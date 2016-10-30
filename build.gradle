@@ -1,0 +1,32 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+allprojects {
+    group = 'org.brownmun'
+    version = System.getenv('TRAVIS') ? System.getenv('TRAVIS_BUILD_NUMBER') : 'dev'
+
+    apply plugin: 'idea'
+}
+
+subprojects {
+    apply plugin: 'spring-boot'
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+project(':frontend') {
+    bootRepackage {
+        enabled = false
+    }
+}
