@@ -1,0 +1,8 @@
+---
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/${BUSUN_DB}
+    username: ${BUSUN_USER}
+    password: ${BUSUN_PASSWORD}
+  jpa:
+    show-sql: true

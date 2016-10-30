@@ -1,0 +1,18 @@
+version: '2'
+services:
+    postgres:
+        build: local/postgres
+        ports:
+        - "5432:5432"
+        volumes:
+        - dbvolume:/var/lib/postgresql/data
+        environment:
+        - BUSUN_DB=$BUSUN_DB
+        - BUSUN_USER=$BUSUN_USER
+        - BUSUN_PASSWORD=$BUSUN_PASSWORD
+        - BUCS_DB=$BUCS_DB
+        - BUCS_USER=$BUCS_USER
+        - BUCS_PASSWORD=$BUCS_PASSWORD
+volumes:
+    dbvolume:
+        driver: dvol

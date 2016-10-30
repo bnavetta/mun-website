@@ -17,11 +17,34 @@ allprojects {
 }
 
 subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
     apply plugin: 'spring-boot'
 
     repositories {
         jcenter()
         mavenCentral()
+    }
+
+    dependencyManagement {
+        dependencies {
+            dependency 'com.google.guava:guava:19.0'
+        }
+    }
+
+    dependencies {
+        compile 'com.google.guava:guava'
+        compileOnly 'org.projectlombok:lombok'
+    }
+
+    bootRun {
+        systemProperty 'debug', 'true'
+        systemProperty 'spring.profiles.active', 'local'
+        rootProject.file('.env').eachLine {
+            if (!it.isEmpty() && !it.startsWith('#')) {
+                environment(*it.split('='))
+            }
+        }
     }
 }
 
