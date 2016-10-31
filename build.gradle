@@ -27,10 +27,16 @@ allprojects {
 task coverage(type: JacocoReport) {
     reports {
         html {
-            destination = file("$buildDir/coverage")
+            destination = file("$buildDir/reports/coverage")
         }
     }
 }
+
+task testReport(type: TestReport) {
+    destinationDir = file("$buildDir/reports/allTests")
+}
+
+task check(dependsOn: [testReport, coverage]) {}
 
 configure([project(':core'), project(':busun'), project(':bucs')]) {
     apply plugin: 'java'
@@ -67,9 +73,8 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
         sourceSets sourceSets.main
     }
 
-    tasks.withType(Test) { testTask ->
-        rootProject.tasks['coverage'].configure {
-            executionData(testTask)
-        }
+    tasks.withType(Test) {
+        rootProject.tasks['coverage'].executionData it
+        rootProject.tasks['testReport'].reportOn it
     }
 }
