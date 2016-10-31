@@ -1,0 +1,8 @@
+---
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/${BUCS_DB}
+    username: ${BUCS_USER}
+    password: ${BUCS_PASSWORD}
+  jpa:
+    show-sql: true

@@ -18,8 +18,6 @@ public class Position
 {
 	@Setter(AccessLevel.NONE)
 	@Id
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-//	@SequenceGenerator(name = "position_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 

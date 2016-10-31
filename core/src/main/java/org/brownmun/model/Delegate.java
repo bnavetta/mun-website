@@ -13,8 +13,6 @@ public class Delegate
 {
 	@Setter(AccessLevel.NONE)
 	@Id
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-//	@SequenceGenerator(name = "delegate_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

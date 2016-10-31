@@ -8,7 +8,5 @@ dependencies {
 	compile 'org.postgresql:postgresql'
 	compile 'org.flywaydb:flyway-core'
 
-	testCompile 'org.codehaus.groovy:groovy'
-	testCompile 'org.spockframework:spock-core'
-	testCompile 'org.spockframework:spock-spring'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

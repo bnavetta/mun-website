@@ -16,8 +16,6 @@ public class School
 {
 	@Setter(AccessLevel.NONE)
 	@Id
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-//	@SequenceGenerator(name = "school_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

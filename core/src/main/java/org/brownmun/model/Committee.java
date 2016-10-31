@@ -17,8 +17,6 @@ public class Committee
 {
 	@Setter(AccessLevel.NONE)
 	@Id
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-//	@SequenceGenerator(name = "committee_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
