@@ -63,4 +63,40 @@ public class AssignmentTrackingTest
 
 		assertThat(saved.isAssigned()).isTrue();
 	}
+
+	@Test
+	public void testPositionIsUnassigned()
+	{
+		Position position = new Position();
+		position.setName("Test Position");
+		position.setCommittee(committee);
+
+		Position saved = entityManager.persistFlushFind(position);
+
+		assertThat(saved.isAssigned()).isFalse();
+	}
+
+	@Test
+	public void testCountAssignedPositions()
+	{
+		Delegate delegate = new Delegate();
+		delegate.setName("Test Delegate");
+		delegate.setSchool(school);
+		delegate = entityManager.persistFlushFind(delegate);
+
+		Position assigned = new Position();
+		assigned.setName("Assigned position");
+		assigned.setCommittee(committee);
+		assigned.setDelegate(delegate);
+		entityManager.persistAndFlush(assigned);
+
+		Position unassigned = new Position();
+		unassigned.setName("Unassigned positopn");
+		unassigned.setCommittee(committee);
+		entityManager.persistAndFlush(unassigned);
+
+		entityManager.detach(committee);
+		Committee fresh = entityManager.find(Committee.class, committee.getId());
+		assertThat(fresh.getAssignedPositions()).isEqualTo(1);
+	}
 }
