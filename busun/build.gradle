@@ -1,5 +1,6 @@
 dependencies {
 	compile project(':core')
+	compile 'org.springframework.boot:spring-boot-devtools'
 
 	testCompile 'junit:junit'
 }

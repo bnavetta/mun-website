@@ -1,5 +1,6 @@
 package org.brownmun.busun;
 
+import lombok.extern.slf4j.Slf4j;
 import org.brownmun.model.*;
 import org.brownmun.model.repo.CommitteeRepository;
 import org.brownmun.model.repo.DelegateRepository;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Testing stuff out
  */
+@Slf4j
 @Component
 public class TestRunner implements CommandLineRunner
 {
@@ -32,6 +34,8 @@ public class TestRunner implements CommandLineRunner
 	@Override
 	public void run(String... args) throws Exception
 	{
+		log.info("Running test logic");
+
 //		positions.deleteAll();
 //		committees.deleteAll();
 //		delegates.deleteAll();

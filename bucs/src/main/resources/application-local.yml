@@ -1,8 +1,8 @@
 ---
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/${BUCS_DB}
-    username: ${BUCS_USER}
-    password: ${BUCS_PASSWORD}
+    url: jdbc:postgresql://localhost/bucs
+    username: bucs
+    password: bucs-local-insecure
   jpa:
     show-sql: true
