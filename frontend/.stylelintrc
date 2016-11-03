@@ -1,0 +1,35 @@
+{
+	"extends": "stylelint-config-standard",
+	"rules": {
+		"indentation": 4,
+		"font-family-name-quotes": "always-where-recommended",
+		"function-url-quotes": "always",
+		"selector-attribute-quotes": "always",
+		"string-quotes": "single",
+
+		"declaration-block-properties-order": [
+			[
+				{ "order": "strict", "properties": ["color", "font"] },
+				{ "order": "strict", "properties": ["display", "flex", "position", "margin", "padding"] }
+			],
+			{ "unspecified": "bottomAlphabetical" }
+		],
+
+		"at-rule-no-vendor-prefix": true,
+		"media-feature-name-no-vendor-prefix": true,
+		"property-no-vendor-prefix": true,
+		"selector-no-vendor-prefix": true,
+		"value-no-vendor-prefix": true,
+
+		"declaration-no-important": true,
+
+		"selector-no-universal": true,
+
+		"font-weight-notation": "named-where-possible",
+
+		"custom-property-no-outside-root": true,
+		"selector-root-no-composition": true,
+
+		"max-line-length": 120
+	}
+}
