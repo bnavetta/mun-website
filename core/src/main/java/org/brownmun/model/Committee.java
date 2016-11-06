@@ -2,6 +2,7 @@ package org.brownmun.model;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
+@EqualsAndHashCode(exclude = {"positions"})
 public class Committee
 {
 	@Setter(AccessLevel.NONE)
@@ -33,4 +35,8 @@ public class Committee
 	@Setter(AccessLevel.NONE)
 	@Formula("(SELECT COUNT(*) FROM position p WHERE p.committee_id = id AND p.delegate_id IS NOT NULL)")
 	private int assignedPositions;
+
+	@Setter(AccessLevel.NONE)
+	@Formula("(SELECT COUNT(*) FROM position p WHERE p.committee_id = id)")
+	private int totalPositions;
 }

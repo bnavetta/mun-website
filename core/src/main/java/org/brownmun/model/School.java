@@ -2,6 +2,7 @@ package org.brownmun.model;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
+@EqualsAndHashCode(exclude = {"delegates"})
 public class School
 {
 	@Setter(AccessLevel.NONE)

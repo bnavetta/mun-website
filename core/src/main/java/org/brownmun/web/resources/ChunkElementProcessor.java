@@ -31,13 +31,13 @@ public class ChunkElementProcessor extends AbstractMarkupSubstitutionElementProc
 			{
 				final Element link = new Element("link");
 				link.setAttribute("rel", "stylesheet");
-				link.setAttribute("href", asset);
+				link.setAttribute("href", "/" + asset);
 				return link;
 			}
 			else if (asset.endsWith(".js"))
 			{
 				final Element script = new Element("script");
-				script.setAttribute("src", asset);
+				script.setAttribute("src", "/" + asset);
 				return script;
 			} else
 			{

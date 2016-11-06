@@ -2,7 +2,7 @@ CREATE TABLE committee (
 	id SERIAL PRIMARY KEY,
 	name TEXT NOT NULL,
 	description TEXT,
-	committee_type VARCHAR(8)
+	committee_type VARCHAR(20)
 );
 
 CREATE INDEX committee_name ON committee (name);

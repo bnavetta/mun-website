@@ -1,5 +1,7 @@
 package org.brownmun.model;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 /**
  * A type of MUN committee
  */
@@ -9,4 +11,10 @@ public enum CommitteeType
 	CRISIS,
 	SPECIALIZED
 	;
+
+	@Override
+	public String toString()
+	{
+		return WordUtils.capitalizeFully(name());
+	}
 }
