@@ -14,5 +14,4 @@ services:
         - BUCS_USER=$BUCS_USER
         - BUCS_PASSWORD=$BUCS_PASSWORD
 volumes:
-    dbvolume:
-        driver: dvol
+    dbvolume: {}

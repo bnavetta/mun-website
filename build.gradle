@@ -60,6 +60,8 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
     }
 
     bootRun {
+        addResources = true
+
         systemProperty 'debug', 'true'
         systemProperty 'spring.profiles.active', System.getenv('TRAVIS') ? 'ci' : 'local'
         rootProject.file('.env').eachLine {
