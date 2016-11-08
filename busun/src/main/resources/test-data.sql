@@ -1,2 +1,0 @@
-INSERT INTO committee(name, description, committee_type) VALUES ('NATO', 'Something something something Cold War', 'GENERAL');
-INSERT INTO committee(name, description, committee_type) VALUES ('Test Committee', 'A committee for testing', 'SPECIALIZED');

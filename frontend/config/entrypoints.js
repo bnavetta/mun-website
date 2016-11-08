@@ -1,6 +1,7 @@
 const entrypoints = {
 	index: ['./src/index.jsx'],
-	mypage: ['./src/mypage.js']
+	mypage: ['./src/mypage.js'],
+	admin: ['./src/admin/index.js']
 };
 
 export default function makeEntrypoints(base) {
