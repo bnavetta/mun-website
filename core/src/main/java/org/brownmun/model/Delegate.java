@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -16,11 +18,14 @@ public class Delegate
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	// Allow null so school advisors can fill in delegate names once allocated
+	@Size(min = 0)
 	private String name;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "delegate")
 	private Position position;
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	private School school;

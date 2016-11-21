@@ -1,14 +1,15 @@
 package org.brownmun.model;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Setter;
-import org.hibernate.annotations.Formula;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.Instant;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 /**
  * A school applying to BUCS/BUSUN
@@ -22,24 +23,31 @@ public class School
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
 	private String name;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private RegistrationStatus status;
 
+	@Valid
 	@Embedded
 	private Address address;
 
+	@NotBlank
 	private String phoneNumber;
 
 	private Integer numberOfYearsAttended;
 	private String yearsAttended;
 
+	@Valid
 	@Embedded
 	private SchoolLogistics logistics;
 
 	private String aboutText;
 
+	@NotNull
+	@Past
 	private Instant registrationTime;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = CascadeType.ALL)

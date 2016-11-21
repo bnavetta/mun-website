@@ -12,6 +12,10 @@
 	<body>
 		<header layout:fragment="header">
 			<h1>Committees</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">Admin</li>
+				<li class="breadcrumb-item active"><a href="#" th:href="${#mvc.url('CC#listCommittees').build()}">Committees</a></li>
+			</ol>
 		</header>
 		<div layout:fragment="body">
 			<div>

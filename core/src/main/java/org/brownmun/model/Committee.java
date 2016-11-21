@@ -5,9 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * A MUN committee, like NATO
@@ -21,10 +23,13 @@ public class Committee
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
 	private String name;
 
+	@NotBlank
 	private String description;
 
+	@NotBlank
 	private String shortName;
 
 	private boolean jointCrisis;
@@ -37,6 +42,7 @@ public class Committee
 
 	private String topic4;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private CommitteeType committeeType;
 

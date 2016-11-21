@@ -3,8 +3,10 @@ package org.brownmun.model;
 import com.google.common.base.MoreObjects;
 import lombok.*;
 import org.hibernate.annotations.Formula;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * A specific position on a committee, which may be assigned to delegates.
@@ -19,8 +21,10 @@ public class Position
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@NotBlank
 	private String name;
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "committee_id")
 	private Committee committee;
