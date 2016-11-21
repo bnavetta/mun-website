@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
+	<head>
+		<title>BUCSUN - Schools</title>
+		<wp:chunk name="index"/>
+		<wp:chunk name="admin"/>
+	</head>
+	<body>
+		<header layout:fragment="header">
+			<h1>Schools</h1>
+		</header>
+		<div layout:fragment="body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Accepted Schools</th>
+						<th>Registered Schools</th>
+						<th>Waitlisted Schools</th>
+						<th>Dropped Schools</th>
+						<th>Denied Schools</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>[[${acceptedCount}]]</td>
+						<td>[[${registeredCount}]]</td>
+						<td>[[${waitlistedCount}]]</td>
+						<td>[[${droppedCount}]]</td>
+						<td>[[${deniedCount}]]</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

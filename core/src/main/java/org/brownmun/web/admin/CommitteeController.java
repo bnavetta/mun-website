@@ -6,6 +6,7 @@ import org.brownmun.model.Committee;
 import org.brownmun.model.CommitteeType;
 import org.brownmun.model.Position;
 import org.brownmun.model.repo.CommitteeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class CommitteeController
 {
 	private final CommitteeRepository repo;
 
+	@Autowired
 	public CommitteeController(CommitteeRepository repo)
 	{
 		this.repo = repo;
