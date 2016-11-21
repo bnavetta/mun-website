@@ -1,7 +1,10 @@
 const entrypoints = {
+	bootstrap: ['./src/bootstrap/index.js'],
 	index: ['./src/index.jsx'],
 	mypage: ['./src/mypage.js'],
-	admin: ['./src/admin/index.js']
+	admin: ['./src/admin/index.js'],
+
+	committeeAdmin: ['./src/admin/committee/index.jsx'],
 };
 
 export default function makeEntrypoints(base) {

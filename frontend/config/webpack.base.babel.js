@@ -20,10 +20,10 @@ export default new Config().merge({
 			},
 
 			{
-				test: /\.css$/,
+				test: /\.scss$/,
 				loader: ExtractTextWebpackPlugin.extract({
 					fallbackLoader: 'style-loader',
-					loader: 'css-loader?sourceMap&importLoaders=1!postcss-loader',
+					loader: 'css-loader?sourceMap&importLoaders=3!postcss-loader!resolve-url-loader!sass-loader?sourceMap',
 				}),
 				exclude: /node_modules/,
 			},
@@ -34,6 +34,10 @@ export default new Config().merge({
 				{ test: /\.(png|jpeg|jpg|gif|svg|woff|woff2)$/, loader: 'url-loader?limit=10000' },
 				{ test: /\.(eot|ttf|wav|mp3)$/, loader: 'file-loader' },
 		],
+	},
+
+	resolve: {
+		extensions: ['.js', '.jsx']
 	},
 
 	plugins: [

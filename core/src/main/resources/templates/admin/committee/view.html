@@ -1,26 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
 	<head>
 		<title th:text="${committee.name}">Committee</title>
-		<style>
-			.assigned {
-				color: green;
-			}
-			.unassigned {
-				color: red;
-			}
-		</style>
+		<wp:chunk name="admin"/>
 	</head>
 	<body>
-		<h1 th:text="${committee.name}">Committee</h1>
+		<header layout:fragment="header">
+			<h1>[[${committee.name}]] <span class="Committee--shortName">([[${committee.shortName}]])</span></h1>
+		</header>
 
-		<h2>Positions</h2>
-		<p th:text="${committee.assignedPositions + ' out of ' + committee.totalPositions + ' positions assigned'}">1/1 positions assigned</p>
-		<ul>
-			<li th:each="position : ${committee.positions}" th:classappend="${position.assigned} ? assigned : unassigned">
-				<span th:text="${position.name}">Position Name</span>
-				<span th:if="${position.assigned}">assigned to <span th:text="${position.delegate.name}">Delegate Name</span></span>
-			</li>
-		</ul>
+		<div layout:fragment="body">
+			<div>
+				<a href="#" th:href="${#mvc.url('CC#editCommittee').arg(0, committee.id).build()}" class="btn btn-primary">Edit</a>
+				<a href="#" th:href="${#mvc.url('CC#addPositions').arg(0, committee.id).build()}" class="btn btn-primary">Add Positions</a>
+			</div>
+
+			<h2>Positions</h2>
+			<p>[[${committee.assignedPositions}]] / [[${committee.totalPositions}]] positions assigned</p>
+			<ul>
+				<li th:each="position : ${committee.positions}" class="Committee--position" th:classappend="${position.assigned} ? assigned : unassigned">
+					<span th:text="${position.name}">Position Name</span>
+					<span th:if="${position.assigned}"> &mdash; <span th:text="${position.delegate.school.name}">School Name</span></span>
+				</li>
+			</ul>
+
+			<h2>Topics</h2>
+			<ul>
+				<li th:text="${committee.topic1}">Topic 1</li>
+				<li th:text="${committee.topic2}">Topci 2</li>
+				<li th:text="${committee.topic3}">Topci 3</li>
+				<li th:text="${committee.topic4}">Topci 4</li>
+			</ul>
+		</div>
 	</body>
 </html>

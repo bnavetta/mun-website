@@ -17,7 +17,6 @@ import javax.persistence.*;
 @EqualsAndHashCode(exclude = {"positions"})
 public class Committee
 {
-	@Setter(AccessLevel.NONE)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,6 +24,18 @@ public class Committee
 	private String name;
 
 	private String description;
+
+	private String shortName;
+
+	private boolean jointCrisis;
+
+	private String topic1;
+
+	private String topic2;
+
+	private String topic3;
+
+	private String topic4;
 
 	@Enumerated(EnumType.STRING)
 	private CommitteeType committeeType;

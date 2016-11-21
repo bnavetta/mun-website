@@ -6,12 +6,12 @@ import entrypoints from './entrypoints';
 export default new Config().extend('config/webpack.base.babel.js').merge({
 	devtool: 'cheap-module-eval-sourcemap',
 
-	entry: entrypoints(['react-hot-loader/patch', 'webpack-hot-middleware/client', /* 'babel-polyfill' */]),
+	entry: entrypoints(['react-hot-loader/patch', 'webpack-hot-middleware/client?dynamicPublicPath=true', /* 'babel-polyfill' */]),
 
 	output: {
 		filename: '[name].js',
 		chunkFilename: '[name].chunk.js',
-		publicPath: 'http://localhost:8080',
+		publicPath: 'http://localhost:8000',
 	},
 
 	plugins: [

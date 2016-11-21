@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<title>Layout Page</title>
+		<wp:chunk name="common"/>
+		<wp:chunk name="bootstrap"/>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10 offset-md-1">
+					<header layout:fragment="header">
+						<h1>Page Header</h1>
+					</header>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-10 offset-md-1">
+					<div layout:fragment="body">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-10 offset-md-1">
+					<footer>
+						Brown MUN
+					</footer>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
+	<head>
+		<title th:unless="${creating}">Edit [[${committee.name}]]</title>
+		<title th:if="${creating}">New Committee</title>
+		<wp:chunk name="admin"/>
+	</head>
+	<body>
+		<header layout:fragment="header">
+			<h1 th:unless="${creating}">Editing [[${committee.name}]]</h1>
+			<h1 th:if="${creating}">New Committee</h1>
+		</header>
+
+		<div layout:fragment="body">
+			<form action="#" th:action="${#mvc.url('CC#saveCommittee').build()}" th:object="${committee}" method="post">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group">
+					<label for="name">Committee Name:</label>
+					<input type="text" th:field="*{name}" class="form-control" placeholder="My Committee">
+				</div>
+				<div class="form-group">
+					<label for="shortName">Short Name:</label>
+					<input type="text" th:field="*{shortName}" class="form-control" placeholder="ABCDE">
+				</div>
+				<div class="form-group">
+					<label for="committeeType">Committee Type:</label>
+					<select th:field="*{committeeType}" class="form-control">
+						<option
+							th:each="ctype : ${T(org.brownmun.model.CommitteeType).values()}"
+							th:value="${ctype.name()}"
+							th:text="${ctype}">
+							General
+						</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="description">Description:</label>
+					<input type="text" th:field="*{description}" class="form-control" placeholder="A brief overview of this committee">
+				</div>
+				<div class="form-group">
+					<label for="topic1">Topic 1:</label>
+					<input type="text" th:field="*{topic1}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="topic2">Topic 2:</label>
+					<input type="text" th:field="*{topic2}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="topic3">Topic 3:</label>
+					<input type="text" th:field="*{topic3}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="topic4">Topic 4:</label>
+					<input type="text" th:field="*{topic4}" class="form-control">
+				</div>
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
+		</div>
+	</body>
+</html>

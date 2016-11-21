@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
+	<head>
+		<title>Add Positions - [[${committeeName}]]</title>
+		<wp:chunk name="admin"/>
+		<wp:chunk name="committeeAdmin"/>
+		<script th:inline="javascript">
+			window.committeeId = [[${committeeId}]];
+		</script>
+	</head>
+	<body>
+		<header layout:fragment="header">
+			<h1>Add Positions - [[${committeeName}]]</h1>
+		</header>
+
+		<div layout:fragment="body">
+			<div id="add-positions"></div>
+		</div>
+	</body>
+</html>

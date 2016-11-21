@@ -1,0 +1,16 @@
+@import "~material-colors/dist/colors";
+
+.Committee--position {
+    &.assigned {
+        color: $md-light-green-500;
+    }
+
+    &.unassigned {
+        color: $md-grey-500;
+    }
+}
+
+.Committee--shortName {
+    color: $md-grey-300;
+    font-size: 85%;
+}

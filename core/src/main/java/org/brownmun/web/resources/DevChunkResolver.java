@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Reload from the built {@code stats.json} every time
@@ -39,7 +40,8 @@ public class DevChunkResolver implements ChunkResolver
 		{
 			log.debug("Loading stats.json at {}", statsJson.getCanonicalFile());
 			WebpackStats stats = mapper.readValue(statsJson, WebpackStats.class);
-			return Optional.ofNullable(stats.getAssetsByChunkName().get(chunkName));
+			return Optional.ofNullable(stats.getAssetsByChunkName().get(chunkName))
+				.map(assets -> assets.stream().map(asset -> "http://localhost:8000/" + asset).collect(Collectors.toList()));
 		}
 		catch (IOException e)
 		{

@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const proxy = require('http-proxy-middleware');
 require('babel-register');
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -26,21 +25,30 @@ if (isDev) {
 
 	const middleware = devMiddleware(compiler, {
 		publicPath: config.output.publicPath,
+		reporter({ state, stats, options }) {
+			if (state) {
+				options.log(stats.toString(options.stats));
+
+				options.log("webpack: bundle is now VALID.");
+
+				const jsonStats = stats.toJson();
+				fs.writeFileSync('dist/stats.json', JSON.stringify({ assetsByChunkName: jsonStats.assetsByChunkName }));
+			} else {
+				options.log("webpack: bundle is now INVALID.");
+			}
+		},
+		headers: {
+			'Access-Control-Allow-Origin': '*'
+		},
 	});
 
 	app.use(middleware);
 	app.use(hotMiddleware(compiler));
-
-	const mfs = middleware.fileSystem;
-	app.use((req, res, next) => {
-		fs.writeFileSync('dist/stats.json', mfs.readFileSync(path.join(compiler.outputPath, 'stats.json')));
-		next();
-	});
 } else {
 	app.use(express.static(path.resolve('build')));
 }
 
-app.use(proxy({ target: 'http://localhost:8080' }))
+// app.use(proxy({ target: 'http://localhost:8080' }))
 
 app.listen(port, (err) => {
 	if (err) {

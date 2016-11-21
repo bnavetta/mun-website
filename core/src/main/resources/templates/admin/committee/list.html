@@ -1,23 +1,32 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun">
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
 	<head>
 		<title>BUCSUN - Committees</title>
-		<wp:chunk name="common"/>
 		<wp:chunk name="index"/>
+		<wp:chunk name="admin"/>
 	</head>
 	<body>
-		<h1>Committees</h1>
-		<section th:each="group : ${committees}">
-			<h2 th:text="${group.key}">Committee Type</h2>
-			<div th:each="committee : ${group.value}">
-				<h3>
-					<a th:text="${committee.name}" th:href="${#mvc.url('CC#viewCommittee').arg(0, committee.id).build()}">Committee Name</a>
-				</h3>
-				<p th:text="${committee.assignedPositions + '/' + committee.totalPositions + ' positions assigned'}">1/1 positions assigned</p>
-				<p th:text="${committee.description}">Committee Description</p>
+		<header layout:fragment="header">
+			<h1>Committees</h1>
+		</header>
+		<div layout:fragment="body">
+			<div>
+				<a href="#" th:href="${#mvc.url('CC#newCommittee').build()}" class="btn btn-primary">New Committee</a>
 			</div>
-		</section>
-		<div>
+			<section th:each="group : ${committees}">
+				<h2 th:text="${group.key}">Committee Type</h2>
+				<div th:each="committee : ${group.value}">
+					<h3>
+						<a th:text="${committee.name}" th:href="${#mvc.url('CC#viewCommittee').arg(0, committee.id).build()}">Committee Name</a>
+					</h3>
+					<p>[[${committee.assignedPositions}]] / [[${committee.totalPositions}]] positions assigned</p>
+					<p th:text="${committee.description}">Committee Description</p>
+				</div>
+			</section>
 		</div>
 	</body>
 </html>

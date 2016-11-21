@@ -1,54 +1,55 @@
 package org.brownmun.web.resources;
 
-import org.thymeleaf.Arguments;
-import org.thymeleaf.dom.Element;
-import org.thymeleaf.dom.Node;
-import org.thymeleaf.processor.element.AbstractMarkupSubstitutionElementProcessor;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.google.common.collect.ImmutableMap;
+import org.thymeleaf.context.ITemplateContext;
+import org.thymeleaf.model.*;
+import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.processor.element.IElementTagStructureHandler;
+import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  * Element processor for adding Webpack chunk assets
  */
-public class ChunkElementProcessor extends AbstractMarkupSubstitutionElementProcessor
+public class ChunkElementProcessor extends AbstractElementTagProcessor
 {
 	private final ChunkResolver chunkResolver;
 
-	public ChunkElementProcessor(ChunkResolver chunkResolver)
+	public ChunkElementProcessor(String dialectPrefix, ChunkResolver chunkResolver)
 	{
-		super("chunk");
+		super(TemplateMode.HTML, dialectPrefix, "chunk", true, null, false, 1000);
 		this.chunkResolver = chunkResolver;
 	}
 
 	@Override
-	protected List<Node> getMarkupSubstitutes(Arguments arguments, Element element)
+	protected void doProcess(ITemplateContext context, IProcessableElementTag tag, IElementTagStructureHandler structureHandler)
 	{
-		String chunkName = element.getAttributeValue("name");
-		return chunkResolver.resolve(chunkName).map((assets) -> assets.stream().map((asset) -> {
-			if (asset.endsWith(".css"))
-			{
-				final Element link = new Element("link");
-				link.setAttribute("rel", "stylesheet");
-				link.setAttribute("href", "/" + asset);
-				return link;
-			}
-			else if (asset.endsWith(".js"))
-			{
-				final Element script = new Element("script");
-				script.setAttribute("src", "/" + asset);
-				return script;
-			} else
-			{
-				throw new IllegalArgumentException("Unsupported asset type: " + asset);
-			}
-		}).collect(Collectors.<Node>toList())).orElse(Collections.emptyList());
-	}
+		String chunkName = tag.getAttributeValue("name");
 
-	@Override
-	public int getPrecedence()
-	{
-		return 1000;
+		IModel model = context.getModelFactory().createModel();
+
+		chunkResolver.resolve(chunkName).ifPresent((assets) -> {
+			for (String asset : assets) {
+				if (asset.endsWith(".css"))
+				{
+					IStandaloneElementTag link = context.getModelFactory().createStandaloneElementTag("link", ImmutableMap.of(
+						"rel", "stylesheet",
+						"href", asset
+					), AttributeValueQuotes.DOUBLE, false, true);
+					model.add(link);
+				}
+				else if (asset.endsWith(".js"))
+				{
+					IOpenElementTag scriptStart = context.getModelFactory().createOpenElementTag("script", "src", asset);
+					model.add(scriptStart);
+					model.add(context.getModelFactory().createCloseElementTag("script"));
+				}
+				else
+				{
+					throw new IllegalArgumentException("Unsupported asset type: " + asset);
+				}
+			}
+		});
+
+		structureHandler.replaceWith(model, true);
 	}
 }
