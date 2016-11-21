@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.Instant;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -26,14 +28,26 @@ public class AssignmentTrackingTest
 	@Before
 	public void setup()
 	{
+		Address address = new Address();
+		address.setCountry("United States");
+		address.setStreetAddress("69 Brown Street");
+		address.setState("Rhode Island");
+		address.setCity("Providence");
+		address.setPostalCode("02912");
+
 		school = new School();
 		school.setName("Test School");
+		school.setStatus(RegistrationStatus.REGISTERED);
+		school.setPhoneNumber("123-456-7890");
+		school.setRegistrationTime(Instant.now());
+		school.setAddress(address);
 		entityManager.persistAndFlush(school);
 
 		committee = new Committee();
 		committee.setName("Test Committe");
 		committee.setCommitteeType(CommitteeType.CRISIS);
 		committee.setDescription("A committee for testing");
+		committee.setShortName("TEST");
 		entityManager.persistAndFlush(committee);
 	}
 
