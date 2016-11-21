@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
+	<head>
+		<title>BUCSUN - Staff Info</title>
+		<wp:chunk name="index"/>
+		<wp:chunk name="admin"/>
+	</head>
+	<body>
+		<header layout:fragment="header">
+			<h1>Staff Info</h1>
+		</header>
+		<div layout:fragment="body">
+			<section>
+				<h2>Core Information</h2>
+				<ul class="nav nav-pills nav-stacked">
+					<li class="nav-item">
+						<a href="#" th:href="${#mvc.url('CC#listCommittees').build()}" class="nav-link">Committee Management</a>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</body>
+</html>
