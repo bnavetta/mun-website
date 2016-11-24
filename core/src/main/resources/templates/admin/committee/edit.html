@@ -16,7 +16,7 @@
 			<h1 th:unless="${creating}">Editing [[${committee.name}]]</h1>
 			<h1 th:if="${creating}">New Committee</h1>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item">Admin</li>
+				<li class="breadcrumb-item"><a href="#" th:href="@{/admin}">Admin</a></li>
 				<li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('CC#listCommittees').build()}">Committees</a></li>
 				<li class="breadcrumb-item active" th:unless="${creating}">[[${committee.name}]]</li>
 				<li class="breadcrumb-item active" th:if="${creating}">New Committee</li>

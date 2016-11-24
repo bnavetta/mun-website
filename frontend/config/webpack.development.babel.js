@@ -6,7 +6,7 @@ import entrypoints from './entrypoints';
 export default new Config().extend('config/webpack.base.babel.js').merge({
 	devtool: 'cheap-module-eval-sourcemap',
 
-	entry: entrypoints(['react-hot-loader/patch', 'webpack-hot-middleware/client?dynamicPublicPath=true', /* 'babel-polyfill' */]),
+	entry: entrypoints(['react-hot-loader/patch', 'webpack-hot-middleware/client?dynamicPublicPath=true']),
 
 	output: {
 		filename: '[name].js',

@@ -8,15 +8,18 @@
 		<title>BUCSUN - Schools</title>
 		<wp:chunk name="index"/>
 		<wp:chunk name="admin"/>
+		<wp:chunk name="schoolAdmin"/>
 	</head>
 	<body>
 		<header layout:fragment="header">
 			<h1>Schools</h1>
 		</header>
 		<div layout:fragment="body">
+			<h3>Statistics</h3>
 			<table class="table">
 				<thead>
 					<tr>
+						<th>School Applications</th>
 						<th>Accepted Schools</th>
 						<th>Registered Schools</th>
 						<th>Waitlisted Schools</th>
@@ -26,6 +29,7 @@
 				</thead>
 				<tbody>
 					<tr>
+						<td>[[${totalCount}]]</td>
 						<td>[[${acceptedCount}]]</td>
 						<td>[[${registeredCount}]]</td>
 						<td>[[${waitlistedCount}]]</td>
@@ -34,6 +38,20 @@
 					</tr>
 				</tbody>
 			</table>
+
+			<h3>All Schools</h3>
+			<!--<table class="table">-->
+				<!--<thead>-->
+					<!--<tr>-->
+						<!--<th>School Name</th>-->
+						<!--<th>Registration Status</th>-->
+						<!--<th>Assigned Positions</th>-->
+						<!--<th>Delegation Size</th>-->
+						<!--<th>Registration Date</th>-->
+					<!--</tr>-->
+				<!--</thead>-->
+			<!--</table>-->
+			<div id="school-display"></div>
 		</div>
 	</body>
 </html>

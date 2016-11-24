@@ -4,7 +4,7 @@ import Config from 'webpack-config';
 import entrypoints from './entrypoints';
 
 export default new Config().extend('config/webpack.base.babel.js').merge({
-	entry: entrypoints([/* 'babel-polyfill' */]),
+	entry: entrypoints([]),
 	output: {
 		filename: '[name].[chunkhash].js',
 		chunkFilename: '[name].chunkhash.js'
