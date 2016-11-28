@@ -13,6 +13,10 @@
 	<body>
 		<header layout:fragment="header">
 			<h1>Schools</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#" th:href="@{/admin}">Admin</a></li>
+				<li class="breadcrumb-item active">Schools</li>
+			</ol>
 		</header>
 		<div layout:fragment="body">
 			<h3>Statistics</h3>
@@ -40,17 +44,6 @@
 			</table>
 
 			<h3>All Schools</h3>
-			<!--<table class="table">-->
-				<!--<thead>-->
-					<!--<tr>-->
-						<!--<th>School Name</th>-->
-						<!--<th>Registration Status</th>-->
-						<!--<th>Assigned Positions</th>-->
-						<!--<th>Delegation Size</th>-->
-						<!--<th>Registration Date</th>-->
-					<!--</tr>-->
-				<!--</thead>-->
-			<!--</table>-->
 			<div id="school-display"></div>
 		</div>
 	</body>

@@ -1,8 +1,5 @@
 import React from 'react';
-import {Table, Column, Cell} from 'fixed-data-table';
 import request from 'superagent';
-
-import 'fixed-data-table/dist/fixed-data-table.css';
 
 async function loadSchools() {
 	console.log('Loading school data');
@@ -16,94 +13,73 @@ async function loadSchools() {
 	}
 }
 
-// https://github.com/facebook/fixed-data-table/blob/master/examples/SortExample.js
-
-// const SortTypes = Object.freeze({
-// 	ASC: 'ASC',
-// 	DESC: 'DESC'
-// });
-//
-// function reverseSortDirection(sortDir) {
-// 	return sortDir === SortTypes.DESC ? SortTypes.ASC : SortTypes.DESC;
-// }
-//
-// class SortHeaderCell extends React.Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.handleSortChange = this.handleSortChange.bind(this);
-// 	}
-//
-// 	render() {
-// 		const {sortDir, children, ...props} = this.props;
-// 		return (
-// 			<Cell {...props}>
-// 				<button onClick={this.handleSortChange}>
-// 					{children} {sortDir ? (sortDir === SortTypes.DESC ? '↓' : '↑') : ''}
-// 				</button>
-// 			</Cell>
-// 		);
-// 	}
-//
-// 	handleSortChange(e) {
-// 		e.preventDefault();
-// 		if (!!this.props.onSortChange) {
-// 			this.props.onSortChange(this.props.columnKey, this.props.sortDir ? reverseSortDirection(this.props.sortDir) : SortTypes.DESC);
-// 		}
-// 	}
-// }
-
-function TextDataCell({rowIndex, data, columnKey, ...props}) {
-	return (
-		<Cell {...props}>
-			{data[rowIndex][columnKey]}
-		</Cell>
-	);
-}
-
 // Might not actually need sorting?
 // Just column filtering?
+
+const columnDefinitions = [
+	{ field: 'id', title: 'ID' },
+	{ field: 'name', title: 'School Name' },
+	{ field: 'status', title: 'Registration Status' },
+	{ field: 'registrationTime', title: 'Registration Time' }
+]
 
 class SchoolTable extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			visibleColumns: { id: true, name: true, status: true, registrationTime: true }
+		};
+	}
+
+	toggleColumn(field) {
+		const { visibleColumns } = this.state;
+		this.setState({ visibleColumns: { ...visibleColumns, [field]: !visibleColumns[field] } });
 	}
 
 	render() {
 		const { schools } = this.props;
+		const columns = columnDefinitions.filter(col => this.state.visibleColumns[col.field]);
+		const hiddenColumns = columnDefinitions.filter(col => !this.state.visibleColumns[col.field]);
+
+		const header = columns.map(col => (
+			<th key={col.field}
+				onClick={this.toggleColumn.bind(this, col.field)}>
+				{col.title}
+			</th>
+		));
+
+		const reactivateToggles = hiddenColumns.map(col => (
+			<li className="list-inline-item"
+				key={col.field}
+				onClick={this.toggleColumn.bind(this, col.field)}>
+				{col.title}
+			</li>
+		));
+
+		const rows = schools.map(school => (
+			<tr key={school.id}>
+				{columns.map(col => <td key={col.field}>{school[col.field]}</td>)}
+			</tr>
+		));
+
 		return (
-			<Table
-				rowHeight={50}
-				rowsCount={schools.length}
-				headerHeight={50}
-				width={1000}
-				height={500}
-				{...this.props}>
-				<Column
-					columnKey="id"
-					header={<Cell>ID</Cell>}
-					cell={<TextDataCell data={schools} />}
-					width={50}
-				/>
-				<Column
-					columnKey="name"
-					header={<Cell>School Name</Cell>}
-					cell={<TextDataCell data={schools} />}
-					width={300}
-				/>
-				<Column
-					columnKey="status"
-					header={<Cell>Registration Status</Cell>}
-					cell={<TextDataCell data={schools} />}
-					width={100}
-					/>
-				<Column
-					columnKey="registrationTime"
-					header={<Cell>Registration Time</Cell>}
-					cell={<TextDataCell data={schools} />}
-					width={150}
-				/>
-			</Table>
-		)
+			<div>
+				<ul className="list-inline">
+					{reactivateToggles}
+				</ul>
+				<table className="table">
+					<thead>
+						<tr>
+							{header}
+						</tr>
+					</thead>
+					<tbody>
+						{rows}
+					</tbody>
+				</table>
+			</div>
+		);
 	}
 }
 
