@@ -7,5 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const schoolDisplay = document.getElementById('school-display');
 	if (!!schoolDisplay) {
 		ReactDOM.render(<SchoolDisplay/>, schoolDisplay);
+
+		module.hot.accept('./list', () => ReactDOM.render(<SchoolDisplay/>, schoolDisplay));
 	}
 });

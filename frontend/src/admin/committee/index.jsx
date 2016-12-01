@@ -8,5 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (!!addPositions) {
 		console.log('Mounting AddPositions');
 		ReactDOM.render(<AddPositions/>, addPositions);
+
+		module.hot.accept('./add-positions', () => ReactDOM.render(<AddPositions />, addPositions));
 	}
 });
