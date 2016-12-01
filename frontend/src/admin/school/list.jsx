@@ -60,6 +60,7 @@ class SchoolTable extends React.Component {
 		const rows = schools.map(school => (
 			<tr key={school.id}>
 				{columns.map(col => <td key={col.field}>{school[col.field]}</td>)}
+				<td><a href={'profile/' + school.id}>Profile</a></td>
 			</tr>
 		));
 
@@ -72,6 +73,7 @@ class SchoolTable extends React.Component {
 					<thead>
 						<tr>
 							{header}
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -97,7 +99,10 @@ export default class SchoolDisplay extends React.Component {
 	componentDidMount() {
 		this.setState({ fetching: true });
 		loadSchools()
-			.then(schools => this.setState({ schools, fetching: false }))
+			.then(schools => {
+				schools.forEach(school => school.registrationTime = new Date(school.registrationTime * 1000).toLocaleString());
+				this.setState({ schools, fetching: false })
+			})
 			.catch(err => this.setState({ error: err.message, fetching: false }));
 	}
 

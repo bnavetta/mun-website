@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -59,6 +60,11 @@ public class School
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = CascadeType.ALL)
 	private List<Delegate> delegates;
+
+	public Date getRegistrationTimeAsDate()
+	{
+		return Date.from(registrationTime);
+	}
 
 	public static class View {
 		public interface Summary {}

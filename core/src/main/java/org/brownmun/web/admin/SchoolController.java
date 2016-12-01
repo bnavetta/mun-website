@@ -7,9 +7,7 @@ import org.brownmun.model.repo.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -45,6 +43,33 @@ public class SchoolController
 	public Iterable<School> listApi()
 	{
 		return repo.findAll();
+	}
+
+	@PostMapping("/set-status")
+	public String setStatus(UriComponentsBuilder builder, @RequestParam("id") Long id, @RequestParam("registrationStatus") RegistrationStatus status)
+	{
+		School school = repo.findOne(id);
+		if (school == null)
+		{
+			throw new NoSuchSchoolException(id);
+		}
+
+		school.setStatus(status);
+		repo.save(school);
+		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "SC#profile").arg(0, id).build();
+	}
+
+	@GetMapping("/profile/{id}")
+	public String profile(@PathVariable("id") Long id, Model model)
+	{
+		School school = repo.findOne(id);
+		if (school == null)
+		{
+			throw new NoSuchSchoolException(id);
+		}
+
+		model.addAttribute("school", school);
+		return "admin/school/profile";
 	}
 
 	@GetMapping("")

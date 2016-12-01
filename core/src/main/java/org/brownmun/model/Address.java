@@ -1,5 +1,6 @@
 package org.brownmun.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -11,18 +12,29 @@ import javax.validation.constraints.Size;
 @Embeddable
 public class Address
 {
+	@JsonView(School.View.Summary.class)
 	@NotBlank
 	private String country;
 
+	@JsonView(School.View.Summary.class)
 	@NotBlank
 	private String streetAddress;
 
+	@JsonView(School.View.Summary.class)
 	@NotBlank
 	private String city;
 
+	@JsonView(School.View.Summary.class)
 	@Size(min = 0)
 	private String state;
 
+	@JsonView(School.View.Summary.class)
 	@Size(min = 0)
 	private String postalCode;
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s, %s %s %s - %s", streetAddress, city, state, postalCode, country);
+	}
 }

@@ -23,8 +23,14 @@ if (isDev) {
 	const compiler = webpack(config);
 	compiler.apply(new DashboardPlugin());
 
+	let publicPath = config.output.publicPath;
+	if (!publicPath.endsWith('/')) {
+		publicPath = publicPath + '/';
+	}
+	console.log('PUBLIC PATH', publicPath);
+
 	const middleware = devMiddleware(compiler, {
-		publicPath: config.output.publicPath,
+		publicPath,
 		reporter({ state, stats, options }) {
 			if (state) {
 				options.log(stats.toString(options.stats));
