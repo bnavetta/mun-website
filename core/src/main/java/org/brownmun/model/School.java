@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -68,6 +69,18 @@ public class School
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = CascadeType.ALL)
 	private List<Delegate> delegates;
+
+	@Transient
+	public List<Delegate> getAssignedDelegates()
+	{
+		return delegates.stream().filter(Delegate::isAssigned).collect(Collectors.toList());
+	}
+
+	@Transient
+	public long getUnassignedDelegateCount()
+	{
+		return delegates.stream().filter(d -> !d.isAssigned()).count();
+	}
 
 	public Date getRegistrationTimeAsDate()
 	{

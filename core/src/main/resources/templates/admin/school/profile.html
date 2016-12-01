@@ -20,6 +20,12 @@
 		</header>
 
 		<div layout:fragment="body">
+			<ul class="nav">
+				<li class="nav-item" th:if="${school.status == T(org.brownmun.model.RegistrationStatus).ACCEPTED}">
+					<a href="#" class="nav-link" th:href="${#mvc.url('SC#delegates').arg(0, school.id).build()}">Manage Delegates</a>
+				</li>
+			</ul>
+
 			<dl class="row">
 				<dt class="col-sm-3">School ID</dt>
 				<dd class="col-sm-9">[[${school.id}]]</dd>

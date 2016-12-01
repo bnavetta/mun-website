@@ -25,6 +25,12 @@ public class Delegate
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "delegate")
 	private Position position;
 
+	@Transient
+	public boolean isAssigned()
+	{
+		return getPosition() != null;
+	}
+
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")

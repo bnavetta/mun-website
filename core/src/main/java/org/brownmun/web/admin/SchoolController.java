@@ -1,8 +1,11 @@
 package org.brownmun.web.admin;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import org.brownmun.model.Delegate;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
+import org.brownmun.model.repo.DelegateRepository;
+import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +19,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SchoolController
 {
 	private final SchoolRepository repo;
+	private final DelegateRepository delegateRepo;
+	private final PositionRepository positionRepo;
 
 	@Autowired
-	public SchoolController(SchoolRepository repo)
+	public SchoolController(SchoolRepository repo, DelegateRepository delegateRepo, PositionRepository positionRepo)
 	{
 		this.repo = repo;
+		this.delegateRepo = delegateRepo;
+		this.positionRepo = positionRepo;
 	}
 
 	@GetMapping("/list")
@@ -76,6 +83,47 @@ public class SchoolController
 
 		model.addAttribute("school", school);
 		return "admin/school/profile";
+	}
+
+	@GetMapping("/profile/{id}/delegates")
+	public String delegates(@PathVariable("id") Long id, Model model)
+	{
+		School school = repo.findOne(id);
+		if (school == null)
+		{
+			throw new NoSuchSchoolException(id);
+		}
+
+		model.addAttribute("school", school);
+		return "admin/school/delegates";
+	}
+
+	// Doing this as a whole-page submit isn't ideal,
+	// but making an ajax request and selectively updating the page also isn't ideal...
+	// but neither is doing everything in React :(
+	@PostMapping("/unassign-delegate")
+	public String unassignDelegate(@RequestParam("schoolId") long schoolId, @RequestParam("delegateId") long delegateId, UriComponentsBuilder builder)
+	{
+		School school = repo.findOne(schoolId);
+		if (school == null)
+		{
+			throw new NoSuchSchoolException(schoolId);
+		}
+
+		Delegate delegate = delegateRepo.findOne(delegateId);
+		if (delegate == null)
+		{
+			throw new InvalidDelegateException(delegateId);
+		}
+
+		if (!delegate.getSchool().getId().equals(schoolId))
+		{
+			throw new InvalidDelegateException(delegateId);
+		}
+
+		delegate.getPosition().setDelegate(null);
+		positionRepo.save(delegate.getPosition());
+		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "SC#delegates").arg(0, schoolId).build();
 	}
 
 	@GetMapping("")
