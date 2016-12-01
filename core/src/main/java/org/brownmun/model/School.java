@@ -44,7 +44,10 @@ public class School
 	@NotBlank
 	private String phoneNumber;
 
+	@JsonView(View.Summary.class)
 	private Integer numberOfYearsAttended;
+
+	@JsonView(View.Summary.class)
 	private String yearsAttended;
 
 	@Valid
@@ -52,6 +55,11 @@ public class School
 	private SchoolLogistics logistics;
 
 	private String aboutText;
+
+	@JsonView(View.Summary.class)
+	private Integer requestedDelegates;
+
+	private Integer requestedChaperones;
 
 	@JsonView(View.Summary.class)
 	@NotNull

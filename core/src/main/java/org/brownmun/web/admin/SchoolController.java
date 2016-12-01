@@ -32,7 +32,13 @@ public class SchoolController
 		model.addAttribute("deniedCount", repo.countByStatus(RegistrationStatus.DENIED));
 		model.addAttribute("droppedCount", repo.countByStatus(RegistrationStatus.DROPPED));
 		model.addAttribute("totalCount", repo.count());
-		model.addAttribute("schools", repo.findAll());
+
+		model.addAttribute("registeredDelegateCount", repo.countRequestedDelegatesByStatus(RegistrationStatus.REGISTERED));
+		model.addAttribute("waitlistedDelegateCount", repo.countRequestedDelegatesByStatus(RegistrationStatus.WAITLISTED));
+		model.addAttribute("acceptedDelegateCount", repo.countRequestedDelegatesByStatus(RegistrationStatus.ACCEPTED));
+		model.addAttribute("deniedDelegateCount", repo.countRequestedDelegatesByStatus(RegistrationStatus.DENIED));
+		model.addAttribute("droppedDelegateCount", repo.countRequestedDelegatesByStatus(RegistrationStatus.DROPPED));
+		model.addAttribute("totalDelegateCount", repo.countRequestedDelegates());
 
 		return "admin/school/list";
 	}

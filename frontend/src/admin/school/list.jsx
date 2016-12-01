@@ -20,7 +20,9 @@ const columnDefinitions = [
 	{ field: 'id', title: 'ID' },
 	{ field: 'name', title: 'School Name' },
 	{ field: 'status', title: 'Registration Status' },
-	{ field: 'registrationTime', title: 'Registration Time' }
+	{ field: 'requestedDelegates', title: 'Delegation Size' },
+	{ field: 'registrationTime', title: 'Registration Time' },
+	{ field: 'numberOfYearsAttended', title: 'Years Attended' },
 ]
 
 class SchoolTable extends React.Component {
@@ -50,10 +52,10 @@ class SchoolTable extends React.Component {
 		));
 
 		const reactivateToggles = hiddenColumns.map(col => (
-			<li className="list-inline-item"
+			<li className="nav-item"
 				key={col.field}
 				onClick={this.toggleColumn.bind(this, col.field)}>
-				{col.title}
+				<a className="nav-link active">{col.title}</a>
 			</li>
 		));
 
@@ -66,7 +68,7 @@ class SchoolTable extends React.Component {
 
 		return (
 			<div>
-				<ul className="list-inline">
+				<ul className="nav nav-pills">
 					{reactivateToggles}
 				</ul>
 				<table className="table">

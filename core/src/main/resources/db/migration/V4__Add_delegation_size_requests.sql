@@ -1,0 +1,3 @@
+ALTER TABLE school
+	ADD COLUMN requested_delegates INTEGER NOT NULL DEFAULT 0,
+	ADD COLUMN requested_chaperones INTEGER NOT NULL DEFAULT 0;
