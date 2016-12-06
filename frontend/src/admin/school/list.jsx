@@ -4,57 +4,61 @@ import request from 'superagent';
 async function loadSchools() {
 	console.log('Loading school data');
 	const res = await request.get('/admin/school/list.json').accept('json');
-	if (res.ok) {
-		console.log('Loaded list of schools');
-		return res.body;
-	} else {
+	if (!res.ok) {
 		console.error('Error loading schools', res.body.message);
 		throw new Error(res.body.message);
 	}
+
+	console.log('Loaded list of schools');
+	return res.body;
 }
 
 // Might not actually need sorting?
 // Just column filtering?
 
 const columnDefinitions = [
-	{ field: 'id', title: 'ID' },
-	{ field: 'name', title: 'School Name' },
-	{ field: 'status', title: 'Registration Status' },
-	{ field: 'requestedDelegates', title: 'Delegation Size' },
-	{ field: 'registrationTime', title: 'Registration Time' },
-	{ field: 'numberOfYearsAttended', title: 'Years Attended' },
-]
+	{field: 'id', title: 'ID'},
+	{field: 'name', title: 'School Name'},
+	{field: 'status', title: 'Registration Status'},
+	{field: 'requestedDelegates', title: 'Delegation Size'},
+	{field: 'registrationTime', title: 'Registration Time'},
+	{field: 'numberOfYearsAttended', title: 'Years Attended'},
+];
 
 class SchoolTable extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			visibleColumns: { id: true, name: true, status: true, registrationTime: true }
+			visibleColumns: {id: true, name: true, status: true, registrationTime: true},
 		};
 	}
 
 	toggleColumn(field) {
-		const { visibleColumns } = this.state;
-		this.setState({ visibleColumns: { ...visibleColumns, [field]: !visibleColumns[field] } });
+		const {visibleColumns} = this.state;
+		this.setState({visibleColumns: {...visibleColumns, [field]: !visibleColumns[field]}});
 	}
 
 	render() {
-		const { schools } = this.props;
+		const {schools} = this.props;
 		const columns = columnDefinitions.filter(col => this.state.visibleColumns[col.field]);
 		const hiddenColumns = columnDefinitions.filter(col => !this.state.visibleColumns[col.field]);
 
 		const header = columns.map(col => (
-			<th key={col.field}
-				onClick={this.toggleColumn.bind(this, col.field)}>
+			<th
+				key={col.field}
+				onClick={() => this.toggleColumn(col.field)}
+				>
 				{col.title}
 			</th>
 		));
 
 		const reactivateToggles = hiddenColumns.map(col => (
-			<li className="nav-item"
+			<li
+				className="nav-item"
 				key={col.field}
-				onClick={this.toggleColumn.bind(this, col.field)}>
+				onClick={() => this.toggleColumn(col.field)}
+				>
 				<a className="nav-link active">{col.title}</a>
 			</li>
 		));
@@ -75,7 +79,7 @@ class SchoolTable extends React.Component {
 					<thead>
 						<tr>
 							{header}
-							<th></th>
+							<th/>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,6 +90,10 @@ class SchoolTable extends React.Component {
 		);
 	}
 }
+
+SchoolTable.propTypes = {
+	schools: React.PropTypes.array,
+};
 
 export default class SchoolDisplay extends React.Component {
 	constructor(props) {
@@ -99,23 +107,25 @@ export default class SchoolDisplay extends React.Component {
 	}
 
 	componentDidMount() {
-		this.setState({ fetching: true });
+		this.setState({fetching: true});
 		loadSchools()
 			.then(schools => {
-				schools.forEach(school => school.registrationTime = new Date(school.registrationTime * 1000).toLocaleString());
-				this.setState({ schools, fetching: false })
+				schools.forEach(school => {
+					school.registrationTime = new Date(school.registrationTime * 1000).toLocaleString();
+				});
+				this.setState({schools, fetching: false});
 			})
-			.catch(err => this.setState({ error: err.message, fetching: false }));
+			.catch(err => this.setState({error: err.message, fetching: false}));
 	}
 
 	render() {
-		const { schools, error, fetching } = this.state;
+		const {schools, error, fetching} = this.state;
 		if (fetching) {
-			return <div>Loading...</div>
-		} else if (!!error) {
-			return <div className="alert alert-danger" role="alert">{error}</div>
-		} else {
-			return <SchoolTable schools={schools} />
+			return <div>Loading...</div>;
+		} else if (error) {
+			return <div className="alert alert-danger" role="alert">{error}</div>;
 		}
+
+		return <SchoolTable schools={schools}/>;
 	}
 }

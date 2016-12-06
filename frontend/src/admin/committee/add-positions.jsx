@@ -4,7 +4,7 @@ import request from 'superagent';
 export default class AddPositions extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { positions: [], newPosition: '' };
+		this.state = {positions: [], newPosition: ''};
 
 		this.handleNewPositionKeyDown = this.handleNewPositionKeyDown.bind(this);
 		this.handleNewPositionChange = this.handleNewPositionChange.bind(this);
@@ -15,13 +15,13 @@ export default class AddPositions extends React.Component {
 		if (event.keyCode === 13) {
 			this.setState({
 				positions: [...this.state.positions, this.state.newPosition],
-				newPosition: ''
+				newPosition: '',
 			});
 		}
 	}
 
 	handleNewPositionChange(event) {
-		this.setState({ newPosition: event.target.value });
+		this.setState({newPosition: event.target.value});
 	}
 
 	handleSavePositions() {
@@ -29,8 +29,8 @@ export default class AddPositions extends React.Component {
 		request
 			.post(`/admin/committee/${window.committeeId}/add-positions`)
 			.send(this.state.positions)
-			.end((err) => {
-				if (!!err) {
+			.end(err => {
+				if (err) {
 					console.error(err); // TODO: show to user
 				} else {
 					// TODO: more bad hard-coded URLs
@@ -40,7 +40,7 @@ export default class AddPositions extends React.Component {
 	}
 
 	render() {
-		const positions = this.state.positions.map((position) => {
+		const positions = this.state.positions.map(position => {
 			return <li key={position}>{position}</li>;
 		});
 
@@ -51,7 +51,7 @@ export default class AddPositions extends React.Component {
 					value={this.state.newPosition}
 					onKeyDown={this.handleNewPositionKeyDown}
 					onChange={this.handleNewPositionChange}
-				/>
+					/>
 				<ul>
 					{positions}
 				</ul>

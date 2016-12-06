@@ -2,6 +2,7 @@ package org.brownmun.web.admin;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.brownmun.model.Delegate;
+import org.brownmun.model.Position;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
 import org.brownmun.model.repo.DelegateRepository;
@@ -14,20 +15,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/admin/school")
 public class SchoolController
 {
 	private final SchoolRepository repo;
-	private final DelegateRepository delegateRepo;
 	private final PositionRepository positionRepo;
+	private final DelegateRepository delegateRepo;
 
 	@Autowired
-	public SchoolController(SchoolRepository repo, DelegateRepository delegateRepo, PositionRepository positionRepo)
+	public SchoolController(SchoolRepository repo, PositionRepository positionRepo, DelegateRepository delegateRepo)
 	{
 		this.repo = repo;
-		this.delegateRepo = delegateRepo;
 		this.positionRepo = positionRepo;
+		this.delegateRepo = delegateRepo;
 	}
 
 	@GetMapping("/list")
@@ -95,14 +98,27 @@ public class SchoolController
 		}
 
 		model.addAttribute("school", school);
+		model.addAttribute("availablePositions", positionRepo.findUnassignedPositions());
 		return "admin/school/delegates";
 	}
 
-	// Doing this as a whole-page submit isn't ideal,
-	// but making an ajax request and selectively updating the page also isn't ideal...
-	// but neither is doing everything in React :(
-	@PostMapping("/unassign-delegate")
-	public String unassignDelegate(@RequestParam("schoolId") long schoolId, @RequestParam("delegateId") long delegateId, UriComponentsBuilder builder)
+	@PostMapping("/name-delegate")
+	public String nameDelegate(@RequestParam("schoolId") Long schoolId, @RequestParam("id") Long delegateId, @RequestParam("name") String delegateName, UriComponentsBuilder builder)
+	{
+		Delegate delegate = delegateRepo.findOne(delegateId);
+		if (delegate == null || delegate.getSchool().getId() != schoolId)
+		{
+			throw new InvalidDelegateException(delegateId);
+		}
+
+		delegate.setName(delegateName);
+		delegateRepo.save(delegate);
+
+		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "SC#delegates").arg(0, schoolId).build();
+	}
+
+	@PostMapping("/assign-position")
+	public String assignPosition(@RequestParam("schoolId") Long schoolId, @RequestParam("positionId") Long positionId, UriComponentsBuilder builder)
 	{
 		School school = repo.findOne(schoolId);
 		if (school == null)
@@ -110,19 +126,20 @@ public class SchoolController
 			throw new NoSuchSchoolException(schoolId);
 		}
 
-		Delegate delegate = delegateRepo.findOne(delegateId);
-		if (delegate == null)
+		Position position = positionRepo.findOne(positionId);
+
+		Optional<Delegate> freeDelegate = delegateRepo.findFreeDelegate(schoolId);
+		if (freeDelegate.isPresent())
 		{
-			throw new InvalidDelegateException(delegateId);
+			position.setDelegate(freeDelegate.get());
+			positionRepo.save(position);
+		}
+		else
+		{
+			// TODO: proper error response
+			throw new InvalidDelegateException(-1L);
 		}
 
-		if (!delegate.getSchool().getId().equals(schoolId))
-		{
-			throw new InvalidDelegateException(delegateId);
-		}
-
-		delegate.getPosition().setDelegate(null);
-		positionRepo.save(delegate.getPosition());
 		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "SC#delegates").arg(0, schoolId).build();
 	}
 

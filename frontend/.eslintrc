@@ -6,7 +6,11 @@
 		"shared-node-browser": true
 	},
 	"rules": {
-		"comma-dangle": [2, "always-multiline"]
+		"comma-dangle": [2, "always-multiline"],
+		"react/jsx-no-bind": [2, {
+			"ignoreRefs": true,
+			"allowArrowFunctions": true
+		}]
 	},
 	"root": true
 }

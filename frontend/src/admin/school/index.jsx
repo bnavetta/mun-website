@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import SchoolDisplay from './list';
+function renderSchoolDisplay(elem) {
+	System.import('./list').then(module => {
+		const SchoolDisplay = module.default;
+		ReactDOM.render(<SchoolDisplay/>, elem);
+	});
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 	const schoolDisplay = document.getElementById('school-display');
-	if (!!schoolDisplay) {
-		ReactDOM.render(<SchoolDisplay/>, schoolDisplay);
-
-		module.hot.accept('./list', () => ReactDOM.render(<SchoolDisplay/>, schoolDisplay));
+	if (schoolDisplay) {
+		renderSchoolDisplay(schoolDisplay);
+		module.hot.accept('./list', () => renderSchoolDisplay(schoolDisplay));
 	}
 });

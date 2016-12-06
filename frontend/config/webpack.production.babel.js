@@ -7,7 +7,7 @@ export default new Config().extend('config/webpack.base.babel.js').merge({
 	entry: entrypoints([]),
 	output: {
 		filename: '[name].[chunkhash].js',
-		chunkFilename: '[name].chunkhash.js'
+		chunkFilename: '[name].[chunkhash].js'
 	},
 	plugins: [
 		new webpack.LoaderOptionsPlugin({
