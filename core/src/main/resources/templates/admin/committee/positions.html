@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:wp="http://brownmun"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
+	<!--/*@thymesVar id="committee" type="org.brownmun.model.Committee"*/-->
+	<head>
+		<title th:text="${committee.name}">Committee</title>
+		<wp:chunk name="admin"/>
+	</head>
+	<body>
+		<header layout:fragment="header">
+			<h1>[[${committee.name}]] <span class="Committee--shortName">([[${committee.shortName}]])</span></h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#" th:href="@{/admin}">Admin</a></li>
+				<li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('CC#listCommittees').build()}">Committees</a></li>
+				<li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('CC#viewCommittee').arg(0, committee.id).build()}">[[${committee.name}]]</a></li>
+				<li class="breadcrumb-item active">Delegates</li>
+			</ol>
+		</header>
+
+		<div layout:fragment="body">
+		</div>
+	</body>
+</html>
