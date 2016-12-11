@@ -6,21 +6,59 @@
 	layout:decorate="~{base}">
 	<!--/*@thymesVar id="committee" type="org.brownmun.model.Committee"*/-->
 	<head>
-		<title th:text="${committee.name}">Committee</title>
+		<title>Positions for [[${committee.name}]]</title>
 		<wp:chunk name="admin"/>
+		<wp:chunk name="committeeAdmin" />
 	</head>
 	<body>
 		<header layout:fragment="header">
-			<h1>[[${committee.name}]] <span class="Committee--shortName">([[${committee.shortName}]])</span></h1>
+			<h1>Positions for [[${committee.name}]]</h1>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#" th:href="@{/admin}">Admin</a></li>
 				<li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('CC#listCommittees').build()}">Committees</a></li>
 				<li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('CC#viewCommittee').arg(0, committee.id).build()}">[[${committee.name}]]</a></li>
-				<li class="breadcrumb-item active">Delegates</li>
+				<li class="breadcrumb-item">Positions</li>
 			</ol>
 		</header>
 
 		<div layout:fragment="body">
+			<form method="post" action="">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Position</th>
+							<th>Assigned To</th>
+							<th>Reassign</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							th:each="position, status : ${committee.positions}"
+						>
+							<td>[[${position.name}]]</td>
+							<td
+								th:class="${position.isAssigned() ? 'Position-assigned' : 'Position-unassigned'}"
+								th:text="${position.isAssigned() ? position.delegate.name : 'Unassigned'}"
+							>
+								Some Delegate
+							</td>
+							<td>
+								<select th:name="|positions[${status.index}]|" class="form-control">
+									<option value="" th:selected="${position.delegate == null}"></option>
+									<option
+										th:each="school : ${schools}"
+										th:value="${school.id}"
+										th:text="${school.name}"
+										th:selected="${school.hasPosition(position)}"
+										th:if="${school.hasPosition(position) || school.unassignedDelegateCount > 0}"
+									/>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary" value="Save Changes">
+			</form>
 		</div>
 	</body>
 </html>

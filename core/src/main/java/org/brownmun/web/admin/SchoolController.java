@@ -136,8 +136,7 @@ public class SchoolController
 		}
 		else
 		{
-			// TODO: proper error response
-			throw new InvalidDelegateException(-1L);
+			throw new NoFreeDelegatesException(schoolId);
 		}
 
 		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "SC#delegates").arg(0, schoolId).build();

@@ -1,11 +1,16 @@
 package org.brownmun.web.admin;
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.model.Committee;
 import org.brownmun.model.CommitteeType;
+import org.brownmun.model.Delegate;
 import org.brownmun.model.Position;
 import org.brownmun.model.repo.CommitteeRepository;
+import org.brownmun.model.repo.DelegateRepository;
+import org.brownmun.model.repo.PositionRepository;
+import org.brownmun.model.repo.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +30,17 @@ import javax.validation.Valid;
 public class CommitteeController
 {
 	private final CommitteeRepository repo;
+	private final SchoolRepository schoolRepo;
+	private final DelegateRepository delegateRepo;
+	private final PositionRepository positionRepo;
 
 	@Autowired
-	public CommitteeController(CommitteeRepository repo)
+	public CommitteeController(CommitteeRepository repo, SchoolRepository schoolRepo, DelegateRepository delegateRepo, PositionRepository positionRepo)
 	{
 		this.repo = repo;
+		this.schoolRepo = schoolRepo;
+		this.delegateRepo = delegateRepo;
+		this.positionRepo = positionRepo;
 	}
 
 	@GetMapping("/list")
@@ -54,6 +65,72 @@ public class CommitteeController
 
 		model.addAttribute("committee", committee);
 		return "admin/committee/view";
+	}
+
+	@GetMapping("/{id}/positions")
+	public String positions(@PathVariable("id") Long id, Model model)
+	{
+		Committee committee = repo.findOne(id);
+		if (committee == null)
+		{
+			throw new NoSuchCommitteeException(id);
+		}
+
+		model.addAttribute("committee", committee);
+		model.addAttribute("schools", schoolRepo.findAll());
+		return "admin/committee/positions";
+	}
+
+	@PostMapping("/{id}/positions")
+	public String savePositions(@PathVariable("id") Long id, @ModelAttribute PositionForm positionForm)
+	{
+		Committee committee = repo.findOne(id);
+		if (committee == null)
+		{
+			throw new NoSuchCommitteeException(id);
+		}
+
+		List<Long> positions = positionForm.positions;
+		List<Position> changedPositions = Lists.newArrayList();
+
+		// Can't really do zip in Java :(
+		for (int i = 0; i < positions.size(); i++)
+		{
+			Long newSchoolId = positions.get(i);
+			Position position = committee.getPositions().get(i);
+
+			if (newSchoolId == null)
+			{
+				// assigned -> unassigned
+				if (position.isAssigned())
+				{
+					position.setDelegate(null);
+					changedPositions.add(position);
+				}
+			}
+			else
+			{
+				// unassigned or assigned to different school -> assigned
+				if (!position.isAssigned() || !position.getDelegate().getSchool().getId().equals(newSchoolId))
+				{
+					Optional<Delegate> newDelegate = delegateRepo.findFreeDelegate(newSchoolId);
+					if (newDelegate.isPresent())
+					{
+						position.setDelegate(newDelegate.get());
+						changedPositions.add(position);
+					}
+					else
+					{
+						throw new NoFreeDelegatesException(newSchoolId);
+					}
+				}
+			}
+		}
+
+		positionRepo.save(changedPositions);
+
+		// Redirect so that the changes are flushed to the database and derived fields are recalculated
+		return "redirect:" + MvcUriComponentsBuilder.fromMappingName("CC#positions").arg(0, id).build();
 	}
 
 	@GetMapping("/{id}/edit")
@@ -127,5 +204,12 @@ public class CommitteeController
 	public String index(UriComponentsBuilder builder)
 	{
 		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "CC#listCommittees").build();
+	}
+
+	// Needed because type erasure prevents using List<String> as a method parameter directly
+	@Data
+	static class PositionForm
+	{
+		List<Long> positions;
 	}
 }

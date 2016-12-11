@@ -82,6 +82,11 @@ public class School
 		return delegates.stream().filter(d -> !d.isAssigned()).count();
 	}
 
+	public boolean hasPosition(Position position)
+	{
+		return position.isAssigned() && position.getDelegate().getSchool().getId() == this.getId();
+	}
+
 	public Date getRegistrationTimeAsDate()
 	{
 		return Date.from(registrationTime);
