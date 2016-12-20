@@ -37,10 +37,10 @@
 
 			<h2>Topics</h2>
 			<ul>
-				<li th:text="${committee.topic1}">Topic 1</li>
-				<li th:text="${committee.topic2}">Topci 2</li>
-				<li th:text="${committee.topic3}">Topci 3</li>
-				<li th:text="${committee.topic4}">Topci 4</li>
+				<li th:text="${committee.topic1}" th:unless="${#strings.isEmpty(committee.topic1)}">Topic 1</li>
+				<li th:text="${committee.topic2}" th:unless="${#strings.isEmpty(committee.topic2)}">Topic 2</li>
+				<li th:text="${committee.topic3}" th:unless="${#strings.isEmpty(committee.topic3)}">Topic 3</li>
+				<li th:text="${committee.topic4}" th:unless="${#strings.isEmpty(committee.topic4)}">Topic 4</li>
 			</ul>
 		</div>
 	</body>
