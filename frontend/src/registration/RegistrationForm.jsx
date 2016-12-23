@@ -1,5 +1,6 @@
 import React from 'react';
 import Formsy from 'formsy-react';
+import request from 'superagent';
 
 import Input from './Input';
 import Textarea from './Textarea';
@@ -7,6 +8,17 @@ import Checkbox from './Checkbox';
 import Select from './Select';
 import PreferenceSlider from './PreferenceSlider';
 import '../util/formsy-rules';
+
+async function loadHotels() {
+	console.log('Loading hotels');
+	const res = await request.get('/api/hotel').accept('json');
+	if (!res.ok) {
+		console.error('Error loading hotels', res.body.message);
+	}
+
+	console.log('Loaded list of hotels');
+	return res.body.map(({ id, name }) => ({ label: name, value: id.toString() }));
+}
 
 export default class RegistrationForm extends React.Component {
 	constructor(props, context) {
@@ -19,8 +31,15 @@ export default class RegistrationForm extends React.Component {
 
 		this.state = {
 			submitEnabled: false,
-			values: {}
+			values: {},
+			hotels: [],
 		};
+	}
+
+	componentDidMount() {
+		loadHotels()
+			.then(hotels => { this.setState({ hotels }) })
+			.catch(e => { console.error(e) });
 	}
 
 	handleSubmit(model) {
@@ -64,7 +83,11 @@ export default class RegistrationForm extends React.Component {
 	renderHotelInfo() {
 		if (this.state.values.busunHotel) {
 			return (
-				<p>TODO: LIST HOTELS</p>
+				<Select
+					name="hotelSelection"
+					label="Tentative Hotel Selection"
+					options={this.state.hotels}
+				/>
 			)
 		}
 	}
