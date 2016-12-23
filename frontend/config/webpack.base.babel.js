@@ -20,6 +20,15 @@ export default new Config().merge({
 			},
 
 			{
+				test: /\.css$/,
+				loader: ExtractTextWebpackPlugin.extract({
+					fallbackLoader: 'style-loader',
+					loader: 'css-loader?sourceMap&importLoaders=1!postcss-loader'
+				}),
+				exclude: /node_modules/,
+			},
+
+			{
 				test: /\.scss$/,
 				loader: ExtractTextWebpackPlugin.extract({
 					fallbackLoader: 'style-loader',

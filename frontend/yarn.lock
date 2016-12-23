@@ -38,6 +38,12 @@ acorn@^4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.3.tgz#1a3e850b428e73ba6b09d1cc527f5aaad4d03ef1"
 
+add-dom-event-listener@1.x:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/add-dom-event-listener/-/add-dom-event-listener-1.0.1.tgz#70e74d0692b27108f9740554e0fa80a4683c2eb2"
+  dependencies:
+    object-assign "4.x"
+
 after@0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.1.tgz#ab5d4fb883f596816d3515f8f791c0af486dd627"
@@ -929,7 +935,7 @@ babel-register, babel-register@^6.18.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
+babel-runtime@6.x, babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.18.0.tgz#0f4177ffd98492ef13b9f823e9994a02584c9078"
   dependencies:
@@ -1287,6 +1293,10 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+classnames@2.x, classnames@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+
 clean-css@3.4.x:
   version "3.4.20"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.20.tgz#c0d8963b5448e030f0bcd3ddd0dac4dfe3dea501"
@@ -1426,6 +1436,12 @@ component-bind@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
 
+component-classes@^1.2.5:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/component-classes/-/component-classes-1.2.6.tgz#c642394c3618a4d8b0b8919efccbbd930e5cd691"
+  dependencies:
+    component-indexof "0.0.3"
+
 component-emitter@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.1.2.tgz#296594f2753daa63996d2af08d15a95116c9aec3"
@@ -1433,6 +1449,10 @@ component-emitter@1.1.2:
 component-emitter@1.2.0, component-emitter@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.0.tgz#ccd113a86388d06482d03de3fc7df98526ba8efe"
+
+component-indexof@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/component-indexof/-/component-indexof-0.0.3.tgz#11d091312239eb8f32c8f25ae9cb002ffe8d3c24"
 
 component-inherit@0.0.3:
   version "0.0.3"
@@ -1598,6 +1618,12 @@ crypto-browserify@~3.2.6:
     pbkdf2-compat "2.0.1"
     ripemd160 "0.2.0"
     sha.js "2.2.6"
+
+css-animation@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/css-animation/-/css-animation-1.3.0.tgz#315d9742bbe282c23b9951ceac2aa53cee05b708"
+  dependencies:
+    component-classes "^1.2.5"
 
 css-color-names@0.0.3:
   version "0.0.3"
@@ -1841,6 +1867,10 @@ doiuse@^2.4.1:
     source-map "^0.4.2"
     through2 "^0.6.3"
     yargs "^3.5.4"
+
+dom-align@1.x:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/dom-align/-/dom-align-1.5.2.tgz#bceb6c109a3442ebc001c04c48cb37a9d5e96df2"
 
 dom-walk@^0.1.0:
   version "0.1.1"
@@ -2417,6 +2447,10 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
+form-data-to-object@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/form-data-to-object/-/form-data-to-object-0.2.0.tgz#f7a8e68ddd910a1100a65e25ac6a484143ff8168"
+
 form-data@^2.1.1, form-data@~2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.1.1.tgz#4adf0342e1a79afa1e84c8c320a9ffc82392a1f3"
@@ -2428,6 +2462,12 @@ form-data@^2.1.1, form-data@~2.1.1:
 formidable@^1.0.17:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.0.17.tgz#ef5491490f9433b705faa77249c99029ae348559"
+
+formsy-react@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-0.19.0.tgz#ac195bf6e53c24fef98423988daf3293e8c7030e"
+  dependencies:
+    form-data-to-object "^0.2.0"
 
 forwarded@~0.1.0:
   version "0.1.0"
@@ -3460,7 +3500,7 @@ lodash.isstring@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
 
-lodash.keys@^3.0.0:
+lodash.keys@^3.0.0, lodash.keys@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
   dependencies:
@@ -3930,7 +3970,7 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@4.x, object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.0.tgz#7a3b3d0e98063d43f4c03f2e8ae6cd51a86883a0"
 
@@ -4663,6 +4703,59 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
+rc-align@2.x:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/rc-align/-/rc-align-2.3.3.tgz#15e2fd329fde9c2dec16e4a0e0ec20fba2ffdbc0"
+  dependencies:
+    dom-align "1.x"
+    rc-util "4.x"
+
+rc-animate@2.x:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/rc-animate/-/rc-animate-2.3.1.tgz#eacda46bf589d857f640c53953d92e07cb688636"
+  dependencies:
+    css-animation "^1.3.0"
+
+rc-slider@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-5.4.0.tgz#3e5ea3e2de3b582b3251c2f522c7260240325447"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.5"
+    rc-tooltip "^3.4.2"
+    rc-util "^3.2.1"
+    warning "^3.0.0"
+
+rc-tooltip@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-3.4.2.tgz#c5c89c347ed790f7f290ef825d5e24e8fb599166"
+  dependencies:
+    rc-trigger "1.x"
+
+rc-trigger@1.x:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-1.8.1.tgz#5c47adad7d5412028fe9a2e43510e10acef90de2"
+  dependencies:
+    babel-runtime "6.x"
+    rc-align "2.x"
+    rc-animate "2.x"
+    rc-util "4.x"
+
+rc-util@4.x:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.0.2.tgz#5804f8b141a13c8c14d7c265a7d21d298195af46"
+  dependencies:
+    add-dom-event-listener "1.x"
+    shallowequal "^0.2.2"
+
+rc-util@^3.2.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-3.4.1.tgz#4b7e0b0c7593bdbcff8ed045d88fbbc773a7b061"
+  dependencies:
+    add-dom-event-listener "1.x"
+    classnames "2.x"
+    shallowequal "0.2.x"
+
 rc@~1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.1.6.tgz#43651b76b6ae53b5c802f1151fa3fc3b059969c9"
@@ -5138,6 +5231,12 @@ sha.js@^2.3.6:
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.4.5.tgz#27d171efcc82a118b99639ff581660242b506e7c"
   dependencies:
     inherits "^2.0.1"
+
+shallowequal@0.2.x, shallowequal@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-0.2.2.tgz#1e32fd5bcab6ad688a4812cb0cc04efc75c7014e"
+  dependencies:
+    lodash.keys "^3.1.2"
 
 shelljs@^0.7.5:
   version "0.7.5"
@@ -5849,6 +5948,12 @@ walker@~1.0.5:
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
+
+warning@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+  dependencies:
+    loose-envify "^1.0.0"
 
 watch@~0.10.0:
   version "0.10.0"

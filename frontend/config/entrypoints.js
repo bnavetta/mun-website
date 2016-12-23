@@ -3,6 +3,8 @@ const entrypoints = {
 	index: ['./src/index.jsx'],
 	admin: ['./src/admin/index.js'],
 
+	registration: ['./src/registration/index.jsx'],
+
 	committeeAdmin: ['./src/admin/committee/index.jsx'],
 	schoolAdmin: ['./src/admin/school/index.jsx'],
 };
