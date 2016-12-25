@@ -5,10 +5,14 @@ before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
+  yarn
   directories:
+    - frontend/node_modules
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 addons:
   postgresql: "9.4"
+before_install:
+  - cd frontend && yarn
 before_script:
   - psql -c 'create database brownmun_testdb;' -U postgres
