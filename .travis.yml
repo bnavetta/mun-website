@@ -1,6 +1,10 @@
 language: java
+dist: trusty
+sudo: false
 jdk:
   - oraclejdk8
+node_js:
+    - "6"
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -13,7 +17,6 @@ cache:
 addons:
   postgresql: "9.4"
 before_install:
-  - npm install -g yarn # TODO: use travis-provided yarn once it's in their precise image
   - cd frontend && yarn
 before_script:
   - psql -c 'create database brownmun_testdb;' -U postgres
