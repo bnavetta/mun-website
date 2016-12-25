@@ -17,6 +17,7 @@ cache:
 addons:
   postgresql: "9.4"
 before_install:
+  - npm install -g yarn
   - cd frontend && yarn
 before_script:
   - psql -c 'create database brownmun_testdb;' -U postgres
