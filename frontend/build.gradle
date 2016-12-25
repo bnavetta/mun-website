@@ -1,9 +1,34 @@
-task build(type: Exec) {
+task yarnInstall(type: Exec) {
+	inputs.file 'package.json'
+	commandLine 'yarn'
+}
+
+task assemble(type: Exec) {
 	inputs.dir 'src'
 	inputs.dir 'flow'
 	outputs.dir 'dist'
 
 	commandLine 'yarn', 'run', 'build'
+
+	dependsOn yarnInstall
+}
+
+task test(type: Exec) {
+	inputs.dir 'src'
+	inputs.dir 'flow'
+
+	commandLine 'yarn', 'run', 'test'
+
+	dependsOn yarnInstall
+}
+
+task check {
+	dependsOn test
+}
+
+task build {
+	dependsOn assemble
+	dependsOn check
 }
 
 task clean(type: Delete) {
