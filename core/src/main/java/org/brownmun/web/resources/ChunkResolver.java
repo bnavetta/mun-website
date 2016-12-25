@@ -8,5 +8,7 @@ import java.util.Optional;
  */
 public interface ChunkResolver
 {
-	Optional<Collection<String>> resolve(String chunkName);
+	String getAssetBase();
+
+	Optional<Chunk> resolve(String chunkName);
 }

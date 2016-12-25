@@ -1,0 +1,11 @@
+task build(type: Exec) {
+	inputs.dir 'src'
+	inputs.dir 'flow'
+	outputs.dir 'dist'
+
+	commandLine 'yarn', 'run', 'build'
+}
+
+task clean(type: Delete) {
+	delete 'dist'
+}

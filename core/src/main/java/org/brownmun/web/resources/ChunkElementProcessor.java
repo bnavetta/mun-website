@@ -27,26 +27,25 @@ public class ChunkElementProcessor extends AbstractElementTagProcessor
 
 		IModel model = context.getModelFactory().createModel();
 
-		chunkResolver.resolve(chunkName).ifPresent((assets) -> {
-			for (String asset : assets) {
-				if (asset.endsWith(".css"))
-				{
-					IStandaloneElementTag link = context.getModelFactory().createStandaloneElementTag("link", ImmutableMap.of(
-						"rel", "stylesheet",
-						"href", asset
-					), AttributeValueQuotes.DOUBLE, false, true);
-					model.add(link);
-				}
-				else if (asset.endsWith(".js"))
-				{
-					IOpenElementTag scriptStart = context.getModelFactory().createOpenElementTag("script", "src", asset);
-					model.add(scriptStart);
-					model.add(context.getModelFactory().createCloseElementTag("script"));
-				}
-				else
-				{
-					throw new IllegalArgumentException("Unsupported asset type: " + asset);
-				}
+		chunkResolver.resolve(chunkName).ifPresent(chunk -> {
+			for (String asset : chunk.getCss())
+			{
+				IStandaloneElementTag link = context.getModelFactory().createStandaloneElementTag("link", ImmutableMap.of(
+					"rel", "stylesheet",
+					"href", chunkResolver.getAssetBase() + asset
+				), AttributeValueQuotes.DOUBLE, false, true);
+				model.add(link);
+			}
+
+			for (String asset : chunk.getJs())
+			{
+				IOpenElementTag scriptStart = context.getModelFactory().createOpenElementTag("script", ImmutableMap.of(
+					"src", chunkResolver.getAssetBase() + asset,
+					// TODO: async or defer?
+					"defer", "true"
+				), AttributeValueQuotes.DOUBLE, false);
+				model.add(scriptStart);
+				model.add(context.getModelFactory().createCloseElementTag("script"));
 			}
 		});
 

@@ -11,8 +11,10 @@ import org.brownmun.model.repo.CommitteeRepository;
 import org.brownmun.model.repo.DelegateRepository;
 import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -68,6 +70,7 @@ public class CommitteeController
 	}
 
 	@GetMapping("/{id}/positions")
+	@Transactional
 	public String positions(@PathVariable("id") Long id, Model model)
 	{
 		Committee committee = repo.findOne(id);

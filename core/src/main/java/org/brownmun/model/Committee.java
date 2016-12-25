@@ -1,5 +1,6 @@
 package org.brownmun.model;
 
+import com.google.common.collect.ComparisonChain;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @EqualsAndHashCode(exclude = {"positions"})
-public class Committee
+public class Committee implements Comparable<Committee>
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +47,7 @@ public class Committee
 	@Enumerated(EnumType.STRING)
 	private CommitteeType committeeType;
 
+	@OrderBy("name ASC")
 	@OneToMany(mappedBy = "committee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Position> positions;
 
@@ -56,4 +58,13 @@ public class Committee
 	@Setter(AccessLevel.NONE)
 	@Formula("(SELECT COUNT(*) FROM position p WHERE p.committee_id = id)")
 	private int totalPositions;
+
+	@Override
+	public int compareTo(Committee o)
+	{
+		return ComparisonChain.start()
+			.compare(this.name, o.name)
+			.compare(this.id, o.id)
+			.result();
+	}
 }

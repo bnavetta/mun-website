@@ -1,6 +1,7 @@
 package org.brownmun.model;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.ComparisonChain;
 import lombok.*;
 import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.NotBlank;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @EqualsAndHashCode(exclude = {"delegate"})
-public class Position
+public class Position implements Comparable<Position>
 {
 	@Setter(AccessLevel.NONE)
 	@Id
@@ -45,8 +46,17 @@ public class Position
 			.add("id", id)
 			.add("name", name)
 			.add("committee_id", committee.getId())
-			.add("delegate_id", delegate.getId())
+			.add("delegate_id", delegate != null ? delegate.getId() : "null")
 			.add("assigned", assigned)
 			.toString();
+	}
+
+	@Override
+	public int compareTo(Position o)
+	{
+		return ComparisonChain.start()
+			.compare(this.committee, o.committee)
+			.compare(this.name, o.name)
+			.result();
 	}
 }

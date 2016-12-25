@@ -20,3 +20,10 @@ dependencies {
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
+
+processResources.dependsOn ':frontend:build'
+processResources.with {
+	from(project(':frontend').file('dist')) {
+		into 'static'
+	}
+}

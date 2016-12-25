@@ -1,16 +1,4 @@
 {
-	"extends": ["xo/esnext", "xo-react"],
-	"env": {
-		"browser": true,
-		"commonjs": true,
-		"shared-node-browser": true
-	},
-	"rules": {
-		"comma-dangle": [2, "always-multiline"],
-		"react/jsx-no-bind": [2, {
-			"ignoreRefs": true,
-			"allowArrowFunctions": true
-		}]
-	},
-	"root": true
+    "extends": ["lycaon"],
+    "root": true
 }
