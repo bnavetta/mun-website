@@ -17,6 +17,7 @@ dependencies {
 	compile 'org.hibernate:hibernate-java8'
 	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
 	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava'
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
