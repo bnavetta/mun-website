@@ -4,7 +4,6 @@ import lombok.Data;
 import org.brownmun.model.Address;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
@@ -69,7 +68,15 @@ public class RegistrationForm
 
 	String aboutSchool;
 
+	/*
+	 * Finanical Aid Information
+	 */
+
 	boolean applyingForFinancialAid;
+
+	int financialAidPercent;
+
+	String financialAidJustification;
 
 	/*
 	 * Logistical Information
@@ -79,21 +86,14 @@ public class RegistrationForm
 
 	boolean busunShuttles;
 
+	Long hotelSelection;
+
 	/*
 	 * Conference Preferences
 	 */
 
-	@Min(0)
-	@Max(100)
-	int preferredGeneralPercentage;
-
-	@Min(0)
-	@Max(100)
-	int preferredSpecializedPercentage;
-
-	@Min(0)
-	@Max(100)
-	int preferredCrisisPercentage;
+	@Valid
+	CommitteePreferences committeePreferences;
 
 	String countryChoice1;
 	String countryChoice2;
@@ -111,9 +111,25 @@ public class RegistrationForm
 		return advisorPassword.equals(advisorPasswordConfirm);
 	}
 
-	@AssertTrue(message = "Committee type preferences must sum to 100%")
-	public boolean preferencesValid()
+	@Data
+	public static class CommitteePreferences
 	{
-		return preferredGeneralPercentage + preferredSpecializedPercentage + preferredCrisisPercentage == 100;
+		@Min(0)
+		@Max(100)
+		int general;
+
+		@Min(0)
+		@Max(100)
+		int specialized;
+
+		@Min(0)
+		@Max(100)
+		int crisis;
+
+		@AssertTrue(message = "Committee type preferences must sum to 100%")
+		public boolean preferencesValid()
+		{
+			return general + specialized + crisis == 100;
+		}
 	}
 }

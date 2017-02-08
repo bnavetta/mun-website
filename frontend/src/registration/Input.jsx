@@ -22,32 +22,14 @@ class Input extends React.Component {
     constructor(props: Props, context: Object) {
         super(props, context);
 
-        this.state = {
-            focused: false,
-        };
-
         this.handleChange = (e) => {
             this.props.setValue(e.target.value);
         };
-
-        this.handleFocus = () => {
-            this.setState({ focused: true });
-        };
-
-        this.handleBlur = () => {
-            this.setState({ focused: true });
-        };
-    }
-
-    state: {
-        focused: boolean,
     }
 
     props: Props
 
     handleChange: (SyntheticInputEvent) => void
-    handleFocus: () => void
-    handleBlur: () => void
 
     renderErrors() {
         return this.props.getErrorMessages().map((message, i) => <div key={i} className="form-control-feedback">{message}</div>);
@@ -55,7 +37,7 @@ class Input extends React.Component {
 
     render() {
         const showError = (this.props.showRequired() || this.props.showError())
-            && !this.state.focused && !this.props.isPristine();
+            && !this.props.isPristine();
 
         return (
             <div className={classNames('form-group', { 'has-danger': showError })}>
@@ -74,8 +56,6 @@ class Input extends React.Component {
                   type={this.props.type}
                   value={this.props.getValue()}
                   onChange={this.handleChange}
-                  onFocus={this.handleFocus}
-                  onBlur={this.handleBlur}
                 />
                 { showError && this.renderErrors() }
                 { this.props.help && <p className="form-text text-muted">{this.props.help}</p> }

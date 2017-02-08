@@ -36,9 +36,25 @@ export default class RegistrationForm extends React.Component {
             ],
         };
 
-        this.handleSubmit = (model) => {
-            console.log(model); // eslint-disable-line no-console
+        this.handleSubmit = (model, resetForm, invalidateForm) => {
             this.setState({ values: model });
+            request.post('').send(model).accept('json')
+                .then(res => res.body)
+                .then((result) => {
+                    if (result.success) {
+                        // TODO: indicate success
+                        resetForm();
+                    } else {
+                        invalidateForm(result.errors);
+                    }
+                })
+                .catch((e) => {
+                    if (e.response.body.errors) {
+                        invalidateForm(e.response.body.errors);
+                    } else {
+                        console.error(e); // eslint-disable-line no-console
+                    }
+                });
         };
 
         this.handleChange = (values) => {

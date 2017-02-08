@@ -43,6 +43,10 @@ class Select extends React.Component {
         focused: boolean,
     }
 
+    componentDidMount() {
+        this.props.setValue(this.props.options[0].value);
+    }
+
     props: Props
 
     handleChange: (SyntheticInputEvent) => void
