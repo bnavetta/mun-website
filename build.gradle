@@ -77,11 +77,6 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
 
         systemProperty 'debug', 'true'
         systemProperty 'spring.profiles.active', System.getenv('TRAVIS') ? 'ci' : 'local'
-        rootProject.file('.env').eachLine {
-            if (!it.isEmpty() && !it.startsWith('#')) {
-                environment(*it.split('='))
-            }
-        }
     }
 
     rootProject.tasks['coverage'].configure {
