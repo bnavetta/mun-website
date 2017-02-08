@@ -11,7 +11,6 @@ import org.brownmun.model.repo.CommitteeRepository;
 import org.brownmun.model.repo.DelegateRepository;
 import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

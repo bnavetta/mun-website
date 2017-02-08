@@ -23,6 +23,8 @@ dependencies {
 	compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava'
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 processResources.dependsOn ':frontend:build'
@@ -31,3 +33,5 @@ processResources.with {
 		into 'static'
 	}
 }
+
+compileJava.dependsOn(processResources)

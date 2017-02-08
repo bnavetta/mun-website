@@ -7,6 +7,14 @@ server:
         enabled: true
         mime-types: "text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json"
 
+sso:
+    allowedDomains:
+        - busun.org
+    allowedEmails: []
+    grantedAuthorities:
+        - ROLE_USER
+        - ROLE_STAFF
+
 google:
     client:
       clientId: ${GOOGLE_CLIENT_ID}
@@ -21,3 +29,6 @@ google:
     resource:
         userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
         preferTokenInfo: true
+logging:
+  level:
+    org.brownmun: trace

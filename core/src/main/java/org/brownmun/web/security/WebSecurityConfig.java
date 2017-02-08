@@ -1,16 +1,16 @@
-package org.brownmun.web;
+package org.brownmun.web.security;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -29,21 +29,24 @@ import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
-//@EnableOAuth2Sso
-public class WebSecurityConfig
+@EnableOAuth2Client
+@EnableConfigurationProperties(SsoProperties.class)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-    @Configuration
-    @Order(1)
-    public static class UserSecurityConfig extends WebSecurityConfigurerAdapter
-    {
+        @Autowired
+        private OAuth2ClientContext oauth2ClientContext;
+
+        @Autowired
+        private SsoProperties ssoProperties;
+
         @Override
         protected void configure(HttpSecurity http) throws Exception
         {
             http
                 .authorizeRequests()
-//                    .antMatchers("/", "/index", "/register")
-//                    .permitAll()
                     .antMatchers("/profile").hasRole("USER")
+                    .antMatchers("/admin/**").hasRole("STAFF")
                     .and()
                 .formLogin()
                     .loginPage("/login")
@@ -53,7 +56,11 @@ public class WebSecurityConfig
                     .and()
                 .logout()
                     .deleteCookies("JSESSIONID")
-                    .permitAll();
+                    .permitAll()
+                    .and()
+                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+                .exceptionHandling()
+                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
         }
 
         @Override
@@ -61,29 +68,6 @@ public class WebSecurityConfig
         {
             auth.inMemoryAuthentication()
                 .withUser("ben").password("busunftw").roles("USER");
-        }
-    }
-
-    @Configuration
-    @Order(2)
-    @EnableOAuth2Client
-    public static class StaffSecurityConfig extends WebSecurityConfigurerAdapter
-    {
-        @Autowired
-        private OAuth2ClientContext oauth2ClientContext;
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception
-        {
-            LoggerFactory.getLogger(getClass()).error("ASDFASDFASDF");
-            http
-                .authorizeRequests()
-                    .antMatchers("/admin/**")
-                    .hasRole("STAFF")
-                    .and()
-                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
-                .exceptionHandling()
-                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
         }
 
         private Filter ssoFilter()
@@ -116,7 +100,7 @@ public class WebSecurityConfig
         @Bean
         public AuthoritiesExtractor authoritiesExtractor()
         {
-            return new DomainRestrictedAuthoritiesExtractor();
+            return new DomainRestrictedAuthoritiesExtractor(ssoProperties);
         }
 
         @Bean
@@ -127,5 +111,4 @@ public class WebSecurityConfig
             registration.setOrder(-100);
             return registration;
         }
-    }
 }
