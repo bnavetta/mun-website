@@ -1,50 +1,131 @@
 package org.brownmun.web;
 
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Sso
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter
+//@EnableOAuth2Sso
+public class WebSecurityConfig
 {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception
+    @Configuration
+    @Order(1)
+    public static class UserSecurityConfig extends WebSecurityConfigurerAdapter
     {
-        http
-            .authorizeRequests()
-                .antMatchers("/", "/index", "/register").permitAll()
-                .antMatchers("/admin/**").hasRole("STAFF")
-                .anyRequest().permitAll()
-                .and()
-            .formLogin()
-                .loginPage("/login")
-                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
-                .permitAll()
-                .and()
-            .logout()
-                .permitAll();
+        @Override
+        protected void configure(HttpSecurity http) throws Exception
+        {
+            http
+                .authorizeRequests()
+//                    .antMatchers("/", "/index", "/register")
+//                    .permitAll()
+                    .antMatchers("/profile").hasRole("USER")
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                    .defaultSuccessUrl("/profile")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .deleteCookies("JSESSIONID")
+                    .permitAll();
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception
+        {
+            auth.inMemoryAuthentication()
+                .withUser("ben").password("busunftw").roles("USER");
+        }
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    @Configuration
+    @Order(2)
+    @EnableOAuth2Client
+    public static class StaffSecurityConfig extends WebSecurityConfigurerAdapter
     {
-        LoggerFactory.getLogger(getClass()).error("A THING HAPPENED");
-        auth.inMemoryAuthentication()
-            .withUser("ben").password("busunftw").roles("STAFF");
-    }
+        @Autowired
+        private OAuth2ClientContext oauth2ClientContext;
 
-    @Bean
-    public AuthoritiesExtractor authoritiesExtractor()
-    {
-        return new DomainRestrictedAuthoritiesExtractor();
+        @Override
+        protected void configure(HttpSecurity http) throws Exception
+        {
+            LoggerFactory.getLogger(getClass()).error("ASDFASDFASDF");
+            http
+                .authorizeRequests()
+                    .antMatchers("/admin/**")
+                    .hasRole("STAFF")
+                    .and()
+                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+                .exceptionHandling()
+                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
+        }
+
+        private Filter ssoFilter()
+        {
+            OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter("/login/staff");
+            OAuth2RestTemplate template = new OAuth2RestTemplate(google(), oauth2ClientContext);
+            filter.setRestTemplate(template);
+            UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
+            tokenServices.setRestTemplate(template);
+            tokenServices.setAuthoritiesExtractor(authoritiesExtractor());
+            filter.setTokenServices(tokenServices);
+            filter.setAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler());
+            return filter;
+        }
+
+        @Bean
+        @ConfigurationProperties("google.client")
+        public AuthorizationCodeResourceDetails google()
+        {
+            return new AuthorizationCodeResourceDetails();
+        }
+
+        @Bean
+        @ConfigurationProperties("google.resource")
+        public ResourceServerProperties googleResource()
+        {
+            return new ResourceServerProperties();
+        }
+
+        @Bean
+        public AuthoritiesExtractor authoritiesExtractor()
+        {
+            return new DomainRestrictedAuthoritiesExtractor();
+        }
+
+        @Bean
+        public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter)
+        {
+            FilterRegistrationBean registration = new FilterRegistrationBean();
+            registration.setFilter(filter);
+            registration.setOrder(-100);
+            return registration;
+        }
     }
 }

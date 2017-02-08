@@ -6,8 +6,8 @@ server:
     compression:
         enabled: true
         mime-types: "text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json"
-security:
-  oauth2:
+
+google:
     client:
       clientId: ${GOOGLE_CLIENT_ID}
       clientSecret: ${GOOGLE_CLIENT_SECRET}
