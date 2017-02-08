@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:wp="http://brownmun" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
 		<title>Layout Page</title>
 		<wp:chunk name="common"/>
@@ -7,6 +7,13 @@
 	</head>
 	<body>
 		<div class="container-fluid">
+			<div class="row">
+                <div th:if="${#httpServletRequest.remoteUser}">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-secondary">Log Out</button>
+                    </form>
+                </div>
+            </div>
 			<div class="row">
 				<div class="col-sm-10 offset-md-1">
 					<header layout:fragment="header">

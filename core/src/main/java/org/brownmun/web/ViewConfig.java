@@ -11,10 +11,11 @@ public class ViewConfig extends WebMvcConfigurerAdapter
 {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry)
-	{
+    {
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/admin/").setViewName("admin/index");
 		registry.addRedirectViewController("/admin", "/admin/");
+        registry.addViewController("/login").setViewName("login");
 
 		// Only useful for dev, but shouldn't break anything in production?
 		registry.addRedirectViewController("/__webpack_hmr", "http://localhost:8000/__webpack_hmr");
