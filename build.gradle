@@ -42,7 +42,7 @@ task check(dependsOn: [testReport, coverage]) {}
 
 configure([project(':core'), project(':busun'), project(':bucs')]) {
     apply plugin: 'java'
-    apply plugin: 'spring-boot'
+    apply plugin: 'org.springframework.boot'
 
     dependencyManagement {
         dependencies {

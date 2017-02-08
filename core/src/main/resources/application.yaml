@@ -1,6 +1,11 @@
 spring:
     thymeleaf:
         mode: "HTML"
+    datasource:
+      url: ${DB_JDBC_URL}
+      username: ${DB_USER}
+      password: ${DB_PASSWORD}
+
 
 server:
     compression:
@@ -14,6 +19,7 @@ sso:
     grantedAuthorities:
         - ROLE_USER
         - ROLE_STAFF
+
 
 google:
     client:
@@ -29,6 +35,7 @@ google:
     resource:
         userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
         preferTokenInfo: true
+
 logging:
   level:
     org.brownmun: trace
