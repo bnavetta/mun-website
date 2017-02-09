@@ -55,7 +55,7 @@ class Select extends React.Component {
 
     renderErrors() {
         // console.log(this.props.getErrorMessages());
-        return this.props.getErrorMessages().map((message, i) => <div key={i} className="form-control-feedback">{message}</div>);
+        return this.props.getErrorMessages().map(message => <div key={message} className="form-control-feedback">{message}</div>);
     }
 
     render() {
@@ -93,20 +93,20 @@ class Select extends React.Component {
 }
 
 Select.propTypes = {
-    getErrorMessages: React.PropTypes.func,
-    getValue: React.PropTypes.func,
-    isPristine: React.PropTypes.func,
-    isRequired: React.PropTypes.func,
-    help: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
-    label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
+    getErrorMessages: React.PropTypes.func.isRequired,
+    getValue: React.PropTypes.func.isRequired,
+    isPristine: React.PropTypes.func.isRequired,
+    isRequired: React.PropTypes.func.isRequired,
+    help: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
+    label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
     name: React.PropTypes.string.isRequired,
     options: React.PropTypes.arrayOf(React.PropTypes.shape({
         label: React.PropTypes.string.isRequired,
         value: React.PropTypes.string.isRequired,
-    })),
-    setValue: React.PropTypes.func,
-    showError: React.PropTypes.func,
-    showRequired: React.PropTypes.func,
+    })).isRequired,
+    setValue: React.PropTypes.func.isRequired,
+    showError: React.PropTypes.func.isRequired,
+    showRequired: React.PropTypes.func.isRequired,
 };
 
 export default HOC(Select);

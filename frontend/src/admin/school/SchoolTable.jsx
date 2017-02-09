@@ -95,5 +95,5 @@ export default class SchoolTable extends React.Component {
 }
 
 SchoolTable.propTypes = {
-    schools: React.PropTypes.arrayOf(React.PropTypes.object),
+    schools: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 };

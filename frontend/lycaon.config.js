@@ -1,6 +1,4 @@
-const path = require('path');
-// const CommonsChunkPlugin = require('lycaon-build/node_modules/webpack/lib/optimize/CommonsChunkPlugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const path = require('path');const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 module.exports = {
 	entry: {

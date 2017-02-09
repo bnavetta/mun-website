@@ -48,7 +48,7 @@ class Textarea extends React.Component {
     handleBlur: () => void
 
     renderErrors() {
-        return this.props.getErrorMessages().map((message, i) => <div key={i} className="form-control-feedback">{message}</div>);
+        return this.props.getErrorMessages().map(message => <div key={message} className="form-control-feedback">{message}</div>);
     }
 
     render() {
@@ -81,15 +81,15 @@ class Textarea extends React.Component {
 }
 
 Textarea.propTypes = {
-    getErrorMessages: React.PropTypes.func,
-    getValue: React.PropTypes.func,
-    isPristine: React.PropTypes.func,
-    isRequired: React.PropTypes.func,
+    getErrorMessages: React.PropTypes.func.isRequired,
+    getValue: React.PropTypes.func.isRequired,
+    isPristine: React.PropTypes.func.isRequired,
+    isRequired: React.PropTypes.func.isRequired,
     label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
     name: React.PropTypes.string.isRequired,
-    setValue: React.PropTypes.func,
-    showError: React.PropTypes.func,
-    showRequired: React.PropTypes.func,
+    setValue: React.PropTypes.func.isRequired,
+    showError: React.PropTypes.func.isRequired,
+    showRequired: React.PropTypes.func.isRequired,
 };
 
 export default HOC(Textarea);
