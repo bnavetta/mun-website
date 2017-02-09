@@ -83,7 +83,9 @@ export default class RegistrationForm extends React.Component {
             .catch((e) => { console.error(e); }); // eslint-disable-line no-console
     }
 
-    handleSubmit: (Object) => void
+    handleSubmit: (model: Object,
+                   resetForm: () => void,
+                   invalidateForm: (Array<any>) => void) => void
     handleChange: (Object) => void
     enableSubmit: () => void
     disableSubmit: () => void
