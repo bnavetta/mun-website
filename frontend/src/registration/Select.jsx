@@ -97,8 +97,8 @@ Select.propTypes = {
     getValue: React.PropTypes.func.isRequired,
     isPristine: React.PropTypes.func.isRequired,
     isRequired: React.PropTypes.func.isRequired,
-    help: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
-    label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
+    help: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
+    label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
     name: React.PropTypes.string.isRequired,
     options: React.PropTypes.arrayOf(React.PropTypes.shape({
         label: React.PropTypes.string.isRequired,
@@ -107,6 +107,11 @@ Select.propTypes = {
     setValue: React.PropTypes.func.isRequired,
     showError: React.PropTypes.func.isRequired,
     showRequired: React.PropTypes.func.isRequired,
+};
+
+Select.defaultProps = {
+    help: null,
+    label: null,
 };
 
 export default HOC(Select);

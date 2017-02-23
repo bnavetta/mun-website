@@ -1,8 +1,11 @@
 package org.brownmun.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.Instant;
@@ -69,6 +72,9 @@ public class School
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = CascadeType.ALL)
 	private List<Delegate> delegates;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = CascadeType.ALL)
+    private List<Advisor> advisors;
 
 	@Transient
 	public List<Delegate> getAssignedDelegates()

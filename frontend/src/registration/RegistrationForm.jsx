@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Formsy from 'formsy-react';
-import request from 'superagent';
+import request from '../util/superagent';
 
 import Input from './Input';
 import Textarea from './Textarea';
@@ -42,8 +42,8 @@ export default class RegistrationForm extends React.Component {
                 .then(res => res.body)
                 .then((result) => {
                     if (result.success) {
-                        // TODO: indicate success
                         resetForm();
+                        window.location.href = '/yourbusun/';
                     } else {
                         invalidateForm(result.errors);
                     }

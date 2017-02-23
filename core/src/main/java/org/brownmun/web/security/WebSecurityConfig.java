@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -40,12 +42,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         @Autowired
         private SsoProperties ssoProperties;
 
+        @Autowired
+        private AdvisorService advisorService;
+
         @Override
         protected void configure(HttpSecurity http) throws Exception
         {
             http
                 .authorizeRequests()
                     .antMatchers("/profile").hasRole("USER")
+                    .antMatchers("/yourbusun/**").hasRole("ADVISOR")
                     .antMatchers("/admin/**").hasRole("STAFF")
                     .and()
                 .formLogin()
@@ -66,8 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception
         {
-            auth.inMemoryAuthentication()
-                .withUser("ben").password("busunftw").roles("USER");
+            auth.userDetailsService(advisorService);
         }
 
         private Filter ssoFilter()

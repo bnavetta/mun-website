@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:wp="http://brownmun"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base}">
+    <head>
+        <title>Your BUSUN</title>
+        <wp:chunk name="index"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Your BUSUN</h1>
+        </header>
+        <div layout:fragment="body">
+            <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
+            <h2 th:text="${school.name}">School Name</h2>
+        </div>
+    </body>
+</html>

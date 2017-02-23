@@ -4,11 +4,13 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import lombok.Data;
+import org.brownmun.model.Advisor;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
 import org.brownmun.model.SchoolLogistics;
 import org.brownmun.model.repo.HotelRepository;
 import org.brownmun.model.repo.SchoolRepository;
+import org.brownmun.web.security.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Locale;
+import java.util.Optional;
 import javax.validation.Valid;
 
 @Controller
@@ -31,14 +34,16 @@ public class RegistrationController
 
 	private final HotelRepository hotelRepo;
 	private final SchoolRepository schoolRepo;
+	private final AdvisorService advisorService;
 
 	@Autowired
-	public RegistrationController(MessageSource messageSource, HotelRepository hotelRepo, SchoolRepository schoolRepo)
+	public RegistrationController(MessageSource messageSource, HotelRepository hotelRepo, SchoolRepository schoolRepo, AdvisorService advisorService)
 	{
 		this.messageSource = messageSource;
 		this.hotelRepo = hotelRepo;
 		this.schoolRepo = schoolRepo;
-	}
+        this.advisorService = advisorService;
+    }
 
 	@GetMapping
 	public String registrationForm(Model model)
@@ -84,6 +89,24 @@ public class RegistrationController
 		school.setRegistrationTime(Instant.now());
 
 		School saved = schoolRepo.save(school);
+
+        Advisor advisor = new Advisor();
+        advisor.setName(form.getAdvisorName());
+        advisor.setEmail(form.getAdvisorEmail());
+        advisor.setPhoneNumber(form.getAdvisorPhoneNumber());
+        advisor.setPrimary(true);
+        advisor.setPassword(form.getAdvisorPassword());
+        advisor.setSchool(saved);
+
+        Optional<Advisor> created = advisorService.register(advisor);
+        created.ifPresent(advisorService::authenticateAs);
+
+        if (!created.isPresent())
+        {
+        	Multimap<String, String> errors = ArrayListMultimap.create();
+        	errors.put("advisorEmail", "An advisor with that email address is already registered");
+        	return ResponseEntity.ok(new RegistrationResult(false, errors, null));
+		}
 
 		return ResponseEntity.ok(new RegistrationResult(true, ArrayListMultimap.create(), saved.getId()));
 	}

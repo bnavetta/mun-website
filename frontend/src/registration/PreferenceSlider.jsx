@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { HOC } from 'formsy-react';
-import Slider from 'rc-slider';
+import { Range } from 'rc-slider';
 import classNames from 'classnames';
 
 import 'rc-slider/assets/index.css';
@@ -95,7 +95,7 @@ class PreferenceSlider extends React.Component {
                     {this.props.label + (this.props.isRequired ? ' *' : '')}
                 </label>
                 }
-                <Slider
+                <Range
                   id={this.props.name}
                   name={this.props.name}
                   onChange={this.handleChange}

@@ -64,14 +64,18 @@ class Input extends React.Component {
     }
 }
 
+Input.defaultProps = {
+    help: null,
+};
+
 Input.propTypes = {
     getErrorMessages: React.PropTypes.func.isRequired,
     getValue: React.PropTypes.func.isRequired,
-    help: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
+    help: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
     isPristine: React.PropTypes.func.isRequired,
     isRequired: React.PropTypes.func.isRequired,
     label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]).isRequired,
-    name: React.PropTypes.string.isRequired.isRequired,
+    name: React.PropTypes.string.isRequired,
     setValue: React.PropTypes.func.isRequired,
     showError: React.PropTypes.func.isRequired,
     showRequired: React.PropTypes.func.isRequired,

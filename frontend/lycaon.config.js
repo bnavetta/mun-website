@@ -1,4 +1,6 @@
-const path = require('path');const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const path = require('path');
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 module.exports = {
 	entry: {
@@ -20,6 +22,10 @@ module.exports = {
 			chunks: ['admin', 'committeeAdmin', 'schoolAdmin'],
 			minChunks: 2
 		}));
+
+		config.plugins.push(new ProvidePlugin({
+		    'Tether': 'tether'
+        }));
 
 		return config;
 	}

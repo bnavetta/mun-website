@@ -1,42 +1,101 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	<head>
-		<title>Layout Page</title>
-		<wp:chunk name="common"/>
-		<wp:chunk name="bootstrap"/>
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="row">
-                <div th:if="${#httpServletRequest.remoteUser}">
-                    <form th:action="@{/logout}" method="post">
-                        <button type="submit" class="btn btn-secondary">Log Out</button>
-                    </form>
+    <head>
+        <title>Layout Page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <wp:chunk name="common"/>
+        <wp:chunk name="bootstrap"/>
+        <script th:inline="javascript">
+            window.csrf = {
+                token: /*[[${_csrf.token}]]*/ null,
+                header: /*[[${_csrf.headerName}]]*/ null,
+            };
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="/" class="navbar-brand">BUSUN</a>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" id="aboutMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            About Us
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="aboutMenuLink">
+                            <a href="#" class="dropdown-item">First Thing</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Conference</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Logistics</a>
+                    </li>
+                </ul>
+            </div>
+            <form th:action="@{/logout}" method="post" th:if="${#httpServletRequest.remoteUser}" class="form-inline">
+                <button type="submit" class="btn btn-secondary">Log Out</button>
+            </form>
+            <div class="form-inline" th:unless="${#httpServletRequest.remoteUser}">
+                <button class="btn btn-primary">Sign In</button>
+            </div>
+        </nav>
+
+        <div id="main" class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <!-- Sidebar -->
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a class="btn btn-primary mx-auto" href="/register">Register</a>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>Announcements</h4>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>Important Dates</h4>
+                        </li>
+                        <li class="list-group-item">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin" class="nav-link">Staff</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col">
+                            <header layout:fragment="header">
+                                <h1>Page Header</h1>
+                            </header>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div layout:fragment="body">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-			<div class="row">
-				<div class="col-sm-10 offset-md-1">
-					<header layout:fragment="header">
-						<h1>Page Header</h1>
-					</header>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-sm-10 offset-md-1">
-					<div layout:fragment="body">
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-10 offset-md-1">
-					<footer>
-						Brown MUN
-					</footer>
-				</div>
-			</div>
-		</div>
-	</body>
+            <div class="row">
+                <footer class="col-md-12">
+                    <p class="mx-auto text-center">Copyright 2017 | Brown University Model United Nations</p>
+                </footer>
+            </div>
+        </div>
+    </body>
 </html>
