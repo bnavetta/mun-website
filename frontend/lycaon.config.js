@@ -16,6 +16,7 @@ module.exports = {
 		cssModules: false,
 		sass: true
 	},
+	assetPatterns: [/\.otf$/],
 	customizeWebpack: function (config) {
 		config.plugins.push(new CommonsChunkPlugin({
 			name: 'admin',

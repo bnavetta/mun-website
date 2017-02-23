@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:wp="http://brownmun">
+<html xmlns:wp="http://brownmun"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
 	<head>
 		<title>Brown MUN</title>
 		<wp:chunk name="common"/>
 		<wp:chunk name="index" />
 	</head>
 	<body>
-		<h1>Brown MUN</h1>
-		<p>Hello delegates!!</p>
+		<header layout:fragment="header">
+			<h1>Brown MUN</h1>
+		</header>
+		<div layout:fragment="body">
+            <p>Hello delegates!!</p>
+        </div>
 	</body>
 </html>

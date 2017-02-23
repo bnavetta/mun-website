@@ -3,8 +3,16 @@
 $enable-flex: true;
 
 // Colors
-$brand-primary: #62a37f;
-$brand-inverse: #693932;
+$brand-primary: #007f5c;
+$brand-info: #afc9d2;
+$brand-success: #45966e;
+$brand-danger: #ffd5e1;
+// e6e6e6
 
 // Fonts
-$font-family-base: adobe-caslon-pro, serif;
+$font-stack-native: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-sans-serif: 'Gotham Bold', $font-stack-native;
+$font-family-serif: adobe-caslon-pro, serif;
+//$font-family-base: adobe-caslon-pro, serif;
+$font-family-base: $font-stack-native;
+$headings-font-family: $font-family-sans-serif;

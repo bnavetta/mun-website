@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import request from 'superagent';
+import request from '../../util/superagent';
 
 export default class AddPositions extends React.Component {
     constructor() {

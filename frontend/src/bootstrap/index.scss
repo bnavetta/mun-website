@@ -1,6 +1,15 @@
 @import 'custom';
 @import '~bootstrap/scss/bootstrap';
 
+@font-face {
+    font-family: 'Gotham Bold';
+    font-weight: bold;
+    src:
+        local('Gotham Bold'),
+        local('Gotham-Bold'),
+        url('./fonts/gotham-bold.otf');
+}
+
 #main {
     padding-top: 50px;
 }

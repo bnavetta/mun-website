@@ -48,7 +48,7 @@ export default class SchoolTable extends React.Component {
             <th
               key={col.field}
             >
-                <button className="btn" onClick={() => this.toggleColumn(col.field)}>{col.title}</button>
+                <button className="btn btn-info" onClick={() => this.toggleColumn(col.field)}>{col.title}</button>
             </th>
         ));
 
@@ -58,7 +58,7 @@ export default class SchoolTable extends React.Component {
               key={col.field}
             >
                 <button
-                  className="btn nav-link"
+                  className="nav-link btn btn-info m-1"
                   onClick={() => this.toggleColumn(col.field)}
                 >
                     {col.title}
