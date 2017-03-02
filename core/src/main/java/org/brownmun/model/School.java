@@ -101,4 +101,34 @@ public class School
 	public static class View {
 		public interface Summary {}
 	}
+
+	@Transient
+	public boolean isWaitlisted()
+    {
+        return RegistrationStatus.WAITLISTED.equals(getStatus());
+    }
+
+    @Transient
+    public boolean isAccepted()
+    {
+        return RegistrationStatus.ACCEPTED.equals(getStatus());
+    }
+
+    @Transient
+    public boolean isRegistered()
+    {
+        return RegistrationStatus.REGISTERED.equals(getStatus());
+    }
+
+    @Transient
+    public boolean isDenied()
+    {
+        return RegistrationStatus.DENIED.equals(getStatus());
+    }
+
+    @Transient
+    public boolean isDropped()
+    {
+        return RegistrationStatus.DROPPED.equals(getStatus());
+    }
 }

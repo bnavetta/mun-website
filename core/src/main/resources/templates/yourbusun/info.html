@@ -15,6 +15,26 @@
         <div layout:fragment="body">
             <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
             <h2 th:text="${school.name}">School Name</h2>
+            <hr>
+            <!--/*@thymesVar id="decisionsPublic" type="java.lang.Boolean"*/-->
+            <div>
+                <!--/*@thymesVar id="registrationInfo" type="java.lang.String"*/-->
+                <!--/*@thymesVar id="registrationDetail" type="java.lang.String"*/-->
+                <p th:if="${registrationInfo}" th:text="${registrationInfo}"></p>
+                <p th:if="${registrationDetail}" th:text="${registrationDetail}"></p>
+            </div>
+
+            <div th:if="${(school.isAccepted() || school.isRegistered()) && decisionsPublic}">
+                <a href="/yourbusun/school-profile" class="btn btn-primary">School Profile</a>
+                <a href="/yourbusun/school-delegates" class="btn btn-primary">Committees and Positions</a>
+                <a href="/yourbusun/supplemental-info">Edit Supplemental Information</a>
+            </div>
+
+            <!-- TODO: unique school code if I can't think of a better way to do advisor creation -->
+
+            <p>
+                <a href="/yourbusun/change-password" class="btn btn-info">Change Password</a>
+            </p>
         </div>
     </body>
 </html>
