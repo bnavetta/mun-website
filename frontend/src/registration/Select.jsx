@@ -9,8 +9,8 @@ type Props = {
     getValue: () => string,
     isPristine: () => boolean,
     isRequired: () => boolean,
-    help: string | React.Element<*>,
-    label: string,
+    help: ?string | ?React.Element<*>,
+    label: ?string,
     name: string,
     options: Array<{ label: string, value: string }>,
     setValue: (string) => void,
@@ -19,6 +19,11 @@ type Props = {
 }
 
 class Select extends React.Component {
+    static defaultProps: {
+        help: ?string | ?React.Element<*>,
+        label: ?string,
+    }
+
     constructor(props: Props, context: Object) {
         super(props, context);
 

@@ -1,3 +1,6 @@
 !gradle/wrapper/gradle-wrapper.jar
 build/
 .env
+
+generated_src/
+generated_testSrc/

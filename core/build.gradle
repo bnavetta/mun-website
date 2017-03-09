@@ -1,3 +1,7 @@
+plugins {
+    id 'org.inferred.processors' version '1.2.8'
+}
+
 bootRepackage {
 	enabled = false
 }
@@ -24,7 +28,10 @@ dependencies {
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 
-    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    // Also a compileOnly dependency, but needed so the other processors see it
+    processor 'org.projectlombok:lombok'
+    processor 'org.springframework.boot:spring-boot-configuration-processor'
+    processor 'org.hibernate:hibernate-jpamodelgen'
 }
 
 processResources.dependsOn ':frontend:build'

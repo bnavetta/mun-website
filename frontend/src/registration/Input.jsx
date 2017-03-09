@@ -7,7 +7,7 @@ import classNames from 'classnames';
 type Props = {
     getErrorMessages: () => [string],
     getValue: () => string,
-    help: string | React.Element<*>,
+    help: ?string | ?React.Element<*>,
     isPristine: () => boolean,
     isRequired: () => boolean,
     label: string,
@@ -19,6 +19,10 @@ type Props = {
 };
 
 class Input extends React.Component {
+    static defaultProps: {
+        help: ?string | ?React.Element<*>,
+    }
+
     constructor(props: Props, context: Object) {
         super(props, context);
 
