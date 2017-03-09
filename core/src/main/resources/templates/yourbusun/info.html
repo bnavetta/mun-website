@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#advisors" role="tab">Advisors</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#finances" role="tab">Finances</a>
+                </li>
             </ul>
 
             <div class="tab-content">
@@ -71,6 +74,69 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="tab-pane" id="finances" role="tabpanel">
+                    <!-- TODO: show financial aid info -->
+
+                    <h3>Charges</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--/*@thymesVar id="charges" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
+                            <tr th:each="charge : ${charges}">
+                                <td th:text="${charge.name}">Charge Name</td>
+                                <td th:text="${charge.formattedAmount()}"></td>
+                                <td th:text="${#dates.format(charge.timestampAsDate)}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Financial Aid Awards</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--/*@thymesVar id="aidAwards" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
+                            <tr th:each="aidAward : ${aidAwards}">
+                                <td th:text="${aidAward.name}">Charge Name</td>
+                                <td th:text="${aidAward.formattedAmount()}"></td>
+                                <td th:text="${#dates.format(aidAward.timestampAsDate)}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Payments</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--/*@thymesVar id="payments" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
+                            <tr th:each="payment : ${payments}">
+                                <td th:text="${payment.name}">Charge Name</td>
+                                <td th:text="${payment.formattedAmount()}"></td>
+                                <td th:text="${#dates.format(payment.timestampAsDate)}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- TODO: show totals -->
                 </div>
             </div>
 

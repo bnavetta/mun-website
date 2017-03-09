@@ -75,6 +75,8 @@ public class RegistrationController
         school.setNumberOfYearsAttended(form.getNumberOfYearsAttended());
         school.setYearsAttended(form.getYearsAttended());
 
+        // TODO: SAVE FINANCIAL AID INFO
+
         SchoolLogistics logistics = new SchoolLogistics();
         logistics.setUsingShuttle(form.isBusunShuttles());
         if (form.isBusunHotel())
