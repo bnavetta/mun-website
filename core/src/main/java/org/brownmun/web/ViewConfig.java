@@ -17,8 +17,7 @@ public class ViewConfig extends WebMvcConfigurerAdapter
 		registry.addViewController("/admin/").setViewName("admin/index");
 		registry.addRedirectViewController("/admin", "/admin/");
 
-		registry.addRedirectViewController("/yourbusun", "/yourbusun/info");
-        registry.addRedirectViewController("/yourbusun/", "/yourbusun/info");
+		registry.addRedirectViewController("/yourbusun", "/yourbusun/");
 
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/profile").setViewName("profile");

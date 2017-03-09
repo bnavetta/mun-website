@@ -45,6 +45,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         @Autowired
         private AdvisorService advisorService;
 
+        @Autowired
+        private PasswordEncoder passwordEncoder;
+
         @Override
         protected void configure(HttpSecurity http) throws Exception
         {
@@ -64,6 +67,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                     .deleteCookies("JSESSIONID")
                     .permitAll()
                     .and()
+                .rememberMe()
+                    .userDetailsService(advisorService)
+                    .key("remember-me")
+                    .alwaysRemember(true)
+                    .and()
                 .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
                 .exceptionHandling()
                 .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
@@ -72,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception
         {
-            auth.userDetailsService(advisorService);
+            auth.userDetailsService(advisorService).passwordEncoder(passwordEncoder);
         }
 
         private Filter ssoFilter()

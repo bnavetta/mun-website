@@ -4,37 +4,76 @@
     xmlns:wp="http://brownmun"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{base}">
+    <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
     <head>
-        <title>Your BUSUN</title>
+        <title th:text="|Your BUSUN: ${school.name}|"></title>
         <wp:chunk name="index"/>
     </head>
     <body>
         <header layout:fragment="header">
             <h1>Your BUSUN</h1>
+            <h2 th:text="${school.name}">School Name</h2>
         </header>
         <div layout:fragment="body">
-            <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
-            <h2 th:text="${school.name}">School Name</h2>
-            <hr>
-            <!--/*@thymesVar id="decisionsPublic" type="java.lang.Boolean"*/-->
-            <div>
-                <!--/*@thymesVar id="registrationInfo" type="java.lang.String"*/-->
-                <!--/*@thymesVar id="registrationDetail" type="java.lang.String"*/-->
-                <p th:if="${registrationInfo}" th:text="${registrationInfo}"></p>
-                <p th:if="${registrationDetail}" th:text="${registrationDetail}"></p>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#school-info" role="tab">School Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#logistics" role="tab">Logistics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#advisors" role="tab">Advisors</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="school-info" role="tabpanel">
+                    <!-- Basic info -->
+                    <ul class="list-group">
+                        <li class="list-group-item">Registration Status: [[${school.status}]]</li>
+                        <li class="list-group-item">Registration Date: [[${#dates.format(school.registrationTimeAsDate)}]]</li>
+                        <li class="list-group-item">School Address: [[${school.address}]]</li>
+                        <li class="list-group-item">School Phone Number: [[${school.phoneNumber}]]</li>
+                    </ul>
+                </div>
+
+                <div class="tab-pane" id="logistics" role="tabpanel">
+                    <ul class="list-group">
+                        <li class="list-group-item">Delegate Count: [[${school.requestedDelegates}]]</li>
+                        <li class="list-group-item">Chaperone Count: [[${school.requestedChaperones}]]</li>
+                        <li class="list-group-item" th:if="${school.logistics.usingHotel}">
+                            BUSUN Hotel: [[${school.logistics.hotel.name}]]
+                        </li>
+                        <li class="list-group-item" th:if="${school.logistics.usingShuttle}">
+                            Using BUSUN shuttle
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-pane" id="advisors" role="tabpanel">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="advisor : ${school.advisors}">
+                                <td th:if="${advisor.primary}">
+                                    <strong th:text="${advisor.name + ' (Primary)'}">Primary Advisor</strong>
+                                </td>
+                                <td th:unless="${advisor.primary}" th:text="${advisor.name}">Advisor Name</td>
+                                <td th:text="${advisor.email}">Email Address</td>
+                                <td th:text="${advisor.phoneNumber}">Phone Number</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div th:if="${(school.isAccepted() || school.isRegistered()) && decisionsPublic}">
-                <a href="/yourbusun/school-profile" class="btn btn-primary">School Profile</a>
-                <a href="/yourbusun/school-delegates" class="btn btn-primary">Committees and Positions</a>
-                <a href="/yourbusun/supplemental-info">Edit Supplemental Information</a>
-            </div>
-
-            <!-- TODO: unique school code if I can't think of a better way to do advisor creation -->
-
-            <p>
-                <a href="/yourbusun/change-password" class="btn btn-info">Change Password</a>
-            </p>
         </div>
     </body>
 </html>

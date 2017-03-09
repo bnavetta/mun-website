@@ -2,6 +2,7 @@ package org.brownmun.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-public class Attendance
+public class Attendance implements Serializable
 {
     @Id
     @OneToOne

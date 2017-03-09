@@ -19,4 +19,9 @@ public enum RegistrationStatus
 	{
 		return WordUtils.capitalizeFully(name());
 	}
+
+	public String messageKey()
+    {
+        return name().toLowerCase();
+    }
 }

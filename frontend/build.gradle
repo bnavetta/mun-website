@@ -1,5 +1,6 @@
 task yarnInstall(type: Exec) {
 	inputs.file 'package.json'
+	outputs.file 'yarn.lock'
 	commandLine 'yarn'
 }
 

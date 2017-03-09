@@ -2,6 +2,7 @@ package org.brownmun.model.repo;
 
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -18,4 +19,7 @@ public interface SchoolRepository extends CrudRepository<School, Long>
 
 	@Query("SELECT COALESCE(SUM(s.requestedDelegates), 0) FROM School s")
 	int countRequestedDelegates();
+
+	@EntityGraph(attributePaths = {"advisors"})
+	School findById(Long id);
 }
