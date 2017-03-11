@@ -53,14 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         {
             http
                 .authorizeRequests()
-                    .antMatchers("/profile").hasRole("USER")
+                    .antMatchers("/profile").hasRole("ADVISOR")
+                    .antMatchers("/yourbusun/add-advisors/confirm").permitAll()
                     .antMatchers("/yourbusun/**").hasRole("ADVISOR")
                     .antMatchers("/admin/**").hasRole("STAFF")
                     .and()
                 .formLogin()
                     .loginPage("/login")
                     .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
-                    .defaultSuccessUrl("/profile")
+                    .defaultSuccessUrl("/yourbusun/")
                     .permitAll()
                     .and()
                 .logout()

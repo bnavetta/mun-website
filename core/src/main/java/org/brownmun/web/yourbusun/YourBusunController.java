@@ -1,53 +1,59 @@
 package org.brownmun.web.yourbusun;
 
+import lombok.extern.slf4j.Slf4j;
 import org.brownmun.ConferenceProperties;
 import org.brownmun.model.Advisor;
 import org.brownmun.model.LineItem;
 import org.brownmun.model.School;
 import org.brownmun.model.repo.LineItemRepository;
 import org.brownmun.model.repo.SchoolRepository;
+import org.brownmun.web.security.AdvisorService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
+import javax.validation.Valid;
 
 /**
  * Controller for per-school info pages.
  */
+@Slf4j
 @Controller
 @RequestMapping("/yourbusun")
 public class YourBusunController
 {
     private final ConferenceProperties conferenceProperties;
-    private final SchoolRepository schoolRepository;
+    private final AdvisorService advisorService;
     private final LineItemRepository lineItemRepository;
 
     @Autowired
-    public YourBusunController(ConferenceProperties conferenceProperties, SchoolRepository schoolRepository, LineItemRepository lineItemRepository)
+    public YourBusunController(ConferenceProperties conferenceProperties, AdvisorService advisorService, LineItemRepository lineItemRepository)
     {
         this.conferenceProperties = conferenceProperties;
-        this.schoolRepository = schoolRepository;
+        this.advisorService = advisorService;
         this.lineItemRepository = lineItemRepository;
     }
 
     // TODO: make sure this doesn't break if staff try to go to the page
     @GetMapping("/")
-//    @RequestMapping("/")
     public String info(@AuthenticationPrincipal Advisor advisor, Model model)
     {
-        School school = schoolRepository.findById(advisor.getSchool().getId());
+        advisor = advisorService.load(advisor);
+        School school = advisor.getSchool();
+        model.addAttribute("loggedIn", advisor);
         model.addAttribute("school", school);
         model.addAttribute("decisionState", conferenceProperties.isDecisionsPublic() ? "public" : "private");
 
         if (conferenceProperties.isDecisionsPublic() && (school.isRegistered() || school.isAccepted()))
         {
-            Hibernate.initialize(school.getAdvisors());
-
             Collection<LineItem> charges = lineItemRepository.findBySchoolAndType(school, LineItem.Type.CHARGE);
             model.addAttribute("charges", charges);
             model.addAttribute("totalCharges", charges.stream().mapToDouble(LineItem::getAmount).sum());
@@ -68,6 +74,35 @@ public class YourBusunController
             return "yourbusun/decisions-private";
         }
     }
+
+    @GetMapping("/change-password")
+    public String changePasswordForm(Model model)
+    {
+        model.addAttribute("form", new ChangePasswordForm());
+        return "yourbusun/change-password";
+    }
+
+    @PostMapping("/change-password")
+    public String changePassword(@AuthenticationPrincipal Advisor advisor, @Valid @ModelAttribute("form") ChangePasswordForm form, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+        {
+            return "yourbusun/change-password";
+        }
+
+        if (!form.getPassword().equals(form.getPasswordConfirm()))
+        {
+            bindingResult.rejectValue("passwordConfirm", "password.mismatch", "Passwords must match");
+            return "yourbusun/change-password";
+        }
+
+        log.debug("Changing password for advisor {}", advisor.getEmail());
+        advisorService.changePassword(advisorService.load(advisor), form.getPassword());
+
+        // TODO: notification email or something?
+        return "redirect:/yourbusun";
+    }
+
         /*
             FOR ADVISOR CREATION: instead of school code, send an email
 

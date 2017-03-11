@@ -10,6 +10,7 @@
     "test": "lycaon-build test"
   },
   "devDependencies": {
+    "babel-plugin-ramda": "^1.1.9",
     "lycaon-build": "^0.3.7",
     "node-sass": "^4.1.1",
     "resolve-url-loader": "^1.6.1",
@@ -22,6 +23,7 @@
     "classnames": "^2.2.5",
     "formsy-react": "^0.19.0",
     "material-colors": "^1.2.0",
+    "ramda": "^0.23.0",
     "rc-slider": "^6.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",

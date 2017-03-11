@@ -7,6 +7,7 @@ module.exports = {
 		bootstrap: [path.resolve('./src/bootstrap/index.js')],
 
 		registration: ['babel-polyfill', path.resolve('./src/registration/index.jsx')],
+		yourbusun: ['babel-polyfill', path.resolve('./src/yourbusun/index.jsx')],
 
 		admin: ['babel-polyfill', path.resolve('./src/admin/index.js')],
 		committeeAdmin: ['babel-polyfill', path.resolve('./src/admin/committee/index.jsx')],

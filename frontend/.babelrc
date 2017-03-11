@@ -7,6 +7,9 @@
         }],
         "stage-0"
     ],
+    "plugins": [
+        "ramda"
+    ],
     "ignore": [
         "node_modules/**/*"
     ]

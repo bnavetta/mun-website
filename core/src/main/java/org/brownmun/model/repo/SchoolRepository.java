@@ -1,5 +1,6 @@
 package org.brownmun.model.repo;
 
+import org.brownmun.model.Advisor;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
 import org.springframework.data.jpa.repository.EntityGraph;

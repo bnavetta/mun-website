@@ -36,6 +36,10 @@ google:
         userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
         preferTokenInfo: true
 
+mailgun:
+  base-uri: https://api.mailgun.net/v3/mg.busun.org
+  api-key: ${MAILGUN_API_KEY}
+
 logging:
   level:
     org.brownmun: trace

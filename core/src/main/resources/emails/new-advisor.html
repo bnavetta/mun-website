@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #body {
+                font-size: 14px;
+                font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            }
+
+            button {
+
+            }
+        </style>
+    </head>
+    <body>
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "EmailMessage",
+                "potentialAction": {
+                    "@type": "SaveAction",
+                    "name": "Create Account",
+                    "handler": {
+                        "@type": "HttpActionHandler",
+                        "url": "%recipient.registerUrl%"
+                    }
+                },
+                "description": "Create a BUSUN school advisor account"
+            }
+        </script>
+        <div id="body">
+            <p>Hello, %recipient.name%,</p>
+            <p>You've been asked to make an account as an advisor for %recipient.school% at BUSUN XXI.</p>
+            <p>
+                <a href="%recipient.registerUrl%">Register</a>
+            </p>
+            <p>
+                Thanks!
+            </p>
+            <p>
+                BUSUN XXI Secretariat
+            </p>
+        </div>
+    </body>
+</html>

@@ -5,6 +5,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{base}">
     <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
+    <!--/*@thymesVar id="loggedIn" type="org.brownmun.model.Advisor"*/-->
     <head>
         <title th:text="|Your BUSUN: ${school.name}|"></title>
         <wp:chunk name="index"/>
@@ -33,7 +34,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="school-info" role="tabpanel">
                     <!-- Basic info -->
-                    <ul class="list-group">
+                    <ul class="list-group p-3">
                         <li class="list-group-item">Registration Status: [[${school.status}]]</li>
                         <li class="list-group-item">Registration Date: [[${#dates.format(school.registrationTimeAsDate)}]]</li>
                         <li class="list-group-item">School Address: [[${school.address}]]</li>
@@ -42,7 +43,7 @@
                 </div>
 
                 <div class="tab-pane" id="logistics" role="tabpanel">
-                    <ul class="list-group">
+                    <ul class="list-group p-3">
                         <li class="list-group-item">Delegate Count: [[${school.requestedDelegates}]]</li>
                         <li class="list-group-item">Chaperone Count: [[${school.requestedChaperones}]]</li>
                         <li class="list-group-item" th:if="${school.logistics.usingHotel}">
@@ -55,88 +56,96 @@
                 </div>
 
                 <div class="tab-pane" id="advisors" role="tabpanel">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="advisor : ${school.advisors}">
-                                <td th:if="${advisor.primary}">
-                                    <strong th:text="${advisor.name + ' (Primary)'}">Primary Advisor</strong>
-                                </td>
-                                <td th:unless="${advisor.primary}" th:text="${advisor.name}">Advisor Name</td>
-                                <td th:text="${advisor.email}">Email Address</td>
-                                <td th:text="${advisor.phoneNumber}">Phone Number</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="p-3">
+                        <p>
+                            <a href="/yourbusun/add-advisors" class="btn btn-info">Invite Advisors</a>
+                        </p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="advisor : ${school.advisors}">
+                                    <td>
+                                        <strong th:remove="${advisor.id == loggedIn.id} ? none : tag">
+                                            [[${advisor.name}]]
+                                            <span th:remove="${advisor.primary} ? none : all"> (Primary)</span>
+                                        </strong>
+                                    </td>
+                                    <td th:text="${advisor.email}">Email Address</td>
+                                    <td th:text="${advisor.phoneNumber}">Phone Number</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="tab-pane" id="finances" role="tabpanel">
                     <!-- TODO: show financial aid info -->
+                    <div class="p-3">
+                        <h3>Charges</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--/*@thymesVar id="charges" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
+                                <tr th:each="charge : ${charges}">
+                                    <td th:text="${charge.name}">Charge Name</td>
+                                    <td th:text="${charge.formattedAmount()}"></td>
+                                    <td th:text="${#dates.format(charge.timestampAsDate)}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <h3>Charges</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Amount</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--/*@thymesVar id="charges" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
-                            <tr th:each="charge : ${charges}">
-                                <td th:text="${charge.name}">Charge Name</td>
-                                <td th:text="${charge.formattedAmount()}"></td>
-                                <td th:text="${#dates.format(charge.timestampAsDate)}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <h3>Financial Aid Awards</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--/*@thymesVar id="aidAwards" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
+                                <tr th:each="aidAward : ${aidAwards}">
+                                    <td th:text="${aidAward.name}">Charge Name</td>
+                                    <td th:text="${aidAward.formattedAmount()}"></td>
+                                    <td th:text="${#dates.format(aidAward.timestampAsDate)}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <h3>Financial Aid Awards</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Amount</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--/*@thymesVar id="aidAwards" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
-                            <tr th:each="aidAward : ${aidAwards}">
-                                <td th:text="${aidAward.name}">Charge Name</td>
-                                <td th:text="${aidAward.formattedAmount()}"></td>
-                                <td th:text="${#dates.format(aidAward.timestampAsDate)}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <h3>Payments</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--/*@thymesVar id="payments" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
+                                <tr th:each="payment : ${payments}">
+                                    <td th:text="${payment.name}">Charge Name</td>
+                                    <td th:text="${payment.formattedAmount()}"></td>
+                                    <td th:text="${#dates.format(payment.timestampAsDate)}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <h3>Payments</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Amount</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--/*@thymesVar id="payments" type="java.util.Collection<org.brownmun.model.LineItem>"*/-->
-                            <tr th:each="payment : ${payments}">
-                                <td th:text="${payment.name}">Charge Name</td>
-                                <td th:text="${payment.formattedAmount()}"></td>
-                                <td th:text="${#dates.format(payment.timestampAsDate)}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- TODO: show totals -->
+                        <!-- TODO: show totals -->
+                    </div>
                 </div>
             </div>
 

@@ -1,6 +1,9 @@
 package org.brownmun.busun;
 
+import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
+import org.brownmun.mail.EmailDescriptor;
+import org.brownmun.mail.MailService;
 import org.brownmun.model.*;
 import org.brownmun.model.repo.CommitteeRepository;
 import org.brownmun.model.repo.DelegateRepository;
@@ -11,6 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Testing stuff out
  */
@@ -19,16 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestRunner implements CommandLineRunner
 {
 	@Autowired
-	private CommitteeRepository committees;
-
-	@Autowired
-	private DelegateRepository delegates;
-
-	@Autowired
-	private PositionRepository positions;
-
-	@Autowired
-	private SchoolRepository schools;
+	private MailService mailService;
 
 	@Transactional
 	@Override
@@ -36,44 +32,15 @@ public class TestRunner implements CommandLineRunner
 	{
 		log.info("Running test logic");
 
-//		positions.deleteAll();
-//		committees.deleteAll();
-//		delegates.deleteAll();
-//		schools.deleteAll();
-//
-//		School school = new School();
-//		school.setName("Test School");
-//		school = schools.save(school);
-//
-//		Committee committee = new Committee();
-//		committee.setName("Hungarian Revolution - NATO");
-//		committee.setCommitteeType(CommitteeType.CRISIS);
-//		committee.setDescription("Adam's committee");
-//		committee = committees.save(committee);
-//
-//		Position position = new Position();
-//		position.setName("Benevolent Dictator for Life");
-//		position.setCommittee(committee);
-//		position = positions.save(position);
-//
-//		Delegate delegate = new Delegate();
-//		delegate.setName("Adam DeHovitz");
-//		delegate.setSchool(school);
-//		position.setDelegate(delegate);
-//		delegates.save(delegate);
-//		positions.save(position);
+		EmailDescriptor msg = new EmailDescriptor();
+		msg.setFrom("test@busun.org");
+		msg.setRecipients(ImmutableMap.of("ben.navetta@gmail.com", ImmutableMap.of(
+		    "name", "Ben"
+        )));
+		msg.setReplyTo(Optional.of("technology@busun.org"));
+		msg.setSubject("Testing");
+		msg.setHtml("<h1>Hello, %recipient.name%</h1>\nThis is a test email.");
 
-		System.out.println("FINDING A POSITION BY NAMES");
-		System.out.println(positions.findByNameAndCommitteeName("Benevolent Dictator for Life", "Hungarian Revolution - NATO"));
-
-		System.out.println("ASSIGNED POSITIONS");
-		for (Committee c : committees.findAll()) {
-			System.out.printf("%s has %d assigned positions\n", c.getName(), c.getAssignedPositions());
-		}
-
-		System.out.println("IS ASSIGNED");
-		for (Position p : positions.findAll()) {
-			System.out.printf("Position %s %s assigned\n", p.getName(), p.isAssigned() ? "is" : "is not");
-		}
+//		mailService.send(msg);
 	}
 }
