@@ -59,6 +59,13 @@ public class Committee implements Comparable<Committee>
 	@Formula("(SELECT COUNT(*) FROM position p WHERE p.committee_id = id)")
 	private int totalPositions;
 
+	@Transient
+	public String getContactEmail()
+	{
+		// TODO: this will break for bucs
+		return getShortName().toLowerCase() + "@busun.org";
+	}
+
 	@Override
 	public int compareTo(Committee o)
 	{

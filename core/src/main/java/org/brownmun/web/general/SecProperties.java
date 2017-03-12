@@ -1,4 +1,4 @@
-package org.brownmun.web.about;
+package org.brownmun.web.general;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Committees</title>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Committees</h1>
+        </header>
+        <div layout:fragment="body">
+            <h2 class="mt-2">General Assemblies</h2>
+            <ul class="list-group">
+                <!--/*@thymesVar id="generalCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                <li th:each="committee : ${generalCommittees}" class="list-group-item flex-column align-items-start">
+                    <h3 th:text="${committee.name}">My Committee</h3>
+                    <p class="m-2" th:text="${committee.description}">About the committee.</p>
+
+                    <p>Topics:</p>
+                    <ul>
+                        <li th:text="${committee.topic1}" th:if="${committee.topic1}">Topic 1</li>
+                        <li th:text="${committee.topic2}" th:if="${committee.topic2}">Topic 2</li>
+                        <li th:text="${committee.topic3}" th:if="${committee.topic3}">Topic 3</li>
+                        <li th:text="${committee.topic4}" th:if="${committee.topic4}">Topic 4</li>
+                    </ul>
+
+                    <p class="m-2">
+                        Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a>
+                    </p>
+                </li>
+            </ul>
+
+            <h2 class="mt-3">Specialized &amp; Historical Committees</h2>
+            <ul class="list-group">
+                <!--/*@thymesVar id="specializedCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                <li th:each="committee : ${specializedCommittees}" class="list-group-item flex-column align-items-start">
+                    <h3 th:text="${committee.name}">My Committee</h3>
+                    <p class="my-2" th:text="${committee.description}">About the committee.</p>
+
+                    <p>Topics:</p>
+                    <ul>
+                        <li th:text="${committee.topic1}" th:if="${committee.topic1}">Topic 1</li>
+                        <li th:text="${committee.topic2}" th:if="${committee.topic2}">Topic 2</li>
+                        <li th:text="${committee.topic3}" th:if="${committee.topic3}">Topic 3</li>
+                        <li th:text="${committee.topic4}" th:if="${committee.topic4}">Topic 4</li>
+                    </ul>
+
+                    <p class="my-2">
+                        Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
