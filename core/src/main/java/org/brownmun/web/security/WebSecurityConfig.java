@@ -52,10 +52,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         {
             http
                 .authorizeRequests()
-                    .antMatchers("/profile").hasRole("ADVISOR")
                     .antMatchers("/yourbusun/add-advisors/confirm").permitAll()
                     .antMatchers("/yourbusun/**").hasRole("ADVISOR")
+                    .antMatchers("/advisor/**").hasRole("ADVISOR")
                     .antMatchers("/admin/**").hasRole("STAFF")
+                    .and()
+                .exceptionHandling()
+                    .accessDeniedHandler(new StaffAwareAccessDeniedHandler())
                     .and()
                 .formLogin()
                     .loginPage("/login")

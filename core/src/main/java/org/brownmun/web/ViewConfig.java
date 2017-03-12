@@ -20,7 +20,6 @@ public class ViewConfig extends WebMvcConfigurerAdapter
 		registry.addRedirectViewController("/yourbusun", "/yourbusun/");
 
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/profile").setViewName("profile");
 
 		// Only useful for dev, but shouldn't break anything in production?
 		registry.addRedirectViewController("/__webpack_hmr", "http://localhost:8000/__webpack_hmr");
