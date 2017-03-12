@@ -21,6 +21,6 @@ before_install:
   - cd frontend && yarn
   # longstanding issue with yarn and node-sass
   # https://github.com/sass/node-sass/issues/1804
-  - cd frontend && npm rebuild node-sass
+  - npm rebuild node-sass
 before_script:
   - psql -c 'create database brownmun_travis;' -U postgres
