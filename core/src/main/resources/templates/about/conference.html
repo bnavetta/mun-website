@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>About the Conference</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>About the Conference</h1>
+        </header>
+        <div layout:fragment="body">
+            <div class="about-section">
+                <img class="about-image" src="https://placebear.com/400/500" alt="BUSUN Delegates">
+                <div class="about-description">
+                    <p>
+                        The <strong>Brown University Simulation of the United Nations</strong> is a high school
+                        Model United Nations conference held on Brown University's campus that hosts over 900
+                        students annually.  At BUSUN, we believe in challenging students to reach their utmost
+                        potential.  Students will learn debate, public speaking, and negotiation skills as well
+                        as develop an understanding of world affairs.  Since its founding in 1996, BUSUN has
+                        prized itself on the professionalism and creativity that have come to define the conference.
+                    </p>
+                    <p>
+                        At BUSUN, students participate in one of approximately 41 committees.  Each committee and
+                        its topics are carefully chosen to provide an engaging and informative learning environment
+                        for delegates.  BUSUN prides itself on its informed and passionate chairs, and is proud to
+                        offer a wide variety of General Assemblies, International Agencies, Specialized, Historical,
+                        and Crisis committees from which delegates may choose from.  As a testament to the multitude
+                        of topics that BUSUN has to offer, some past committees have included Interpol, Versailles 1789,
+                        the Icelandic Cabinet, the African Union, and the Suez Canal Crisis.  The bulk of BUSUN
+                        committees are smaller than those at many other Model UN conferences, which allows students an
+                        opportunity to participate and learn in a more fulfilling manner.  In fact, even GA Plenary is
+                        capped at 45 delegates.  In addition, BUSUN offers a unique joint-crisis of 6 simultaneously
+                        interacting committees, an opportunity that allows students to simulate real-time diplomacy and
+                        adaptation to international events quickly and effectively in a fully-immersive experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

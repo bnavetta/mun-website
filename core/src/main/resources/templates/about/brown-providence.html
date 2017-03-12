@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>About the Conference</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>About the Conference</h1>
+        </header>
+        <div layout:fragment="body">
+            <div class="about-section">
+                <div class="about-description">
+                    <p>
+                        Brown University is located in historic Providence, Rhode Island and was founded in 1764,
+                        making it the seventh-oldest college in the United States.
+                    </p>
+                    <p>
+                        Brown is an independent, coeducational Ivy League institution comprising of both undergraduate
+                        and graduate programs, plus the Alpert Medical School and the School of Engineering.  Its vibrant,
+                        diverse community consists of over 6,000 undergraduates, 2,000 graduate students, 400 medical
+                        school students, and nearly 700 faculty members, with students hailing from all 50 states
+                        and more than 100 countries.
+                    </p>
+                    <p>
+                        Brown students have a lot to smile about. Named by the 2010 Princeton Review as the #1 College in
+                        America for Happiest Students, Brown is frequently recognized for its global reach, many cultural
+                        events, numerous campus groups and activities, active community service programs, highly competitive
+                        athletics, and beautiful facilities.
+                    </p>
+                    <p>
+                        Located between the cities of New York and Boston, the community around the University is picturesquely
+                        New England.  Despite its labeling as an urban school, residential blocks, rather than skyscrapers,
+                        surround main campus, which is nestled atop of one of the highest points in Providence: College
+                        Hill.  Aside from the University, the city of Providence offers fantastic cuisine on nearby Federal
+                        Hill, and a downtown transportation hub complete with an Amtrak station, commuter rail to Boston,
+                        and regular shuttle buses to the nearby T.F. Green International Airport in Cranston, RI.
+                    </p>
+                </div>
+                <img class="about-image" src="https://placebear.com/400/500" alt="BUSUN Delegates">
+            </div>
+        </div>
+    </body>
+</html>

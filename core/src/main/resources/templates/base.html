@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:wp="http://brownmun"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
-        <title>Layout Page</title>
+        <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">BUSUN</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <wp:chunk name="common"/>
         <wp:chunk name="bootstrap"/>
@@ -29,6 +32,7 @@
                             <a th:href="@{/about/conference}" class="dropdown-item">The Conference</a>
                             <a th:href="@{/about/brown-providence}" class="dropdown-item">Brown &amp; Providence</a>
                             <a th:href="@{/about/secretariat}" class="dropdown-item">Meet the Secretariat</a>
+                            <a th:href="@{/about/sustainability}" class="dropdown-item">Sustainability</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -42,7 +46,7 @@
                         <a class="nav-link dropdown-toggle" href="/" id="conferenceMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Conference</a>
                         <div class="dropdown-menu" aria-labelledby="conferenceMenuLink">
                             <a th:href="@{/conference/committees}" class="dropdown-item">Committees</a>
-                            <a th:href="@{/conference/preparation-procedure}" class="dropdown-item">Preparation &amp; Procedure</a>
+                            <a th:href="@{/conference/preparation}" class="dropdown-item">Preparation &amp; Procedure</a>
                             <a th:href="@{/conference/schedule}" class="dropdown-item">Schedule</a>
                             <a th:href="@{/conference/keynote-speaker}" class="dropdown-item">Keynote Speaker</a>
                         </div>
@@ -55,7 +59,10 @@
                             <a th:href="@{/logistics/parking}" class="dropdown-item">Shuttles &amp; Parking</a>
                         </div>
                     </li>
-                    <li class="nav-item" sec:authorize="${hasRole('ADVISOR')}">
+                    <!--<li class="nav-item" sec:authorize="hasRole('ROLE_ADVISOR')">-->
+                        <!--<a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>-->
+                    <!--</li>-->
+                    <li class="nav-item">
                         <a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>
                     </li>
                 </ul>
@@ -81,6 +88,24 @@
                         </li>
                         <li class="list-group-item">
                             <h5>Important Dates</h5>
+                            <dl>
+                                <dt>April 3, 2017</dt>
+                                <dd>BUSUN registration opens</dd>
+                            </dl>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Social Media</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="https://www.facebook.com/busunbuzz">Facebook</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://twitter.com/busunbuzz">Twitter</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="http://instagram.com/busunbuzz">Instagram</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="list-group-item">
                             <ul class="nav flex-column">

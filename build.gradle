@@ -55,8 +55,9 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
                 entry 'thymeleaf-spring4'
             }
 
-            // Override Spring Boot's Thymeleaf layout dialect version
+            // Override Spring Boot's Thymeleaf dialect versions
             dependency 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.1.0'
+            dependency 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE'
 
             dependencySet(group: 'org.testcontainers', version: '1.1.6') {
                 entry 'postgresql'
