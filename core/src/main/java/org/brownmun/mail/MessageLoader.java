@@ -32,7 +32,7 @@ public class MessageLoader
                 @Override
                 public String load(String key) throws Exception
                 {
-                    Resource resource = resourceLoader.getResource(messageBase + key);
+                    Resource resource = resourceLoader.getResource(messageBase + key + ".email");
                     try (InputStream in = resource.getInputStream())
                     {
                         return CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));

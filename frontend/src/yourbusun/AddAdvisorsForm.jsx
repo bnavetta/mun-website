@@ -22,6 +22,8 @@ export default class AddAdvisorsForm extends React.Component {
 
         this.state = {
             advisors: [],
+            error: null,
+            message: null,
         };
 
         this.renderAdvisor = (advisor: Advisor, index: number) => (
@@ -39,6 +41,7 @@ export default class AddAdvisorsForm extends React.Component {
         };
 
         this.submitAdvisors = () => {
+            this.setState({ error: null, message: null });
             request
                 .post('/yourbusun/add-advisors')
                 .send({

@@ -78,6 +78,8 @@ public class AddAdvisorController
                 .body(ImmutableMap.of("error", "Incorrect school ID"));
         }
 
+        // TODO: this REALLY REALLY REALLY shouldn't be in a controller
+
         Iterable<NewAdvisorToken> tokens = advisorService.createTokens(school, request.getAdvisors());
         Map<String, Map<String, String>> recipients = Maps.newHashMap();
         for (NewAdvisorToken token : tokens)
@@ -97,7 +99,7 @@ public class AddAdvisorController
         message.setReplyTo(Optional.of("technology@busun.org"));
         message.setRecipients(recipients);
         message.setSubject("Create a BUSUN Account");
-        message.setHtml(messageLoader.getMessage("new-advisor.html"));
+        message.setHtml(messageLoader.getMessage("new-advisor"));
         mailService.send(message);
 
         return ResponseEntity.ok(ImmutableMap.of("success", true));
