@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Error</title>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>This page doesn't exist</h1>
+        </header>
+        <div layout:fragment="body">
+            <p>
+                Head back to our <a th:href="@{/}">homepage</a> or contact our
+                <a href="mailto:technology@busun.org">Director of Technology</a>
+                if you still haven't found what you're looking for.
+            </p>
+        </div>
+    </body>
+</html>

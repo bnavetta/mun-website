@@ -19,6 +19,7 @@ sso:
     grantedAuthorities:
         - ROLE_USER
         - ROLE_STAFF
+        - ROLE_ACTUATOR
 
 
 google:
