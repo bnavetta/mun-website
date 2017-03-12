@@ -12,12 +12,12 @@ import java.util.List;
 
 @RequestMapping("/api/hotel")
 @Controller
-public class HotelController
+public class HotelApiController
 {
 	private final HotelRepository repo;
 
 	@Autowired
-	public HotelController(HotelRepository repo)
+	public HotelApiController(HotelRepository repo)
 	{
 		this.repo = repo;
 	}

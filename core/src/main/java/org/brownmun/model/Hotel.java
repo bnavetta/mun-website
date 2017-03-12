@@ -3,10 +3,13 @@ package org.brownmun.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.net.URI;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Locale;
+import javax.persistence.*;
 
 /**
  * A hotel BUSUN has a relationship with
@@ -15,10 +18,38 @@ import javax.persistence.Id;
 @Data
 public class Hotel
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    private static NumberFormat CURRENCY_FORMATTER = NumberFormat.getCurrencyInstance(Locale.US);
 
-	@NotBlank
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    private String name;
+
+    private LocalDate deadline;
+
+    private double rate;
+
+    private int availability;
+
+    private String bookingPage;
+
+    private String imageAddress;
+
+    private String address;
+
+    private String phoneNumber;
+
+    @Transient
+    public Date getDeadlineAsDate()
+    {
+        return Date.from(deadline.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Transient
+    public String getFormattedRate()
+    {
+        return CURRENCY_FORMATTER.format(rate);
+    }
 }

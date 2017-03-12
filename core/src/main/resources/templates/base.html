@@ -30,13 +30,19 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Registration</a>
+                        <a th:href="@{/register}" class="nav-link">Registration</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Conference</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Logistics</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" id="logisticsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logistics</a>
+                        <div class="dropdown-menu" aria-labelledby="logisticsMenuLink">
+                            <a th:href="@{/logistics/hotels}" class="dropdown-item">Hotels</a>
+                        </div>
+                    </li>
+                    <li class="nav-item" sec:authorize="${hasRole('ADVISOR')}">
+                        <a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>
                     </li>
                 </ul>
             </div>
@@ -44,7 +50,7 @@
                 <button type="submit" class="btn btn-primary">Log Out</button>
             </form>
             <div class="form-inline" th:unless="${#httpServletRequest.remoteUser}">
-                <button class="btn btn-primary">Sign In</button>
+                <a class="btn btn-primary" th:href="@{/login}">Sign In</a>
             </div>
         </nav>
 

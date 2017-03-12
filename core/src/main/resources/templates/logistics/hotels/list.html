@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Hotels</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Hotels</h1>
+        </header>
+        <div layout:fragment="body">
+            <h1>Hotels</h1>
+            <p>
+                We are expanding our hotel offerings this year to accommodate diverse school needs and will be updating
+                this page continuously.
+            </p>
+            <p>
+                Reserving rooms is the responsibility of each individual delegation. Please
+                contact the hotel directly in order to make a reservation. Be sure to mention BUSUN
+                (run by Brown Model UN). While we have blocked rooms, we are not responsible for hotel service. Hotels
+                must be contacted by their deadlines to ensure availability and rates. Please note, however, that hotels
+                reserve rooms on a first-come, first-served basis. Hotel deadlines are different from ours; we cannot
+                guarantee the rates for any reservations made after their deadlines.
+            </p>
+            <p>
+                For a better idea of where the hotels are, check out the <a href="@{/logistics/maps}">maps</a> page.
+            </p>
+            <p>
+                Delegates will have access to <strong>free wifi</strong> in all BUSUN partner hotels.
+            </p>
+
+            <section>
+                <!--/*@thymesVar id="hotels" type="java.lang.Iterable<org.brownmun.model.Hotel>"*/-->
+                <div class="hotel media" th:each="hotel : ${hotels}">
+                    <img th:src="${hotel.imageAddress}" th:alt="${hotel.name}" class="hotel-image">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            <a th:href="${hotel.bookingPage}" th:text="${hotel.name}">Hotel Name</a>
+                        </h5>
+                        <dl class="row">
+                            <dt class="col-sm-3">Address</dt>
+                            <dd class="col-sm-9" th:text="${hotel.address}"></dd>
+                            <dt class="col-sm-3">Phone Number</dt>
+                            <dd class="col-sm-9" th:text="${hotel.phoneNumber}"></dd>
+                            <dt class="col-sm-3">Deadline</dt>
+                            <dd class="col-sm-9" th:text="${#dates.format(hotel.deadlineAsDate, 'MM/dd/yy')}">1/2/17</dd>
+                            <dt class="col-sm-3">Rate</dt>
+                            <dd class="col-sm-9" th:text="${hotel.formattedRate}">$123</dd>
+                            <dt class="col-sm-3">Availability</dt>
+                            <dd class="col-sm-9" th:text="#{hotel.availability(${hotel.availability})}">50 rooms</dd>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
