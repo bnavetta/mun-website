@@ -4,13 +4,24 @@ secretariat:
     name: Jordan Waller
     image-address: https://placebear.com/200/200
     email: sg@busun.org
-    bio:
+    bio: >
+        Jordan Waller ('18) is the Co-Secretary General for BUSUN 2017. She is originally from Chicago, IL and
+        is concentrating in Political Science and History. Outside of Brown Model United Nations, Jordan serves on
+        the Interviews Board from the Brown Political Review and conducts research for a professor in the Political
+        Science Department. This is Jordan's second year on the BUSUN Secretariat. As someone who has participated
+        in Model United Nations since high school, she is excited to make sure BUSUN is an educational and enjoyable
+        experience for all.
 
   - title: Secretary-General
     name: Cathy Bai
     image-address: https://placebear.com/200/200
     email: sg@busun.org
-    bio:
+    bio: >
+        Cathy Bai (’19) is the Co-Secretary-General for BUSUN 2016. Cathy is a junior Computational Biology and
+        Applied Mathematics-Economics (or maybe History) concentrator from China and Indonesia. When she’s not
+        overcommitted to classes, she enjoys cooking, playing the classical guitar, and spending an absurd amount
+        of time hunting for nice cafes in Providence. Cathy served as Director of General Committees for BUSUN 2016,
+        and is looking forward to an even better conference this year.
 
   - title: Under-Secretary-General
     name: Beatriz Vianna
@@ -54,6 +65,13 @@ secretariat:
     name: Adam DeHovitz
     image-address: https://placebear.com/200/200
     email: crisis@busun.org
+    bio: >
+        Adam DeHovitz ('19) is Director of Crisis Committees for this year's BUSUN. Adam is a New Yorker
+        enjoying his time here at Brown, where he studies Computer Science. When he's not overworked he enjoys
+        biking, reading about history, and being a teaching assistant in the CS department. Adam was Director of
+        Technology as well as a Crisis Manager at last year's BUSUN, and has been involved in the conference since
+        his sophomore year of high school when he first came as a delegate. He hopes that you'll enjoy the
+        conference as much as he did.
 
   - title: Director of External Affairs
     name: Jourdan Smithwick
@@ -90,7 +108,7 @@ secretariat:
         and volunteers as a tutor at a local Providence elementary school.  On campus, she can be found
         working on art projects or listening to new musical soundtracks.
 
-  - title: Director of Operations
+  - title: Director of Operations and Implementations
     name: Tess Rossi
     email: ops@busun.org
     image-address: https://placebear.com/200/200
@@ -121,11 +139,22 @@ secretariat:
     name: Bethany Hung
     email: media@busun.org
     image-address: https://placebear.com/200/200
+    bio: >
+        Bethany Hung (’19) is the Director of Media for BUSUN 2017. Although Bethany formally studies cognitive
+        neuroscience here at Brown, she also gets very excited about organic chemistry and oceanography. When not
+        doodling in Illustrator for BUSUN, she can be found doodling on her nails or on a whiteboard in the Sciences
+        Library. Beyond BUSUN, she serves as media lead for Hack@Brown, Brown’s annual hackathon, creative director
+        for B-SIDE Magazine, and communications director for Brown NARAL. Bethany also spends an inordinate amount
+        of time in a basement researching visual cognition and staring into the darkness.
 
   - title: Director of Technology
     name: Ben Navetta
     email: technology@busun.org
     image-address: https://placebear.com/200/200
-    bio: |
-        Ben is a person.
-        He does cool stuff.
+    bio: >
+        Ben Navetta ('19) is Director of Technology for BUSUN XXI. A lifelong New Englander, Ben comes from
+        a small town in Massachusetts. As a junior at Brown, he loves studying computer science. Outside of BUSUN,
+        he's one of the workshops leads for Hack@Brown, a teaching assistant in the computer science department, and
+        the systems administrator for a computer vision research lab. When he has the time, Ben is passionate
+        about coffee, baking, and classics. He got his first Model UN experience when a friend pulled him into
+        staffing BUCS his freshman year.
