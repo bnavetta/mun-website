@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-echo "PATH=$PATH"
-
-rm -rf "${HOME}/google-cloud-sdk"
+# rm -rf "${HOME}/google-cloud-sdk"
 
 if [ ! -d ${HOME}/google-cloud-sdk ]; then
     echo "Installing gcloud sdk"
@@ -10,8 +8,6 @@ if [ ! -d ${HOME}/google-cloud-sdk ]; then
 else
     echo "gcloud sdk already installed"
 fi
-
-ls -l ${HOME}/google-cloud-sdk/bin
 
 gcloud auth activate-service-account --key-file client-secret.json
 gcloud config set project busun-158105
