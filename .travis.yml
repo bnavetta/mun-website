@@ -25,28 +25,22 @@ before_install:
 before_script:
 - psql -c 'create database brownmun_travis;' -U postgres
 before_deploy:
-  - git config --global user.email "builds@travis-ci.com"
-  - git config --global user.name "Travis CI"
-  - export GIT_TAG="$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER"
-  - git tag $GIT_TAG -a -m "Generated tag for Travis CI build $TRAVIS_BUILD_NUMBER"
-  - git push -q origin --tags
+#  - git config --global user.email "builds@travis-ci.com"
+#  - git config --global user.name "Travis CI"
+#  - export GIT_TAG="$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER"
+#  - git tag $GIT_TAG -a -m "Generated tag for Travis CI build $TRAVIS_BUILD_NUMBER"
+#  - git push -q origin --tags
   # TODO: keep version number
   - cp busun/build/libs/busun-$TRAVIS_BUILD_NUMBER.jar busun/build/libs/busun-latest.jar
 deploy:
   provider: releases
   skip_cleanup: true
-  on:
-    tags: true
   api_key:
     secure: e+eOb6rbo9FSh/+n4NbjFcALLfciKCyod3651GXB1NIS6QWifig5fyfyd5/YZZIl0qiVKmlO2GMgUPsWaVMrR+SQkymZTcYGq8Eq9J6CmCyZkHw+lsrHnugLoZwU3BzstNQhgAnlGrR4t45KOqmqeBtqQD9XPdOO/xGFblnU4u0Xuzhfz8hmpf6hZGpnx/TmY9obP5tcrMt/zG1pOvti8ck1/gnr1tzxf4InXGDc9bs8nYdjPXzT2tK4gPabyi6701kkUmu04RLlkytPJGR51bL45oXXsikOn9VjxbiTaY2wsqAVrMx/HBghakzZZiipRX9vvTlbKnFRTzjxUeRue76I2OwNG1ebYaPxpJh+i3j1xb6PtUgHeMce38wAhFwr85TJq0V3jgx3jFUtiYVziMht3ZDHkem4OJrLD1jjbk5yCwNmXxzHGjZuxzo3w0JBxC/KQ5/Lyaux3/JNrCDptuke/mDFIEde5jDU+f01vLSZ/2JmIwYltGHNMQwL0Q0vOs32YYxkFrjydYehrTzDIdPfLH8/7LcKn6USEl4v9Wr00IBMkZwN5U2tAKSeR0jaBLmRl9PVwLnXWnlSRMEYJEnsWY8MaWBDrXVmrCLXqcZypIBPzO6N3WeAg3JysYwfL9sCgQfFTqiUkOZetbhhovYmqyuiIEsd2qLvKmpXaQ0=
-  file: busun/build/libs/busun-latest.jar
+  file: busun/build/libs/busun-$TRAVIS_BUILD_NUMBER.jar
   on:
     repo: roguePanda/mun-website
-    tags: false
-    all_branches: true
-branches:
-  except:
-    - /^*-v[0-9]/
+    tags: true
 notifications:
   slack:
     secure: F1kuTJIPTRBlfJDFqaOnj84V+mNM1fuHLxF5aKXsOVWhRm3He0xT+aoEqv1GY02SKRuxnIl0AQVBCe36DAJQSeLfa/cr7U66/OWXwSiHNMaLsSsWz5uzba31v8fKvP0W01C4ROD8Ie3X7LrMMhIhdteMGP4ZFFhOGdq9xaaz2u9+6yEa5S94QFtCSc6X5OaUGriRdt2U0BfwWiXw5hqyiLOu6ByPu0K+oV9F5BCkOxqyAXd1CyWmyPi305AWdQMrCFZrIU9ERoYN+QVCacOUU5NDb74/T++APpUOVRZHfD9ZFfgm1bVliA+j80SekE/DAny1n+QWpyYQI3K7ZUU+vTmUAbpXNowvw/VAgg9NW6Kfr49b7bZAfiujBw7P5aYMVzMcpXB3HYcvAcTOwaVYcc9gg5LIkasTIZZ4Rn4b59kzWA2/FCxmSeblj0bG+Z8ckSym6Ti36m5+onkTf4cpOqyA8YuwguNALMOo6uJfGBIMhPS9UptaocmTwuoaswdobeQMGHP3enccHfaCoZ5zv5+NxAsMaWH1MD++oc7DsK1qWds4qOWinOTG3B0oMPDCLA8s5nqNeUTkT2HdDqQaWBiUwTOABtuQ9HA9TvYwu6xuyPnnifufwvJH8Kd48gMuEOzitLdstvjxtAxsHZRQ1MHfo+1fJIUh46FHuiTYm7c=
