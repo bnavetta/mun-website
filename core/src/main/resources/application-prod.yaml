@@ -1,0 +1,6 @@
+security:
+  require-ssl: true
+server:
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
