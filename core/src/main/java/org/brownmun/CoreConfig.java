@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Common configuration and beans.
  */
 @Configuration
-@PropertySource("file:./.env")
+@PropertySource(value = "file:./.env", ignoreResourceNotFound = true)
 @EnableConfigurationProperties(ConferenceProperties.class)
 public class CoreConfig
 {
