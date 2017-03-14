@@ -20,13 +20,9 @@ env:
 addons:
   postgresql: '9.4'
 before_install:
-- if [ ! -d ${HOME}/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash
-  fi
 - openssl aes-256-cbc -K $encrypted_e67abcd5ac1d_key -iv $encrypted_e67abcd5ac1d_iv
   -in client-secret.json.enc -out client-secret.json -d
-- gcloud auth activate-service-account --key-file client-secret.json
-- gcloud config set project busun-158105
-- gcloud config set compute/zone us-east1-b
+- scripts/gcloud-setup.sh
 - npm install -g yarn
 - cd frontend
 - yarn
