@@ -2,6 +2,8 @@
 
 echo "PATH=$PATH"
 
+rm -rf "${HOME}/google-cloud-sdk"
+
 if [ ! -d ${HOME}/google-cloud-sdk ]; then
     echo "Installing gcloud sdk"
     curl https://sdk.cloud.google.com | bash
