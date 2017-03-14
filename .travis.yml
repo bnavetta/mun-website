@@ -2,25 +2,35 @@ language: java
 dist: trusty
 sudo: false
 jdk:
-  - oraclejdk8
+- oraclejdk8
 node_js:
-    - "6"
+- '6'
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   yarn: true
   directories:
-    - frontend/node_modules
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - frontend/node_modules
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 before_install:
-  - npm install -g yarn
-  - cd frontend && yarn
-  # longstanding issue with yarn and node-sass
-  # https://github.com/sass/node-sass/issues/1804
-  - npm rebuild node-sass
+- npm install -g yarn
+- cd frontend && yarn
+- npm rebuild node-sass
 before_script:
-  - psql -c 'create database brownmun_travis;' -U postgres
+- psql -c 'create database brownmun_travis;' -U postgres
+before_deploy:
+- cp busun/build/libs/busun-$TRAVIS_BUILD_NUMBER.jar busun/build/libs/busun-latest.jar
+deploy:
+  provider: releases
+  api_key:
+    secure: e+eOb6rbo9FSh/+n4NbjFcALLfciKCyod3651GXB1NIS6QWifig5fyfyd5/YZZIl0qiVKmlO2GMgUPsWaVMrR+SQkymZTcYGq8Eq9J6CmCyZkHw+lsrHnugLoZwU3BzstNQhgAnlGrR4t45KOqmqeBtqQD9XPdOO/xGFblnU4u0Xuzhfz8hmpf6hZGpnx/TmY9obP5tcrMt/zG1pOvti8ck1/gnr1tzxf4InXGDc9bs8nYdjPXzT2tK4gPabyi6701kkUmu04RLlkytPJGR51bL45oXXsikOn9VjxbiTaY2wsqAVrMx/HBghakzZZiipRX9vvTlbKnFRTzjxUeRue76I2OwNG1ebYaPxpJh+i3j1xb6PtUgHeMce38wAhFwr85TJq0V3jgx3jFUtiYVziMht3ZDHkem4OJrLD1jjbk5yCwNmXxzHGjZuxzo3w0JBxC/KQ5/Lyaux3/JNrCDptuke/mDFIEde5jDU+f01vLSZ/2JmIwYltGHNMQwL0Q0vOs32YYxkFrjydYehrTzDIdPfLH8/7LcKn6USEl4v9Wr00IBMkZwN5U2tAKSeR0jaBLmRl9PVwLnXWnlSRMEYJEnsWY8MaWBDrXVmrCLXqcZypIBPzO6N3WeAg3JysYwfL9sCgQfFTqiUkOZetbhhovYmqyuiIEsd2qLvKmpXaQ0=
+  file: busun/build/libs/busun-latest.jar
+  on:
+    repo: roguePanda/mun-website
+notifications:
+  slack:
+    secure: F1kuTJIPTRBlfJDFqaOnj84V+mNM1fuHLxF5aKXsOVWhRm3He0xT+aoEqv1GY02SKRuxnIl0AQVBCe36DAJQSeLfa/cr7U66/OWXwSiHNMaLsSsWz5uzba31v8fKvP0W01C4ROD8Ie3X7LrMMhIhdteMGP4ZFFhOGdq9xaaz2u9+6yEa5S94QFtCSc6X5OaUGriRdt2U0BfwWiXw5hqyiLOu6ByPu0K+oV9F5BCkOxqyAXd1CyWmyPi305AWdQMrCFZrIU9ERoYN+QVCacOUU5NDb74/T++APpUOVRZHfD9ZFfgm1bVliA+j80SekE/DAny1n+QWpyYQI3K7ZUU+vTmUAbpXNowvw/VAgg9NW6Kfr49b7bZAfiujBw7P5aYMVzMcpXB3HYcvAcTOwaVYcc9gg5LIkasTIZZ4Rn4b59kzWA2/FCxmSeblj0bG+Z8ckSym6Ti36m5+onkTf4cpOqyA8YuwguNALMOo6uJfGBIMhPS9UptaocmTwuoaswdobeQMGHP3enccHfaCoZ5zv5+NxAsMaWH1MD++oc7DsK1qWds4qOWinOTG3B0oMPDCLA8s5nqNeUTkT2HdDqQaWBiUwTOABtuQ9HA9TvYwu6xuyPnnifufwvJH8Kd48gMuEOzitLdstvjxtAxsHZRQ1MHfo+1fJIUh46FHuiTYm7c=
