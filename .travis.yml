@@ -26,6 +26,9 @@ before_deploy:
 - cp busun/build/libs/busun-$TRAVIS_BUILD_NUMBER.jar busun/build/libs/busun-latest.jar
 deploy:
   provider: releases
+  skip_cleanup: true
+  on:
+    tags: true
   api_key:
     secure: e+eOb6rbo9FSh/+n4NbjFcALLfciKCyod3651GXB1NIS6QWifig5fyfyd5/YZZIl0qiVKmlO2GMgUPsWaVMrR+SQkymZTcYGq8Eq9J6CmCyZkHw+lsrHnugLoZwU3BzstNQhgAnlGrR4t45KOqmqeBtqQD9XPdOO/xGFblnU4u0Xuzhfz8hmpf6hZGpnx/TmY9obP5tcrMt/zG1pOvti8ck1/gnr1tzxf4InXGDc9bs8nYdjPXzT2tK4gPabyi6701kkUmu04RLlkytPJGR51bL45oXXsikOn9VjxbiTaY2wsqAVrMx/HBghakzZZiipRX9vvTlbKnFRTzjxUeRue76I2OwNG1ebYaPxpJh+i3j1xb6PtUgHeMce38wAhFwr85TJq0V3jgx3jFUtiYVziMht3ZDHkem4OJrLD1jjbk5yCwNmXxzHGjZuxzo3w0JBxC/KQ5/Lyaux3/JNrCDptuke/mDFIEde5jDU+f01vLSZ/2JmIwYltGHNMQwL0Q0vOs32YYxkFrjydYehrTzDIdPfLH8/7LcKn6USEl4v9Wr00IBMkZwN5U2tAKSeR0jaBLmRl9PVwLnXWnlSRMEYJEnsWY8MaWBDrXVmrCLXqcZypIBPzO6N3WeAg3JysYwfL9sCgQfFTqiUkOZetbhhovYmqyuiIEsd2qLvKmpXaQ0=
   file: busun/build/libs/busun-latest.jar
