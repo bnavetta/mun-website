@@ -1,6 +1,8 @@
 package org.brownmun.web.security;
 
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
@@ -30,104 +32,105 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import javax.servlet.Filter;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @EnableOAuth2Client
 @EnableConfigurationProperties(SsoProperties.class)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-        @Autowired
-        private OAuth2ClientContext oauth2ClientContext;
 
-        @Autowired
-        private SsoProperties ssoProperties;
+    @Autowired
+    private OAuth2ClientContext oauth2ClientContext;
 
-        @Autowired
-        private AdvisorService advisorService;
+    @Autowired
+    private SsoProperties ssoProperties;
 
-        @Autowired
-        private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AdvisorService advisorService;
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception
-        {
-            http
-                .authorizeRequests()
-                    .antMatchers("/yourbusun/add-advisors/confirm").permitAll()
-                    .antMatchers("/yourbusun/**").hasRole("ADVISOR")
-                    .antMatchers("/advisor/**").hasRole("ADVISOR")
-                    .antMatchers("/admin/**").hasRole("STAFF")
-                    // TODO: remove once registration live
-                    .antMatchers("/register").authenticated()
-                    .and()
-                .exceptionHandling()
-                    .accessDeniedHandler(new StaffAwareAccessDeniedHandler())
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
-                    .defaultSuccessUrl("/yourbusun/")
-                    .permitAll()
-                    .and()
-                .logout()
-                    .deleteCookies("JSESSIONID")
-                    .permitAll()
-                    .and()
-                .rememberMe()
-                    .userDetailsService(advisorService)
-                    .key("remember-me")
-                    .alwaysRemember(true)
-                    .and()
-                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
-                .exceptionHandling()
-                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
-        }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-        @Override
-        protected void configure(AuthenticationManagerBuilder auth) throws Exception
-        {
-            auth.userDetailsService(advisorService).passwordEncoder(passwordEncoder);
-        }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception
+    {
+        http
+            .authorizeRequests()
+                .antMatchers("/yourbusun/add-advisors/confirm").permitAll()
+                .antMatchers("/yourbusun/**").hasRole("ADVISOR")
+                .antMatchers("/advisor/**").hasRole("ADVISOR")
+                .antMatchers("/admin/**").hasRole("STAFF")
+                // TODO: remove once registration live
+                .antMatchers("/register").authenticated()
+                .and()
+            .exceptionHandling()
+                .accessDeniedHandler(new StaffAwareAccessDeniedHandler())
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                .defaultSuccessUrl("/yourbusun/")
+                .permitAll()
+                .and()
+            .logout()
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+                .and()
+            .rememberMe()
+                .userDetailsService(advisorService)
+                .key("remember-me")
+                .alwaysRemember(true)
+                .and()
+            .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+            .exceptionHandling()
+            .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
+    }
 
-        private Filter ssoFilter()
-        {
-            OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter("/login/staff");
-            OAuth2RestTemplate template = new OAuth2RestTemplate(google(), oauth2ClientContext);
-            filter.setRestTemplate(template);
-            UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
-            tokenServices.setRestTemplate(template);
-            tokenServices.setAuthoritiesExtractor(authoritiesExtractor());
-            filter.setTokenServices(tokenServices);
-            filter.setAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler());
-            return filter;
-        }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
+        auth.userDetailsService(advisorService).passwordEncoder(passwordEncoder);
+    }
 
-        @Bean
-        @ConfigurationProperties("google.client")
-        public AuthorizationCodeResourceDetails google()
-        {
-            return new AuthorizationCodeResourceDetails();
-        }
+    private Filter ssoFilter()
+    {
+        OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter("/login/staff");
+        OAuth2RestTemplate template = new OAuth2RestTemplate(google(), oauth2ClientContext);
+        filter.setRestTemplate(template);
+        UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
+        tokenServices.setRestTemplate(template);
+        tokenServices.setAuthoritiesExtractor(authoritiesExtractor());
+        filter.setTokenServices(tokenServices);
+        filter.setAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler());
+        return filter;
+    }
 
-        @Bean
-        @ConfigurationProperties("google.resource")
-        public ResourceServerProperties googleResource()
-        {
-            return new ResourceServerProperties();
-        }
+    @Bean
+    @ConfigurationProperties("google.client")
+    public AuthorizationCodeResourceDetails google()
+    {
+        return new AuthorizationCodeResourceDetails();
+    }
 
-        @Bean
-        public AuthoritiesExtractor authoritiesExtractor()
-        {
-            return new DomainRestrictedAuthoritiesExtractor(ssoProperties);
-        }
+    @Bean
+    @ConfigurationProperties("google.resource")
+    public ResourceServerProperties googleResource()
+    {
+        return new ResourceServerProperties();
+    }
 
-        @Bean
-        public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter)
-        {
-            FilterRegistrationBean registration = new FilterRegistrationBean();
-            registration.setFilter(filter);
-            registration.setOrder(-100);
-            return registration;
-        }
+    @Bean
+    public AuthoritiesExtractor authoritiesExtractor()
+    {
+        return new DomainRestrictedAuthoritiesExtractor(ssoProperties);
+    }
+
+    @Bean
+    public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter)
+    {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(filter);
+        registration.setOrder(-100);
+        return registration;
+    }
 }

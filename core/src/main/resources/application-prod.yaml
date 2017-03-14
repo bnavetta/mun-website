@@ -1,5 +1,8 @@
 security:
   require-ssl: true
+  headers:
+    content-security-policy: default-src 'self'; script-src 'self' ajax.googleapis.com use.typekit.net; connect-src 'self' performance.typekit.net; img-src 'self' storage.googleapis.com p.typekit.net; style-src 'self' 'unsafe-inline' use.typekit.net; font-src 'self' use.typekit.net fonts.typekit.net
+
 server:
   tomcat:
     remote-ip-header: x-forwarded-for
