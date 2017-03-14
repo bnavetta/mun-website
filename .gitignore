@@ -2,5 +2,8 @@
 build/
 .env
 
+client-secret.json
+
 generated_src/
 generated_testSrc/
+
