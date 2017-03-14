@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Schedule</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Conference Schedule</h1>
+        </header>
+        <div layout:fragment="body">
+            <div class="alert alert-info">
+                This schedule is currently tentative, but we will update this page as it is finalized.
+            </div>
+
+            <h3>Friday, November 10, 2017</h3>
+            <table class="table table-hover">
+                <tr><td>09:00 AM - 03:00 PM</td><td>International Relations Classes Open to Delegates</td></tr>
+                <tr><td>01:00 PM - 06:00 PM</td><td>Conference Registration</td></tr>
+                <tr><td>02:00 PM - 04:00 PM</td><td>Campus Tours</td></tr>
+                <tr><td>04:00 PM - 05:00 PM</td><td>Parliamentary Procedure and Crisis Training Sessions</td></tr>
+                <tr><td>06:00 PM - 06:45 PM</td><td>Opening Ceremonies</td></tr>
+                <tr><td>07:00 PM - 10:30 PM</td><td>Committee Session I</td></tr>
+            </table>
+
+            <h3>Saturday, November 11, 2017</h3>
+            <table class="table table-hover">
+                <tr><td>09:00 AM - 12:30 PM</td><td>Committee Session II</td></tr>
+                <tr><td>12:30 PM - 02:00 PM</td><td>Lunch Break</td></tr>
+                <tr><td>12:30 PM - 02:00 PM</td><td>International Relations at Brown</td></tr>
+                <tr><td>02:00 PM - 05:30 PM</td><td>Committee Session III</td></tr>
+                <tr><td>05:30 PM - 07:00 PM</td><td>Dinner Break</td></tr>
+                <tr><td>07:00 PM - 09:30 PM</td><td>A Night at Brown: Delegate Social</td></tr>
+            </table>
+
+            <h3>Sunday, November 12, 2017</h3>
+            <table class="table table-hover">
+                <tr><td>09:00 AM - 12:00 PM</td><td>Committee Session IV</td></tr>
+                <tr><td>12:15 PM - 01:30 PM</td><td>Closing Ceremonies</td></tr>
+            </table>
+        </div>
+    </body>
+</html>

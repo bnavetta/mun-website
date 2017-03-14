@@ -57,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                     .antMatchers("/yourbusun/**").hasRole("ADVISOR")
                     .antMatchers("/advisor/**").hasRole("ADVISOR")
                     .antMatchers("/admin/**").hasRole("STAFF")
+                    // TODO: remove once registration live
+                    .antMatchers("/register").authenticated()
                     .and()
                 .exceptionHandling()
                     .accessDeniedHandler(new StaffAwareAccessDeniedHandler())

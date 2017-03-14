@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Shuttles and Parking</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Shuttles and Parking</h1>
+        </header>
+        <div layout:fragment="body">
+            <div class="alert alert-info">
+                The shuttle schedule is still being finalized, but this information from last year is
+                indicative of what will be available.
+            </div>
+
+            <h2>Shuttles</h2>
+            <p>
+                BUSUN provides shuttle service for schools staying at one of our
+                <a th:href="@{/logistics/hotels}">sponsored hotels</a>.
+                We heavily subsidize the cost of running shuttles, providing the service for the entire duration
+                of the conference for only $13 per person (including advisors and chaperones). Although it is
+                possible in nice weather to walk from the downtown hotels, BUSUN strongly encourages all participants,
+                for safety and convenience, to take the shuttle.
+            </p>
+            <p>
+                The shuttles will run before registration, at the end of committee sessions on Friday night, and
+                before the first committee session on Saturday and Sunday. The shuttles will make multiple trips
+                during A Night on the Town at Brown Saturday night from the beginning of the event until the end.
+                Please note that shuttle services will not be provided to hotels at the end of closing ceremonies.
+                We will, however, provide a locked luggage room for those who wish to store luggage.
+            </p>
+            <p>
+                Please let us know as soon as possible if you will be in need of shuttle service and, if so,
+                for how many people. The shuttle fee can be paid separately as cash or as a part of the delegate
+                fees paid at registration.
+            </p>
+            <p>If you need any clarifications or have any questions, please email us at <a href="mailto:info@busun.org">info@busun.org</a>.</p>
+
+            <h2>Parking</h2>
+            <p>
+                If you will be using your own transportation to Brown University each day of the conference,
+                you will need to purchase a visitor-parking pass. The parking pass will cost $15 per day per vehicle,
+                regardless of vehicle size. Buses and large vans will need to park at the parking lot for the Brown
+                Stadium, located at <b>400 Elmgrove Avenue</b>. Directions for this location can be found
+                <a href="http://www.brownbears.com/athletics/Parking_Directions/index">here</a>
+                (scroll down to Brown Stadium Parking). Buses and large vans may also be parked at some BUSUN hotels,
+                although BUSUN cannot guarantee that hotels will have bus parking available in all cases. Smaller vans
+                and cars may park in the visitor parking lot located on Brook Street just off of Waterman Street.
+            </p>
+        </div>
+    </body>
+</html>

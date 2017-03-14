@@ -31,8 +31,9 @@
                 Delegates will have access to <strong>free wifi</strong> in all BUSUN partner hotels.
             </p>
 
+            <!--/*@thymesVar id="hotels" type="java.lang.Iterable<org.brownmun.model.Hotel>"*/-->
+            <!--/*
             <section>
-                <!--/*@thymesVar id="hotels" type="java.lang.Iterable<org.brownmun.model.Hotel>"*/-->
                 <div class="hotel media" th:each="hotel : ${hotels}">
                     <img th:src="${hotel.imageAddress}" th:alt="${hotel.name}" class="hotel-image">
                     <div class="media-body">
@@ -54,6 +55,7 @@
                     </div>
                 </div>
             </section>
+            */-->
         </div>
     </body>
 </html>

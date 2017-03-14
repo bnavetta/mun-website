@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Maps and Directions</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Map and Directions</h1>
+        </header>
+        <div layout:fragment="body">
+            <iframe style="width: 100%; height:500px;" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                    src="https://mapsengine.google.com/map/u/0/embed?mid=zG9b4QU35r9k.kgzo2o0U31jE"></iframe>
+
+            <h2>Directions to Campus</h2>
+
+            <p>
+                Registration will be held at the <b>Stephen Robert '62 Campus Center</b> on the corner of Brown
+                and Waterman Streets (<a
+                href="http://www.brown.edu/Facilities/Facilities_Management/docs/PAUR_Campus_Map.pdf">visitor's map</a>).
+                <br/>
+                If you are using a GPS navigator, please enter <b>75 Waterman Street, Providence, RI 02912</b> as the
+                destination address.
+            </p>
+
+            <h3>By Car</h3>
+
+            <dl>
+                <dt>From I-95 North and South</dt>
+                <dd>
+                    Follow I-95 to Exit 22A ("Downtown / Memorial Boulevard"). At the end of the exit ramp proceed
+                    straight onto Memorial Boulevard, and continue on Memorial Boulevard until you reach the
+                    intersection with Washington Street. Turn left onto Washington Street. Continuing straight ahead on
+                    Washington Street, the street will turn into Waterman Street, and will take you up College Hill and
+                    onto Brown's campus, with the campus center on the righthand side, about a block beyond the clock
+                    tower.
+                </dd>
+
+                <dt>From I-195 West</dt>
+                <dd>
+                    Follow I-195 West to Exit 3 ("Gano Street / India Point"). At the traffic light at the end of the
+                    exit ramp, make a right onto Gano Street. Continue on Gano Street until you reach the intersection
+                    with Angell Street. Turn left onto Angell Street, and continue until you reach the intersection with
+                    Brown Street. Turn left onto Brown Street. Continue to the end of Brown Street, which will form a
+                    T-intersection with Waterman Street, right in front of the campus center.
+                </dd>
+
+                <dt>From US-6 East</dt>
+                <dd>
+                    Follow US-6 East. US-6 will take you into the city of Providence, where it will merge with RI-10.
+                    About 1.5 miles following this merge, take the exit for "Providence Downtown," and follow signage
+                    for "Memorial Boulevard." At the end of the exit ramp, proceed straight onto Memorial Boulevard, and
+                    continue on Memorial Boulevard until you reach the intersection with Washington Street. Turn left
+                    onto Washington Street. Continuing straight ahead on Washington Street, the street will turn into
+                    Waterman Street, and will take you up College Hill and onto Brown's campus, with the campus center
+                    on the righthand side, about a block beyond the clock tower.
+                </dd>
+            </dl>
+
+            <h3>By Train</h3>
+
+            <p>
+                Providence Station is served by <a href="http://www.amtrak.com/">Amtrak</a> (Northeast Regional and Acela
+                Express) and the MBTA <a href="http://www.mbta.com/schedules_and_maps/rail/lines/?route=PROVSTOU">Providence/Stoughton
+                    Line</a>. Campus is a short cab ride or a fifteen minute walk (uphill) away from the train station.
+            </p>
+
+            <h3>By Bus</h3>
+
+            <p>
+                Providence is served by the <a href="http://www.greyhound.com/">Greyhound</a> and <a
+                href="http://www.peterpanbus.com/">Peter Pan</a> bus lines. The Providence bus terminal is Kennedy
+                Plaza, a short cab ride or a fifteen minute walk (again, uphill) to campus.
+            </p>
+
+            <h3>By Air</h3>
+
+            <p>
+                Named for Senator Theodore Francis Green, class of 1887, <a href="http://www.pvdairport.com/">T.F. Green
+                International Airport</a> (PVD) is served by many local and national airlines. The airport, which is
+                located in the city of Warwick, is approximately 10 miles from the University. A variety of ground
+                transportation options are available from the terminal to campus.
+            </p>
+
+            <p>
+                For those delegations traveling to Brown from abroad, there are a number of transportation options
+                running from Boston Logan International Airport to Providence, including the MBTA commuter rail line and
+                various bus services mentioned above.
+            </p>
+
+            <p>If you have any questions regarding transit to Brown University, please do not hesitate and send any
+                queries to <a href="mailto:info@busun.org">info@busun.org</a>.
+            </p>
+        </div>
+    </body>
+</html>

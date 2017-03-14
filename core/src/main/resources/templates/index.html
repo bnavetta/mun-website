@@ -2,16 +2,16 @@
 <html xmlns:wp="http://brownmun"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base}">
-	<head>
-		<title>Brown MUN</title>
-		<wp:chunk name="index" />
-	</head>
-	<body>
-		<header layout:fragment="header">
-			<h1>Brown MUN</h1>
-		</header>
-		<div layout:fragment="body">
-            <p>Hello delegates!!</p>
+    <head>
+        <title>Brown MUN</title>
+        <wp:chunk name="public" />
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>The Brown University Simulation of the United Nations</h1>
+        </header>
+        <div layout:fragment="body">
+            <img class="busun-cover" src="https://storage.googleapis.com/busun_assets/busun-cover.png" alt="BUSUN XXI">
         </div>
-	</body>
+    </body>
 </html>
