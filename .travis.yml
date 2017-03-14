@@ -18,8 +18,10 @@ addons:
   postgresql: '9.4'
 before_install:
 - npm install -g yarn
-- cd frontend && yarn
+- cd frontend
+- yarn
 - npm rebuild node-sass
+- cd ..
 before_script:
 - psql -c 'create database brownmun_travis;' -U postgres
 before_deploy:
