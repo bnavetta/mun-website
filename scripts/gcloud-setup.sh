@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -d ${HOME}/google-cloud-sdk ]; then
+    echo "Installing gcloud sdk"
     curl https://sdk.cloud.google.com | bash
 fi
 
