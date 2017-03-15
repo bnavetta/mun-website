@@ -1,0 +1,11 @@
+// @flow
+
+declare interface JQueryObject {
+    tooltip: () => void,
+}
+
+declare interface JQuery {
+    (HTMLElement | string): JQueryObject,
+};
+
+declare var $: JQuery;

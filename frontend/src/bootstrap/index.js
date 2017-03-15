@@ -9,4 +9,5 @@ WebFont.load({
     typekit: { id: 'afh4xoi' },
 });
 
-document.querySelectorAll('[data-toggle="tooltip"]').forEach((tooltip) => $(tooltip).tooltip());
+/* eslint-env jquery */
+document.querySelectorAll('[data-toggle="tooltip"]').forEach(tooltip => $(tooltip).tooltip());
