@@ -42,6 +42,26 @@
                     <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
                 </li>
             </ul>
+
+            <h2 class="mt-3">Crisis Committees</h2>
+            <ul class="list-group">
+                <!--/*@thymesVar id="jointCrises" type="java.util.Collection<org.brownmun.model.JointCrisis>"*/-->
+                <li th:each="crisis : ${jointCrises}" class="list-group-item flex-column align-items-start">
+                    <h3 th:text="${crisis.name}">Crisis Name</h3>
+                    <p class="my-2" th:text="${crisis.description}">Crisis Description</p>
+                    <h4>Committees:</h4>
+                    <dl>
+                        <th:block th:each="committee : ${crisis.committees}">
+                            <dt th:text="${committee.name}">Committee Name</dt>
+                            <dd>Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a></dd>
+                        </th:block>
+                    </dl>
+                </li>
+                <!--/*@thymesVar id="crisisCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                <li th:each="committee : ${crisisCommittees}" class="list-group-item flex-column align-items-start">
+                    <th:block th:replace="~{::committeeEntry(${committee})}"/>
+                </li>
+            </ul>
         </div>
     </body>
 </html>
