@@ -3,6 +3,7 @@ package org.brownmun.web.security;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
@@ -40,6 +41,8 @@ import javax.servlet.Filter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @Autowired
     private OAuth2ClientContext oauth2ClientContext;
@@ -56,9 +59,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
+        if (!Strings.isNullOrEmpty(securityProperties.getHeaders().getContentSecurityPolicy()))
+        {
+            http.headers().contentSecurityPolicy(securityProperties.getHeaders().getContentSecurityPolicy());
+        }
+
         http
             .headers()
-                .referrerPolicy(ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN).and()
+                .referrerPolicy(ReferrerPolicy.NO_REFERRER_WHEN_DOWNGRADE).and()
                 .and()
             .authorizeRequests()
                 .antMatchers("/yourbusun/add-advisors/confirm").permitAll()
