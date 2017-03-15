@@ -18,6 +18,6 @@ public interface CommitteeRepository extends CrudRepository<Committee, Long>
 
     Collection<Committee> findAllByCommitteeType(CommitteeType type);
 
-    @Query("SELECT c from Committee c WHERE c.committeeType = org.brownmun.model.CommitteeType.CRISIS AND NOT c.jointCrisis")
+    @Query("SELECT c from Committee c WHERE c.committeeType = org.brownmun.model.CommitteeType.CRISIS AND c.jointCrisis = FALSE")
     Collection<Committee> findNonJointCrisisCommittees();
 }
