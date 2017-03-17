@@ -34,29 +34,29 @@
             <!--/*@thymesVar id="hotels" type="java.lang.Iterable<org.brownmun.model.Hotel>"*/-->
             <section>
                 <div class="hotel media" th:each="hotel : ${hotels}">
-                    <img th:remove="${#strings.isEmpty(hotel.imageAddress)}" th:src="${hotel.imageAddress}" th:alt="${hotel.name}" class="hotel-image">
+                    <img th:remove="${#strings.isEmpty(hotel.imageAddress)}? all" th:src="${hotel.imageAddress}" th:alt="${hotel.name}" class="hotel-image">
                     <div class="media-body">
                         <h5 class="mt-0">
-                            <a th:remove="${#strings.isEmpty(hotel.bookingPage)}" th:href="${hotel.bookingPage}">[[${hotel.name}]]</a>
+                            <a th:remove="${#strings.isEmpty(hotel.bookingPage)}? tag" th:href="${hotel.bookingPage}">[[${hotel.name}]]</a>
                         </h5>
                         <dl class="row">
-                            <th:block th:remove="${#strings.isEmpty(hotel.address)}">
+                            <th:block th:remove="${#strings.isEmpty(hotel.address)}? all">
                                 <dt class="col-sm-3">Address</dt>
                                 <dd class="col-sm-9" th:text="${hotel.address}"></dd>
                             </th:block>
-                            <th:block th:remove="${#strings.isEmpty(hotel.phoneNumber)}">
+                            <th:block th:remove="${#strings.isEmpty(hotel.phoneNumber)}? all">
                                 <dt class="col-sm-3">Phone Number</dt>
                                 <dd class="col-sm-9" th:text="${hotel.phoneNumber}"></dd>
                             </th:block>
-                            <th:block th:remove="${hotel.deadline == null}">
+                            <th:block th:remove="${hotel.deadline == null}? all">
                                 <dt class="col-sm-3">Deadline</dt>
                                 <dd class="col-sm-9" th:text="${#dates.format(hotel.deadlineAsDate, 'MM/dd/yy')}">1/2/17</dd>
                             </th:block>
-                            <th:block th:remove="${hotel.rate == null}">
+                            <th:block th:remove="${hotel.rate == null}? all">
                                 <dt class="col-sm-3">Rate</dt>
                                 <dd class="col-sm-9" th:text="${hotel.formattedRate}">$123</dd>
                             </th:block>
-                            <th:block th:remove="${hotel.availability == null}">
+                            <th:block th:remove="${hotel.availability == null}? all">
                                 <dt class="col-sm-3">Availability</dt>
                                 <dd class="col-sm-9" th:text="#{hotel.availability(${hotel.availability})}">50 rooms</dd>
                             </th:block>
