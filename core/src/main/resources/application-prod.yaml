@@ -1,15 +1,7 @@
 security:
   require-ssl: true
   headers:
-    content-security-policy: >
-        default-src 'self';
-        base-uri 'self';
-        script-src 'self' cdnjs.cloudflare.com use.typekit.net;
-        connect-src 'self' performance.typekit.net;
-        img-src 'self' storage.googleapis.com p.typekit.net placebear.com;
-        style-src 'self' 'unsafe-inline' use.typekit.net;
-        font-src 'self' use.typekit.net fonts.typekit.net;
-        frame-src 'self' mapsengine.google.com www.google.com
+    content-security-policy: default-src 'self'; base-uri 'self'; script-src 'self' cdnjs.cloudflare.com use.typekit.net; connect-src 'self' performance.typekit.net; img-src 'self' storage.googleapis.com p.typekit.net placebear.com; style-src 'self' 'unsafe-inline' use.typekit.net; font-src 'self' use.typekit.net fonts.typekit.net; frame-src 'self' mapsengine.google.com www.google.com
 
 server:
   tomcat:
