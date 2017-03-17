@@ -5,11 +5,16 @@ import superagentUse from 'superagent-use';
 
 const agent = superagentUse(superagent);
 
-const csrfHeader = document.querySelector('meta[name=csrf-header]').getAttribute('content');
-const csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+const csrfHeaderMeta = document.querySelector('meta[name=csrf-header]');
+const csrfTokenMeta = document.querySelector('meta[name=csrf-token]');
+
+const csrfHeader = csrfHeaderMeta ? csrfHeaderMeta.getAttribute('content') : null;
+const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : null;
 
 const csrf = (request) => {
-    request.set(csrfHeader, csrfToken);
+    if (csrfHeader && csrfToken) {
+        request.set(csrfHeader, csrfToken);
+    }
 };
 
 agent.use(csrf);
