@@ -34,22 +34,32 @@
             <!--/*@thymesVar id="hotels" type="java.lang.Iterable<org.brownmun.model.Hotel>"*/-->
             <section>
                 <div class="hotel media" th:each="hotel : ${hotels}">
-                    <img th:src="${hotel.imageAddress}" th:alt="${hotel.name}" class="hotel-image">
+                    <img th:remove="${#strings.isEmpty(hotel.imageAddress)}" th:src="${hotel.imageAddress}" th:alt="${hotel.name}" class="hotel-image">
                     <div class="media-body">
                         <h5 class="mt-0">
-                            <a th:href="${hotel.bookingPage}" th:text="${hotel.name}">Hotel Name</a>
+                            <a th:remove="${#strings.isEmpty(hotel.bookingPage)}" th:href="${hotel.bookingPage}">[[${hotel.name}]]</a>
                         </h5>
                         <dl class="row">
-                            <dt class="col-sm-3">Address</dt>
-                            <dd class="col-sm-9" th:text="${hotel.address}"></dd>
-                            <dt class="col-sm-3">Phone Number</dt>
-                            <dd class="col-sm-9" th:text="${hotel.phoneNumber}"></dd>
-                            <dt class="col-sm-3">Deadline</dt>
-                            <dd class="col-sm-9" th:text="${#dates.format(hotel.deadlineAsDate, 'MM/dd/yy')}">1/2/17</dd>
-                            <dt class="col-sm-3">Rate</dt>
-                            <dd class="col-sm-9" th:text="${hotel.formattedRate}">$123</dd>
-                            <dt class="col-sm-3">Availability</dt>
-                            <dd class="col-sm-9" th:text="#{hotel.availability(${hotel.availability})}">50 rooms</dd>
+                            <th:block th:remove="${#strings.isEmpty(hotel.address)}">
+                                <dt class="col-sm-3">Address</dt>
+                                <dd class="col-sm-9" th:text="${hotel.address}"></dd>
+                            </th:block>
+                            <th:block th:remove="${#strings.isEmpty(hotel.phoneNumber)}">
+                                <dt class="col-sm-3">Phone Number</dt>
+                                <dd class="col-sm-9" th:text="${hotel.phoneNumber}"></dd>
+                            </th:block>
+                            <th:block th:remove="${hotel.deadline == null}">
+                                <dt class="col-sm-3">Deadline</dt>
+                                <dd class="col-sm-9" th:text="${#dates.format(hotel.deadlineAsDate, 'MM/dd/yy')}">1/2/17</dd>
+                            </th:block>
+                            <th:block th:remove="${hotel.rate == null}">
+                                <dt class="col-sm-3">Rate</dt>
+                                <dd class="col-sm-9" th:text="${hotel.formattedRate}">$123</dd>
+                            </th:block>
+                            <th:block th:remove="${hotel.availability == null}">
+                                <dt class="col-sm-3">Availability</dt>
+                                <dd class="col-sm-9" th:text="#{hotel.availability(${hotel.availability})}">50 rooms</dd>
+                            </th:block>
                         </dl>
                     </div>
                 </div>

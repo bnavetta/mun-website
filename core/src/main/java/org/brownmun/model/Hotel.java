@@ -29,9 +29,9 @@ public class Hotel
 
     private LocalDate deadline;
 
-    private double rate;
+    private Double rate;
 
-    private int availability;
+    private Integer availability;
 
     private String bookingPage;
 
