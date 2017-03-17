@@ -8,12 +8,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
         <wp:chunk name="common"/>
         <wp:chunk name="bootstrap"/>
-        <script th:inline="javascript">
-            window.csrf = {
-                token: /*[[${_csrf.token}]]*/ null,
-                header: /*[[${_csrf.headerName}]]*/ null,
-            };
-        </script>
+        <meta name="csrf-header" th:content="${_csrf.headerName}">
+        <meta name="csrf-token" th:content="${_csrf.token}">
     </head>
     <body>
         <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
@@ -25,7 +21,7 @@
             </a>
 
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto nav-fill">
+                <ul class="navbar-nav nav-fill">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/" id="aboutMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             About Us
