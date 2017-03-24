@@ -2,7 +2,7 @@ secretariat:
   members:
   - title: Secretary-General
     name: Jordan Waller
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/jordan.jpg
     email: sg@busun.org
     bio: >
         Jordan Waller ('18) is the Co-Secretary General for BUSUN 2017. She is originally from Chicago, IL and
@@ -14,7 +14,7 @@ secretariat:
 
   - title: Secretary-General
     name: Cathy Bai
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/cathy.jpg
     email: sg@busun.org
     bio: >
         Cathy Bai (’19) is the Co-Secretary-General for BUSUN 2016. Cathy is a junior Computational Biology and
@@ -25,7 +25,7 @@ secretariat:
 
   - title: Under-Secretary-General
     name: Beatriz Vianna
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/bia.jpg
     email: usg@busun.org
     bio: >
         Beatriz Vianna (’18) is excited to join the Secretariat as Under-Secretary-General for her fourth and
@@ -39,7 +39,7 @@ secretariat:
   - title: Director General
     name: Colette Bare
     email: dg@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/colette.jpg
     bio: >
         Colette Bare (’19) is the Director General for BUSUN 2017. Originally from Illinois, she is a
         junior studying electrical engineering with a focus on applications in health and human biology.
@@ -52,7 +52,7 @@ secretariat:
   - title: Director of General Committees
     name: Zahra Asghar
     email: general@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/zahra.jpg
     bio: >
         Zahra Asghar ('20) is the Director of General Committees for BUSUN 2017. She is a sophomore from Dubai,
         UAE concentrating in Cognitive Neuroscience and International Relations with a focus on the Middle East.
@@ -63,7 +63,7 @@ secretariat:
 
   - title: Director of Specialized and Historical Committees
     name: Margaret Follet
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/margaret.jpg
     email: spec@busun.org
     bio: >
         Margaret Follett (’19) is excited to serve as the Director of Specialized and Historical Committees
@@ -76,7 +76,7 @@ secretariat:
 
   - title: Director of Crisis Committees
     name: Adam DeHovitz
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/windmill.jpg
     email: crisis@busun.org
     bio: >
         Adam DeHovitz ('19) is Director of Crisis Committees for this year's BUSUN. Adam is a New Yorker
@@ -89,7 +89,7 @@ secretariat:
   - title: Director of External Affairs
     name: Jourdan Smithwick
     email: info@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/jourdan.jpg
     bio: >
         Jourdan Smithwick (’20) is proud to serve as the Director of External Affairs
         for BUSUN XXI. A sophomore from Long Island, New York hoping to
@@ -117,7 +117,7 @@ secretariat:
   - title: Director of Outreach
     name: Elana Confino-Pinzon
     email: outreach@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/elana.jpg
     bio: >
         Elana Confino-Pinzon (‘20) is delighted to join BUSUN 2017 as one of the Directors of Outreach.
         Elana is a sophomore from New York planning to concentrate in Political Science and Urban Studies.
@@ -129,7 +129,7 @@ secretariat:
   - title: Director of Operations and Implementations
     name: Tess Rossi
     email: ops@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/tess.jpg
     bio: >
         Tess Rossi ('20) is the Director of Operations for BUSUN 2017. Tess is a sophomore who
         has no idea what she wants to concentrate in, though she would bet $1 she will end up
@@ -141,7 +141,7 @@ secretariat:
 
   - title: Director of Decorum
     name: Lily Zhao
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/lily.jpg
     email: decorum@busun.org
     bio: >
         Lily (Yiyu) Zhao (’18) is the Director of Decorum for BUSUN XXI. Lily comes from Beijing, China,
@@ -156,7 +156,7 @@ secretariat:
   - title: Director of Media
     name: Bethany Hung
     email: media@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/bethany.jpg
     bio: >
         Bethany Hung (’19) is the Director of Media for BUSUN 2017. Although Bethany formally studies cognitive
         neuroscience here at Brown, she also gets very excited about organic chemistry and oceanography. When not
@@ -168,7 +168,7 @@ secretariat:
   - title: Director of Technology
     name: Ben Navetta
     email: technology@busun.org
-    image-address: https://placebear.com/200/200
+    image-address: https://storage.googleapis.com/busun_assets/sec-photos/ben.jpg
     bio: >
         Ben Navetta ('19) is Director of Technology for BUSUN XXI. A lifelong New Englander, Ben comes from
         a small town in Massachusetts. As a junior at Brown, he loves studying computer science. Outside of BUSUN,
