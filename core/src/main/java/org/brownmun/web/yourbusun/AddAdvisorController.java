@@ -1,20 +1,17 @@
 package org.brownmun.web.yourbusun;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.brownmun.mail.EmailDescriptor;
+import org.brownmun.advisor.AdvisorCreationException;
+import org.brownmun.advisor.AdvisorCreationService;
 import org.brownmun.mail.MailException;
-import org.brownmun.mail.MailService;
-import org.brownmun.mail.MessageLoader;
 import org.brownmun.model.Advisor;
-import org.brownmun.model.NewAdvisorToken;
 import org.brownmun.model.School;
-import org.brownmun.model.repo.SchoolRepository;
-import org.brownmun.web.security.AdvisorRequest;
+import org.brownmun.advisor.AdvisorCreationRequest;
 import org.brownmun.web.security.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -37,26 +35,16 @@ import javax.validation.Valid;
 public class AddAdvisorController
 {
     private final AdvisorService advisorService;
-    private final MailService mailService;
-    private final MessageLoader messageLoader;
+    private final AdvisorCreationService advisorCreationService;
+    private final MessageSource messages;
 
     @Autowired
-    public AddAdvisorController(AdvisorService advisorService, MailService mailService, MessageLoader messageLoader)
+    public AddAdvisorController(AdvisorService advisorService, AdvisorCreationService advisorCreationService, MessageSource messages)
     {
         this.advisorService = advisorService;
-        this.mailService = mailService;
-        this.messageLoader = messageLoader;
+        this.advisorCreationService = advisorCreationService;
+        this.messages = messages;
     }
-
-    /*
-       Flow:
-       1. Existing advisor goes to form for adding advisors (addAdvisors)
-                REACT!!!
-       2. Fills out each one's name and email address (addAdvisors / submitAdvisors)
-       3. An NewAdvisorToken is generated for each (submitAdvisors)
-       4. Each advisor is emailed their token
-       5. When they get the email, they follow a link to create their account (createAdvisor)
-     */
 
     @GetMapping
     public String addAdvisors(@AuthenticationPrincipal Advisor advisor, Model model)
@@ -67,7 +55,7 @@ public class AddAdvisorController
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> submitAdvisors(@AuthenticationPrincipal Advisor advisor, @RequestBody AddAdvisorsRequest request) throws MailException
+    public ResponseEntity<Map<String, Object>> submitAdvisors(@AuthenticationPrincipal Advisor advisor, @RequestBody AddAdvisorsRequest request, Locale locale) throws MailException
     {
         advisor = advisorService.load(advisor);
         School school = advisor.getSchool();
@@ -78,31 +66,17 @@ public class AddAdvisorController
                 .body(ImmutableMap.of("error", "Incorrect school ID"));
         }
 
-        // TODO: this REALLY REALLY REALLY shouldn't be in a controller
-
-        Iterable<NewAdvisorToken> tokens = advisorService.createTokens(school, request.getAdvisors());
-        Map<String, Map<String, String>> recipients = Maps.newHashMap();
-        for (NewAdvisorToken token : tokens)
+        try
         {
-            Map<String, String> variables = Maps.newHashMap();
-            variables.put("name", token.getAdvisorName());
-            variables.put("school", school.getName());
-            // TODO: put base URI of site in ConferenceProperties
-            // and use a URI builder
-            variables.put("registerUrl", "http://localhost:8080/yourbusun/add-advisors/confirm?token=" + token.getToken());
-            recipients.put(token.getAdvisorEmail(), variables);
+            advisorCreationService.inviteAdvisors(school, request.getAdvisors());
+            return ResponseEntity.ok(ImmutableMap.of("success", true));
         }
-
-        // TODO: pull out constants
-        EmailDescriptor message = new EmailDescriptor();
-        message.setFrom("admin@busun.org");
-        message.setReplyTo(Optional.of("technology@busun.org"));
-        message.setRecipients(recipients);
-        message.setSubject("Create a BUSUN Account");
-        message.setHtml(messageLoader.getMessage("new-advisor"));
-        mailService.send(message);
-
-        return ResponseEntity.ok(ImmutableMap.of("success", true));
+        catch (AdvisorCreationException e)
+        {
+            return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ImmutableMap.of("error", messages.getMessage(e.getMessageCode(), null, locale)));
+        }
     }
 
     @GetMapping("/confirm")
@@ -129,15 +103,16 @@ public class AddAdvisorController
             return "yourbusun/confirm-advisor";
         }
 
-        Optional<Advisor> newAdvisor = advisorService.createAdvisorFromToken(form.getToken(), form.getPassword(), form.getPhoneNumber());
-        if (newAdvisor.isPresent())
+        Advisor base = new Advisor();
+        base.setPhoneNumber(form.getPhoneNumber());
+        try
         {
-            advisorService.authenticateAs(newAdvisor.get());
+            Advisor created = advisorCreationService.createAdvisorAndLogin(form.getToken(), form.getPassword(), base);
             return "redirect:/yourbusun/";
         }
-        else
+        catch (AdvisorCreationException e)
         {
-            model.addAttribute("error", "Invalid information provided");
+            model.addAttribute("errorCode", e.getMessageCode());
             return "yourbusun/confirm-advisor";
         }
     }
@@ -149,6 +124,6 @@ public class AddAdvisorController
     public static class AddAdvisorsRequest
     {
         private Long schoolId;
-        private List<AdvisorRequest> advisors;
+        private List<AdvisorCreationRequest> advisors;
     }
 }

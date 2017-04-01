@@ -70,6 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .and()
             .authorizeRequests()
                 .antMatchers("/yourbusun/add-advisors/confirm").permitAll()
+                .antMatchers("/advisor/forgot-password").permitAll()
+                .antMatchers("/advisor/reset-password").permitAll()
                 .antMatchers("/yourbusun/**").hasRole("ADVISOR")
                 .antMatchers("/advisor/**").hasRole("ADVISOR")
                 .antMatchers("/admin/**").hasRole("STAFF")

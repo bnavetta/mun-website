@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-public class NewAdvisorToken
+public class AdvisorCreationToken
 {
     /**
      * Randomly-generated token sent in the creation email

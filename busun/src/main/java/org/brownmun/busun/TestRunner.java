@@ -3,12 +3,7 @@ package org.brownmun.busun;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.EmailDescriptor;
-import org.brownmun.mail.MailService;
-import org.brownmun.model.*;
-import org.brownmun.model.repo.CommitteeRepository;
-import org.brownmun.model.repo.DelegateRepository;
-import org.brownmun.model.repo.PositionRepository;
-import org.brownmun.model.repo.SchoolRepository;
+import org.brownmun.mail.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -24,7 +19,7 @@ import java.util.Optional;
 public class TestRunner implements CommandLineRunner
 {
 	@Autowired
-	private MailService mailService;
+	private MailSender mailSender;
 
 	@Transactional
 	@Override
@@ -41,6 +36,6 @@ public class TestRunner implements CommandLineRunner
 		msg.setSubject("Testing");
 		msg.setHtml("<h1>Hello, %recipient.name%</h1>\nThis is a test email.");
 
-//		mailService.send(msg);
+//		mailSender.send(msg);
 	}
 }

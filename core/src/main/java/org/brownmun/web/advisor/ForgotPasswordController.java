@@ -1,6 +1,7 @@
 package org.brownmun.web.advisor;
 
-import org.brownmun.web.security.AdvisorService;
+import org.brownmun.advisor.PasswordResetException;
+import org.brownmun.advisor.PasswordResetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,12 @@ import java.util.Optional;
 @RequestMapping("/advisor/forgot-password")
 public class ForgotPasswordController
 {
-    private final AdvisorService advisorService;
+    private final PasswordResetService passwordResetService;
 
     @Autowired
-    public ForgotPasswordController(AdvisorService advisorService)
+    public ForgotPasswordController(PasswordResetService passwordResetService)
     {
-        this.advisorService = advisorService;
+        this.passwordResetService = passwordResetService;
     }
 
     @GetMapping
@@ -36,14 +37,14 @@ public class ForgotPasswordController
     public String forgotPassword(@RequestParam("email") String email, Model model)
     {
         model.addAttribute("email", email);
-        Optional<String> error = advisorService.requestPasswordReset(email);
-        if (error.isPresent())
+        try
         {
-            model.addAttribute("error", error.get());
-        }
-        else
-        {
+            passwordResetService.requestPasswordReset(email);
             model.addAttribute("message", "Check your email for a password reset link");
+        }
+        catch (PasswordResetException e)
+        {
+            model.addAttribute("errorCode", e.getMessageCode());
         }
 
         return "advisor/forgot-password";

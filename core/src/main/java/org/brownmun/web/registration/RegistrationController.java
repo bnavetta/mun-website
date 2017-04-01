@@ -92,23 +92,20 @@ public class RegistrationController
 
         School saved = schoolRepo.save(school);
 
-        Advisor advisor = new Advisor();
-        advisor.setName(form.getAdvisorName());
-        advisor.setEmail(form.getAdvisorEmail());
-        advisor.setPhoneNumber(form.getAdvisorPhoneNumber());
-        advisor.setPrimary(true);
-        advisor.setPassword(form.getAdvisorPassword());
-        advisor.setSchool(saved);
-
-        Optional<Advisor> created = advisorService.register(advisor);
-        created.ifPresent(advisorService::authenticateAs);
-
-        if (!created.isPresent())
+        if (advisorService.advisorExists(form.getAdvisorEmail()))
         {
             Multimap<String, String> errors = ArrayListMultimap.create();
             errors.put("advisorEmail", "An advisor with that email address is already registered");
             return ResponseEntity.ok(new RegistrationResult(false, errors, null));
         }
+
+        Advisor advisor = new Advisor();
+        advisor.setName(form.getAdvisorName());
+        advisor.setEmail(form.getAdvisorEmail());
+        advisor.setPhoneNumber(form.getAdvisorPhoneNumber());
+        advisor.setPrimary(true);
+        advisor.setSchool(saved);
+        advisorService.saveAndLogin(advisor, form.getAdvisorPassword());
 
         return ResponseEntity.ok(new RegistrationResult(true, ArrayListMultimap.create(), saved.getId()));
     }

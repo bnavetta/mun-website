@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.EmailDescriptor;
 import org.brownmun.mail.MailException;
-import org.brownmun.mail.MailService;
+import org.brownmun.mail.MailSender;
 import org.springframework.core.io.Resource;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -15,20 +15,20 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * {@link MailService} that uses the Mailgun API
+ * {@link MailSender} that uses the Mailgun API
  */
 @Slf4j
-public class MailgunMailService implements MailService
+public class MailgunMailSender implements MailSender
 {
     private final RestTemplate restTemplate;
     private final ObjectMapper jsonMapper;
 
     /**
-     * Create a new Mailgun-based {@link MailService} from the provided {@link RestTemplate}. Assumes
+     * Create a new Mailgun-based {@link MailSender} from the provided {@link RestTemplate}. Assumes
      * that the template is configured with the Mailgun API base URL and credentials.
      * @param restTemplate
      */
-    public MailgunMailService(RestTemplate restTemplate, ObjectMapper jsonMapper)
+    public MailgunMailSender(RestTemplate restTemplate, ObjectMapper jsonMapper)
     {
         this.restTemplate = restTemplate;
         this.jsonMapper = jsonMapper;

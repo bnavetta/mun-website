@@ -79,7 +79,8 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
         workingDir rootProject.projectDir
 
         systemProperty 'debug', 'true'
-        systemProperty 'spring.profiles.active', System.getenv('TRAVIS') ? 'ci' : 'local'
+        def platformProfile =  System.getenv('TRAVIS') ? 'ci' : 'local'
+        systemProperty 'spring.profiles.active', "${platformProfile},dev-assets"
     }
 
     rootProject.tasks['coverage'].configure {

@@ -1,4 +1,4 @@
-package org.brownmun.web.security;
+package org.brownmun.advisor;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
  * A request to create a new school advisor, with all the required information.
  */
 @Data
-public class AdvisorRequest
+public class AdvisorCreationRequest
 {
     String name;
     String email;

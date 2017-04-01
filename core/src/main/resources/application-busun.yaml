@@ -176,3 +176,8 @@ secretariat:
         the systems administrator for a computer vision research lab. When he has the time, Ben is passionate
         about coffee, baking, and classics. He got his first Model UN experience when a friend pulled him into
         staffing BUCS his freshman year.
+
+mail:
+    linkBase: https://busun.org
+    fromAddress: admin@busun.org
+    replyAddress: technology@busun.org

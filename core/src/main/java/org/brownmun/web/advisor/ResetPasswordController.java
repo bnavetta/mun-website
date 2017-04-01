@@ -1,6 +1,7 @@
 package org.brownmun.web.advisor;
 
-import org.brownmun.web.security.AdvisorService;
+import org.brownmun.advisor.PasswordResetException;
+import org.brownmun.advisor.PasswordResetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,12 +17,12 @@ import javax.validation.Valid;
 @RequestMapping("/advisor/reset-password")
 public class ResetPasswordController
 {
-    private final AdvisorService advisorService;
+    private final PasswordResetService passwordResetService;
 
     @Autowired
-    public ResetPasswordController(AdvisorService advisorService)
+    public ResetPasswordController(PasswordResetService passwordResetService)
     {
-        this.advisorService = advisorService;
+        this.passwordResetService = passwordResetService;
     }
 
     @GetMapping
@@ -45,14 +46,15 @@ public class ResetPasswordController
             return "advisor/reset-password";
         }
 
-        Optional<String> error = advisorService.resetPassword(form.getToken(), form.getPassword());
-        if (error.isPresent())
+        try
         {
-
-            bindingResult.reject("", error.get());
+            passwordResetService.resetPasswordAndLogin(form.getToken(), form.getPassword());
+            return "redirect:/yourbusun";
+        }
+        catch (PasswordResetException e)
+        {
+            bindingResult.reject(e.getMessageCode());
             return "advisor/reset-password";
         }
-
-        return "redirect:/yourbusun";
     }
 }

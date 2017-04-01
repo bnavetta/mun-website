@@ -97,7 +97,7 @@ public class YourBusunController
         }
 
         log.debug("Changing password for advisor {}", advisor.getEmail());
-        advisorService.changePassword(advisorService.load(advisor), form.getPassword());
+        advisorService.saveAndLogin(advisorService.load(advisor), form.getPassword());
 
         // TODO: notification email or something?
         return "redirect:/yourbusun";

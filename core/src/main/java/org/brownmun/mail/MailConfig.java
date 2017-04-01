@@ -1,7 +1,7 @@
 package org.brownmun.mail;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.brownmun.mail.mailgun.MailgunMailService;
+import org.brownmun.mail.mailgun.MailgunMailSender;
 import org.brownmun.mail.mailgun.MailgunProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
  * Spring configuration for sending emails
  */
 @Configuration
-@EnableConfigurationProperties(MailgunProperties.class)
+@EnableConfigurationProperties({ MailgunProperties.class, MailProperties.class })
 public class MailConfig
 {
     @Bean
@@ -27,15 +27,14 @@ public class MailConfig
     }
 
     @Bean
-    public MailService mailgun(RestTemplate restTemplate, ObjectMapper mapper)
+    public MailSender mailgun(RestTemplate restTemplate, ObjectMapper mapper)
     {
-        return new MailgunMailService(restTemplate, mapper);
+        return new MailgunMailSender(restTemplate, mapper);
     }
 
     @Bean
-    public MessageLoader messageLoader(ResourceLoader loader)
+    public MessageLoader messageLoader(MailProperties props, ResourceLoader loader)
     {
-        // TODO: move into config property
-        return new MessageLoader(loader, "classpath:/emails/");
+        return new MessageLoader(loader, props.getTemplateLocation());
     }
 }

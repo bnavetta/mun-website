@@ -18,7 +18,8 @@
 
             <!--/*@thymesVar id="registration" type="org.brownmun.web.yourbusun.AdvisorRegistrationForm"*/-->
             <form th:action="@{/yourbusun/add-advisors/confirm}" th:object="${registration}" method="post">
-                <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+                <!--/*@thymesVar id="errorCode" type="java.lang.String"*/-->
+                <div class="alert alert-danger" th:if="${errorCode}" th:text="#{${errorCode}}"></div>
                 <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}">
                     Global Errors
                 </div>

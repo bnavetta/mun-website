@@ -41,6 +41,9 @@ mailgun:
   base-uri: https://api.mailgun.net/v3/mg.busun.org
   api-key: ${MAILGUN_API_KEY}
 
+mail:
+    templateLocation: "classpath:/emails/"
+
 logging:
   level:
     org.brownmun: trace
