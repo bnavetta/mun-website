@@ -5,6 +5,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">BUSUN</title>
+        <link rel="icon" th:href="@{/favicon.ico}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js" integrity="sha384-o9KO9jVK1Q4ybtHgJCCHfgQrTRNlkT6SL3j/qMuBMlDw3MmFrgrOHCOaIMJWGgK5" crossorigin="anonymous"></script>
         <wp:chunk name="common"/>
         <wp:chunk name="bootstrap"/>
@@ -12,15 +13,14 @@
         <meta name="csrf-token" th:content="${_csrf.token}">
     </head>
     <body>
-        <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse">
+        <nav class="navbar navbar-toggleable-sm navbar-inverse bg-primary">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="/" class="navbar-brand">
-                <img src="https://storage.googleapis.com/busun_assets/re-aligned-logo.png" alt="BUSUN Logo">
-            </a>
-
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" id="main-navbar">
+                <a href="/" class="navbar-brand">
+                    <img src="https://storage.googleapis.com/busun_assets/re-aligned-logo.png" alt="BUSUN Logo">
+                </a>
                 <ul class="navbar-nav nav-fill">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/" id="aboutMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,18 +70,18 @@
                         <a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>
                     </li>
                 </ul>
-            </div>
-            <form th:action="@{/logout}" method="post" th:if="${#httpServletRequest.remoteUser}" class="form-inline">
-                <button type="submit" class="btn btn-primary">Log Out</button>
-            </form>
-            <div class="form-inline" th:unless="${#httpServletRequest.remoteUser}">
-                <a class="btn btn-primary" th:href="@{/login}">Sign In</a>
+                <form th:action="@{/logout}" method="post" th:if="${#httpServletRequest.remoteUser}" class="form-inline">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+                <div class="form-inline" th:unless="${#httpServletRequest.remoteUser}">
+                    <a class="btn btn-primary" th:href="@{/login}">Sign In</a>
+                </div>
             </div>
         </nav>
 
         <div id="main" class="container-fluid">
             <div class="row">
-                <div class="col-md-2 hidden-sm-down">
+                <div class="col-md-3 hidden-sm-down">
                     <!-- Sidebar -->
                     <ul class="list-group">
                         <!--*/<li class="list-group-item">
@@ -102,6 +102,9 @@
                             <dl>
                                 <dt>April 3, 2017</dt>
                                 <dd>BUSUN registration opens</dd>
+
+                                <dt>November 10-12</dt>
+                                <dd>BUSUN XXI</dd>
                             </dl>
                         </li>
                         <li class="list-group-item sidebar-item">
@@ -128,7 +131,7 @@
                     </ul>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <div class="row">
                         <div class="col d-flex justify-content-center">
                             <header layout:fragment="header">
@@ -149,8 +152,7 @@
 
             <div class="row">
                 <footer class="col-md-12">
-                    <p class="mx-auto text-center text-muted small">Copyright 2017 | Brown University Model United Nations</p>
-                    <p class="mx-auto text-center text-muted small">Honorable Web Stewardship and Development by Ben Navetta</p>
+                    <p class="mx-auto text-center text-muted small">Copyright 2017 | Brown University Model United Nations &bullet; Honorable Web Stewardship and Development by Ben Navetta</p>
                 </footer>
             </div>
         </div>
