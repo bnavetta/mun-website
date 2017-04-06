@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
+import org.brownmun.model.Advisor;
 import org.brownmun.model.AdvisorCreationToken;
 import org.brownmun.model.PasswordResetToken;
 import org.brownmun.model.School;
@@ -80,5 +81,19 @@ public class MailService
         message.setHtml(messageLoader.getMessage("reset-password"));
         mailSender.send(message);
         log.debug("Sent password reset email to {}", token.getAdvisor().getEmail());
+    }
+
+    public void sendRegistrationConfirmation(School school, Advisor advisor)
+    {
+        EmailDescriptor message = new EmailDescriptor();
+        message.setSubject(messages.getMessage("email.registrationConfirmation.subject", null, Locale.getDefault()));
+        Map<String, String> variables = Maps.newHashMap();
+        variables.put("name", advisor.getName());
+        variables.put("schoolName", school.getName());
+        variables.put("schoolAddress", school.getAddress().toString());
+        variables.put("registrationTime", school.getRegistrationTime().toString());
+        variables.put("delegateCount", school.getRequestedDelegates().toString());
+        variables.put("chaperoneCount", school.getRequestedChaperones().toString());
+        message.setRecipients(ImmutableMap.of(advisor.getEmail(), variables));
     }
 }
