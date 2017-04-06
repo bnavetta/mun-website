@@ -21,7 +21,7 @@
                 <a href="/" class="navbar-brand">
                     <img src="https://storage.googleapis.com/busun_assets/re-aligned-logo.png" alt="BUSUN Logo">
                 </a>
-                <ul class="navbar-nav nav-fill">
+                <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/" id="aboutMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             About Us
@@ -33,7 +33,7 @@
                             <!--/*<a th:href="@{/about/sustainability}" class="dropdown-item">Sustainability</a>*/-->
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown my-auto">
                         <a class="nav-link dropdown-toggle" href="/" id="registrationMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Registration</a>
                         <div class="dropdown-menu" aria-labelledby="registrationMenuLink">
                             <!--/*<a class="dropdown-item" th:href="@{/register}">Register</a>*/-->
@@ -44,7 +44,7 @@
                             <a class="dropdown-item" th:href="@{/registration/fees-and-deadlines}">Fees &amp; Deadlines</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown my-auto">
                         <a class="nav-link dropdown-toggle" href="/" id="conferenceMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Conference</a>
                         <div class="dropdown-menu" aria-labelledby="conferenceMenuLink">
                             <a th:href="@{/conference/committees}" class="dropdown-item">Committees</a>
@@ -53,7 +53,7 @@
                             <a th:href="@{/conference/keynote-speaker}" class="dropdown-item">Keynote Speaker</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown my-auto">
                         <a class="nav-link dropdown-toggle" href="/" id="logisticsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logistics</a>
                         <div class="dropdown-menu" aria-labelledby="logisticsMenuLink">
                             <a th:href="@{/logistics/directions}" class="dropdown-item">Directions</a>
@@ -66,16 +66,16 @@
                         <a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>
                     </li>
 					*/-->
-                    <li class="nav-item">
+                    <li class="nav-item my-auto">
                         <a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>
+                    </li>
+                    <li class="nav-item my-auto" th:unless="${#httpServletRequest.remoteUser}">
+                        <a class="nav-link" th:href="@{/login}">Sign In</a>
                     </li>
                 </ul>
                 <form th:action="@{/logout}" method="post" th:if="${#httpServletRequest.remoteUser}" class="form-inline">
                     <button type="submit" class="btn btn-primary">Log Out</button>
                 </form>
-                <div class="form-inline" th:unless="${#httpServletRequest.remoteUser}">
-                    <a class="btn btn-primary" th:href="@{/login}">Sign In</a>
-                </div>
             </div>
         </nav>
 
