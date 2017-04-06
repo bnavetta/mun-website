@@ -11,57 +11,75 @@
             <h1>Committees</h1>
         </header>
         <div th:fragment="committeeEntry (committee)" th:remove="tag">
+            <!--/*@thymesVar id="committee" type="org.brownmun.model.Committee"*/-->
             <h3 th:text="${committee.name}">My Committee</h3>
             <p class="my-2" th:text="${committee.description}">About the committee.</p>
 
-            <p>Topics:</p>
-            <ul>
-                <li th:text="${committee.topic1}" th:unless="${#strings.isEmpty(committee.topic1)}">Topic 1</li>
-                <li th:text="${committee.topic2}" th:unless="${#strings.isEmpty(committee.topic2)}">Topic 2</li>
-                <li th:text="${committee.topic3}" th:unless="${#strings.isEmpty(committee.topic3)}">Topic 3</li>
-                <li th:text="${committee.topic4}" th:unless="${#strings.isEmpty(committee.topic4)}">Topic 4</li>
-            </ul>
+            <th:block th:if="${committee.hasTopics()}">
+                <p>Topics:</p>
+                <ul>
+                    <li th:text="${committee.topic1}" th:unless="${#strings.isEmpty(committee.topic1)}">Topic 1</li>
+                    <li th:text="${committee.topic2}" th:unless="${#strings.isEmpty(committee.topic2)}">Topic 2</li>
+                    <li th:text="${committee.topic3}" th:unless="${#strings.isEmpty(committee.topic3)}">Topic 3</li>
+                    <li th:text="${committee.topic4}" th:unless="${#strings.isEmpty(committee.topic4)}">Topic 4</li>
+                </ul>
+            </th:block>
 
             <p class="my-2">
                 Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a>
             </p>
         </div>
         <div layout:fragment="body">
-            <h2 class="mt-2">General Assemblies</h2>
-            <ul class="list-group">
-                <!--/*@thymesVar id="generalCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
-                <li th:each="committee : ${generalCommittees}" class="list-group-item flex-column align-items-start">
-                    <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" role="tab" href="#general">General Assemblies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" role="tab" href="#spec">Specialized &amp; Historical Committees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" role="tab" href="#crisis">Crisis Committees</a>
                 </li>
             </ul>
 
-            <h2 class="mt-3">Specialized &amp; Historical Committees</h2>
-            <ul class="list-group">
-                <!--/*@thymesVar id="specializedCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
-                <li th:each="committee : ${specializedCommittees}" class="list-group-item flex-column align-items-start">
-                    <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
-                </li>
-            </ul>
-
-            <h2 class="mt-3">Crisis Committees</h2>
-            <ul class="list-group">
-                <!--/*@thymesVar id="jointCrises" type="java.util.Collection<org.brownmun.model.JointCrisis>"*/-->
-                <li th:each="crisis : ${jointCrises}" class="list-group-item flex-column align-items-start">
-                    <h3 th:text="${crisis.name}">Crisis Name</h3>
-                    <p class="my-2" th:text="${crisis.description}">Crisis Description</p>
-                    <h4>Committees:</h4>
-                    <dl>
-                        <th:block th:each="committee : ${crisis.committees}">
-                            <dt th:text="${committee.name}">Committee Name</dt>
-                            <dd>Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a></dd>
-                        </th:block>
-                    </dl>
-                </li>
-                <!--/*@thymesVar id="crisisCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
-                <li th:each="committee : ${crisisCommittees}" class="list-group-item flex-column align-items-start">
-                    <th:block th:replace="~{::committeeEntry(${committee})}"/>
-                </li>
-            </ul>
+            <div class="tab-content p-3">
+                <div class="tab-pane active" id="general" role="tabpanel">
+                    <ul class="list-group">
+                        <!--/*@thymesVar id="generalCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                        <li th:each="committee : ${generalCommittees}" class="list-group-item flex-column align-items-start">
+                            <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="spec" role="tabpanel">
+                    <ul class="list-group">
+                        <!--/*@thymesVar id="specializedCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                        <li th:each="committee : ${specializedCommittees}" class="list-group-item flex-column align-items-start">
+                            <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="crisis" role="tabpanel">
+                    <ul class="list-group">
+                        <!--/*@thymesVar id="jointCrises" type="java.util.Collection<org.brownmun.model.JointCrisis>"*/-->
+                        <li th:each="crisis : ${jointCrises}" class="list-group-item flex-column align-items-start">
+                            <h3 th:text="${crisis.name}">Crisis Name</h3>
+                            <p class="my-2" th:text="${crisis.description}">Crisis Description</p>
+                            <h4>Committees:</h4>
+                            <dl>
+                                <th:block th:each="committee : ${crisis.committees}">
+                                    <dt th:text="${committee.name}">Committee Name</dt>
+                                    <dd>Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a></dd>
+                                </th:block>
+                            </dl>
+                        </li>
+                        <!--/*@thymesVar id="crisisCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                        <li th:each="committee : ${crisisCommittees}" class="list-group-item flex-column align-items-start">
+                            <th:block th:replace="~{::committeeEntry(${committee})}"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </body>
 </html>

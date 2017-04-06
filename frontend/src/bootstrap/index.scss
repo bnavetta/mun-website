@@ -1,14 +1,6 @@
 @import 'custom';
 @import '~bootstrap/scss/bootstrap';
-
-@font-face {
-    font-family: 'Gotham Bold';
-    font-weight: bold;
-    src:
-        local('Gotham Bold'),
-        local('Gotham-Bold'),
-        url('./fonts/gotham-bold.otf');
-}
+@import 'type';
 
 .navbar-brand > img {
     height: 50px;
@@ -19,6 +11,11 @@
     height: 100px;
     background-image: url('https://storage.googleapis.com/busun_assets/busunxxi_halfglobe.png');
     background-size: cover;
+}
+
+.sidebar-item > h5 {
+    margin: 0 auto;
+    text-align: center;
 }
 
 #main {

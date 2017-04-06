@@ -5,6 +5,9 @@ spring:
       url: ${DB_JDBC_URL}
       username: ${DB_USER}
       password: ${DB_PASSWORD}
+    mvc:
+      favicon:
+        enabled: true
 
 
 server:
