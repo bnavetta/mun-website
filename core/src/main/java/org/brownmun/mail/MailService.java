@@ -83,7 +83,7 @@ public class MailService
         log.debug("Sent password reset email to {}", token.getAdvisor().getEmail());
     }
 
-    public void sendRegistrationConfirmation(School school, Advisor advisor)
+    public void sendRegistrationConfirmation(School school, Advisor advisor) throws MailException
     {
         EmailDescriptor message = new EmailDescriptor();
         message.setSubject(messages.getMessage("email.registrationConfirmation.subject", null, Locale.getDefault()));
@@ -95,5 +95,11 @@ public class MailService
         variables.put("delegateCount", school.getRequestedDelegates().toString());
         variables.put("chaperoneCount", school.getRequestedChaperones().toString());
         message.setRecipients(ImmutableMap.of(advisor.getEmail(), variables));
+        message.setFrom(props.getFromAddress());
+        message.setReplyTo(Optional.of(props.getReplyAddress()));
+        message.setTags(Sets.newHashSet("registration", "advisor"));
+        message.setHtml(messageLoader.getMessage("registration-confirmation"));
+        mailSender.send(message);
+        log.debug("Sent registration confirmation to {}", advisor.getEmail());
     }
 }

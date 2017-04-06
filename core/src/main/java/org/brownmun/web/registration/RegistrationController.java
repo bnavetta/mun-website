@@ -4,6 +4,9 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.brownmun.mail.MailException;
+import org.brownmun.mail.MailService;
 import org.brownmun.model.Advisor;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
@@ -22,9 +25,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Locale;
-import java.util.Optional;
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequestMapping("/register")
 public class RegistrationController
@@ -35,14 +38,16 @@ public class RegistrationController
     private final HotelRepository hotelRepo;
     private final SchoolRepository schoolRepo;
     private final AdvisorService advisorService;
+    private final MailService mailService;
 
     @Autowired
-    public RegistrationController(MessageSource messageSource, HotelRepository hotelRepo, SchoolRepository schoolRepo, AdvisorService advisorService)
+    public RegistrationController(MessageSource messageSource, HotelRepository hotelRepo, SchoolRepository schoolRepo, AdvisorService advisorService, MailService mailService)
     {
         this.messageSource = messageSource;
         this.hotelRepo = hotelRepo;
         this.schoolRepo = schoolRepo;
         this.advisorService = advisorService;
+        this.mailService = mailService;
     }
 
     @GetMapping
@@ -106,6 +111,18 @@ public class RegistrationController
         advisor.setPrimary(true);
         advisor.setSchool(saved);
         advisorService.saveAndLogin(advisor, form.getAdvisorPassword());
+
+        try
+        {
+            mailService.sendRegistrationConfirmation(school, advisor);
+        }
+        catch (MailException e)
+        {
+            log.error("Error sending registration confirmation", e);
+            Multimap<String, String> errors = ArrayListMultimap.create();
+            errors.put("advisorEmail", "Error sending confirmation email");
+            return ResponseEntity.ok(new RegistrationResult(false, errors, null));
+        }
 
         return ResponseEntity.ok(new RegistrationResult(true, ArrayListMultimap.create(), saved.getId()));
     }
