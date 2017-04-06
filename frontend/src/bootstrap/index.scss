@@ -1,6 +1,7 @@
 @import 'custom';
 @import '~bootstrap/scss/bootstrap';
 @import 'type';
+@import 'social';
 
 .navbar-brand > img {
     height: 50px;
@@ -13,11 +14,27 @@
     background-size: cover;
 }
 
+.sidebar-item {
+    flex-direction: column;
+}
+
 .sidebar-item > h5 {
-    margin: 0 auto;
+    margin: 10px auto;
     text-align: center;
 }
 
 #main {
     padding-top: 50px;
+}
+
+#content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    //padding: 20px;
+    //margin: 10px;
+    background-color: $content-bg;
+}
+
+#footer {
+    margin-top: 15px;
 }
