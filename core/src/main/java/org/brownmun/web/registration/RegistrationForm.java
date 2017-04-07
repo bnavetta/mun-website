@@ -1,7 +1,7 @@
 package org.brownmun.web.registration;
 
 import lombok.Data;
-import org.brownmun.model.Address;
+import org.brownmun.model.delegation.Address;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 

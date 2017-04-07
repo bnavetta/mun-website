@@ -2,7 +2,7 @@ package org.brownmun.web.admin;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.brownmun.model.Delegate;
-import org.brownmun.model.Position;
+import org.brownmun.model.committee.Position;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
 import org.brownmun.model.repo.DelegateRepository;

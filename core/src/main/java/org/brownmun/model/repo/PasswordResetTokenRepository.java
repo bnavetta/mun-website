@@ -1,7 +1,7 @@
 package org.brownmun.model.repo;
 
-import org.brownmun.model.Advisor;
-import org.brownmun.model.PasswordResetToken;
+import org.brownmun.model.advisor.Advisor;
+import org.brownmun.model.advisor.PasswordResetToken;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;

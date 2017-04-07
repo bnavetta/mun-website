@@ -2,13 +2,11 @@ package org.brownmun.web.yourbusun;
 
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.ConferenceProperties;
-import org.brownmun.model.Advisor;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.LineItem;
 import org.brownmun.model.School;
 import org.brownmun.model.repo.LineItemRepository;
-import org.brownmun.model.repo.SchoolRepository;
 import org.brownmun.web.security.AdvisorService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

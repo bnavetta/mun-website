@@ -1,4 +1,4 @@
-package org.brownmun.model;
+package org.brownmun.model.committee;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ComparisonChain;
@@ -32,7 +32,7 @@ public class Position implements Comparable<Position>
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "delegate_id")
-	private Delegate delegate;
+	private org.brownmun.model.Delegate delegate;
 
 	@Setter(AccessLevel.NONE)
 	@Formula("(delegate_id is not null)")

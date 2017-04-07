@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import org.brownmun.model.committee.Position;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

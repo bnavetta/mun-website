@@ -1,6 +1,6 @@
 package org.brownmun.web.general;
 
-import org.brownmun.model.CommitteeType;
+import org.brownmun.model.committee.CommitteeType;
 import org.brownmun.model.repo.CommitteeRepository;
 import org.brownmun.model.repo.JointCrisisRepository;
 import org.springframework.beans.factory.annotation.Autowired;

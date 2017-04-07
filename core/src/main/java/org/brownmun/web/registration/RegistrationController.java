@@ -7,10 +7,9 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.MailException;
 import org.brownmun.mail.MailService;
-import org.brownmun.model.Advisor;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
-import org.brownmun.model.SchoolLogistics;
 import org.brownmun.model.repo.HotelRepository;
 import org.brownmun.model.repo.SchoolRepository;
 import org.brownmun.web.security.AdvisorService;
@@ -75,24 +74,24 @@ public class RegistrationController
         School school = new School();
         school.setName(form.getSchoolName());
         school.setStatus(RegistrationStatus.REGISTERED);
-        school.setAddress(form.getSchoolAddress());
-        school.setPhoneNumber(form.getSchoolPhoneNumber());
-        school.setNumberOfYearsAttended(form.getNumberOfYearsAttended());
-        school.setYearsAttended(form.getYearsAttended());
+//        school.setAddress(form.getSchoolAddress());
+//        school.setPhoneNumber(form.getSchoolPhoneNumber());
+//        school.setNumberOfYearsAttended(form.getNumberOfYearsAttended());
+//        school.setYearsAttended(form.getYearsAttended());
 
         // TODO: SAVE FINANCIAL AID INFO
 
-        SchoolLogistics logistics = new SchoolLogistics();
-        logistics.setUsingShuttle(form.isBusunShuttles());
-        if (form.isBusunHotel())
-        {
-            logistics.setHotel(hotelRepo.findOne(form.getHotelSelection()));
-        }
-        school.setLogistics(logistics);
-
-        school.setAboutText(form.getAboutSchool());
-        school.setRequestedDelegates(form.getEstimatedDelegates());
-        school.setRequestedChaperones(form.getEstimatedChaperones());
+//        SchoolLogistics logistics = new SchoolLogistics();
+//        logistics.setUsingShuttle(form.isBusunShuttles());
+//        if (form.isBusunHotel())
+//        {
+//            logistics.setHotel(hotelRepo.findOne(form.getHotelSelection()));
+//        }
+//        school.setLogistics(logistics);
+//
+//        school.setAboutText(form.getAboutSchool());
+//        school.setRequestedDelegates(form.getEstimatedDelegates());
+//        school.setRequestedChaperones(form.getEstimatedChaperones());
         school.setRegistrationTime(Instant.now());
 
         School saved = schoolRepo.save(school);

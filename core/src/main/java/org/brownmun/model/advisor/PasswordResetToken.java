@@ -1,4 +1,4 @@
-package org.brownmun.model;
+package org.brownmun.model.advisor;
 
 import lombok.Data;
 

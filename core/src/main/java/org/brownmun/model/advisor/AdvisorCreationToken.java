@@ -1,6 +1,7 @@
-package org.brownmun.model;
+package org.brownmun.model.advisor;
 
 import lombok.Data;
+import org.brownmun.model.School;
 
 import javax.persistence.*;
 

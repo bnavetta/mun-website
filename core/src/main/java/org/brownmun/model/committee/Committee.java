@@ -1,4 +1,4 @@
-package org.brownmun.model;
+package org.brownmun.model.committee;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ComparisonChain;

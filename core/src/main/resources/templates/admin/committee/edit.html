@@ -5,7 +5,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{base}">
 	<!--/*@thymesVar id="creating" type="java.lang.Boolean"*/-->
-	<!--/*@thymesVar id="committee" type="org.brownmun.model.Committee"*/-->
+    <!--/*@thymesVar id="committee" type="org.brownmun.model.committee.Committee"*/-->
 	<head>
 		<title th:unless="${creating}">Edit [[${committee.name}]]</title>
 		<title th:if="${creating}">New Committee</title>

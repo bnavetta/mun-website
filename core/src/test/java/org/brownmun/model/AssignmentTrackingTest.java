@@ -1,6 +1,10 @@
 package org.brownmun.model;
 
 import org.brownmun.BaseSpringTest;
+import org.brownmun.model.committee.Committee;
+import org.brownmun.model.committee.CommitteeType;
+import org.brownmun.model.committee.Position;
+import org.brownmun.model.delegation.Address;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -40,11 +44,11 @@ public class AssignmentTrackingTest
 		school = new School();
 		school.setName("Test School");
 		school.setStatus(RegistrationStatus.REGISTERED);
-		school.setPhoneNumber("123-456-7890");
+//		school.setPhoneNumber("123-456-7890");
 		school.setRegistrationTime(Instant.now().minusSeconds(10000));
-		school.setAddress(address);
-		school.setRequestedDelegates(20);
-		school.setRequestedChaperones(2);
+//		school.setAddress(address);
+//		school.setRequestedDelegates(20);
+//		school.setRequestedChaperones(2);
 		entityManager.persistAndFlush(school);
 
 		committee = new Committee();

@@ -1,11 +1,11 @@
 package org.brownmun.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Setter;
-import org.hibernate.annotations.Formula;
+import org.brownmun.model.advisor.Advisor;
+import org.brownmun.model.committee.Position;
+import org.brownmun.model.delegation.SchoolInfo;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.Instant;
@@ -39,31 +39,10 @@ public class School
 	@Enumerated(EnumType.STRING)
 	private RegistrationStatus status;
 
-	@JsonView(View.Summary.class)
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	@Valid
-	@Embedded
-	private Address address;
-
-	@JsonView(View.Summary.class)
-	@NotBlank
-	private String phoneNumber;
-
-	@JsonView(View.Summary.class)
-	private Integer numberOfYearsAttended;
-
-	@JsonView(View.Summary.class)
-	private String yearsAttended;
-
-	@Valid
-	@Embedded
-	private SchoolLogistics logistics;
-
-	private String aboutText;
-
-	@JsonView(View.Summary.class)
-	private Integer requestedDelegates;
-
-	private Integer requestedChaperones;
+	private SchoolInfo info;
 
 	@JsonView(View.Summary.class)
 	@NotNull

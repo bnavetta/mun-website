@@ -1,4 +1,4 @@
-package org.brownmun.model;
+package org.brownmun.model.committee;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;

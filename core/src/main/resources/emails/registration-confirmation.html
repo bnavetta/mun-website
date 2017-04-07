@@ -4,25 +4,16 @@
         <div id="body">
             <p>Hello %recipient.name%,</p>
             <p>
-                This is confirmation that you've registered for BUSUN XXI. We've included some
-                details about your registration below.
+                This is confirmation that you registered %recipient.schoolName% for BUSUN XXI.
+                at %recipient.registrationTime%.
             </p>
             <div>
                 <dl class="row">
                     <dt class="col-sm-3">School Name</dt>
                     <dd class="col-sm-9">%recipient.schoolName%</dd>
 
-                    <dt class="col-sm-3">School Address</dt>
-                    <dd class="col-sm-9">$recipient.schoolAddress%</dd>
-
                     <dt class="col-sm-3">Registration Time</dt>
                     <dd class="col-sm-9">%recipient.registrationTime%</dd>
-
-                    <dt class="col-sm-3">Requested Delegate Count</dt>
-                    <dd class="col-sm-9">%recipient.delegateCount%</dd>
-
-                    <dt class="col-sm-3">Requested Chaperone Count</dt>
-                    <dd class="col-sm-9">%recipient.chaperoneCount%</dd>
                 </dl>
             </div>
             <p>

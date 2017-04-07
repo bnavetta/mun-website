@@ -1,6 +1,6 @@
 package org.brownmun.web.security;
 
-import org.brownmun.model.Advisor;
+import org.brownmun.model.advisor.Advisor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

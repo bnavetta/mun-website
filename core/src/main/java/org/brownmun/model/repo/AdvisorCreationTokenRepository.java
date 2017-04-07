@@ -1,6 +1,6 @@
 package org.brownmun.model.repo;
 
-import org.brownmun.model.AdvisorCreationToken;
+import org.brownmun.model.advisor.AdvisorCreationToken;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

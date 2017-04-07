@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/yourbusun/**").hasRole("ADVISOR")
                 .antMatchers("/advisor/**").hasRole("ADVISOR")
                 .antMatchers("/admin/**").hasRole("STAFF")
-                .antMatchers("/register").authenticated()
+                .antMatchers("/register").hasRole("STAFF") // probably going away
                 .and()
             .exceptionHandling()
                 .accessDeniedHandler(new StaffAwareAccessDeniedHandler())

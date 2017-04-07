@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.brownmun.advisor.AdvisorCreationException;
 import org.brownmun.advisor.AdvisorCreationService;
 import org.brownmun.mail.MailException;
-import org.brownmun.model.Advisor;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.School;
 import org.brownmun.advisor.AdvisorCreationRequest;
 import org.brownmun.web.security.AdvisorService;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import javax.validation.Valid;
 
 /**

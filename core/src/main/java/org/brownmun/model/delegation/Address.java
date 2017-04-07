@@ -1,7 +1,8 @@
-package org.brownmun.model;
+package org.brownmun.model.delegation;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import org.brownmun.model.School;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Embeddable;

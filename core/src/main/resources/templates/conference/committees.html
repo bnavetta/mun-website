@@ -11,7 +11,7 @@
             <h1>Committees</h1>
         </header>
         <div th:fragment="committeeEntry (committee)" th:remove="tag">
-            <!--/*@thymesVar id="committee" type="org.brownmun.model.Committee"*/-->
+            <!--/*@thymesVar id="committee" type="org.brownmun.model.committee.Committee"*/-->
             <h3 th:text="${committee.name}">My Committee</h3>
             <p class="my-2" th:text="${committee.description}">About the committee.</p>
 
@@ -45,7 +45,7 @@
             <div class="tab-content p-3">
                 <div class="tab-pane active" id="general" role="tabpanel">
                     <ul class="list-group">
-                        <!--/*@thymesVar id="generalCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                        <!--/*@thymesVar id="generalCommittees" type="java.util.Collection<org.brownmun.model.committee.Committee>"*/-->
                         <li th:each="committee : ${generalCommittees}" class="list-group-item flex-column align-items-start">
                             <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
                         </li>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="tab-pane" id="spec" role="tabpanel">
                     <ul class="list-group">
-                        <!--/*@thymesVar id="specializedCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                        <!--/*@thymesVar id="specializedCommittees" type="java.util.Collection<org.brownmun.model.committee.Committee>"*/-->
                         <li th:each="committee : ${specializedCommittees}" class="list-group-item flex-column align-items-start">
                             <th:block th:replace="~{::committeeEntry(${committee})}"></th:block>
                         </li>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="tab-pane" id="crisis" role="tabpanel">
                     <ul class="list-group">
-                        <!--/*@thymesVar id="jointCrises" type="java.util.Collection<org.brownmun.model.JointCrisis>"*/-->
+                        <!--/*@thymesVar id="jointCrises" type="java.util.Collection<org.brownmun.model.committee.JointCrisis>"*/-->
                         <li th:each="crisis : ${jointCrises}" class="list-group-item flex-column align-items-start">
                             <h3 th:text="${crisis.name}">Crisis Name</h3>
                             <p class="my-2" th:text="${crisis.description}">Crisis Description</p>
@@ -73,7 +73,7 @@
                                 </th:block>
                             </dl>
                         </li>
-                        <!--/*@thymesVar id="crisisCommittees" type="java.util.Collection<org.brownmun.model.Committee>"*/-->
+                        <!--/*@thymesVar id="crisisCommittees" type="java.util.Collection<org.brownmun.model.committee.Committee>"*/-->
                         <li th:each="committee : ${crisisCommittees}" class="list-group-item flex-column align-items-start">
                             <th:block th:replace="~{::committeeEntry(${committee})}"/>
                         </li>

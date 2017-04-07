@@ -1,6 +1,6 @@
 package org.brownmun.web.admin;
 
-import org.brownmun.model.Position;
+import org.brownmun.model.committee.Position;
 import org.brownmun.model.repo.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

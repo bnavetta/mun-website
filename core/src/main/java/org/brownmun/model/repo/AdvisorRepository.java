@@ -1,6 +1,6 @@
 package org.brownmun.model.repo;
 
-import org.brownmun.model.Advisor;
+import org.brownmun.model.advisor.Advisor;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 

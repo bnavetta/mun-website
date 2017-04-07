@@ -1,17 +1,8 @@
 package org.brownmun.web.security;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
-import org.brownmun.mail.EmailDescriptor;
-import org.brownmun.mail.MailException;
-import org.brownmun.mail.MailSender;
-import org.brownmun.mail.MessageLoader;
-import org.brownmun.model.Advisor;
-import org.brownmun.model.PasswordResetToken;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.repo.AdvisorRepository;
-import org.brownmun.model.repo.PasswordResetTokenRepository;
-import org.brownmun.util.Tokens;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,9 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Optional;
 import javax.transaction.Transactional;
 
 @Slf4j
