@@ -47,19 +47,19 @@
                     <!-- Basic info -->
                     <ul class="list-group p-3">
                         <li class="list-group-item">Registration Status: [[${school.status}]]</li>
-                        <li class="list-group-item">School Address: [[${school.info.address}]]</li>
-                        <li class="list-group-item">School Phone Number: [[${school.info.phoneNumber}]]</li>
+                        <li class="list-group-item">School Address: [[${school.info?.address?: '(not given)'}]]</li>
+                        <li class="list-group-item">School Phone Number: [[${school.info?.phoneNumber?: '(not given)'}]]</li>
                     </ul>
                 </div>
 
                 <div class="tab-pane" id="logistics" role="tabpanel">
                     <ul class="list-group p-3">
-                        <li class="list-group-item">Delegate Count: [[${school.info.requestedDelegates}]]</li>
-                        <li class="list-group-item">Chaperone Count: [[${school.info.requestedChaperones}]]</li>
-                        <li class="list-group-item" th:if="${school.info.usingBusunHotel}">
+                        <li class="list-group-item">Delegate Count: [[${school.info?.requestedDelegates?: '(not given)'}]]</li>
+                        <li class="list-group-item">Chaperone Count: [[${school.info?.requestedChaperones?: '(not given)'}]]</li>
+                        <li class="list-group-item" th:if="${school.info?.usingBusunHotel?: false}">
                             BUSUN Hotel: [[${school.info.hotel.name}]]
                         </li>
-                        <li class="list-group-item" th:if="${school.info.usingShuttle}">
+                        <li class="list-group-item" th:if="${school.info?.usingShuttle?: false}">
                             Using BUSUN shuttle
                         </li>
                     </ul>

@@ -13,7 +13,7 @@ reasonably commit to at this time. We will notify you of the number of delegates
 after all supplementary forms have been received.
 
 This form can be found if you log into to your newly-created BUSUN advisor account at busun.org. Your username is
-%recipient.advisor_email% and your temporary password is %recipient.password%. Feel free to change your password to
+%recipient.advisor_email% and your temporary password is "%recipient.password%". Feel free to change your password to
 anything your choice after you log in for the first time. This advisor account will be used throughout the BUSUN
 registration process as well as during the conference weekend, so please remember the password that you choose.
 
