@@ -15,7 +15,7 @@
             <h1>Editing School Info</h1>
         </header>
         <div layout:fragment="body">
-            <form th:action="@{/yourbusun/edit-info}" method="post" th:object="${schoolInfo}">
+            <form th:action="@{/yourbusun/info}" method="post" th:object="${schoolInfo}">
                 <h3>School Information</h3>
                 <div class="form-group" th:classappend="${#fields.hasErrors('phoneNumber')}? 'has-danger'">
                     <label for="phoneNumber">Phone Number</label>
@@ -51,6 +51,35 @@
                     <label for="address.country">Country</label>
                     <input id="address.country" type="text" class="form-control" th:field="*{address.country}">
                     <p class="form-control-feedback" th:if="${#fields.hasErrors('address.country')}" th:text="${#fields.errors('address.country')}"></p>
+                </div>
+
+                <h3>Financial Aid</h3>
+
+                <div class="form-check" th:classappend="${#fields.hasErrors('applyingForAid')}? 'has-danger'">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" th:field="*{applyingForAid}">
+                        We are applying for financial aid
+                    </label>
+                </div>
+
+                <div class="form-group" th:classappend="${#fields.hasErrors('aidAmount')} ? 'has-danger'">
+                    <label for="aidAmount">Requested Financial Aid Amount</label>
+                    <input id="aidAmount" type="number" step="0.01" min="0" class="form-control" th:field="*{aidAmount}">
+                    <p class="form-control-feedback" th:if="${#fields.hasErrors('aidAmount')}" th:text="${#fields.errors('aidAmount')}"></p>
+                    <p class="form-text text-muted">
+                        We will try to provide the requested amount, but cannot guarantee providing it in full.
+                    </p>
+                </div>
+
+                <div class="form-group" th:classappend="${#fields.hasErrors('aidDocumentation')}? 'has-danger'">
+                    <label for="aidDocumentation">Financial Need Documentation</label>
+                    <textarea id="aidDocumentation" class="form-control" rows="5" th:field="*{aidDocumentation}"></textarea>
+                    <p class="form-control-feedback" th:if="${#fields.hasErrors('aidDocumentation')}" th:text="${#fields.errors('aidDocumentation')}"></p>
+                    <p class="form-text text-muted">
+                        Please document your delegation's need for financial aid. Include the percentage of students
+                        in a subsidized lunch program (for U.S. public schools) and any expenses that pose a burden to
+                        attending BUSUN.
+                    </p>
                 </div>
 
                 <h3>Hotels</h3>
@@ -140,7 +169,7 @@
 
                 <div class="form-group" th:classappend="${#fields.hasErrors('arrivalTime')}? 'has-danger'">
                     <label for="arrivalTime">Arrival Time</label>
-                    <input id="arrivalTime" type="time" class="form-control" th:field="*{arrivalTime}">
+                    <input id="arrivalTime" type="text" class="form-control" th:field="*{arrivalTime}">
                     <p class="form-control-feedback" th:if="${#fields.hasErrors('arrivalTime')}" th:text="${#fields.errors('arrivalTime')}"></p>
                 </div>
 

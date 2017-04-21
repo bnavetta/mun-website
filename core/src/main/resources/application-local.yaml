@@ -9,5 +9,5 @@ flyway:
 mail:
     linkBase: http://localhost:8080
 
-#conference:
-#  decisions-public: true
+conference:
+  decisions-public: true

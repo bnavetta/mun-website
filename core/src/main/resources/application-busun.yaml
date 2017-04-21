@@ -181,3 +181,6 @@ mail:
     linkBase: https://busun.org
     fromAddress: admin@busun.org
     replyAddress: technology@busun.org
+
+conference:
+  decisions-public: true

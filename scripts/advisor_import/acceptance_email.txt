@@ -1,0 +1,28 @@
+Dear Sir or Madam,
+
+On behalf of the entire BUSUN XXI Secretariat, I am delighted to inform you that we have accepted your delegation to our
+Twenty-First Annual Session of the Brown University Simulation of the United Nations! Thank you for your interest in our
+conference - we appreciate the effort you put into completing your application.
+
+At this time, we ask that you complete our supplementary form of logistics information
+(https://busun.org/yourbusun/info) by Friday May 19, 2017. We understand that not all of your responses may be entirely
+accurate this far in advance of the conference but we ask that you complete all questions to the best of your ability.
+Note that the most important piece of this form is delegation size, as the Secretariat needs a count of delegates
+attending during the process of creating committees. Please list your goal for the amount of delegates your school can
+reasonably commit to at this time. We will notify you of the number of delegates your school will be allowed shortly
+after all supplementary forms have been received.
+
+This form can be found if you log into to your newly-created BUSUN advisor account at busun.org. Your username is
+%recipient.advisor_email% and your temporary password is %recipient.password%. Feel free to change your password to
+anything your choice after you log in for the first time. This advisor account will be used throughout the BUSUN
+registration process as well as during the conference weekend, so please remember the password that you choose.
+
+Please do not hesitate to contact us with any questions or concerns about your acceptance or the supplementary form at
+info@busun.org. Congratulations again on your acceptance - we look forward to welcoming you and your students to Brown
+University in November!
+
+Best regards,
+
+Jourdan Smithwick
+Director of External Affairs
+BUSUN XXI

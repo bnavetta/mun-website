@@ -10,6 +10,8 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -32,6 +34,15 @@ public class SchoolInfo
     @JsonView(School.View.Summary.class)
     @NotBlank
     private String phoneNumber;
+
+    /*
+     * Financial Aid Info
+     */
+    private boolean applyingForAid;
+
+    private Double aidAmount;
+
+    private String aidDocumentation;
 
     /*
      * Hotel Info
@@ -74,7 +85,8 @@ public class SchoolInfo
     /*
      * Misc. logistics
      */
-    private LocalTime arrivalTime;
+
+    private String arrivalTime; // parsing is hard :(
 
     @Enumerated(EnumType.STRING)
     private LuggageStorage luggageStorage;
