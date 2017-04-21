@@ -40,6 +40,7 @@ public class EditInfoController
     @ModelAttribute
     public Iterable<Hotel> hotels()
     {
+        System.out.println("Hotels: " + hotelRepo.findAll());
         return hotelRepo.findAll();
     }
 
@@ -50,7 +51,9 @@ public class EditInfoController
         School school = advisor.getSchool();
         if (school.getInfo() == null)
         {
-            return new SchoolInfo();
+            SchoolInfo info = new SchoolInfo();
+            school.setInfo(info);
+            schoolRepo.save(school);
         }
 
         return school.getInfo();
