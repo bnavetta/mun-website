@@ -27,12 +27,11 @@ public class SchoolInfo
     private Long id;
 
     @JsonView(School.View.Summary.class)
-    @Valid
+//    @Valid
     @Embedded
     private Address address;
 
     @JsonView(School.View.Summary.class)
-    @NotBlank
     private String phoneNumber;
 
     /*
@@ -100,10 +99,10 @@ public class SchoolInfo
 
     @Min(1)
     @JsonView(School.View.Summary.class)
-    private Integer requestedDelegates;
+    private Integer requestedDelegates = 1;
 
     @Min(1)
-    private Integer requestedChaperones;
+    private Integer requestedChaperones = 1;
 
     @Min(0)
     private Integer parliTrainingCount;

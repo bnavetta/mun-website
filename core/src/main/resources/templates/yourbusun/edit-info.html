@@ -93,7 +93,7 @@
                             th:each="hotel : ${hotels}"
                             th:value="${hotel.id}"
                             th:text="${hotel.name}"
-                            th:selected="${hotel.id == schoolInfo.hotel.id}"
+                            th:selected="${schoolInfo.hotel != null && hotel.id == schoolInfo.hotel.id}"
                         ></option>
                     </select>
                     <p class="form-control-feedback" th:if="${#fields.hasErrors('hotel')}" th:text="${#fields.errors('hotel')}"></p>

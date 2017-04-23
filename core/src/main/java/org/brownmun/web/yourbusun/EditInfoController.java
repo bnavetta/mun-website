@@ -1,5 +1,6 @@
 package org.brownmun.web.yourbusun;
 
+import com.google.common.collect.Lists;
 import org.brownmun.model.Hotel;
 import org.brownmun.model.School;
 import org.brownmun.model.advisor.Advisor;
@@ -10,12 +11,14 @@ import org.brownmun.web.security.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import javax.validation.Valid;
 
 /**
@@ -37,11 +40,10 @@ public class EditInfoController
         this.hotelRepo = hotelRepo;
     }
 
-    @ModelAttribute
-    public Iterable<Hotel> hotels()
+    @ModelAttribute("hotels")
+    public List<Hotel> hotels()
     {
-        System.out.println("Hotels: " + hotelRepo.findAll());
-        return hotelRepo.findAll();
+        return Lists.newArrayList(hotelRepo.findAll());
     }
 
     @ModelAttribute
@@ -52,6 +54,7 @@ public class EditInfoController
         if (school.getInfo() == null)
         {
             SchoolInfo info = new SchoolInfo();
+            info.setId(school.getId());
             school.setInfo(info);
             schoolRepo.save(school);
         }
