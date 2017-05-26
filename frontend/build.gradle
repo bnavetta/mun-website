@@ -13,23 +13,23 @@ task assemble(type: Exec) {
 
 	dependsOn yarnInstall
 }
-
-task test(type: Exec) {
-	inputs.dir 'src'
-	inputs.dir 'flow'
-
-	commandLine 'yarn', 'run', 'test'
-
-	dependsOn yarnInstall
-}
-
-task check {
-	dependsOn test
-}
+//
+//task test(type: Exec) {
+//	inputs.dir 'src'
+//	inputs.dir 'flow'
+//
+//	commandLine 'yarn', 'test'
+//
+//	dependsOn yarnInstall
+//}
+//
+//task check {
+//	dependsOn test
+//}
 
 task build {
 	dependsOn assemble
-	dependsOn check
+//	dependsOn check
 }
 
 task clean(type: Delete) {

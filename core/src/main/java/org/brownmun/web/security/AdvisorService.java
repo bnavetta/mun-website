@@ -64,7 +64,7 @@ public class AdvisorService implements UserDetailsService
     public Advisor load(Advisor a)
     {
         Advisor advisor = repo.findOne(a.getId());
-        Assert.notEmpty(advisor.getSchool().getAdvisors());
+        Assert.notEmpty(advisor.getSchool().getAdvisors(), "School has no advisors");
 //        Hibernate.initialize(s.getAdvisors());
         return advisor;
     }
