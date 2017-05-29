@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
         http
             .headers()
-                .referrerPolicy(ReferrerPolicy.NO_REFERRER_WHEN_DOWNGRADE).and()
+                .referrerPolicy(ReferrerPolicy.NO_REFERRER).and()
                 .and()
             .authorizeRequests()
                 .antMatchers("/yourbusun/add-advisors/confirm").permitAll()

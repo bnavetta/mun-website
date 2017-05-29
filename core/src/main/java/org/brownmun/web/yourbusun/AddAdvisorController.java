@@ -4,11 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.advisor.AdvisorCreationException;
+import org.brownmun.advisor.AdvisorCreationRequest;
 import org.brownmun.advisor.AdvisorCreationService;
 import org.brownmun.mail.MailException;
-import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.School;
-import org.brownmun.advisor.AdvisorCreationRequest;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.web.security.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -20,10 +20,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.validation.Valid;
 
 /**
  * Handle creating non-primary school advisors
@@ -48,7 +48,8 @@ public class AddAdvisorController
     @GetMapping
     public String addAdvisors(@AuthenticationPrincipal Advisor advisor, Model model)
     {
-        model.addAttribute("school", advisorService.load(advisor).getSchool());
+        School school = advisorService.load(advisor).getSchool();
+        model.addAttribute("school", school);
         return "yourbusun/add-advisors";
     }
 
