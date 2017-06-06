@@ -10,28 +10,28 @@
     "test": "lycaon-build test"
   },
   "devDependencies": {
-    "babel-plugin-ramda": "^1.1.9",
-    "juice": "^4.0.2",
+    "babel-plugin-ramda": "^1.2.0",
+    "juice": "^4.1.0",
     "lycaon-build": "^0.3.7",
-    "node-sass": "^4.1.1",
-    "resolve-url-loader": "^1.6.1",
-    "sass-loader": "^5.0.1"
+    "node-sass": "^4.5.3",
+    "resolve-url-loader": "^2.0.2",
+    "sass-loader": "^6.0.5"
   },
   "dependencies": {
-    "babel-core": "^6.18.2",
-    "babel-polyfill": "^6.20.0",
+    "babel-core": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
     "bootstrap": "4.0.0-alpha.6",
     "classnames": "^2.2.5",
     "formsy-react": "^0.19.0",
     "material-colors": "^1.2.0",
-    "ramda": "^0.23.0",
-    "rc-slider": "^6.1.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "superagent": "^3.0.0",
+    "ramda": "^0.24.1",
+    "rc-slider": "^8.0.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "superagent": "^3.5.2",
     "superagent-use": "^0.1.0",
     "tether": "^1.4.0",
-    "webfontloader": "^1.6.27"
+    "webfontloader": "^1.6.28"
   }
 }
