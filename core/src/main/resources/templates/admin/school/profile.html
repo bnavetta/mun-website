@@ -104,12 +104,12 @@
 
         <th:block th:if="${school.info.carCount > 0}">
             <dt class="col-sm-3">Car Passes</dt>
-            <dd class="col-sm-9">[[${school.info.carCount}]] cars for [[${school.info.carDays}]] day(s)</dd>
+            <dd class="col-sm-9" th:text="#{transport.cars(${school.info.carCount}, ${school.info.carDays})}"></dd>
         </th:block>
 
         <th:block th:if="${school.info.busCount > 0}">
             <dt class="col-sm-3">Bus Passes</dt>
-            <dd class="col-sm-9">[[${school.info.busCount}]] buses for [[${school.info.busDays}]] day(s)</dd>
+            <dd class="col-sm-9" th:text="#{transport.buses(${school.info.busCount}, ${school.info.busDays})}"></dd>
         </th:block>
 
         <dt class="col-sm-3">Arrival Time</dt>
