@@ -1,72 +1,170 @@
 <!DOCTYPE html>
 <html
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:wp="http://brownmun"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{base}">
-	<!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
-	<head>
-		<title th:text="${school.name}">School</title>
-		<wp:chunk name="admin"/>
-	</head>
-	<body>
-		<header layout:fragment="header">
-			<h1>[[${school.name}]]</h1>
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#" th:href="@{/admin}">Admin</a></li>
-				<li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('SC#list').build()}">Schools</a></li>
-				<li class="breadcrumb-item active">[[${school.name}]]</li>
-			</ol>
-		</header>
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+<!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
+<head>
+    <title th:text="${school.name}">School</title>
+    <wp:chunk name="admin"/>
+</head>
+<body>
+<header layout:fragment="header">
+    <h1>[[${school.name}]]</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" th:href="@{/admin}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="#" th:href="${#mvc.url('SC#list').build()}">Schools</a></li>
+        <li class="breadcrumb-item active">[[${school.name}]]</li>
+    </ol>
+</header>
 
-		<div layout:fragment="body">
-			<ul class="nav">
-				<li class="nav-item" th:if="${school.status == T(org.brownmun.model.RegistrationStatus).ACCEPTED}">
-					<a href="#" class="nav-link" th:href="${#mvc.url('SC#delegates').arg(0, school.id).build()}">Manage Delegates</a>
-				</li>
-			</ul>
+<div layout:fragment="body">
+    <ul class="nav">
+        <li class="nav-item" th:if="${school.status == T(org.brownmun.model.RegistrationStatus).ACCEPTED}">
+            <a href="#" class="nav-link" th:href="${#mvc.url('SC#delegates').arg(0, school.id).build()}">Manage Delegates</a>
+        </li>
+    </ul>
 
-			<dl class="row">
-				<dt class="col-sm-3">School ID</dt>
-				<dd class="col-sm-9">[[${school.id}]]</dd>
+    <h4>Basic Info</h4>
 
-				<dt class="col-sm-3">Registration Status</dt>
-				<dd class="col-sm-9">[[${school.status}]]</dd>
+    <dl class="row">
+        <dt class="col-sm-3">School ID</dt>
+        <dd class="col-sm-9">[[${school.id}]]</dd>
 
-				<dt class="col-sm-3">Requested Delegates</dt>
-				<dd class="col-sm-9">[[${school.requestedDelegates}]]</dd>
+        <dt class="col-sm-3">Registration Status</dt>
+        <dd class="col-sm-9">[[${school.status}]]</dd>
 
-				<dt class="col-sm-3">Requested Chaperones</dt>
-				<dd class="col-sm-9">[[${school.requestedChaperones}]]</dd>
+        <dt class="col-sm-3">Requested Delegates</dt>
+        <dd class="col-sm-9">[[${school.info.requestedDelegates}]]</dd>
 
-				<dt class="col-sm-3">Address</dt>
-				<dd class="col-sm-9">[[${school.address}]]</dd>
+        <dt class="col-sm-3">Requested Chaperones</dt>
+        <dd class="col-sm-9">[[${school.info.requestedChaperones}]]</dd>
 
-				<dt class="col-sm-3">School Phone</dt>
-				<dd class="col-sm-9">[[${school.phoneNumber}]]</dd>
-			</dl>
+        <dt class="col-sm-3">Address</dt>
+        <dd class="col-sm-9">[[${school.info.address}]]</dd>
 
-			<h4>Logistics</h4>
-			<ul class="list-unstyled">
-				<li th:if="${school.logistics.usingHotel}">Using BUSUN hotel</li>
-				<li th:unless="${school.logistics.usingHotel}">Not using BUSUN hotel</li>
-				<li th:if="${school.logistics.usingShuttle}">Using shuttles</li>
-				<li th:unless="${school.logistics.usingShuttle}">Not using shuttles</li>
-			</ul>
+        <dt class="col-sm-3">School Phone</dt>
+        <dd class="col-sm-9">[[${school.info.phoneNumber}]]</dd>
 
-			<form method="post" th:action="@{/admin/school/set-status}" class="form-inline">
-				<input type="hidden" name="id" th:value="${school.id}">
-				<select name="registrationStatus" class="form-control">
-					<option
-						th:each="status : ${T(org.brownmun.model.RegistrationStatus).values()}"
-						th:value="${status.name()}"
-						th:text="${status}"
-						th:selected="${status == school.status}"
-					>
-						Registered</option>
-				</select>
-				<button type="submit" class="btn btn-warning">Update Registration Status</button>
-			</form>
-		</div>
-	</body>
+        <dt class="col-sm-3">Chaperone Info</dt>
+        <dd class="col-sm-9" th:text="${school.info.chaperoneInfo}"></dd>
+    </dl>
+
+    <h4>Logistics</h4>
+    <dl class="row">
+        <dt class="col-sm-3">Using BUSUN hotel</dt>
+        <dd class="col-sm-9" th:text="${school.info.usingBusunHotel ? 'Yes' : 'No'}"></dd>
+
+        <th:block th:if="${school.info.usingBusunHotel}">
+            <dt class="col-sm-3">Hotel Name</dt>
+            <dd class="col-sm-9" th:text="${school.info.hotel}"></dd>
+        </th:block>
+
+        <th:block th:if="${!#strings.isEmpty(school.info.otherHotel)}">
+            <dt class="col-sm-3">Hotel Name</dt>
+            <dd class="col-sm-9" th:text="${school.info.otherHotel}"></dd>
+        </th:block>
+
+        <dt class="col-sm-3">Using Shuttles</dt>
+        <dd class="col-sm-9" th:text="${school.info.usingShuttle ? 'Yes' : 'No'}"></dd>
+
+        <th:block th:unless="${school.info.shuttleService.isNone()}">
+            <dt class="col-sm-3">Shuttle Service</dt>
+            <dd class="col-sm-9">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" th:checked="${school.info.shuttleService.fridayAfternoon}" disabled>
+                        Friday Afternoon
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" th:checked="${school.info.shuttleService.fridayNight}" disabled>
+                        Friday Night
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" th:checked="${school.info.shuttleService.saturday}" disabled>
+                        Saturday
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" th:checked="${school.info.shuttleService.sunday}" disabled>
+                        Sunday
+                    </label>
+                </div>
+            </dd>
+        </th:block>
+
+        <dt class="col-sm-3">Commuting</dt>
+        <dd class="col-sm-9" th:text="${school.info.commuting ? 'Yes' : 'No'}"></dd>
+
+        <th:block th:if="${school.info.carCount > 0}">
+            <dt class="col-sm-3">Car Passes</dt>
+            <dd class="col-sm-9">[[${school.info.carCount}]] cars for [[${school.info.carDays}]] day(s)</dd>
+        </th:block>
+
+        <th:block th:if="${school.info.busCount > 0}">
+            <dt class="col-sm-3">Bus Passes</dt>
+            <dd class="col-sm-9">[[${school.info.busCount}]] buses for [[${school.info.busDays}]] day(s)</dd>
+        </th:block>
+
+        <dt class="col-sm-3">Arrival Time</dt>
+        <dd class="col-sm-9" th:text="${school.info.arrivalTime}"></dd>
+
+        <dt class="col-sm-3">Luggage Storage</dt>
+        <dd class="col-sm-9" th:text="${school.info.luggageStorage}"></dd>
+
+        <dt class="col-sm-3">Band Color</dt>
+        <dd class="col-sm-9" th:text="${school.info.bandColor}"></dd>
+    </dl>
+
+    <h4>Financial Aid</h4>
+
+    <dl class="row">
+        <dt class="col-sm-3">Applying for aid?</dt>
+        <dd class="col-sm-9" th:text="${school.info.applyingForAid ? 'Yes' : 'No'}"></dd>
+        <th:block th:if="${school.info.applyingForAid}">
+            <dt class="col-sm-3">Aid Amount</dt>
+            <dd class="col-sm-9" th:text="${school.info.aidAmount}"></dd>
+
+            <dt class="col-sm-3">Documentation</dt>
+            <dd class="col-sm-9" th:text="${school.info.aidDocumentation}"></dd>
+        </th:block>
+    </dl>
+
+    <h4>Training and Event Attendance</h4>
+
+    <dl class="row">
+        <dt class="col-sm-3">Parliamentary Procedure Training</dt>
+        <dd class="col-sm-9" th:text="${school.info.parliTrainingCount}"></dd>
+
+        <dt class="col-sm-3">Crisis Training</dt>
+        <dd class="col-sm-9" th:text="${school.info.crisisTrainingCount}"></dd>
+
+        <dt class="col-sm-3">Campus Tour</dt>
+        <dd class="col-sm-9" th:text="${school.info.tourCount}"></dd>
+
+        <dt class="col-sm-3">Info Session</dt>
+        <dd class="col-sm-9" th:text="${school.info.infoSessionCount}"></dd>
+    </dl>
+
+    <form method="post" th:action="@{/admin/school/set-status}" class="form-inline">
+        <input type="hidden" name="id" th:value="${school.id}">
+        <select name="registrationStatus" class="form-control mx-3">
+            <option
+                    th:each="status : ${T(org.brownmun.model.RegistrationStatus).values()}"
+                    th:value="${status.name()}"
+                    th:text="${status}"
+                    th:selected="${status == school.status}"
+            >
+                Registered</option>
+        </select>
+        <button type="submit" class="btn btn-warning">Update Registration Status</button>
+    </form>
+</div>
+</body>
 </html>

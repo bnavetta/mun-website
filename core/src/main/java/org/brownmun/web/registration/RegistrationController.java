@@ -92,7 +92,6 @@ public class RegistrationController
 //        school.setAboutText(form.getAboutSchool());
 //        school.setRequestedDelegates(form.getEstimatedDelegates());
 //        school.setRequestedChaperones(form.getEstimatedChaperones());
-        school.setRegistrationTime(Instant.now());
 
         School saved = schoolRepo.save(school);
 

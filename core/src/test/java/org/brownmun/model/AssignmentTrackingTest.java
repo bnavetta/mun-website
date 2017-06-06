@@ -45,7 +45,6 @@ public class AssignmentTrackingTest
 		school.setName("Test School");
 		school.setStatus(RegistrationStatus.REGISTERED);
 //		school.setPhoneNumber("123-456-7890");
-		school.setRegistrationTime(Instant.now().minusSeconds(10000));
 //		school.setAddress(address);
 //		school.setRequestedDelegates(20);
 //		school.setRequestedChaperones(2);
