@@ -2,11 +2,11 @@
 
 # rm -rf "${HOME}/google-cloud-sdk"
 
-if [ ! -d ${HOME}/google-cloud-sdk ]; then
+if command -v gcloud 2>/dev/null; then
+    echo "gcloud sdk already installed"
+else
     echo "Installing gcloud sdk"
     curl https://sdk.cloud.google.com | bash
-else
-    echo "gcloud sdk already installed"
 fi
 
 gcloud auth activate-service-account --key-file client-secret.json
