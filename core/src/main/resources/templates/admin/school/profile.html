@@ -58,7 +58,7 @@
 
         <th:block th:if="${school.info.usingBusunHotel}">
             <dt class="col-sm-3">Hotel Name</dt>
-            <dd class="col-sm-9" th:text="${school.info.hotel}"></dd>
+            <dd class="col-sm-9" th:text="${school.info.hotel.name}"></dd>
         </th:block>
 
         <th:block th:if="${!#strings.isEmpty(school.info.otherHotel)}">
