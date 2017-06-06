@@ -5,6 +5,7 @@
 if command -v gcloud 2>/dev/null; then
     echo "gcloud sdk already installed"
 else
+    rm -rf "${HOME}/google-cloud-sdk"
     echo "Installing gcloud sdk"
     curl https://sdk.cloud.google.com | bash
 fi
