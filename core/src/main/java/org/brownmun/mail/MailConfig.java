@@ -8,6 +8,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -29,7 +31,13 @@ public class MailConfig
     @Bean
     public MailSender mailgun(RestTemplate restTemplate, ObjectMapper mapper)
     {
-        return new MailgunMailSender(restTemplate, mapper);
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(1);
+        executor.setMaxPoolSize(5);
+        executor.setThreadNamePrefix("Mail-");
+        executor.initialize();
+
+        return new MailgunMailSender(restTemplate, mapper, executor);
     }
 
     @Bean

@@ -34,10 +34,6 @@ export default class SchoolDisplay extends React.Component {
     componentDidMount() {
         loadSchools()
             .then((schools) => {
-                schools.forEach((school) => {
-                    const timeStr = new Date(school.registrationTime * 1000).toLocaleString();
-                    school.registrationTime = timeStr; // eslint-disable-line no-param-reassign
-                });
                 this.setState({ schools, fetching: false });
             })
             .catch(err => this.setState({ error: err.message, fetching: false }));

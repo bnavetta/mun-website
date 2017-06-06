@@ -50,7 +50,7 @@ public class AdvisorService implements UserDetailsService
      */
     public boolean advisorExists(String email)
     {
-        return repo.findByEmail(email).isPresent();
+        return repo.findByEmailIgnoreCase(email).isPresent();
     }
 
     /**
@@ -77,7 +77,7 @@ public class AdvisorService implements UserDetailsService
 
     public Advisor findAdvisor(String email) throws UsernameNotFoundException
     {
-        return repo.findByEmail(email)
+        return repo.findByEmailIgnoreCase(email)
             .orElseThrow(() -> new UsernameNotFoundException("Advisor not found: " + email));
     }
 }

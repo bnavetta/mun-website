@@ -24,8 +24,8 @@ import javax.validation.Valid;
 /**
  * Controller for editing school info.
  */
-@Controller
-@RequestMapping("/yourbusun/info")
+//@Controller
+//@RequestMapping("/yourbusun/info")
 public class EditInfoController
 {
     private final AdvisorService advisorService;

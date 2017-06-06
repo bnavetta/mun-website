@@ -9,6 +9,7 @@ import org.brownmun.mail.EmailDescriptor;
 import org.brownmun.mail.MailException;
 import org.brownmun.mail.MailSender;
 import org.springframework.core.io.Resource;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
@@ -22,16 +23,18 @@ public class MailgunMailSender implements MailSender
 {
     private final RestTemplate restTemplate;
     private final ObjectMapper jsonMapper;
+    private final TaskExecutor executor;
 
     /**
      * Create a new Mailgun-based {@link MailSender} from the provided {@link RestTemplate}. Assumes
      * that the template is configured with the Mailgun API base URL and credentials.
      * @param restTemplate
      */
-    public MailgunMailSender(RestTemplate restTemplate, ObjectMapper jsonMapper)
+    public MailgunMailSender(RestTemplate restTemplate, ObjectMapper jsonMapper, TaskExecutor executor)
     {
         this.restTemplate = restTemplate;
         this.jsonMapper = jsonMapper;
+        this.executor = executor;
     }
 
     @Override
@@ -71,6 +74,9 @@ public class MailgunMailSender implements MailSender
             params.add("attachment", attachment);
         }
 
+        executor.execute(() -> {
+
+
         try
         {
             MailgunMessageResponse response =
@@ -80,8 +86,9 @@ public class MailgunMailSender implements MailSender
         catch (RestClientException e)
         {
             log.error("Error sending message to Mailgun", e);
-            throw new MailException("Unable to submit message", e, message);
+//            throw new MailException("Unable to submit message", e, message);
         }
+        });
     }
 
     @Data

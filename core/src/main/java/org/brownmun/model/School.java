@@ -44,11 +44,6 @@ public class School
 	@Valid
 	private SchoolInfo info;
 
-	@JsonView(View.Summary.class)
-	@NotNull
-	@Past
-	private Instant registrationTime;
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = CascadeType.ALL)
 	private List<Delegate> delegates;
 
@@ -70,11 +65,6 @@ public class School
 	public boolean hasPosition(Position position)
 	{
 		return position.isAssigned() && position.getDelegate().getSchool().getId() == this.getId();
-	}
-
-	public Date getRegistrationTimeAsDate()
-	{
-		return Date.from(registrationTime);
 	}
 
 	public static class View {

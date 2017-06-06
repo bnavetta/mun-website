@@ -90,7 +90,6 @@ public class MailService
         Map<String, String> variables = Maps.newHashMap();
         variables.put("name", advisor.getName());
         variables.put("schoolName", school.getName());
-        variables.put("registrationTime", school.getRegistrationTime().toString());
         message.setRecipients(ImmutableMap.of(advisor.getEmail(), variables));
         message.setFrom(props.getFromAddress());
         message.setReplyTo(Optional.of(props.getReplyAddress()));

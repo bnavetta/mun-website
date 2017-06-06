@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface AdvisorRepository extends CrudRepository<Advisor, Long>
 {
     @EntityGraph(attributePaths = { "school" })
-    Optional<Advisor> findByEmail(String email);
+    Optional<Advisor> findByEmailIgnoreCase(String email);
 }

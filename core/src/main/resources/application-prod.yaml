@@ -11,3 +11,6 @@ server:
       directory: /var/log/busun
       enabled: true
       request-attributes-enabled: true
+logging:
+  level:
+    org.brownmun: debug

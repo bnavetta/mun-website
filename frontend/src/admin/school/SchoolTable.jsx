@@ -9,7 +9,6 @@ const columnDefinitions = [
     { field: 'name', title: 'School Name' },
     { field: 'status', title: 'Registration Status' },
     { field: 'requestedDelegates', title: 'Delegation Size' },
-    { field: 'registrationTime', title: 'Registration Time' },
     { field: 'numberOfYearsAttended', title: 'Years Attended' },
 ];
 
@@ -22,7 +21,7 @@ export default class SchoolTable extends React.Component {
         super(props);
 
         this.state = {
-            visibleColumns: { id: true, name: true, status: true, registrationTime: true },
+            visibleColumns: { id: true, name: true, status: true },
         };
     }
 
