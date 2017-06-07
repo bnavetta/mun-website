@@ -1,6 +1,7 @@
 package org.brownmun.web.admin;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.collect.Lists;
 import org.brownmun.model.Delegate;
 import org.brownmun.model.committee.Position;
 import org.brownmun.model.RegistrationStatus;
@@ -12,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -146,5 +150,13 @@ public class SchoolController
 	public String index(UriComponentsBuilder builder)
 	{
 		return "redirect:" + MvcUriComponentsBuilder.fromMappingName(builder, "SC#list").build();
+	}
+
+	@GetMapping("export")
+	public ModelAndView export(HttpServletResponse response)
+	{
+		response.setHeader("Content-Disposition", "attachment; filename=\"schools.xlsx\"");
+		List<School> schools = Lists.newArrayList(repo.findAll());
+		return new ModelAndView(new SchoolExportView()).addObject("schools", schools);
 	}
 }
