@@ -1,5 +1,6 @@
 package org.brownmun.web.admin;
 
+import com.google.common.base.MoreObjects;
 import org.apache.poi.ss.usermodel.*;
 import org.brownmun.model.School;
 import org.brownmun.model.delegation.SchoolInfo;
@@ -92,35 +93,64 @@ public class SchoolExportView extends AbstractXlsxView {
         for (School school : schools) {
             SchoolInfo info = school.getInfo();
             Row row = sheet.createRow(rowCount++);
-            row.createCell(ID_COL).setCellValue(school.getId());
-            row.createCell(NAME_COL).setCellValue(school.getName());
-            row.createCell(ADDRESS_COL).setCellValue(Objects.toString(info.getAddress(), "<none>"));
-            row.createCell(PHONE_NUMBER_COL).setCellValue(info.getPhoneNumber());
-            row.createCell(APPLYING_FOR_AID_COL).setCellValue(info.isApplyingForAid());
-            row.createCell(AID_AMOUNT_COL).setCellValue(info.getAidAmount());
-            row.createCell(AID_DOCUMENTATION_COL).setCellValue(info.getAidDocumentation());
-            row.createCell(BUSUN_HOTEL_COL).setCellValue(info.isUsingBusunHotel());
-            row.createCell(HOTEL_NAME_COL).setCellValue(info.isUsingBusunHotel() ? info.getHotel().getName() : info.getOtherHotel());
-            row.createCell(SHUTTLE_COL).setCellValue(info.getUsingShuttle());
-            row.createCell(SHUTTLE_FRIDAY_AFTERNOON_COL).setCellValue(info.getShuttleService().isFridayAfternoon());
-            row.createCell(SHUTTLE_FRIDAY_NIGHT_COL).setCellValue(info.getShuttleService().isFridayNight());
-            row.createCell(SHUTTLE_SATURDAY_COL).setCellValue(info.getShuttleService().isSaturday());
-            row.createCell(SHUTTLE_SUNDAY_COL).setCellValue(info.getShuttleService().isSunday());
-            row.createCell(COMMUTING_COL).setCellValue(info.getCommuting());
-            row.createCell(CAR_COUNT_COL).setCellValue(info.getCarCount());
-            row.createCell(CAR_DAYS_COL).setCellValue(info.getCarDays());
-            row.createCell(BUS_COUNT_COL).setCellValue(info.getBusCount());
-            row.createCell(BUS_DAYS_COL).setCellValue(info.getBusDays());
-            row.createCell(ARRIVAL_TIME_COL).setCellValue(info.getArrivalTime());
-            row.createCell(LUGGAGE_STORAGE_COL).setCellValue(info.getLuggageStorage().toString());
-            row.createCell(BAND_COLOR_COL).setCellValue(info.getBandColor().toString());
-            row.createCell(REQUESTED_DELEGATES_COL).setCellValue(info.getRequestedDelegates());
-            row.createCell(REQUESTED_CHAPERONES_COL).setCellValue(info.getRequestedChaperones());
-            row.createCell(PARLIAMENTARY_PROCEDURE_TRAINING_COL).setCellValue(info.getParliTrainingCount());
-            row.createCell(CRISIS_TRAINING_COL).setCellValue(info.getCrisisTrainingCount());
-            row.createCell(TOUR_COL).setCellValue(info.getTourCount());
-            row.createCell(INFO_SESSION_COL).setCellValue(info.getInfoSessionCount());
-            row.createCell(CHAPERONE_INFO_COL).setCellValue(info.getChaperoneInfo());
+            row.createCell(ID_COL)
+                    .setCellValue(school.getId());
+            row.createCell(NAME_COL)
+                    .setCellValue(school.getName());
+            row.createCell(ADDRESS_COL)
+                    .setCellValue(Objects.toString(info.getAddress(), "<none>"));
+            row.createCell(PHONE_NUMBER_COL)
+                    .setCellValue(info.getPhoneNumber());
+            row.createCell(APPLYING_FOR_AID_COL)
+                    .setCellValue(info.isApplyingForAid());
+            row.createCell(AID_AMOUNT_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getAidAmount(), 0.0));
+            row.createCell(AID_DOCUMENTATION_COL)
+                    .setCellValue(info.getAidDocumentation());
+            row.createCell(BUSUN_HOTEL_COL)
+                    .setCellValue(info.isUsingBusunHotel());
+            row.createCell(HOTEL_NAME_COL)
+                    .setCellValue(info.isUsingBusunHotel() ? info.getHotel().getName() : info.getOtherHotel());
+            row.createCell(SHUTTLE_COL)
+                    .setCellValue(info.getUsingShuttle());
+            row.createCell(SHUTTLE_FRIDAY_AFTERNOON_COL)
+                    .setCellValue(info.getShuttleService().isFridayAfternoon());
+            row.createCell(SHUTTLE_FRIDAY_NIGHT_COL)
+                    .setCellValue(info.getShuttleService().isFridayNight());
+            row.createCell(SHUTTLE_SATURDAY_COL)
+                    .setCellValue(info.getShuttleService().isSaturday());
+            row.createCell(SHUTTLE_SUNDAY_COL)
+                    .setCellValue(info.getShuttleService().isSunday());
+            row.createCell(COMMUTING_COL)
+                    .setCellValue(info.getCommuting());
+            row.createCell(CAR_COUNT_COL)
+                    .setCellValue(info.getCarCount());
+            row.createCell(CAR_DAYS_COL)
+                    .setCellValue(info.getCarDays());
+            row.createCell(BUS_COUNT_COL)
+                    .setCellValue(info.getBusCount());
+            row.createCell(BUS_DAYS_COL)
+                    .setCellValue(info.getBusDays());
+            row.createCell(ARRIVAL_TIME_COL)
+                    .setCellValue(info.getArrivalTime());
+            row.createCell(LUGGAGE_STORAGE_COL)
+                    .setCellValue(Objects.toString(info.getLuggageStorage(), "<unset>"));
+            row.createCell(BAND_COLOR_COL)
+                    .setCellValue(Objects.toString(info.getBandColor(), "<unset>"));
+            row.createCell(REQUESTED_DELEGATES_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getRequestedDelegates(), 0));
+            row.createCell(REQUESTED_CHAPERONES_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getRequestedChaperones(), 0));
+            row.createCell(PARLIAMENTARY_PROCEDURE_TRAINING_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getParliTrainingCount(), 0));
+            row.createCell(CRISIS_TRAINING_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getCrisisTrainingCount(), 0));
+            row.createCell(TOUR_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getTourCount(), 0));
+            row.createCell(INFO_SESSION_COL)
+                    .setCellValue(MoreObjects.firstNonNull(info.getInfoSessionCount(), 0));
+            row.createCell(CHAPERONE_INFO_COL)
+                    .setCellValue(info.getChaperoneInfo());
         }
 
         Row summary = sheet.createRow(rowCount + 2);
