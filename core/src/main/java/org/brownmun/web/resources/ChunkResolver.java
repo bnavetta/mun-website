@@ -1,6 +1,5 @@
 package org.brownmun.web.resources;
 
-import java.util.Collection;
 import java.util.Optional;
 
 /**

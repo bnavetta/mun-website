@@ -25,7 +25,7 @@ public class ProdChunkResolver extends AbstractChunkResolver
 	{
 		try
 		{
-			Optional<Map<String, Chunk>> loaded = loadChunks(getClass().getResource("/static/asset-manifest.json").toURI());
+			Optional<Map<String, Chunk>> loaded = loadManifest(getClass().getResource("/static/asset-manifest.json").toURI());
 			if (loaded.isPresent())
 			{
 				this.chunks = loaded.get();
