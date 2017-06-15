@@ -4,13 +4,25 @@ task yarnInstall(type: Exec) {
 	commandLine 'yarn'
 }
 
+task buildDlls(type: Exec) {
+    inputs.file 'yarn.lock'
+    inputs.dir 'tooling'
+    outputs.dir 'dist'
+    
+    commandLine 'yarn', 'run', 'dll:prod'
+
+    dependsOn yarnInstall
+}
+
 task assemble(type: Exec) {
 	inputs.dir 'src'
 	inputs.dir 'flow'
+    inputs.dir 'tooling'
 	outputs.dir 'dist'
 
-	commandLine 'yarn', 'run', 'build'
+	commandLine 'yarn', 'run', 'build:prod'
 
+    dependsOn buildDlls
 	dependsOn yarnInstall
 }
 //
