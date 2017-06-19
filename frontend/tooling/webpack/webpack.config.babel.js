@@ -43,5 +43,6 @@ export default compose(partials)({
         new webpack.ProvidePlugin({
             'Tether': 'tether'
         })
+
     ]
 });

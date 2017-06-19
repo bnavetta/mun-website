@@ -5,10 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Optional;
-import javax.annotation.PostConstruct;
 
 /**
  * Load the embedded {@code asset-manifest.json} once
@@ -25,12 +26,10 @@ public class ProdChunkResolver extends AbstractChunkResolver
 	{
 		try
 		{
-			Optional<Map<String, Chunk>> loaded = loadManifest(getClass().getResource("/static/asset-manifest.json").toURI());
-			if (loaded.isPresent())
-			{
-				this.chunks = loaded.get();
-			}
+			URI assetManifest = getClass().getResource("/static/asset-manifest.json").toURI();
+			URI dllManifest = getClass().getResource("/static/dll.json").toURI();
 
+			this.chunks = loadChunks(dllManifest, assetManifest);
 		}
 		catch (URISyntaxException e)
 		{

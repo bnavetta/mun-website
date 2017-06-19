@@ -38,7 +38,7 @@ dependencies {
 
 processResources.dependsOn ':frontend:build'
 processResources.with {
-	from(project(':frontend').file('dist')) {
+	from(project(':frontend').file('dist/production')) {
 		into 'static'
 	}
 }
