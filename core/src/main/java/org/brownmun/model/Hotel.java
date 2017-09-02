@@ -1,5 +1,6 @@
 package org.brownmun.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -42,12 +43,14 @@ public class Hotel
     private String phoneNumber;
 
     @Transient
+    @JsonIgnore
     public Date getDeadlineAsDate()
     {
         return Date.from(deadline.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     @Transient
+    @JsonIgnore
     public String getFormattedRate()
     {
         return CURRENCY_FORMATTER.format(rate);

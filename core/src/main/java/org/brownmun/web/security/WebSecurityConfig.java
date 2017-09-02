@@ -3,6 +3,7 @@ package org.brownmun.web.security;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.Http401AuthenticationEntryPoint;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
@@ -94,10 +95,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .userDetailsService(advisorService)
                 .key("remember-me")
                 .alwaysRemember(true)
-                .and()
-            .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+            .and()
+                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
             .exceptionHandling()
-            .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"));
+                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login/staff"), new AntPathRequestMatcher("/admin/**"))
+                .defaultAuthenticationEntryPointFor(new Http401AuthenticationEntryPoint("Bearer realm=\"busun.org\""), new AntPathRequestMatcher("/api/**"));
     }
 
     @Override

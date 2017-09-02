@@ -10,16 +10,16 @@ import java.util.Optional;
 
 public interface SchoolRepository extends CrudRepository<School, Long>
 {
-	Optional<School> findByName(String name);
+    Optional<School> findByName(String name);
 
-	int countByStatus(RegistrationStatus status);
+    int countByStatus(RegistrationStatus status);
 
-	@Query("SELECT COALESCE(SUM(s.info.requestedDelegates), 0) FROM School s WHERE s.status = ?1")
-	int countRequestedDelegatesByStatus(RegistrationStatus status);
+    @Query("SELECT COALESCE(SUM(s.info.requestedDelegates), 0) FROM School s WHERE s.status = ?1")
+    int countRequestedDelegatesByStatus(RegistrationStatus status);
 
-	@Query("SELECT COALESCE(SUM(s.info.requestedDelegates), 0) FROM School s")
-	int countRequestedDelegates();
+    @Query("SELECT COALESCE(SUM(s.info.requestedDelegates), 0) FROM School s")
+    int countRequestedDelegates();
 
-	@EntityGraph(attributePaths = {"advisors"})
-	School findById(Long id);
+    @EntityGraph(attributePaths = {"advisors"})
+    School findById(Long id);
 }
