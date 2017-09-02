@@ -4,7 +4,8 @@
       xmlns:wp="http://brownmun"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
-        <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">BUSUN</title>
+        <!--<title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">[[#{conference.name}]]</title>-->
+        <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">[[#{conference.name}]]</title>
         <link rel="icon" th:href="@{/favicon.ico}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js" integrity="sha384-o9KO9jVK1Q4ybtHgJCCHfgQrTRNlkT6SL3j/qMuBMlDw3MmFrgrOHCOaIMJWGgK5" crossorigin="anonymous"></script>
         <wp:chunk name="react" />
@@ -20,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse" id="main-navbar">
                 <a href="/" class="navbar-brand">
-                    <img src="https://storage.googleapis.com/busun_assets/re-aligned-logo.png" alt="BUSUN Logo">
+                    <img src="https://storage.googleapis.com/busun_assets/re-aligned-logo.png" alt="Logo">
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown my-auto">

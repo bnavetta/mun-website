@@ -1,46 +1,47 @@
 plugins {
-	id 'net.ltgt.apt' version '0.9'
+    id 'net.ltgt.apt' version '0.11'
+    id 'net.ltgt.apt-idea' version '0.11'
 }
 
 bootRepackage {
-	enabled = false
+    enabled = false
 }
 
 dependencies {
-	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
-	compile 'org.apache.poi:poi-ooxml'
+    compile 'org.apache.poi:poi-ooxml'
 
-	compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.springframework.security.oauth:spring-security-oauth2'
 
-	compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
 
-	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile 'org.postgresql:postgresql'
-	compile 'org.flywaydb:flyway-core'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.postgresql:postgresql'
+    compile 'org.flywaydb:flyway-core'
 
-	compile 'org.hibernate:hibernate-validator'
+    compile 'org.hibernate:hibernate-validator'
 
-	compile 'org.hibernate:hibernate-java8'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava'
+    compile 'org.hibernate:hibernate-java8'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava'
 
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 
     // Also a compileOnly dependency, but needed so the other processors see it
     apt 'org.projectlombok:lombok'
     apt 'org.springframework.boot:spring-boot-configuration-processor'
-    apt 'org.hibernate:hibernate-jpamodelgen'
+//    apt 'org.hibernate:hibernate-jpamodelgen'
 }
 
 processResources.dependsOn ':frontend:build'
 processResources.with {
-	from(project(':frontend').file('dist/production')) {
-		into 'static'
-	}
+    from(project(':frontend').file('dist/production')) {
+        into 'static'
+    }
 }
 
 compileJava.dependsOn(processResources)

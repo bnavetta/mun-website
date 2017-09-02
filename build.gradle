@@ -58,7 +58,7 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
             }
 
             // Override Spring Boot's Thymeleaf dialect versions
-            dependency 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.1.0'
+            dependency 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.2.2'
             dependency 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE'
 
             dependencySet(group: 'org.testcontainers', version: '1.1.6') {

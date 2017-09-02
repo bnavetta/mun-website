@@ -1,0 +1,8 @@
+mail:
+  link-base: https://browncrisis.org
+  from-address: admin@browncrisis.org
+  reply-address: technology@busun.org
+
+conference:
+  decisions-public: false
+  name: BUCS
