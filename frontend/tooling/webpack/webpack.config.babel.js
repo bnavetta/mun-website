@@ -1,8 +1,6 @@
 import webpack from 'webpack';
 import compose from 'lodash/fp/compose';
-import partial from 'lodash/fp/partial';
 import map from 'lodash/fp/map';
-import { createVariants } from 'parallel-webpack';
 
 import config from '../config';
 import out from './partials/out';
@@ -15,39 +13,34 @@ import uglify from './partials/uglify';
 import env from './partials/env';
 import stats from './partials/stats';
 
-function createConfig(options) {
-    const referenceDlls = map(partial(referenceDll, [options.conference]), Object.keys(config.dlls));
-    const partials = [hot, uglify, env, babel, sass(options.conference), css, stats('asset-manifest.json'), ...referenceDlls, out(options.conference)];
+const referenceDlls = map(referenceDll, Object.keys(config.dlls));
+const partials = [hot, uglify, env, babel, sass, css, stats('asset-manifest.json'), ...referenceDlls, out];
 
-    return compose(partials)({
-        entry: config.entry,
+export default compose(partials)({
+    entry: config.entry,
 
-        devtool: 'cheap-module-source-map',
+    devtool: 'cheap-module-source-map',
 
-        output: {
-            filename: '[name].[hash].js',
-            chunkFilename: '[name].[hash].chunk.js'
-        },
+    output: {
+        filename: '[name].[hash].js',
+        chunkFilename: '[name].[hash].chunk.js'
+    },
 
-        resolve: {
-            extensions: ['.jsx', '.js'],
-        },
+    resolve: {
+        extensions: ['.jsx', '.js'],
+    },
 
-        plugins: [
-            new webpack.NamedModulesPlugin(),
-            new webpack.NoEmitOnErrorsPlugin(),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'admin',
-                chunks: ['admin', 'committeeAdmin', 'schoolAdmin'],
-                minChunks: 2
-            }),
-            new webpack.ProvidePlugin({
-                'Tether': 'tether'
-            })
+    plugins: [
+        new webpack.NamedModulesPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'admin',
+            chunks: ['admin', 'committeeAdmin', 'schoolAdmin'],
+            minChunks: 2
+        }),
+        new webpack.ProvidePlugin({
+            'Tether': 'tether'
+        })
 
-        ]
-    });
-
-}
-
-export default createVariants({}, config.buildVariants, createConfig);
+    ]
+});

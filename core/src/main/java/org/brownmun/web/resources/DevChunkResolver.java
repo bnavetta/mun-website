@@ -2,6 +2,8 @@ package org.brownmun.web.resources;
 
 import com.google.common.base.Suppliers;
 import lombok.extern.slf4j.Slf4j;
+import org.brownmun.ConferenceProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,22 @@ import java.util.function.Supplier;
 public class DevChunkResolver extends AbstractChunkResolver
 {
 	// IntelliJ runs from the workspace root. Does Gradle?
-	private final URI dllJson = new File("frontend/dist/development/dll.json").toURI();
+	private final URI dllJson;
 	private final URI statsJson = URI.create("http://localhost:8000/asset-manifest.json");
 
-	private Supplier<Map<String, Chunk>> chunks = Suppliers.memoizeWithExpiration(
-			() -> loadChunks(dllJson, statsJson),
-			1,
-			TimeUnit.SECONDS
-	);
+	private final Supplier<Map<String, Chunk>> chunks;
+
+	@Autowired
+	public DevChunkResolver(ConferenceProperties conference)
+	{
+		dllJson = new File("frontend/dist/" + conference.getName().toLowerCase() + "/development/dll.json").toURI();
+
+		chunks = Suppliers.memoizeWithExpiration(
+				() -> loadChunks(dllJson, statsJson),
+				1,
+				TimeUnit.SECONDS
+		);
+	}
 
 	@Override
 	public String getAssetBase()

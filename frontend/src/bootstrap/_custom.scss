@@ -2,21 +2,21 @@
 
 $enable-flex: true;
 
-@if ($conference == 'busun') {
-  // Colors
-  $brand-primary: #007f5c;
-  $brand-info: #afc9d2;
-  $brand-success: #45966e;
-  $brand-danger: #ffd5e1;
-  //$list-group-bg: $body-bg;
-} @else if ($conference == 'bucs') {
-  $brand-primary: purple;
-  $brand-info: blue;
-  $brand-success: green;
-  $brand-danger: orange;
+@function byConference($busun, $bucs) {
+  @if ($conference == 'busun') {
+    @return $busun;
+  } @else if ($conference == 'bucs') {
+    @return $bucs;
+  } @else {
+    @error '$conference variable not set';
+  }
 }
 
-// Shared colors
+// Colors
+$brand-primary: byConference(#007f5c, purple);
+$brand-info: byConference(#afc9d2, blue);
+$brand-success: byConference(#45966e, green);
+$brand-danger: byConference(#ffd5e1, orange);
 $body-bg: #e6e6e6;
 $content-bg: #fff;
 

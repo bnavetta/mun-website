@@ -1,7 +1,8 @@
 import path from 'path';
 
-export default {
+const config = {
     production: process.env.NODE_ENV == 'production',
+    conference: process.env.CONFERENCE,
     entry: {
         bootstrap: [path.resolve('./src/bootstrap/index.js')],
 
@@ -14,12 +15,16 @@ export default {
         committeeAdmin: ['babel-polyfill', path.resolve('./src/admin/committee/index.jsx')],
         schoolAdmin: ['babel-polyfill', path.resolve('./src/admin/school/index.jsx')],
     },
-    distPath: (conference) => path.resolve(path.join('dist', conference, process.env.NODE_ENV)),
+
+    paths: {
+        dist: path.resolve(path.join('dist', process.env.CONFERENCE, process.env.NODE_ENV))
+    },
     dllStatsFile: 'dll.json',
     dlls: {
         react: ['react', 'react-dom', 'html-entities', 'strip-ansi']
-    },
-    buildVariants: {
-        conference: ['bucs', 'busun']
     }
 };
+
+console.log(`Building for ${config.conference} into ${config.paths.dist} in ${process.env.NODE_ENV} env`);
+
+export default config;

@@ -7,7 +7,8 @@ import config from '../../config';
 const nodeEnv = plugin(new webpack.EnvironmentPlugin({
     // These are defaults, not fixed values
     NODE_ENV: 'development',
-    DEBUG: true
+    DEBUG: true,
+    CONFERENCE: 'busun'
 }));
 
 const webpackOpts = plugin(new webpack.LoaderOptionsPlugin({
