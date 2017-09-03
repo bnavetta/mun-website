@@ -7,22 +7,22 @@
     <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
     <!--/*@thymesVar id="loggedIn" type="org.brownmun.model.advisor.Advisor"*/-->
     <head>
-        <title th:text="|Your BUSUN: ${school.name}|"></title>
+        <title th:text="|Your #{conference.name}: ${school.name}|"></title>
         <wp:chunk name="index"/>
     </head>
     <body>
         <header layout:fragment="header">
-            <h1 class="text-center">Your BUSUN</h1>
+            <h1 class="text-center" th:text="|Your #{conference.name}|">Your BUSUN</h1>
             <h2 class="text-center" th:text="${school.name}">School Name</h2>
         </header>
         <div layout:fragment="body">
             <div class="d-flex justify-content-center">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a href="/yourbusun/change-password" class="nav-link">Change Password</a>
+                        <a href="/yourmun/change-password" class="nav-link">Change Password</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/yourbusun/info" class="nav-link">Edit Supplemental Info</a>
+                        <a href="/yourmun/info" class="nav-link">Edit Supplemental Info</a>
                     </li>
                 </ul>
             </div>
@@ -68,7 +68,7 @@
                 <div class="tab-pane" id="advisors" role="tabpanel">
                     <div class="p-3">
                         <p>
-                            <a href="/yourbusun/add-advisors" class="btn btn-info">Invite Advisors</a>
+                            <a href="/yourmun/add-advisors" class="btn btn-info">Invite Advisors</a>
                         </p>
                         <table class="table">
                             <thead>

@@ -1,4 +1,4 @@
-package org.brownmun.web.yourbusun;
+package org.brownmun.web.yourmun;
 
 import com.google.common.collect.Lists;
 import org.brownmun.model.Hotel;
@@ -11,7 +11,6 @@ import org.brownmun.web.security.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,7 +24,7 @@ import javax.validation.Valid;
  * Controller for editing school info.
  */
 @Controller
-@RequestMapping("/yourbusun/info")
+@RequestMapping("/yourmun/info")
 public class EditInfoController
 {
     private final AdvisorService advisorService;
@@ -65,7 +64,7 @@ public class EditInfoController
     @GetMapping
     public String getForm()
     {
-        return "yourbusun/edit-info";
+        return "yourmun/edit-info";
     }
 
     @PostMapping
@@ -73,12 +72,12 @@ public class EditInfoController
     {
         if (bindingResult.hasErrors())
         {
-            return "yourbusun/edit-info";
+            return "yourmun/edit-info";
         }
 
         School school = advisorService.load(advisor).getSchool();
         school.setInfo(schoolInfo);
         schoolRepo.save(school);
-        return "redirect:/yourbusun";
+        return "redirect:/yourmun";
     }
 }

@@ -1,4 +1,4 @@
-package org.brownmun.web.yourbusun;
+package org.brownmun.web.yourmun;
 
 import lombok.extern.slf4j.Slf4j;
 import org.brownmun.ConferenceProperties;
@@ -25,15 +25,15 @@ import javax.validation.Valid;
  */
 @Slf4j
 @Controller
-@RequestMapping("/yourbusun")
-public class YourBusunController
+@RequestMapping("/yourmun")
+public class YourMunController
 {
     private final ConferenceProperties conferenceProperties;
     private final AdvisorService advisorService;
     private final LineItemRepository lineItemRepository;
 
     @Autowired
-    public YourBusunController(ConferenceProperties conferenceProperties, AdvisorService advisorService, LineItemRepository lineItemRepository)
+    public YourMunController(ConferenceProperties conferenceProperties, AdvisorService advisorService, LineItemRepository lineItemRepository)
     {
         this.conferenceProperties = conferenceProperties;
         this.advisorService = advisorService;
@@ -65,11 +65,11 @@ public class YourBusunController
             model.addAttribute("totalAidAwards", aidAwards.stream().mapToDouble(LineItem::getAmount).sum());
 
             // They can actually do things!
-            return "yourbusun/info";
+            return "yourmun/info";
         }
         else
         {
-            return "yourbusun/decisions-private";
+            return "yourmun/decisions-private";
         }
     }
 
@@ -77,7 +77,7 @@ public class YourBusunController
     public String changePasswordForm(Model model)
     {
         model.addAttribute("form", new ChangePasswordForm());
-        return "yourbusun/change-password";
+        return "yourmun/change-password";
     }
 
     @PostMapping("/change-password")
@@ -85,20 +85,20 @@ public class YourBusunController
     {
         if (bindingResult.hasErrors())
         {
-            return "yourbusun/change-password";
+            return "yourmun/change-password";
         }
 
         if (!form.getPassword().equals(form.getPasswordConfirm()))
         {
             bindingResult.rejectValue("passwordConfirm", "password.mismatch", "Passwords must match");
-            return "yourbusun/change-password";
+            return "yourmun/change-password";
         }
 
         log.debug("Changing password for advisor {}", advisor.getEmail());
         advisorService.saveAndLogin(advisorService.load(advisor), form.getPassword());
 
         // TODO: notification email or something?
-        return "redirect:/yourbusun";
+        return "redirect:/yourmun";
     }
 
         /*

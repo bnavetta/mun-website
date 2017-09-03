@@ -15,7 +15,7 @@
             <h1>Editing School Info</h1>
         </header>
         <div layout:fragment="body">
-            <form th:action="@{/yourbusun/info}" method="post" th:object="${schoolInfo}">
+            <form th:action="@{/yourmun/info}" method="post" th:object="${schoolInfo}">
                 <h3>School Information</h3>
                 <div class="form-group" th:classappend="${#fields.hasErrors('phoneNumber')}? 'has-danger'">
                     <label for="phoneNumber">Phone Number</label>

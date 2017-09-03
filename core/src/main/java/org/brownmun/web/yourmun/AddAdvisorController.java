@@ -1,4 +1,4 @@
-package org.brownmun.web.yourbusun;
+package org.brownmun.web.yourmun;
 
 import com.google.common.collect.ImmutableMap;
 import lombok.Data;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Slf4j
 @Controller
-@RequestMapping("/yourbusun/add-advisors")
+@RequestMapping("/yourmun/add-advisors")
 public class AddAdvisorController
 {
     private final AdvisorService advisorService;
@@ -50,7 +50,7 @@ public class AddAdvisorController
     {
         School school = advisorService.load(advisor).getSchool();
         model.addAttribute("school", school);
-        return "yourbusun/add-advisors";
+        return "yourmun/add-advisors";
     }
 
     @PostMapping
@@ -85,7 +85,7 @@ public class AddAdvisorController
         AdvisorRegistrationForm form = new AdvisorRegistrationForm();
         form.setToken(token);
         model.addAttribute("registration", form);
-        return "yourbusun/confirm-advisor";
+        return "yourmun/confirm-advisor";
     }
 
     @PostMapping("/confirm")
@@ -93,14 +93,14 @@ public class AddAdvisorController
     {
         if (bindingResult.hasErrors())
         {
-            return "yourbusun/confirm-advisor";
+            return "yourmun/confirm-advisor";
         }
 
         // Not always getting checked for some reason?
         if (!form.passwordsMatch())
         {
             model.addAttribute("error", "Passwords do not match");
-            return "yourbusun/confirm-advisor";
+            return "yourmun/confirm-advisor";
         }
 
         Advisor base = new Advisor();
@@ -108,12 +108,12 @@ public class AddAdvisorController
         try
         {
             Advisor created = advisorCreationService.createAdvisorAndLogin(form.getToken(), form.getPassword(), base);
-            return "redirect:/yourbusun/";
+            return "redirect:/yourmun/";
         }
         catch (AdvisorCreationException e)
         {
             model.addAttribute("errorCode", e.getMessageCode());
-            return "yourbusun/confirm-advisor";
+            return "yourmun/confirm-advisor";
         }
     }
 

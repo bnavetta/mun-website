@@ -5,21 +5,25 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{base}">
     <head>
-        <title>Change Advisor Password</title>
+        <title>Create Advisor Account</title>
         <wp:chunk name="index"/>
         <wp:chunk name="yourbusun"/>
     </head>
     <body>
         <header layout:fragment="header">
-            <h1>Change Advisor Password</h1>
+            <h1>Create BUSUN Advisor Account</h1>
         </header>
         <div layout:fragment="body">
             <hr>
-            <!--/*@thymesVar id="form" type="org.brownmun.web.yourbusun.ChangePasswordForm"*/-->
-            <form th:action="@{/yourbusun/change-password}" th:object="${form}" method="post">
+
+            <!--/*@thymesVar id="registration" type="org.brownmun.web.yourmun.AdvisorRegistrationForm"*/-->
+            <form th:action="@{/yourmun/add-advisors/confirm}" th:object="${registration}" method="post">
+                <!--/*@thymesVar id="errorCode" type="java.lang.String"*/-->
+                <div class="alert alert-danger" th:if="${errorCode}" th:text="#{${errorCode}}"></div>
                 <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}">
                     Global Errors
                 </div>
+                <input type="hidden" th:field="*{token}">
                 <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-danger'">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" th:field="*{password}">
@@ -30,8 +34,13 @@
                     <input type="password" class="form-control" th:field="*{passwordConfirm}">
                     <div class="form-control-feedback" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Error Messages</div>
                 </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('phoneNumber')}? 'has-danger'">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" class="form-control" th:field="*{phoneNumber}" placeholder="333-333-3333">
+                    <div class="form-control-feedback" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Error Messages</div>
+                </div>
                 <div>
-                    <input type="submit" class="btn btn-primary" value="Change Password">
+                    <input type="submit" class="btn btn-primary" value="Register">
                 </div>
             </form>
         </div>

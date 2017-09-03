@@ -18,7 +18,12 @@ public class WebConfig extends WebMvcConfigurerAdapter
         registry.addViewController("/admin/").setViewName("admin/index");
         registry.addRedirectViewController("/admin", "/admin/");
 
-        registry.addRedirectViewController("/yourbusun", "/yourbusun/");
+        registry.addRedirectViewController("/yourmun", "/yourmun/");
+
+        // Migrate old paths
+        registry.addRedirectViewController("/yourbusun/{path}", "/yourmun/{path}");
+        registry.addRedirectViewController("/yourbusun", "/yourmun/");
+        registry.addRedirectViewController("/yourbusun/", "/yourmun/");
 
         registry.addViewController("/login").setViewName("login");
 

@@ -1,4 +1,4 @@
-package org.brownmun.web.yourbusun;
+package org.brownmun.web.yourmun;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;

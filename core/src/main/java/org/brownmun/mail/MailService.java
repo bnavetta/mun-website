@@ -47,7 +47,7 @@ public class MailService
             variables.put("name", advisorToken.getAdvisorName());
             variables.put("school", school.getName());
             String registerUrl = UriComponentsBuilder.fromHttpUrl(props.getLinkBase())
-                .path("/yourbusun/add-advisors/confirm")
+                .path("/yourmun/add-advisors/confirm")
                 .queryParam("token", advisorToken.getToken())
                 .build().toUriString();
             variables.put("registerUrl", registerUrl);

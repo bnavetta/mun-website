@@ -39,8 +39,8 @@ public class StaffAwareAccessDeniedHandler extends AccessDeniedHandlerImpl
 
         String path = pathHelper.getPathWithinApplication(request);
 
-        // Staff going to /yourbusun
-        if (path.startsWith("/yourbusun") && !(principal instanceof Advisor))
+        // Staff going to /yourmun
+        if (path.startsWith("/yourmun") && !(principal instanceof Advisor))
         {
             logger.info("Redirecting advisor from admin page to advisor page");
             request.getRequestDispatcher("/admin").forward(request, response);
@@ -48,7 +48,7 @@ public class StaffAwareAccessDeniedHandler extends AccessDeniedHandlerImpl
         else if (path.startsWith("/admin") && principal instanceof Advisor)
         {
             logger.info("Redirecting staff member from advisor page to admin page");
-            request.getRequestDispatcher("/yourbusun").forward(request, response);
+            request.getRequestDispatcher("/yourmun").forward(request, response);
         }
         else
         {

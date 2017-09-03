@@ -49,7 +49,7 @@ public class ResetPasswordController
         try
         {
             passwordResetService.resetPasswordAndLogin(form.getToken(), form.getPassword());
-            return "redirect:/yourbusun";
+            return "redirect:/yourmun";
         }
         catch (PasswordResetException e)
         {

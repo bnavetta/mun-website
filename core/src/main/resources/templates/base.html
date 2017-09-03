@@ -4,7 +4,6 @@
       xmlns:wp="http://brownmun"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
-        <!--<title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">[[#{conference.name}]]</title>-->
         <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">[[#{conference.name}]]</title>
         <link rel="icon" th:href="@{/favicon.ico}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js" integrity="sha384-o9KO9jVK1Q4ybtHgJCCHfgQrTRNlkT6SL3j/qMuBMlDw3MmFrgrOHCOaIMJWGgK5" crossorigin="anonymous"></script>
@@ -70,7 +69,7 @@
                     </li>
 					*/-->
                     <li class="nav-item my-auto">
-                        <a th:href="@{/yourbusun/}" class="nav-link">Your BUSUN</a>
+                        <a th:href="@{/yourmun/}" class="nav-link">Your [[#{conference.name}]]</a>
                     </li>
                 </ul>
                 <form th:action="@{/logout}" method="post" th:if="${#httpServletRequest.remoteUser}" class="form-inline">
