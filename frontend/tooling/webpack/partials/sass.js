@@ -5,30 +5,38 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import config from '../../config';
 
-let loader = [
-    'style-loader',
-    'css-loader?sourceMap&importLoaders=1',
-    'sass-loader'
-];
+export default (conference) => {
+    const baseLoaders = [
+        'css-loader?sourceMap&importLoaders=1',
+        {
+            loader: 'sass-loader',
+            options: {
+                data: '$conference: ' + conference + ';'
+            }
+        }
+    ];
 
-if (config.production) {
-    loader = ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-            'css-loader?importLoaders=1',
-            'sass-loader'
-        ]
-    })
-}
+    let loader = [
+        'style-loader',
+        ...baseLoaders
+    ];
 
-const sassLoader = update(['module', 'rules'], (rules = []) => ([
-    ...rules,
-    {
-        test: /\.scss/,
-        use: loader,
+    if (config.production) {
+        loader = ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: baseLoaders
+        })
     }
-]));
 
-const partial = config.production ? compose(sassLoader, plugin(new ExtractTextPlugin('[name].[hash].css'))) : sassLoader;
+    const sassLoader = update(['module', 'rules'], (rules = []) => ([
+        ...rules,
+        {
+            test: /\.scss/,
+            use: loader,
+        }
+    ]));
 
-export default partial;
+    const partial = config.production ? compose(sassLoader, plugin(new ExtractTextPlugin('[name].[hash].css'))) : sassLoader;
+
+    return partial;
+}

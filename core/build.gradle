@@ -36,12 +36,3 @@ dependencies {
     apt 'org.springframework.boot:spring-boot-configuration-processor'
 //    apt 'org.hibernate:hibernate-jpamodelgen'
 }
-
-processResources.dependsOn ':frontend:build'
-processResources.with {
-    from(project(':frontend').file('dist/production')) {
-        into 'static'
-    }
-}
-
-compileJava.dependsOn(processResources)

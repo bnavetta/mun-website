@@ -2,9 +2,6 @@ import path from 'path';
 
 export default {
     production: process.env.NODE_ENV == 'production',
-    paths: {
-        dist: path.resolve(path.join('dist', process.env.NODE_ENV)),
-    },
     entry: {
         bootstrap: [path.resolve('./src/bootstrap/index.js')],
 
@@ -17,8 +14,12 @@ export default {
         committeeAdmin: ['babel-polyfill', path.resolve('./src/admin/committee/index.jsx')],
         schoolAdmin: ['babel-polyfill', path.resolve('./src/admin/school/index.jsx')],
     },
+    distPath: (conference) => path.resolve(path.join('dist', conference, process.env.NODE_ENV)),
     dllStatsFile: 'dll.json',
     dlls: {
         react: ['react', 'react-dom', 'html-entities', 'strip-ansi']
+    },
+    buildVariants: {
+        conference: ['bucs', 'busun']
     }
 };

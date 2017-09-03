@@ -5,8 +5,8 @@ import plugin from 'webpack-partial/plugin';
 
 import config from '../../config';
 
-export default function referenceDll(dllName) {
-    const manifestFile = path.join(config.paths.dist, `${dllName}.dll.json`);
+export default function referenceDll(conference, dllName) {
+    const manifestFile = path.join(config.distPath(conference), `${dllName}.dll.json`);
     if (!fs.existsSync(manifestFile)) {
         throw new Error(`DLL ${dllName} does not have a manifest (missing ${manifestFile})`);
     }

@@ -1,10 +1,19 @@
 dependencies {
-	compile project(':core')
-	compile 'org.springframework.boot:spring-boot-devtools'
+    compile project(':core')
+    compile 'org.springframework.boot:spring-boot-devtools'
 
-	testCompile 'junit:junit'
+    testCompile 'junit:junit'
 }
 
 bootRun {
-	args '--spring.profiles.active=local,prod-assets'
+    args '--spring.profiles.active=local,prod-assets'
 }
+
+processResources.dependsOn ':frontend:build'
+processResources.with {
+    from(project(':frontend').file('dist/busun/production')) {
+        into 'static'
+    }
+}
+
+compileJava.dependsOn(processResources)

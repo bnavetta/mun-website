@@ -2,7 +2,9 @@ import output from 'webpack-partial/output';
 
 import config from '../../config';
 
-export default output({
-    publicPath: '/',
-    path: config.paths.dist,
-});
+export default (conference) => {
+    return output({
+        publicPath: '/',
+        path: config.distPath(conference)
+    });
+}

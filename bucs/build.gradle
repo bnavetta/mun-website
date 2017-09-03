@@ -4,3 +4,16 @@ dependencies {
 
 	testCompile 'junit:junit'
 }
+
+bootRun {
+	args '--spring.profiles.active=local,prod-assets'
+}
+
+processResources.dependsOn ':frontend:build'
+processResources.with {
+	from(project(':frontend').file('dist/bucs/production')) {
+		into 'static'
+	}
+}
+
+compileJava.dependsOn(processResources)
