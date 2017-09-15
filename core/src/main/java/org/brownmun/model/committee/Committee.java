@@ -28,7 +28,7 @@ public class Committee implements Comparable<Committee>
     @NotBlank
     private String name;
 
-    @NotBlank
+//    @NotBlank
     private String description;
 
     @NotBlank
