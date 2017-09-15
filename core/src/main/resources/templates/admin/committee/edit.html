@@ -40,7 +40,7 @@
 					<label for="committeeType">Committee Type:</label>
 					<select th:field="*{committeeType}" class="form-control">
 						<option
-							th:each="ctype : ${T(org.brownmun.model.CommitteeType).values()}"
+							th:each="ctype : ${T(org.brownmun.model.committee.CommitteeType).values()}"
 							th:value="${ctype.name()}"
 							th:text="${ctype}">
 							General
