@@ -185,3 +185,8 @@ mail:
 conference:
   decisions-public: true
   name: BUSUN
+
+server:
+  tomcat:
+    accesslog:
+      directory: /var/log/busun

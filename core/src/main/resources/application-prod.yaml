@@ -8,7 +8,6 @@ server:
     remote-ip-header: x-forwarded-for
     protocol-header: x-forwarded-proto
     accesslog:
-      directory: /var/log/busun
       enabled: true
       request-attributes-enabled: true
 logging:

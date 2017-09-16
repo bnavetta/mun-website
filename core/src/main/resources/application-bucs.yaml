@@ -6,3 +6,8 @@ mail:
 conference:
   decisions-public: false
   name: BUCS
+
+server:
+  tomcat:
+    accesslog:
+      directory: /var/log/bucs
