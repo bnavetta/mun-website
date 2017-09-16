@@ -8,3 +8,5 @@ generated_src/
 generated_testSrc/
 
 data/
+
+bin/
