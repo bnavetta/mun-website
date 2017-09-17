@@ -7,12 +7,12 @@
     <!--/*@thymesVar id="school" type="org.brownmun.model.School"*/-->
     <!--/*@thymesVar id="loggedIn" type="org.brownmun.model.advisor.Advisor"*/-->
     <head>
-        <title th:text="|Your #{conference.name}: ${school.name}|"></title>
+        <title th:text="|Your ${#conference.name}: ${school.name}|"></title>
         <wp:chunk name="index"/>
     </head>
     <body>
         <header layout:fragment="header">
-            <h1 class="text-center" th:text="|Your #{conference.name}|">Your BUSUN</h1>
+            <h1 class="text-center" th:text="|Your ${#conference.name}|">Your BUSUN</h1>
             <h2 class="text-center" th:text="${school.name}">School Name</h2>
         </header>
         <div layout:fragment="body">

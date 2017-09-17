@@ -1,3 +1,11 @@
+secretariat:
+  members:
+    - title:
+      name:
+      image-address:
+      email:
+      bio:
+
 mail:
   link-base: https://browncrisis.org
   from-address: admin@browncrisis.org
@@ -6,6 +14,9 @@ mail:
 conference:
   decisions-public: false
   name: BUCS
+  logo-url: https://storage.googleapis.com/bucs_assets/bucs-logo.png
+  facebook-url: https://facebook.com/browncrisis
+  twitter-url: https://twitter.com/browncrisis
 
 server:
   tomcat:

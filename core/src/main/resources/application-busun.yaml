@@ -185,6 +185,17 @@ mail:
 conference:
   decisions-public: true
   name: BUSUN
+  logo-url: https://storage.googleapis.com/busun_assets/re-aligned-logo.png
+  events:
+  - date: April 3, 2017
+     description: BUSUN registration opens
+  - date: BUSUN registration opens
+    description: BUSUN registration closes
+  - date: November 10-12, 2017
+    description: BUSUN XXI
+  facebook-url: https://www.facebook.com/busunbuzz
+  twitter-url: https://twitter.com/busunbuzz
+  instagram-url: http://instagram.com/busunbuzz
 
 server:
   tomcat:

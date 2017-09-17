@@ -13,10 +13,10 @@ $enable-flex: true;
 }
 
 // Colors
-$brand-primary: byConference(#007f5c, purple);
-$brand-info: byConference(#afc9d2, blue);
-$brand-success: byConference(#45966e, green);
-$brand-danger: byConference(#ffd5e1, orange);
+$brand-primary: byConference(#007f5c, #88221f);
+$brand-info: #afc9d2;
+$brand-success: #45966e;
+$brand-danger: byConference(#ffd5e1, #d9534f);
 $body-bg: #e6e6e6;
 $content-bg: #fff;
 
