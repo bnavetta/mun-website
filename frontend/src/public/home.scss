@@ -2,3 +2,10 @@
     width: 100%;
     padding: 2rem;
 }
+
+.sec-letter {
+    & > .signoff > p {
+        margin: 0px;
+        padding: 0px;
+    }
+}

@@ -107,14 +107,8 @@ public class ConferenceProperties
 
     public static final class Event
     {
-        private final String date;
-        private final String description;
-
-        public Event(String date, String description)
-        {
-            this.date = date;
-            this.description = description;
-        }
+        private String date;
+        private String description;
 
         public String getDate()
         {
@@ -124,6 +118,16 @@ public class ConferenceProperties
         public String getDescription()
         {
             return description;
+        }
+
+        public void setDate(String date)
+        {
+            this.date = date;
+        }
+
+        public void setDescription(String description)
+        {
+            this.description = description;
         }
 
         @Override

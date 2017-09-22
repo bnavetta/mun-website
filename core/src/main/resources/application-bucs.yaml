@@ -1,10 +1,10 @@
-secretariat:
-  members:
-    - title:
-      name:
-      image-address:
-      email:
-      bio:
+#secretariat:
+#  members:
+#    - title:
+#      name:
+#      image-address:
+#      email:
+#      bio:
 
 mail:
   link-base: https://browncrisis.org
@@ -17,6 +17,13 @@ conference:
   logo-url: https://storage.googleapis.com/bucs_assets/bucs-logo.png
   facebook-url: https://facebook.com/browncrisis
   twitter-url: https://twitter.com/browncrisis
+  events:
+  - date: 'September 21 - November 10'
+    description: Early registration
+  - date: 'November 11 - January 20'
+    description: Regular registration
+  - date: 'January 21 - February 10'
+    description: Late registration
 
 server:
   tomcat:
