@@ -58,7 +58,7 @@
                         <a class="nav-link dropdown-toggle" href="/" id="logisticsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logistics</a>
                         <div class="dropdown-menu" aria-labelledby="logisticsMenuLink">
                             <a th:href="@{/logistics/directions}" class="dropdown-item">Directions</a>
-                            <a th:href="@{/logistics/hotels}" class="dropdown-item">Hotels</a>
+                            <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/logistics/hotels}" class="dropdown-item">Hotels</a>
                             <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/logistics/parking}" class="dropdown-item">Shuttles &amp; Parking</a>
                         </div>
                     </li>
