@@ -42,6 +42,13 @@
                                 Apply
                             </a>
 							*/-->
+
+                            <a class="dropdown-item"
+                               th:if="${#conference.name == 'BUCS'}"
+                               href="https://docs.google.com/forms/d/e/1FAIpQLSf1qy5MdcJ-E7e0LV9x3MO-HQ_2SJbeFUCzy3HSEJFblseNSQ/viewform?c=0&w=1">
+                               Register
+                            </a>
+
                             <a class="dropdown-item" th:href="@{/registration/fees-and-deadlines}">Fees &amp; Deadlines</a>
                         </div>
                     </li>
@@ -85,6 +92,15 @@
                         <!--*/<li class="list-group-item">
                             <div class="globe-logo mx-auto"></div>
                         </li>*?-->
+
+                        <li class="list-group-item sidebar-item" th:if="${#conference.name == 'BUCS'}">
+                            <a class="btn btn-primary mx-auto"
+                               href="https://docs.google.com/forms/d/e/1FAIpQLSf1qy5MdcJ-E7e0LV9x3MO-HQ_2SJbeFUCzy3HSEJFblseNSQ/viewform?c=0&w=1">
+                                Register for BUCS
+                            </a>
+                        </li>
+
+
 						<!--/*
                         <li class="list-group-item sidebar-item">
 							<a class="btn btn-primary mx-auto" href="/register">Register</a>
