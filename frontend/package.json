@@ -61,5 +61,8 @@
     "superagent-use": "^0.1.0",
     "tether": "^1.4.0",
     "webfontloader": "^1.6.28"
+  },
+  "engines": {
+    "node": "8.x.x"
   }
 }

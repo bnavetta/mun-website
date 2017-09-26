@@ -159,4 +159,12 @@ public class SchoolController
 		List<School> schools = Lists.newArrayList(repo.findAll());
 		return new ModelAndView(new SchoolExportView()).addObject("schools", schools);
 	}
+
+	// Would be nicer to have REST DELETE request
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable long id)
+	{
+		repo.delete(id);
+		return "redirect:/admin/school";
+	}
 }

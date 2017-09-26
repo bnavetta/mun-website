@@ -24,6 +24,11 @@
         <li class="nav-item" th:if="${school.status == T(org.brownmun.model.RegistrationStatus).ACCEPTED}">
             <a href="#" class="nav-link" th:href="${#mvc.url('SC#delegates').arg(0, school.id).build()}">Manage Delegates</a>
         </li>
+        <li class="nav-item">
+            <form action="post" th:href="${#mvc.url('SC#delete').arg(0, school.id).build()}">
+                <button class="nav-link btn btn-danger">Delete School</button>
+            </form>
+        </li>
     </ul>
 
     <h4>Basic Info</h4>
