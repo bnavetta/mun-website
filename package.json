@@ -1,0 +1,7 @@
+{
+	"name": "mun-website",
+	"description": "Brown Model UN sites",
+	"engines": {
+	    "node": "8.x.x"
+	}
+}
