@@ -1,6 +1,5 @@
 package org.brownmun.advisor;
 
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.MailException;
 import org.brownmun.mail.MailService;
 import org.brownmun.model.advisor.Advisor;
@@ -8,6 +7,8 @@ import org.brownmun.model.advisor.PasswordResetToken;
 import org.brownmun.model.repo.PasswordResetTokenRepository;
 import org.brownmun.util.Tokens;
 import org.brownmun.web.security.AdvisorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,11 @@ import javax.transaction.Transactional;
 /**
  * Service for handling password resets
  */
-@Slf4j
 @Service
 public class PasswordResetService
 {
+    private static final Logger log = LoggerFactory.getLogger(PasswordResetService.class);
+
     // TODO: put in config?
     private static final Duration RESET_TOKEN_LIFESPAN = Duration.ofDays(1);
 

@@ -1,12 +1,13 @@
 package org.brownmun.web.yourmun;
 
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.ConferenceProperties;
-import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.LineItem;
 import org.brownmun.model.School;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.repo.LineItemRepository;
 import org.brownmun.web.security.AdvisorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,17 +18,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collection;
 import javax.validation.Valid;
+import java.util.Collection;
 
 /**
  * Controller for per-school info pages.
  */
-@Slf4j
 @Controller
 @RequestMapping("/yourmun")
 public class YourMunController
 {
+    private static final Logger log = LoggerFactory.getLogger(YourMunController.class);
+    
     private final ConferenceProperties conferenceProperties;
     private final AdvisorService advisorService;
     private final LineItemRepository lineItemRepository;

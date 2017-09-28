@@ -6,6 +6,7 @@ dependencies {
 }
 
 bootRun {
+//    jvmArgs '--add-modules', 'java.xml.bind',  '--illegal-access=permit'
     args '--spring.profiles.active=local,prod-assets'
 }
 

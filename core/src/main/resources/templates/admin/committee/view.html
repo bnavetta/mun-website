@@ -29,9 +29,9 @@
 			<h2>Positions</h2>
 			<p>[[${committee.assignedPositions}]] / [[${committee.totalPositions}]] positions assigned</p>
 			<ul>
-				<li th:each="position : ${committee.positions}" class="Committee--position" th:classappend="${position.assigned} ? assigned : unassigned">
-					<span th:text="${position.name}">Position Name</span>
-					<span th:if="${position.assigned}"> &mdash; <span th:text="${position.delegate.school.name}">School Name</span></span>
+				<li th:each="positions : ${committee.positions}" class="Committee--positions" th:classappend="${positions.assigned} ? assigned : unassigned">
+					<span th:text="${positions.name}">Position Name</span>
+					<span th:if="${positions.assigned}"> &mdash; <span th:text="${positions.delegate.school.name}">School Name</span></span>
 				</li>
 			</ul>
 

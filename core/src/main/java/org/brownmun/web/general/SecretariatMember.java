@@ -1,21 +1,68 @@
 package org.brownmun.web.general;
 
-import lombok.Data;
-
 /**
  * A member of the secretariat. Because I didn't feel like repeating all the HTML so I decided to
  * model them here.
  */
-@Data
 public class SecretariatMember
 {
-    String title;
+    private String title;
 
-    String name;
+    private String name;
 
-    String bio;
+    private String bio;
 
-    String imageAddress;
+    private String imageAddress;
 
-    String email;
+    private String email;
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getBio()
+    {
+        return bio;
+    }
+
+    public void setBio(String bio)
+    {
+        this.bio = bio;
+    }
+
+    public String getImageAddress()
+    {
+        return imageAddress;
+    }
+
+    public void setImageAddress(String imageAddress)
+    {
+        this.imageAddress = imageAddress;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
 }

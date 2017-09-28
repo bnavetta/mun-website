@@ -1,17 +1,28 @@
 package org.brownmun.model;
 
-import lombok.Data;
+import com.google.common.base.MoreObjects;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.BitSet;
+import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkElementIndex;
 
 /**
  * Represents a delegate's attendance for their committee.
  */
 @Entity
-@Data
 public class Attendance implements Serializable
 {
+    private static final int POSITION_PAPER_INDEX = 0;
+    private static final int MIN_SESSION = 1;
+    private static final int MAX_SESSION = 5;
+
     @Id
     @OneToOne
     @JoinColumn(name = "delegate_id", referencedColumnName = "id")
@@ -20,48 +31,65 @@ public class Attendance implements Serializable
     // TODO: link to staff member since they have no local state
     // is it needed?
 
-    private boolean positionPaper;
+    // TODO: just do a bitset where i == session (with 0 for position paper)
 
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "present", column = @Column(name = "session_one_present")),
-        @AttributeOverride(name = "tally", column = @Column(name = "session_one_tally"))
-    })
-    private Session sessionOne;
+    private BitSet record = new BitSet(MAX_SESSION + 1);
 
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "present", column = @Column(name = "session_two_present")),
-        @AttributeOverride(name = "tally", column = @Column(name = "session_two_tally"))
-    })
-    private Session sessionTwo;
-
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "present", column = @Column(name = "session_three_present")),
-        @AttributeOverride(name = "tally", column = @Column(name = "session_three_tally"))
-    })
-    private Session sessionThree;
-
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "present", column = @Column(name = "session_four_present")),
-        @AttributeOverride(name = "tally", column = @Column(name = "session_four_tally"))
-    })
-    private Session sessionFour;
-
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "present", column = @Column(name = "session_five_present")),
-        @AttributeOverride(name = "tally", column = @Column(name = "session_five_tally"))
-    })
-    private Session sessionFive;
-
-    @Data
-    @Embeddable
-    public static class Session
+    public boolean positionPaperSubmitted()
     {
-        private boolean present;
-        private int tally; // Tally of how many times the
+        return record.get(POSITION_PAPER_INDEX);
+    }
+
+    public void setPositionPaperSubmitted(boolean submitted)
+    {
+        record.set(POSITION_PAPER_INDEX, submitted);
+    }
+
+    public boolean isPresentForSession(int session)
+    {
+        checkElementIndex(session, MAX_SESSION + 1, "%s beyond last session");
+        checkArgument(session >= MIN_SESSION, "%s before first session", session);
+        return record.get(session);
+    }
+
+    public void setPresentForSession(int session, boolean present)
+    {
+        checkElementIndex(session, MAX_SESSION + 1, "%s beyond last session");
+        checkArgument(session >= MIN_SESSION, "%s before first session", session);
+        record.set(session, present);
+    }
+
+    public Delegate getDelegate()
+    {
+        return delegate;
+    }
+
+    public void setDelegate(Delegate delegate)
+    {
+        this.delegate = delegate;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Attendance that = (Attendance) o;
+        return Objects.equals(record, that.record);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(record);
+    }
+
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this)
+                .add("delegate", delegate)
+                .add("record", record)
+                .toString();
     }
 }

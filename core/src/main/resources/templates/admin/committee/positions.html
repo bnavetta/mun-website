@@ -33,24 +33,24 @@
 					</thead>
 					<tbody>
 						<tr
-							th:each="position, status : ${committee.positions}"
+							th:each="positions, status : ${committee.positions}"
 						>
-							<td>[[${position.name}]]</td>
+							<td>[[${positions.name}]]</td>
 							<td
-								th:class="${position.isAssigned() ? 'Position-assigned' : 'Position-unassigned'}"
-								th:text="${position.isAssigned() ? position.delegate.name : 'Unassigned'}"
+								th:class="${positions.isAssigned() ? 'Position-assigned' : 'Position-unassigned'}"
+								th:text="${positions.isAssigned() ? positions.delegate.name : 'Unassigned'}"
 							>
 								Some Delegate
 							</td>
 							<td>
 								<select th:name="|positions[${status.index}]|" class="form-control">
-									<option value="" th:selected="${position.delegate == null}"></option>
+									<option value="" th:selected="${positions.delegate == null}"></option>
 									<option
 										th:each="school : ${schools}"
 										th:value="${school.id}"
 										th:text="${school.name}"
-										th:selected="${school.hasPosition(position)}"
-										th:if="${school.hasPosition(position) || school.unassignedDelegateCount > 0}"
+										th:selected="${school.hasPosition(positions)}"
+										th:if="${school.hasPosition(positions) || school.unassignedDelegateCount > 0}"
 									/>
 								</select>
 							</td>

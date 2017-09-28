@@ -1,20 +1,15 @@
 package org.brownmun.model;
 
 import com.google.common.base.MoreObjects;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
 import org.brownmun.model.committee.Position;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
 @Entity
 public class Delegate
 {
-	@Setter(AccessLevel.NONE)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,6 +31,43 @@ public class Delegate
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	private School school;
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public Position getPosition()
+	{
+		return position;
+	}
+
+	public void setPosition(Position position)
+	{
+		this.position = position;
+	}
+
+	public School getSchool()
+	{
+		return school;
+	}
+
+	public void setSchool(School school)
+	{
+		this.school = school;
+	}
+
+
 
 	@Override
 	public String toString()

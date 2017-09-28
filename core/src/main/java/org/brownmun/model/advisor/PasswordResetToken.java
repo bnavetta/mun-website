@@ -1,18 +1,17 @@
 package org.brownmun.model.advisor;
 
-import lombok.Data;
+import com.google.common.base.MoreObjects;
 
-import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.Instant;
 
 /**
  * Represents a request to reset an advisor's password.
  */
 @Entity
-@Data
 public class PasswordResetToken
 {
     /**
@@ -32,4 +31,44 @@ public class PasswordResetToken
      * When the password reset was requested, so we can see if it expired.
      */
     private Instant requestedAt;
+
+    public String getResetCode()
+    {
+        return resetCode;
+    }
+
+    public void setResetCode(String resetCode)
+    {
+        this.resetCode = resetCode;
+    }
+
+    public Advisor getAdvisor()
+    {
+        return advisor;
+    }
+
+    public void setAdvisor(Advisor advisor)
+    {
+        this.advisor = advisor;
+    }
+
+    public Instant getRequestedAt()
+    {
+        return requestedAt;
+    }
+
+    public void setRequestedAt(Instant requestedAt)
+    {
+        this.requestedAt = requestedAt;
+    }
+
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this)
+                .add("resetCode", resetCode)
+                .add("advisor", advisor)
+                .add("requestedAt", requestedAt)
+                .toString();
+    }
 }

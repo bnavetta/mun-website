@@ -3,16 +3,16 @@ package org.brownmun.web.registration;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.MailException;
 import org.brownmun.mail.MailService;
-import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
+import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.repo.HotelRepository;
 import org.brownmun.model.repo.SchoolRepository;
 import org.brownmun.web.security.AdvisorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -22,15 +22,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.util.Locale;
 import javax.validation.Valid;
+import java.util.Locale;
 
-@Slf4j
 @Controller
 @RequestMapping("/register")
 public class RegistrationController
 {
+    private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
+    
     // For resolving error messages
     private final MessageSource messageSource;
 
@@ -125,11 +125,32 @@ public class RegistrationController
         return ResponseEntity.ok(new RegistrationResult(true, ArrayListMultimap.create(), saved.getId()));
     }
 
-    @Data
     public class RegistrationResult
     {
         final boolean success;
         final Multimap<String, String> errors;
         final Long schoolId;
+
+        public RegistrationResult(boolean success, Multimap<String, String> errors, Long schoolId)
+        {
+            this.success = success;
+            this.errors = errors;
+            this.schoolId = schoolId;
+        }
+
+        public boolean isSuccess()
+        {
+            return success;
+        }
+
+        public Multimap<String, String> getErrors()
+        {
+            return errors;
+        }
+
+        public Long getSchoolId()
+        {
+            return schoolId;
+        }
     }
 }

@@ -33,9 +33,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="delegate : ${school.assignedDelegates}">
-						<td th:text="${delegate.position.committee.committeeType}">General</td>
-						<td th:text="${delegate.position.committee.name}">UN Security Council</td>
-						<td th:text="${delegate.position.name}">France</td>
+						<td th:text="${delegate.positions.committee.committeeType}">General</td>
+						<td th:text="${delegate.positions.committee.name}">UN Security Council</td>
+						<td th:text="${delegate.positions.name}">France</td>
 						<td>
 							<form th:action="@{/admin/school/name-delegate}" method="post" class="form-inline">
 								<input type="hidden" name="schoolId" th:value="${school.id}">
@@ -45,8 +45,8 @@
 							</form>
 						</td>
 						<td>
-							<form th:action="@{/admin/position/unassign}" method="post" class="form-inline">
-								<input type="hidden" name="id" th:value="${delegate.position.id}">
+							<form th:action="@{/admin/positions/unassign}" method="post" class="form-inline">
+								<input type="hidden" name="id" th:value="${delegate.positions.id}">
 								<input type="hidden" name="redirect" th:value="${#mvc.url('SC#delegates').arg(0, school.id).build()}">
 								<input type="submit" class="btn btn-danger" value="Unassign">
 							</form>
@@ -58,14 +58,14 @@
 			<p th:if="${school.unassignedDelegateCount > 0}">
 				[[${school.unassignedDelegateCount}]] [[${school.unassignedDelegateCount == 1 ? 'spot' : 'spots'}]] remaining.
 			</p>
-			<form th:if="${school.unassignedDelegateCount > 0}" th:action="@{/admin/school/assign-position}" method="post">
+			<form th:if="${school.unassignedDelegateCount > 0}" th:action="@{/admin/school/assign-positions}" method="post">
 				<input type="hidden" name="schoolId" th:value="${school.id}">
 				<select name="positionId" class="form-control">
-                    <!--/*@thymesVar id="position" type="org.brownmun.model.committee.Position"*/-->
+                    <!--/*@thymesVar id="positions" type="org.brownmun.model.committee.Position"*/-->
 					<option
-						th:each="position : ${availablePositions}"
-						th:value="${position.id}"
-						th:text="${position.committee.shortName + ' - ' + position.name}"
+						th:each="positions : ${availablePositions}"
+						th:value="${positions.id}"
+						th:text="${positions.committee.shortName + ' - ' + positions.name}"
 					>COMMITTEE - Position</option>
 				</select>
 				<input type="submit" class="btn btn-primary" value="Assign">

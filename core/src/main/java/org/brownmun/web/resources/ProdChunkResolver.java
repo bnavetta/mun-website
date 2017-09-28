@@ -1,7 +1,8 @@
 package org.brownmun.web.resources;
 
 import com.google.common.collect.ImmutableMap;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,12 @@ import java.util.Optional;
 /**
  * Load the embedded {@code asset-manifest.json} once
  */
-@Slf4j
 @Service
 @Profile("prod-assets")
 public class ProdChunkResolver extends AbstractChunkResolver
 {
+	private static final Logger log = LoggerFactory.getLogger(ProdChunkResolver.class);
+	
 	private Map<String, Chunk> chunks = ImmutableMap.of();
 
 	@PostConstruct

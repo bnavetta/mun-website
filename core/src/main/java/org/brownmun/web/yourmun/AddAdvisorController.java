@@ -1,8 +1,6 @@
 package org.brownmun.web.yourmun;
 
 import com.google.common.collect.ImmutableMap;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.advisor.AdvisorCreationException;
 import org.brownmun.advisor.AdvisorCreationRequest;
 import org.brownmun.advisor.AdvisorCreationService;
@@ -10,6 +8,8 @@ import org.brownmun.mail.MailException;
 import org.brownmun.model.School;
 import org.brownmun.model.advisor.Advisor;
 import org.brownmun.web.security.AdvisorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -28,11 +28,12 @@ import java.util.Map;
 /**
  * Handle creating non-primary school advisors
  */
-@Slf4j
 @Controller
 @RequestMapping("/yourmun/add-advisors")
 public class AddAdvisorController
 {
+    private static final Logger log = LoggerFactory.getLogger(AddAdvisorController.class);
+    
     private final AdvisorService advisorService;
     private final AdvisorCreationService advisorCreationService;
     private final MessageSource messages;
@@ -120,10 +121,29 @@ public class AddAdvisorController
     /**
      * JSON request to add advisors.
      */
-    @Data
-    public static class AddAdvisorsRequest
+    private static class AddAdvisorsRequest
     {
         private Long schoolId;
         private List<AdvisorCreationRequest> advisors;
+
+        public Long getSchoolId()
+        {
+            return schoolId;
+        }
+
+        public void setSchoolId(Long schoolId)
+        {
+            this.schoolId = schoolId;
+        }
+
+        public List<AdvisorCreationRequest> getAdvisors()
+        {
+            return advisors;
+        }
+
+        public void setAdvisors(List<AdvisorCreationRequest> advisors)
+        {
+            this.advisors = advisors;
+        }
     }
 }

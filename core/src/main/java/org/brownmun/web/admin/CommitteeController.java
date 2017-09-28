@@ -1,16 +1,16 @@
 package org.brownmun.web.admin;
 
 import com.google.common.collect.Lists;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import org.brownmun.model.Delegate;
 import org.brownmun.model.committee.Committee;
 import org.brownmun.model.committee.CommitteeType;
-import org.brownmun.model.Delegate;
 import org.brownmun.model.committee.Position;
 import org.brownmun.model.repo.CommitteeRepository;
 import org.brownmun.model.repo.DelegateRepository;
 import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +20,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequestMapping("/admin/committee")
 public class CommitteeController
 {
+	private static final Logger log = LoggerFactory.getLogger(CommitteeController.class);
+
 	private final CommitteeRepository repo;
 	private final SchoolRepository schoolRepo;
 	private final DelegateRepository delegateRepo;
@@ -209,7 +210,6 @@ public class CommitteeController
 	}
 
 	// Needed because type erasure prevents using List<String> as a method parameter directly
-	@Data
 	static class PositionForm
 	{
 		List<Long> positions;

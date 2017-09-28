@@ -1,19 +1,18 @@
 package org.brownmun.model.advisor;
 
-import lombok.Data;
+import com.google.common.base.MoreObjects;
 import org.brownmun.model.School;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
-import javax.persistence.*;
 
 /**
  * A school advisor.
  */
-@Data
 @Entity
 public class Advisor implements UserDetails
 {
@@ -40,6 +39,72 @@ public class Advisor implements UserDetails
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public boolean isPrimary()
+    {
+        return isPrimary;
+    }
+
+    public void setPrimary(boolean primary)
+    {
+        isPrimary = primary;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public School getSchool()
+    {
+        return school;
+    }
+
+    public void setSchool(School school)
+    {
+        this.school = school;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
@@ -75,5 +140,19 @@ public class Advisor implements UserDetails
     public boolean isEnabled()
     {
         return true;
+    }
+
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("isPrimary", isPrimary)
+                .add("name", name)
+                .add("email", email)
+                .add("phoneNumber", phoneNumber)
+                .add("password", password)
+                .add("school_id", school.getId())
+                .toString();
     }
 }

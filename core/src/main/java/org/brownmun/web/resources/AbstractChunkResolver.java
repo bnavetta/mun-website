@@ -2,8 +2,8 @@ package org.brownmun.web.resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -12,9 +12,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
-@Slf4j
 public abstract class AbstractChunkResolver implements ChunkResolver
 {
+	private static final Logger log = LoggerFactory.getLogger(AbstractChunkResolver.class);
+	
 	private ObjectMapper mapper;
 
 	@Autowired

@@ -1,16 +1,15 @@
 package org.brownmun.model.committee;
 
-import lombok.Data;
+import com.google.common.base.MoreObjects;
 import org.hibernate.validator.constraints.NotBlank;
 
-import java.util.Collection;
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Crisis simulations can consist of multiple committees.
  */
 @Entity
-@Data
 public class JointCrisis
 {
     @Id
@@ -29,4 +28,55 @@ public class JointCrisis
         inverseJoinColumns = @JoinColumn(name = "committee_id")
     )
     private Collection<Committee> committees;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public Collection<Committee> getCommittees()
+    {
+        return committees;
+    }
+
+    public void setCommittees(Collection<Committee> committees)
+    {
+        this.committees = committees;
+    }
+
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("description", description)
+                .add("committees", committees)
+                .toString();
+    }
 }

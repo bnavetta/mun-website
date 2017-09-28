@@ -29,10 +29,10 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava'
 
+    compile 'javax.xml.bind:jaxb-api:2.3.+'
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
-    // Also a compileOnly dependency, but needed so the other processors see it
-    apt 'org.projectlombok:lombok'
     apt 'org.springframework.boot:spring-boot-configuration-processor'
-//    apt 'org.hibernate:hibernate-jpamodelgen'
+    apt 'org.hibernate:hibernate-jpamodelgen'
 }

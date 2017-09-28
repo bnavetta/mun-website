@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE"
         classpath "com.netflix.nebula:nebula-project-plugin:3.3.0"
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
     }
@@ -29,7 +29,7 @@ allprojects {
 task coverage(type: JacocoReport) {
     reports {
         html {
-            destination = file("$buildDir/reports/coverage")
+            destination file("$buildDir/reports/coverage")
         }
     }
 }
@@ -72,7 +72,6 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
     dependencies {
         compile 'com.google.guava:guava'
         compile 'org.apache.commons:commons-lang3'
-        compileOnly 'org.projectlombok:lombok'
     }
 
     bootRun {
@@ -92,5 +91,10 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
     tasks.withType(Test) {
         rootProject.tasks['coverage'].executionData it
         rootProject.tasks['testReport'].reportOn it
+    }
+
+    tasks.withType(JavaCompile) {
+//        options.compilerArgs = ['--add-modules', 'java.xml.bind', '--release', '8']
+//        options.compilerArgs = ['--release', '8']
     }
 }

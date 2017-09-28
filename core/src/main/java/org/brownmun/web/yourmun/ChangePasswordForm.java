@@ -1,12 +1,10 @@
 package org.brownmun.web.yourmun;
 
-import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Models the form for when an advisor changes their password.
  */
-@Data
 public class ChangePasswordForm
 {
     @NotBlank
@@ -14,4 +12,24 @@ public class ChangePasswordForm
 
     @NotBlank
     private String passwordConfirm;
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm()
+    {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm)
+    {
+        this.passwordConfirm = passwordConfirm;
+    }
 }

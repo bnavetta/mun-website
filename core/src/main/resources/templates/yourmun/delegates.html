@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+<head>
+    <title th:text="|Your ${#conference.name}: Committee Positions|"></title>
+    <wp:chunk name="index"/>
+</head>
+<body>
+<header layout:fragment="header">
+    <h1 class="text-center" th:text="|Your ${#conference.name}|">Your BUSUN</h1>
+    <h2 class="text-center">Committee Positions</h2>
+</header>
+<div layout:fragment="body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Committee</th>
+            <th>Position</th>
+        </tr>
+        </thead>
+        <!--/*@thymesVar id="delegates" type="java.util.List<org.brownmun.model.Delegate>"*/-->
+        <tr th:each="delegate : ${delegates}">
+            <td th:text="${delegate.position.committee.name}">Committee</td>
+            <td th:text="${delegate.position.name}">Position</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,8 +1,9 @@
 package org.brownmun.web.resources;
 
 import com.google.common.base.Suppliers;
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.ConferenceProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,12 @@ import java.util.function.Supplier;
 /**
  * Reload from the built {@code asset-manifest.json} every time
  */
-@Slf4j
 @Service
 @Profile("dev-assets")
 public class DevChunkResolver extends AbstractChunkResolver
 {
+	private static final Logger log = LoggerFactory.getLogger(DevChunkResolver.class);
+
 	// IntelliJ runs from the workspace root. Does Gradle?
 	private final URI dllJson;
 	private final URI statsJson = URI.create("http://localhost:8000/asset-manifest.json");

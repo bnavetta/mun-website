@@ -1,28 +1,30 @@
 package org.brownmun.advisor;
 
 import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.MailException;
 import org.brownmun.mail.MailService;
+import org.brownmun.model.School;
 import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.advisor.AdvisorCreationToken;
-import org.brownmun.model.School;
 import org.brownmun.model.repo.AdvisorCreationTokenRepository;
 import org.brownmun.util.Tokens;
 import org.brownmun.web.security.AdvisorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Service to handle creating secondary {@link Advisor}s
  */
-@Slf4j
 @Service
 public class AdvisorCreationService
 {
+    private static final Logger log = LoggerFactory.getLogger(AdvisorCreationService.class);
+    
     private final AdvisorCreationTokenRepository tokenRepo;
     private final AdvisorService advisorService;
     private final MailService mailService;

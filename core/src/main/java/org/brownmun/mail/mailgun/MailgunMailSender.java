@@ -3,11 +3,11 @@ package org.brownmun.mail.mailgun;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.brownmun.mail.EmailDescriptor;
 import org.brownmun.mail.MailException;
 import org.brownmun.mail.MailSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,9 +18,10 @@ import org.springframework.web.client.RestTemplate;
 /**
  * {@link MailSender} that uses the Mailgun API
  */
-@Slf4j
 public class MailgunMailSender implements MailSender
 {
+    private static final Logger log = LoggerFactory.getLogger(MailgunMailSender.class);
+
     private final RestTemplate restTemplate;
     private final ObjectMapper jsonMapper;
     private final TaskExecutor executor;
@@ -91,10 +92,29 @@ public class MailgunMailSender implements MailSender
         });
     }
 
-    @Data
     private static class MailgunMessageResponse
     {
         private String message;
         private String id;
+
+        public String getMessage()
+        {
+            return message;
+        }
+
+        public void setMessage(String message)
+        {
+            this.message = message;
+        }
+
+        public String getId()
+        {
+            return id;
+        }
+
+        public void setId(String id)
+        {
+            this.id = id;
+        }
     }
 }

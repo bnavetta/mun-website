@@ -3,11 +3,12 @@ package org.brownmun.mail;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import lombok.extern.slf4j.Slf4j;
+import org.brownmun.model.School;
 import org.brownmun.model.advisor.Advisor;
 import org.brownmun.model.advisor.AdvisorCreationToken;
 import org.brownmun.model.advisor.PasswordResetToken;
-import org.brownmun.model.School;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,11 @@ import java.util.Optional;
 /**
  * Service wrapper around all the transactional emails we have to send.
  */
-@Slf4j
 @Service
 public class MailService
 {
+    private static final Logger log = LoggerFactory.getLogger(MailService.class);
+    
     private final MailSender mailSender;
     private final MessageLoader messageLoader;
     private final MailProperties props;

@@ -1,19 +1,15 @@
 package org.brownmun.mail;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import lombok.Data;
 import org.springframework.core.io.Resource;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Models an email to send, potentially batched.
  */
-@Data
 public class EmailDescriptor
 {
     /**
@@ -71,5 +67,134 @@ public class EmailDescriptor
     public void setText(String text)
     {
         this.text = Optional.ofNullable(text);
+    }
+
+    public String getFrom()
+    {
+        return from;
+    }
+
+    public void setFrom(String from)
+    {
+        this.from = from;
+    }
+
+    public Map<String, Map<String, String>> getRecipients()
+    {
+        return recipients;
+    }
+
+    public void setRecipients(Map<String, Map<String, String>> recipients)
+    {
+        this.recipients = recipients;
+    }
+
+    public Optional<String> getReplyTo()
+    {
+        return replyTo;
+    }
+
+    public void setReplyTo(Optional<String> replyTo)
+    {
+        this.replyTo = replyTo;
+    }
+
+    public String getSubject()
+    {
+        return subject;
+    }
+
+    public void setSubject(String subject)
+    {
+        this.subject = subject;
+    }
+
+    public Optional<String> getText()
+    {
+        return text;
+    }
+
+    public void setText(Optional<String> text)
+    {
+        this.text = text;
+    }
+
+    public Optional<String> getHtml()
+    {
+        return html;
+    }
+
+    public void setHtml(Optional<String> html)
+    {
+        this.html = html;
+    }
+
+    public Collection<Resource> getInline()
+    {
+        return inline;
+    }
+
+    public void setInline(Collection<Resource> inline)
+    {
+        this.inline = inline;
+    }
+
+    public Collection<Resource> getAttachments()
+    {
+        return attachments;
+    }
+
+    public void setAttachments(Collection<Resource> attachments)
+    {
+        this.attachments = attachments;
+    }
+
+    public Set<String> getTags()
+    {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags)
+    {
+        this.tags = tags;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmailDescriptor that = (EmailDescriptor) o;
+        return Objects.equals(from, that.from) &&
+                Objects.equals(recipients, that.recipients) &&
+                Objects.equals(replyTo, that.replyTo) &&
+                Objects.equals(subject, that.subject) &&
+                Objects.equals(text, that.text) &&
+                Objects.equals(html, that.html) &&
+                Objects.equals(inline, that.inline) &&
+                Objects.equals(attachments, that.attachments) &&
+                Objects.equals(tags, that.tags);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(from, recipients, replyTo, subject, text, html, inline, attachments, tags);
+    }
+
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this)
+                .add("from", from)
+                .add("recipients", recipients)
+                .add("replyTo", replyTo)
+                .add("subject", subject)
+                .add("text", text)
+                .add("html", html)
+                .add("inline", inline)
+                .add("attachments", attachments)
+                .add("tags", tags)
+                .toString();
     }
 }
