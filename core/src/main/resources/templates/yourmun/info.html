@@ -30,6 +30,8 @@
                 </ul>
             </div>
 
+            <div class="alert alert-success" th:unless="${#strings.isEmpty(message)}" th:text="${message}"/>
+
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#school-info" role="tab">School Info</a>
