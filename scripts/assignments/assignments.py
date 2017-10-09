@@ -2,63 +2,35 @@
 
 import random
 import csv
-import requests
 
-# load schools from google form csv
-# for countries, do country -> list of committees
-# for spec/crisis, have newline-delimited file
+general_position_count = 0
 
-base = 'http://localhost:8080/adminp/assignment-params/'
+with open('ga_positions2.csv') as f:
+    ga_positions = dict()
+    r = csv.reader(f)
+    for row in r:
+        committee = row[0]
+        country = row[1]
+        general_position_count += 1
+        posn = committee + ':' + country
+        if country in ga_positions:
+            ga_positions[country].append(posn)
+        else:
+            ga_positions[country] = [posn]
 
-# countries_json = requests.get(base + 'ga-countries').json()
-# countries = [pair for pair in countries_json.iteritems()]
-# general_position_count = sum(len(posns) for (_, posns) in countries)
+    countries = list(ga_positions.items())
 
-# spec_positions = requests.get(base + 'spec-positions').json()
-# spec_position_count = len(spec_positions)
+with open('spec.txt') as f:
+    spec_positions = [p.strip() for p in f]
+    spec_position_count = len(spec_positions)
 
-# crisis_positions = requests.get(base + 'crisis-positions').json()
-# crisis_position_count = len(crisis_positions)
-
-general_position_count = 50
-spec_position_count = 20
-crisis_position_count = 30
-
-countries = [
-    ('France', [1, 2, 3, 4, 5, 6, 7, 8]), # (name, position IDs)
-    ('United States', [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]),
-    ('Israel', [21, 22, 23, 24, 25, 26]),
-    ('New York', [27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]),
-    ('Russia', [41, 42, 43, 44, 45, 46, 47, 48, 49, 50])
-]
-
-spec_positions = [
-    'The Pope',
-    'Italy or something',
-    'Parliament',
-    'Other Parliament',
-    'Adam',
-    'Adam 2',
-    'Adam 3',
-    'Adam 4',
-    'Jordan',
-    'Jourdan',
-    'Cathy',
-    'Bia',
-    'Tess',
-    'Colette',
-    'Bethany',
-    'Ben',
-    'Alex',
-    'ALEX',
-    'aLeX',
-    'ALEXXXXXXXX'
-]
-
-crisis_positions = []
+with open('crisis.txt') as f:
+    crisis_positions = [p.strip() for p in f]
+    crisis_position_count = len(crisis_positions)
 
 class School(object):
-    def __init__(self, name, general_pref, spec_pref, crisis_pref):
+    def __init__(self, id, name, general_pref, spec_pref, crisis_pref):
+        self.id = id
         self.name = name
         # Requested # of delegates of each type
         self.general_pref = general_pref
@@ -77,12 +49,18 @@ class School(object):
     def slots_remaining(self):
         return self.general_pref + self.spec_pref + self.crisis_pref
 
-schools = [
-    School("Groton-Dunstable", 10, 5, 6),
-    School("Stuy", 6, 4, 15),
-    School("PASA", 20, 0, 0),
-    School("Wheeler", 15, 8, 8)
-]
+schools = []
+with open('schools.csv') as f:
+    r = csv.reader(f)
+    next(r)
+    for row in r:
+        schools.append(School(row[0], row[1], int(row[2]), int(row[3]), int(row[4])))
+
+delegate_count = 0
+for school in schools:
+    delegate_count += school.general_pref + school.spec_pref + school.crisis_pref
+
+print("{} delegates and {} positions".format(delegate_count, general_position_count + spec_position_count + crisis_position_count))
 
 while True:
     progress = False # track when we stop assigning
@@ -185,7 +163,7 @@ for school in schools:
 
 with open('assignments.csv', 'w') as f:
     w = csv.writer(f)
+    w.writerow(['school_name', 'position_id', 'position_name'])
     for school in schools:
-        row = [school.name]
-        row.extend(school.positions)
-        w.writerow(row)
+        for posn in school.positions:
+            w.writerow([school.name, posn])
