@@ -15,6 +15,8 @@
             <h3 th:text="${committee.name}">My Committee</h3>
             <p class="my-2" th:text="${committee.description}">About the committee.</p>
 
+            <p class="my-2"><a th:href="|https://storage.googleapis.com/busun_assets/background_guides/${committee.shortName}.pdf|">Background Guide</a></p>
+
             <th:block th:if="${committee.hasTopics()}">
                 <p>Topics:</p>
                 <ul>
