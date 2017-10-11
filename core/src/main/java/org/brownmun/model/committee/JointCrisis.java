@@ -19,6 +19,8 @@ public class JointCrisis
     @NotBlank
     private String name;
 
+    private String shortName;
+
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -49,6 +51,16 @@ public class JointCrisis
         this.name = name;
     }
 
+    public String getShortName()
+    {
+        return shortName;
+    }
+
+    public void setShortName(String shortName)
+    {
+        this.shortName = shortName;
+    }
+
     public String getDescription()
     {
         return description;
@@ -67,6 +79,13 @@ public class JointCrisis
     public void setCommittees(Collection<Committee> committees)
     {
         this.committees = committees;
+    }
+
+    @Transient
+    public String getContactEmail()
+    {
+        // TODO: this will break for bucs
+        return getShortName() == null ? "<none>" : getShortName().toLowerCase() + "@busun.org";
     }
 
     @Override
