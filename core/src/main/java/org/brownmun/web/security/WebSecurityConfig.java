@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.Http401AuthenticationEntryPoint;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -56,6 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private StaffPrincipalExtractor principalExtractor;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
@@ -116,6 +120,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
         tokenServices.setRestTemplate(template);
         tokenServices.setAuthoritiesExtractor(authoritiesExtractor());
+        tokenServices.setPrincipalExtractor(principalExtractor);
         filter.setTokenServices(tokenServices);
         filter.setAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler());
         return filter;
