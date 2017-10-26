@@ -30,6 +30,10 @@ export default compose(partials)({
         extensions: ['.jsx', '.js'],
     },
 
+    node: {
+        net: 'empty',
+    },
+
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),

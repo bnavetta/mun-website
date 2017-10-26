@@ -12,6 +12,7 @@ const config = {
         public: [path.resolve('./src/public/index.js')],
 
         admin: ['babel-polyfill', path.resolve('./src/admin/index.js')],
+        print: ['babel-polyfill', path.resolve('./src/admin/print/index.jsx')],
         committeeAdmin: ['babel-polyfill', path.resolve('./src/admin/committee/index.jsx')],
         schoolAdmin: ['babel-polyfill', path.resolve('./src/admin/school/index.jsx')],
     },
