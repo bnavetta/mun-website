@@ -1,5 +1,7 @@
 package org.brownmun.web;
 
+import org.brownmun.ConferenceProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -10,6 +12,9 @@ import java.time.Duration;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter
 {
+    @Autowired
+    private ConferenceProperties conference;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry)
     {
@@ -29,6 +34,11 @@ public class WebConfig extends WebMvcConfigurerAdapter
 
         // Only useful for dev, but shouldn't break anything in production?
         registry.addRedirectViewController("/__webpack_hmr", "http://localhost:8000/__webpack_hmr");
+
+        if (conference.getName().equals("BUSUN"))
+        {
+            registry.addViewController("/conference/classes").setViewName("conference/classes");
+        }
     }
 
     @Override
