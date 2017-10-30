@@ -59,14 +59,15 @@ public class AdvisorCreationService
     public void inviteAdvisors(School school, Iterable<AdvisorCreationRequest> advisors) throws AdvisorCreationException
     {
         Iterable<AdvisorCreationToken> tokens = generateTokens(school, advisors);
+
         try
         {
             mailService.sendAdvisorCreationInvites(tokens, school);
+            log.debug("Sent invitation emails to advisors");
         }
         catch (MailException e)
         {
             log.error("Exception sending advisor invitations", e);
-            throw new AdvisorCreationException("advisorCreation.inviteFailed", null, e);
         }
     }
 

@@ -68,6 +68,7 @@ public class AddAdvisorController
         }
         catch (AdvisorCreationException e)
         {
+            log.error("Error inviting advisors", e);
             return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ImmutableMap.of("error", messages.getMessage(e.getMessageCode(), null, locale)));
@@ -117,7 +118,18 @@ public class AddAdvisorController
      */
     private static class AddAdvisorsRequest
     {
+        private Long schoolId;
         private List<AdvisorCreationRequest> advisors;
+
+        public Long getSchoolId()
+        {
+            return schoolId;
+        }
+
+        public void setSchoolId(Long schoolId)
+        {
+            this.schoolId = schoolId;
+        }
 
         public List<AdvisorCreationRequest> getAdvisors()
         {
