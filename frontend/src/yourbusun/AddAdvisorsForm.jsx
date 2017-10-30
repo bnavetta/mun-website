@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import R from 'ramda';
 import request from '../util/superagent';
@@ -13,10 +12,6 @@ type Props = {
 };
 
 export default class AddAdvisorsForm extends React.Component {
-    static propTypes = {
-        schoolId: React.PropTypes.number.isRequired,
-    };
-
     constructor(props: Props) {
         super(props);
 
@@ -45,7 +40,6 @@ export default class AddAdvisorsForm extends React.Component {
             request
                 .post('/yourmun/add-advisors')
                 .send({
-                    schoolId: this.props.schoolId,
                     advisors: this.state.advisors,
                 })
                 .end((err, res) => {

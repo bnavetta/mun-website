@@ -60,12 +60,6 @@ public class AddAdvisorController
     {
         advisor = advisorService.load(advisor);
         School school = advisor.getSchool();
-        if (!school.getId().equals(request.getSchoolId()))
-        {
-            return ResponseEntity
-                .status(HttpStatus.FORBIDDEN)
-                .body(ImmutableMap.of("error", "Incorrect school ID"));
-        }
 
         try
         {
@@ -123,18 +117,7 @@ public class AddAdvisorController
      */
     private static class AddAdvisorsRequest
     {
-        private Long schoolId;
         private List<AdvisorCreationRequest> advisors;
-
-        public Long getSchoolId()
-        {
-            return schoolId;
-        }
-
-        public void setSchoolId(Long schoolId)
-        {
-            this.schoolId = schoolId;
-        }
 
         public List<AdvisorCreationRequest> getAdvisors()
         {
