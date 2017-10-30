@@ -43,7 +43,7 @@ export default class AddAdvisorsForm extends React.Component {
         this.submitAdvisors = () => {
             this.setState({ error: null, message: null });
             request
-                .post('/yourbusun/add-advisors')
+                .post('/yourmun/add-advisors')
                 .send({
                     schoolId: this.props.schoolId,
                     advisors: this.state.advisors,

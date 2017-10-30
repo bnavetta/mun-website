@@ -8,6 +8,8 @@ spring:
     mvc:
       favicon:
         enabled: true
+    messages:
+      basename: messages,conference_messages
 
 
 server:
