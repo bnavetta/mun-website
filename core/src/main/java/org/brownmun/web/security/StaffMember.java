@@ -61,6 +61,22 @@ public class StaffMember
         this.committeeId = committeeId;
     }
 
+    public String getRole()
+    {
+        if (isSec)
+        {
+            return "Sec member";
+        }
+        else if (committeeId.isPresent())
+        {
+            return "Staff for committee " + committeeId.get();
+        }
+        else
+        {
+            return "Staff member";
+        }
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -82,11 +98,6 @@ public class StaffMember
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("name", name)
-                .add("email", email)
-                .add("isSec", isSec)
-                .add("committeeId", committeeId)
-                .toString();
+        return String.format("%s %s (%s)", getRole(), name, email);
     }
 }
