@@ -3,6 +3,7 @@ package org.brownmun.model.committee;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ComparisonChain;
+import org.brownmun.model.Attendance;
 import org.brownmun.model.Delegate;
 import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.NotBlank;
@@ -33,7 +34,10 @@ public class Position implements Comparable<Position>
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "delegate_id")
-	private org.brownmun.model.Delegate delegate;
+	private Delegate delegate;
+
+	@Embedded
+	private Attendance attendance;
 
 	@Formula("(delegate_id is not null)")
 	private boolean assigned;
@@ -83,7 +87,17 @@ public class Position implements Comparable<Position>
 		this.assigned = assigned;
 	}
 
-	@Override
+    public Attendance getAttendance()
+    {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance)
+    {
+        this.attendance = attendance;
+    }
+
+    @Override
 	public boolean equals(Object o)
 	{
 		if (this == o) return true;
@@ -110,6 +124,7 @@ public class Position implements Comparable<Position>
 			.add("committee_id", committee.getId())
 			.add("delegate_id", delegate != null ? delegate.getId() : "null")
 			.add("assigned", assigned)
+            .add("attendance", attendance)
 			.toString();
 	}
 

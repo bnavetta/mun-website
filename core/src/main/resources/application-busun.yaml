@@ -197,3 +197,101 @@ server:
   tomcat:
     accesslog:
       directory: /var/log/busun
+
+staff:
+  committees:
+    african_union:
+      - african_union@busun.org
+    arab_league:
+      - arab_league@busun.org
+    undp:
+      - undp@busun.org
+    disec:
+      - disec@busun.org
+    ecosoc:
+      - ecosoc@busun.org
+    environmental_assembly:
+      - environmental_assembly@busun.org
+    european_union:
+      - european_union@busun.org
+    plenary:
+      - plenary@busun.org
+    unhcr:
+      - unhcr@busun.org
+    hrc:
+      - hrc@busun.org
+    sc:
+      - sc@busun.org
+    specpol:
+      - specpol@busun.org
+    un_women:
+      - un_women@busun.org
+    who:
+      - who@busun.org
+    # Spec
+    rome_statute:
+      - rome_statute@busun.org
+    australian_parliament:
+      - australian_parliament@busun.org
+    climate_and_forests:
+      - climate_and_forests@busun.org
+    sherpas_nepalese_government:
+      - sherpas_nepalese_government@busun.org
+    westphalia:
+      - westphalia@busun.org
+    peter_the_great:
+      - peter_the_great@busun.org
+    nato:
+      - nato@busun.org
+    rashidun_caliphate:
+      - rashidun_caliphate@busun.org
+    zanzibar:
+      - zanzibar@busun.org
+    lyon:
+      - lyon@busun.org
+    sri_lankan_parliament:
+      - sri_lankan_parliament@busun.org
+    algeciras:
+      - algeciras@busun.org
+    british_parliament:
+      - british_parliament@busun.org
+    # Crisis
+    #   All 1848 committees
+    vienna:
+      - 1848@busun.org
+      - vienna@busun.org
+    hungarian_diet:
+      - 1848@busun.org
+      - hungarian_diet@busun.org
+    piedmontese_cabinet:
+      - 1848@busun.org
+      - piedmontese_cabinet@busun.org
+    #  All Arab Spring committees
+    saudi_uae:
+      - arab_spring@busun.org
+      - saudi_uae@busun.org
+    egypt_gov:
+      - arab_spring@busun.org
+      - egypt_gov@busun.org
+    tahir:
+      - arab_spring@busun.org
+      - tahir@busun.org
+    muslim_brothers:
+      - arab_spring@busun.org
+      - muslim_brothers@busun.org
+    #  All Cuban Government committees
+    cuba:
+      - cuba@busun.org
+      - cuban_gov@busun.org
+    us:
+      - cuban_gov@busun.org
+      - us@busun.org
+    # Regular crisis
+    cesar_gaviria:
+      - cesar_gaviria@busun.org
+      - cesar_gaviria_chair@busun.org
+    singapore:
+      - singapore@busun.org
+      - singapore_chair@busun.org
+  ops:
+    - ben.navetta@gmail.com

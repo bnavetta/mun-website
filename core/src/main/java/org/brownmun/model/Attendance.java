@@ -2,10 +2,7 @@ package org.brownmun.model;
 
 import com.google.common.base.MoreObjects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.BitSet;
 import java.util.Objects;
@@ -16,57 +13,35 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 /**
  * Represents a delegate's attendance for their committee.
  */
-@Entity
+@Embeddable
 public class Attendance implements Serializable
 {
     private static final int POSITION_PAPER_INDEX = 0;
     private static final int MIN_SESSION = 1;
-    private static final int MAX_SESSION = 5;
+    private static final int MAX_SESSION = 4;
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "delegate_id", referencedColumnName = "id")
-    private Delegate delegate;
+    private BitSet attendanceRecord = new BitSet(MAX_SESSION + 1);
 
-    // TODO: link to staff member since they have no local state
-    // is it needed?
-
-    // TODO: just do a bitset where i == session (with 0 for position paper)
-
-    private BitSet record = new BitSet(MAX_SESSION + 1);
-
-    public boolean positionPaperSubmitted()
+    public boolean isPositionPaperSubmitted()
     {
-        return record.get(POSITION_PAPER_INDEX);
+        return attendanceRecord.get(POSITION_PAPER_INDEX);
     }
 
     public void setPositionPaperSubmitted(boolean submitted)
     {
-        record.set(POSITION_PAPER_INDEX, submitted);
+        attendanceRecord.set(POSITION_PAPER_INDEX, submitted);
     }
 
     public boolean isPresentForSession(int session)
     {
-        checkElementIndex(session, MAX_SESSION + 1, "%s beyond last session");
-        checkArgument(session >= MIN_SESSION, "%s before first session", session);
-        return record.get(session);
+        checkArgument(session >= MIN_SESSION && session <= MAX_SESSION, "session %s out of bounds", session);
+        return attendanceRecord.get(session);
     }
 
     public void setPresentForSession(int session, boolean present)
     {
-        checkElementIndex(session, MAX_SESSION + 1, "%s beyond last session");
-        checkArgument(session >= MIN_SESSION, "%s before first session", session);
-        record.set(session, present);
-    }
-
-    public Delegate getDelegate()
-    {
-        return delegate;
-    }
-
-    public void setDelegate(Delegate delegate)
-    {
-        this.delegate = delegate;
+        checkArgument(session >= MIN_SESSION && session <= MAX_SESSION, "session %s out of bounds", session);
+        attendanceRecord.set(session, present);
     }
 
     @Override
@@ -75,21 +50,24 @@ public class Attendance implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Attendance that = (Attendance) o;
-        return Objects.equals(record, that.record);
+        return Objects.equals(attendanceRecord, that.attendanceRecord);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(record);
+        return Objects.hash(attendanceRecord);
     }
 
     @Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this)
-                .add("delegate", delegate)
-                .add("record", record)
+                .add("positionPaper", isPositionPaperSubmitted())
+                .add("sessionOne", isPresentForSession(1))
+                .add("sessionTwo", isPresentForSession(2))
+                .add("sessionThree", isPresentForSession(3))
+                .add("sessionFour", isPresentForSession(4))
                 .toString();
     }
 }
