@@ -48,6 +48,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     private AdvisorService advisorService;
 
     @Autowired
+    private StaffService staffService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -133,7 +136,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     @Bean
-    public AuthoritiesExtractor authoritiesExtractor(StaffService staffService)
+    public AuthoritiesExtractor authoritiesExtractor()
     {
         return new DomainRestrictedAuthoritiesExtractor(staffService);
     }

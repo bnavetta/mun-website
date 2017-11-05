@@ -1,6 +1,8 @@
 package org.brownmun.web.security;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
@@ -13,12 +15,12 @@ public class StaffProperties
     /**
      * Email addresses of ops staffers (not associated with a committee)
      */
-    private List<String> ops;
+    private List<String> ops = Lists.newArrayList();
 
     /**
      * Email addresses of committee staffers, grouped by committee shortname.
      */
-    private Map<String, List<String>> committees;
+    private Map<String, List<String>> committees = Maps.newHashMap();
 
     public List<String> getOps()
     {

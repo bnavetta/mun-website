@@ -51,7 +51,11 @@ public class StaffService
 
         for (Map.Entry<String, List<String>> committee : staffers.getCommittees().entrySet())
         {
-            long id = committeeRepo.findIdByShortName(committee.getKey());
+            Long id = committeeRepo.findIdByShortName(committee.getKey());
+            if (id == null)
+            {
+                throw new IllegalStateException("No committee with short name " + committee.getKey());
+            }
             for (String staffEmail : committee.getValue())
             {
                 staff.put(staffEmail, new StaffMember(staffEmail, StaffType.COMMITTEE, id));
