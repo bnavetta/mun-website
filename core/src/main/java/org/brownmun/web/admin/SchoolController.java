@@ -10,6 +10,7 @@ import org.brownmun.model.repo.DelegateRepository;
 import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/school")
+@PreAuthorize("hasRole('SEC')")
 public class SchoolController
 {
 	private final SchoolRepository repo;

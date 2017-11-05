@@ -1,34 +1,28 @@
 package org.brownmun.web.security;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 
 import java.util.Objects;
 import java.util.Optional;
 
 public class StaffMember
 {
-    private String name;
     private String email;
 
-    private boolean isSec;
-    private Optional<Long> committeeId;
+    private StaffType type;
+    private long committeeId;
 
-    public StaffMember(String name, String email, boolean isSec, Optional<Long> committeeId)
+    public StaffMember(String email, StaffType staffType, long committeeId)
     {
-        this.name = name;
         this.email = email;
-        this.isSec = isSec;
+        this.type = staffType;
         this.committeeId = committeeId;
-    }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
+        if (staffType == StaffType.COMMITTEE && committeeId < 1)
+        {
+            throw new IllegalArgumentException("Committee staff must have a committee ID");
+        }
     }
 
     public String getEmail()
@@ -41,40 +35,44 @@ public class StaffMember
         this.email = email;
     }
 
-    public boolean isSec()
+    public StaffType getType()
     {
-        return isSec;
+        return type;
     }
 
-    public void setSec(boolean sec)
+    public void setType(StaffType type)
     {
-        isSec = sec;
+        this.type = type;
     }
 
-    public Optional<Long> getCommitteeId()
+    public long getCommitteeId()
     {
         return committeeId;
     }
 
-    public void setCommitteeId(Optional<Long> committeeId)
+    public void setCommitteeId(long committeeId)
     {
         this.committeeId = committeeId;
     }
 
+    public boolean isCommitteeStaff()
+    {
+        return committeeId > 0;
+    }
+
     public String getRole()
     {
-        if (isSec)
+        switch (type)
         {
-            return "Sec member";
+            case SECRETARIAT:
+                return "Sec member";
+            case COMMITTEE:
+                return "Committee " + committeeId + " staff";
+            case OPS:
+                return "Ops staff";
         }
-        else if (committeeId.isPresent())
-        {
-            return "Staff for committee " + committeeId.get();
-        }
-        else
-        {
-            return "Staff member";
-        }
+
+        return null;
     }
 
     @Override
@@ -83,21 +81,27 @@ public class StaffMember
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StaffMember that = (StaffMember) o;
-        return isSec == that.isSec &&
-                Objects.equals(name, that.name) &&
+        return committeeId == that.committeeId &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(committeeId, that.committeeId);
+                type == that.type;
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(name, email, isSec, committeeId);
+        return Objects.hash(email, type, committeeId);
     }
 
     @Override
     public String toString()
     {
-        return String.format("%s %s (%s)", getRole(), name, email);
+        return String.format("%s (%s)", email, getRole());
+    }
+
+    public enum StaffType
+    {
+        SECRETARIAT,
+        OPS,
+        COMMITTEE
     }
 }

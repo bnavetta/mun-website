@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -12,33 +13,38 @@ import java.util.Map;
 public class DomainRestrictedAuthoritiesExtractor implements AuthoritiesExtractor
 {
     private static final Logger log = LoggerFactory.getLogger(DomainRestrictedAuthoritiesExtractor.class);
-    
-    private final SsoProperties ssoProperties;
 
-    public DomainRestrictedAuthoritiesExtractor(SsoProperties ssoProperties)
+    private static final List<GrantedAuthority> SEC_AUTHORITIES =
+            AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_STAFF", "ROLE_ACTUATOR", "ROLE_SEC");
+    private static final List<GrantedAuthority> OPS_AUTHORITIES =
+            AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_STAFF", "ROLE_OPS");
+    private static final List<GrantedAuthority> COMMITTEE_AUTHORITIES =
+            AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_STAFF", "ROLE_COMMITTEE");
+
+    private final StaffService staff;
+
+    public DomainRestrictedAuthoritiesExtractor(StaffService staff)
     {
-        this.ssoProperties = ssoProperties;
-        log.info("Configuring SSO with {}", ssoProperties);
+        this.staff = staff;
     }
 
     @Override
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map)
     {
-        String domain = (String) map.get("hd");
         String email = (String) map.get("email");
+        StaffMember staffMember = staff.getByEmail(email)
+                .orElseThrow(() -> new BadCredentialsException("Not allowed staff email: " + email));
 
-        boolean emailAllowed = email != null && ssoProperties.getAllowedEmails().contains(email);
-        boolean domainAllowed = domain != null && ssoProperties.getAllowedDomains().contains(domain);
-
-        if (domainAllowed || emailAllowed)
+        switch (staffMember.getType())
         {
-            log.debug("Allowing staff SSO for {} from domain {}", email, domain);
-            return ssoProperties.getAuthorities();
-        }
-        else
-        {
-            log.warn("Denying staff SSO for {} from domain {}", email, domain);
-            throw new BadCredentialsException("Not allowed staff email");
+            case SECRETARIAT:
+                return SEC_AUTHORITIES;
+            case OPS:
+                return OPS_AUTHORITIES;
+            case COMMITTEE:
+                return COMMITTEE_AUTHORITIES;
+            default:
+                throw new IllegalStateException("Unknown staff type: " + staffMember.getType());
         }
     }
 }

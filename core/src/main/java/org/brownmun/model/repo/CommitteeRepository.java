@@ -21,5 +21,5 @@ public interface CommitteeRepository extends CrudRepository<Committee, Long>
     @Query("SELECT c from Committee c WHERE c.committeeType = org.brownmun.model.committee.CommitteeType.CRISIS AND c.jointCrisis = FALSE")
     Collection<Committee> findNonJointCrisisCommittees();
 
-    Optional<Long> findIdByShortName(String shortName);
+    long findIdByShortName(String shortName);
 }
