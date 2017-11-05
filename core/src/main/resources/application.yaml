@@ -19,7 +19,6 @@ server:
 
 staff:
   committees:
-    # General Assembly
     african_union:
       - african_union@busun.org
     arab_league:
@@ -30,8 +29,8 @@ staff:
       - disec@busun.org
     ecosoc:
       - ecosoc@busun.org
-     environmental_assembly:
-      environmental_assembly@busun.org
+    environmental_assembly:
+      - environmental_assembly@busun.org
     european_union:
       - european_union@busun.org
     plenary:
