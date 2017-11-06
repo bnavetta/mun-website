@@ -15,7 +15,8 @@
     }],
     "transform-class-properties",
     "react-hot-loader/babel",
-    "ramda"
+    "ramda",
+    "emotion"
   ],
   "env": {
     "production": {

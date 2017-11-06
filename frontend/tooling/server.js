@@ -12,11 +12,15 @@ const compiler = webpack(webpackConfig);
 compiler.apply(new DashboardPlugin());
 
 const app = express();
+const port = process.env.PORT || 8000;
 
 const devMiddleware = webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
-})
+    headers: {
+        "Access-Control-Allow-Origin": "*"
+    }
+});
 
 app.use(devMiddleware);
 
@@ -37,4 +41,4 @@ app.get('*', (req, res) => {
     });
 })
 
-app.listen(process.env.PORT || 8000);
+app.listen(port);

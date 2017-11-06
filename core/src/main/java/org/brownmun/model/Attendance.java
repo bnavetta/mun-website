@@ -2,6 +2,7 @@ package org.brownmun.model;
 
 import com.google.common.base.MoreObjects;
 
+import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.BitSet;
@@ -20,6 +21,7 @@ public class Attendance implements Serializable
     private static final int MIN_SESSION = 1;
     private static final int MAX_SESSION = 4;
 
+    @Convert(converter = BitSetAttributeConverter.class)
     private BitSet attendanceRecord = new BitSet(MAX_SESSION + 1);
 
     public boolean isPositionPaperSubmitted()

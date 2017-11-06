@@ -7,9 +7,10 @@ import java.util.Objects;
 /**
  * Models the attendance data submitted from the frontend
  */
-public class AttendanceRequest
+public class PositionAttendance
 {
     private long positionId;
+    private String positionName;
     private boolean positionPaper;
     private boolean sessionOne;
     private boolean sessionTwo;
@@ -24,6 +25,16 @@ public class AttendanceRequest
     public void setPositionId(long positionId)
     {
         this.positionId = positionId;
+    }
+
+    public String getPositionName()
+    {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName)
+    {
+        this.positionName = positionName;
     }
 
     public boolean isPositionPaper()
@@ -81,8 +92,9 @@ public class AttendanceRequest
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AttendanceRequest that = (AttendanceRequest) o;
+        PositionAttendance that = (PositionAttendance) o;
         return positionId == that.positionId &&
+                positionName == that.positionName &&
                 positionPaper == that.positionPaper &&
                 sessionOne == that.sessionOne &&
                 sessionTwo == that.sessionTwo &&
@@ -93,7 +105,7 @@ public class AttendanceRequest
     @Override
     public int hashCode()
     {
-        return Objects.hash(positionId, positionPaper, sessionOne, sessionTwo, sessionThree, sessionFour);
+        return Objects.hash(positionId, positionName, positionPaper, sessionOne, sessionTwo, sessionThree, sessionFour);
     }
 
     @Override
@@ -101,6 +113,7 @@ public class AttendanceRequest
     {
         return MoreObjects.toStringHelper(this)
                 .add("positionId", positionId)
+                .add("positionName", positionName)
                 .add("positionPaper", positionPaper)
                 .add("sessionOne", sessionOne)
                 .add("sessionTwo", sessionTwo)

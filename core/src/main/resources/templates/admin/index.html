@@ -22,8 +22,11 @@
 							<a href="#" th:href="${#mvc.url('SC#list').build()}" class="nav-link">All Schools</a>
 						</th:block>
 						<th:block sec:authorize="hasRole('COMMITTEE')">
-							<a href="#"
-							   th:href="${#mvc.url('CC#viewCommittee').arg(0, #authentication.principal.committeeId).build()}"
+							<a th:href="${#mvc.url('AC#index').buildAndExpand(#authentication.principal.committeeId)}"
+							   class="nav-link">
+								Attendance
+							</a>
+							<a th:href="${#mvc.url('CC#viewCommittee').arg(0, #authentication.principal.committeeId).build()}"
 							   class="nav-link">
 								Manage Committee
 							</a>

@@ -37,7 +37,7 @@ public class Position implements Comparable<Position>
 	private Delegate delegate;
 
 	@Embedded
-	private Attendance attendance;
+	private Attendance attendance = new Attendance();
 
 	@Formula("(delegate_id is not null)")
 	private boolean assigned;

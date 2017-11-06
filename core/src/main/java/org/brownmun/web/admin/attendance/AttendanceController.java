@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/admin/committee/{id}/attendance")
 public class AttendanceController
@@ -38,9 +42,31 @@ public class AttendanceController
         return "admin/attendance/index";
     }
 
+    @GetMapping(produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<List<PositionAttendance>> getAttendance(@ModelAttribute Committee committee)
+    {
+        if (committee == null)
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(committee.getPositions().stream().map(p -> {
+            PositionAttendance dto = new PositionAttendance();
+            dto.setPositionId(p.getId());
+            dto.setPositionName(p.getName());
+            dto.setPositionPaper(p.getAttendance().isPositionPaperSubmitted());
+            dto.setSessionOne(p.getAttendance().isPresentForSession(1));
+            dto.setSessionTwo(p.getAttendance().isPresentForSession(2));
+            dto.setSessionThree(p.getAttendance().isPresentForSession(3));
+            dto.setSessionFour(p.getAttendance().isPresentForSession(4));
+            return dto;
+        }).sorted(Comparator.comparing(PositionAttendance::getPositionName)).collect(Collectors.toList()));
+    }
+
     @PostMapping
     @ResponseBody
-    public ResponseEntity<ApiResponse> submitAttendance(@RequestBody AttendanceRequest request)
+    public ResponseEntity<ApiResponse> submitAttendance(@RequestBody PositionAttendance request)
     {
         Position position = positionRepo.findOne(request.getPositionId());
         if (position == null)
