@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:wp="http://brownmun"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+    <head>
+        <title>Local Restaurants</title>
+        <wp:chunk name="public"/>
+    </head>
+    <body>
+        <header layout:fragment="header">
+            <h1>Local Restaurants</h1>
+        </header>
+        <div layout:fragment="body">
+            <p>
+                Conference participants can show their BUSUN badges at any of these Thayer Street restaurants for a discount.
+            </p>
+            <ul>
+                <li>10% at East Side Pockets</li>
+                <li>10% at Andreas Restaurant</li>
+                <li>10% at La Creperie</li>
+                <li>15% at Flatbread</li>
+            </ul>
+        </div>
+    </body>
+</html>

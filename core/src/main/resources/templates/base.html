@@ -57,7 +57,7 @@
                         <div class="dropdown-menu" aria-labelledby="conferenceMenuLink">
                             <a th:href="@{/conference/committees}" class="dropdown-item">Committees</a>
                             <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/conference/preparation}" class="dropdown-item">Preparation &amp; Procedure</a>
-                            <a th:if="${#conference.name == 'BUSUN'}" href="https://storage.googleapis.com/busun_assets/delegate-guide.pdf">Delegate Guide</a>
+                            <a th:if="${#conference.name == 'BUSUN'}" href="https://storage.googleapis.com/busun_assets/delegate-guide.pdf" class="dropdown-item">Delegate Guide</a>
                             <a th:href="@{/conference/schedule}" class="dropdown-item">Schedule</a>
                             <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/conference/keynote-speaker}" class="dropdown-item">Keynote Speaker</a>
 							<a th:if="${#conference.name == 'BUSUN'}" th:href="@{/conference/classes}" class="dropdown-item">Friday Classes</a>
@@ -67,6 +67,8 @@
                         <a class="nav-link dropdown-toggle" href="/" id="logisticsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logistics</a>
                         <div class="dropdown-menu" aria-labelledby="logisticsMenuLink">
                             <a th:href="@{/logistics/directions}" class="dropdown-item">Directions</a>
+                            <!-- TODO: add an attribute to the Thymeleaf dialect like mun:if-busun -->
+                            <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/logistics/restaurants}" class="dropdown-item">Local Restaurants</a>
                             <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/logistics/hotels}" class="dropdown-item">Hotels</a>
                             <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/logistics/parking}" class="dropdown-item">Shuttles &amp; Parking</a>
 							<a th:if="${#conference.name == 'BUSUN'}" href="https://storage.googleapis.com/busun_assets/busun-waiver-2017.pdf" class="dropdown-item">Waiver</a>

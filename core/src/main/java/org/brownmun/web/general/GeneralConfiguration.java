@@ -27,5 +27,6 @@ public class GeneralConfiguration extends WebMvcConfigurerAdapter
 
         registry.addViewController("/logistics/directions").setViewName("logistics/directions");
         registry.addViewController("/logistics/parking").setViewName("logistics/parking");
+        registry.addViewController("/logistics/restaurants").setViewName("logistics/restaurants");
     }
 }
