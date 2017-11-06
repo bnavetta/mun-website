@@ -29,9 +29,12 @@
 					</h3>
 					<p>[[${committee.assignedPositions}]] / [[${committee.totalPositions}]] positions assigned</p>
 					<p th:text="${committee.description}">Committee Description</p>
-					<ul class="nav">
-						<li>
+					<ul class="nav mb-3">
+						<li class="nav-item">
 							<a class="nav-link" th:href="${#mvc.url('AC#index').buildAndExpand(committee.id)}">Attendance</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Awards</a>
 						</li>
 					</ul>
 				</div>

@@ -5,7 +5,7 @@
 // makes sense to bundle it all.
 
 import './logistics/hotels.scss';
-
+import './conference/keynote-speaker.scss';
 import './about/secretariat.scss';
 import './about/conference.scss';
 import './home.scss';

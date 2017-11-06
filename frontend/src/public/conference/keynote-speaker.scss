@@ -1,0 +1,5 @@
+.speaker-bio {
+  // Bootstrap uses 1.25rem for blockquote text, which is way too big when we're citing
+  // multiple paragraphs
+  font-size: 1rem;
+}
