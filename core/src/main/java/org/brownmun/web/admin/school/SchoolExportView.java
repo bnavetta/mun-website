@@ -1,4 +1,4 @@
-package org.brownmun.web.admin;
+package org.brownmun.web.admin.school;
 
 import com.google.common.base.MoreObjects;
 import org.apache.poi.ss.usermodel.*;

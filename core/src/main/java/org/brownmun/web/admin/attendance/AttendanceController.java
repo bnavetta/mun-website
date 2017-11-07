@@ -36,7 +36,7 @@ public class AttendanceController
         return committeeRepo.findOne(id);
     }
 
-    @GetMapping
+    @GetMapping(name = "AC#attendanceIndex")
     public String index()
     {
         return "admin/attendance/index";

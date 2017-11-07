@@ -44,6 +44,10 @@ public class Committee implements Comparable<Committee>
     @Enumerated(EnumType.STRING)
     private CommitteeType committeeType;
 
+    @OrderBy("awardType ASC")
+    @OneToMany(mappedBy = "committee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Award> awards;
+
     @OrderBy("name ASC")
     @OneToMany(mappedBy = "committee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Position> positions;
@@ -177,6 +181,16 @@ public class Committee implements Comparable<Committee>
         this.committeeType = committeeType;
     }
 
+    public List<Award> getAwards()
+    {
+        return awards;
+    }
+
+    public void setAwards(List<Award> awards)
+    {
+        this.awards = awards;
+    }
+
     public List<Position> getPositions()
     {
         return positions;
@@ -221,35 +235,8 @@ public class Committee implements Comparable<Committee>
                 .add("topic3", topic3)
                 .add("topic4", topic4)
                 .add("committeeType", committeeType)
-                .add("positions", positions)
                 .add("assignedPositions", assignedPositions)
                 .add("totalPositions", totalPositions)
                 .toString();
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Committee committee = (Committee) o;
-        return jointCrisis == committee.jointCrisis &&
-                assignedPositions == committee.assignedPositions &&
-                totalPositions == committee.totalPositions &&
-                Objects.equals(id, committee.id) &&
-                Objects.equals(name, committee.name) &&
-                Objects.equals(description, committee.description) &&
-                Objects.equals(shortName, committee.shortName) &&
-                Objects.equals(topic1, committee.topic1) &&
-                Objects.equals(topic2, committee.topic2) &&
-                Objects.equals(topic3, committee.topic3) &&
-                Objects.equals(topic4, committee.topic4) &&
-                committeeType == committee.committeeType;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(id, name, description, shortName, jointCrisis, topic1, topic2, topic3, topic4, committeeType, assignedPositions, totalPositions);
     }
 }

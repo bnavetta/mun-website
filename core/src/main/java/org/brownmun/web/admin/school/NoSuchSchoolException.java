@@ -1,4 +1,4 @@
-package org.brownmun.web.admin;
+package org.brownmun.web.admin.school;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

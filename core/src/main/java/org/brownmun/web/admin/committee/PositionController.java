@@ -1,4 +1,4 @@
-package org.brownmun.web.admin;
+package org.brownmun.web.admin.committee;
 
 import org.brownmun.model.committee.Position;
 import org.brownmun.model.repo.PositionRepository;

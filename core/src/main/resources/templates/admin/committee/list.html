@@ -31,10 +31,10 @@
 					<p th:text="${committee.description}">Committee Description</p>
 					<ul class="nav mb-3">
 						<li class="nav-item">
-							<a class="nav-link" th:href="${#mvc.url('AC#index').buildAndExpand(committee.id)}">Attendance</a>
+							<a class="nav-link" th:href="${#mvc.url('AC#attendanceIndex').buildAndExpand(committee.id)}">Attendance</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">Awards</a>
+							<a href="#" class="nav-link" th:href="${#mvc.url('AC#awardsIndex').arg(0, committee.id).build()}">Awards</a>
 						</li>
 					</ul>
 				</div>

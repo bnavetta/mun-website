@@ -1,4 +1,4 @@
-package org.brownmun.web.admin;
+package org.brownmun.web.admin.school;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
@@ -9,6 +9,7 @@ import org.brownmun.model.School;
 import org.brownmun.model.repo.DelegateRepository;
 import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
+import org.brownmun.web.admin.NoFreeDelegatesException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

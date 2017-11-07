@@ -24,7 +24,8 @@
 				<a href="#" th:href="${#mvc.url('CC#editCommittee').arg(0, committee.id).build()}" class="btn btn-primary">Edit</a>
 				<a href="#" th:href="${#mvc.url('CC#addPositions').arg(0, committee.id).build()}" class="btn btn-primary">Add Positions</a>
 				<a href="#" th:href="${#mvc.url('CC#positions').arg(0, committee.id).build()}" class="btn btn-primary">Manage Positions</a>
-				<a href="#" th:href="${#mvc.url('AC#index').buildAndExpand(committee.id)}" class="btn btn-primary">Attendance</a>
+				<a href="#" th:href="${#mvc.url('AC#attendanceIndex').buildAndExpand(committee.id)}" class="btn btn-primary">Attendance</a>
+				<a href="#" th:href="${#mvc.url('AC#awardsIndex').arg(0, committee.id).build()}" class="btn btn-primary">Awards</a>
 			</div>
 
 			<h2>Positions</h2>
