@@ -30,6 +30,7 @@ import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWrite
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.Filter;
+import javax.servlet.http.HttpServletRequest;
 
 @Configuration
 //@EnableWebSecurity
@@ -49,6 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     private StaffService staffService;
+
+    @Autowired
+    private HttpServletRequest requestProxy;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -138,7 +142,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public AuthoritiesExtractor authoritiesExtractor()
     {
-        return new DomainRestrictedAuthoritiesExtractor(staffService);
+        return new DomainRestrictedAuthoritiesExtractor(staffService, requestProxy);
     }
 
     @Bean

@@ -6,9 +6,15 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.Authoriti
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class DomainRestrictedAuthoritiesExtractor implements AuthoritiesExtractor
 {
@@ -22,18 +28,34 @@ public class DomainRestrictedAuthoritiesExtractor implements AuthoritiesExtracto
             AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_STAFF", "ROLE_COMMITTEE");
 
     private final StaffService staff;
+    private final HttpServletRequest requestProxy; // Spring will make this a proxy that points to the current request
 
-    public DomainRestrictedAuthoritiesExtractor(StaffService staff)
+    public DomainRestrictedAuthoritiesExtractor(StaffService staff, HttpServletRequest requestProxy)
     {
         this.staff = staff;
+        this.requestProxy = requestProxy;
     }
 
     @Override
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map)
     {
         String email = (String) map.get("email");
-        StaffMember staffMember = staff.getByEmail(email)
-                .orElseThrow(() -> new BadCredentialsException("Not allowed staff email: " + email));
+        Optional<StaffMember> staffMemberOpt = staff.getByEmail(email);
+        if (!staffMemberOpt.isPresent()) {
+            // This is all pretty ugly, but trying to work around a quirk where throwing a BadCredentialsException
+            // doesn't actually log you out
+
+            HttpSession session = requestProxy.getSession(false);
+            if (session != null)
+            {
+                session.invalidate();
+            }
+            SecurityContext context = SecurityContextHolder.getContext();
+            context.setAuthentication(null);
+            SecurityContextHolder.clearContext();
+            throw new BadCredentialsException("Not allowed staff email: " + email);
+        }
+        StaffMember staffMember = staffMemberOpt.get();
 
         switch (staffMember.getType())
         {
