@@ -1,6 +1,7 @@
 package org.brownmun.web.admin.printing;
 
 import org.brownmun.model.PrintRequest;
+import org.brownmun.web.ApiResponse;
 import org.brownmun.web.security.StaffMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,19 +83,19 @@ public class PrintingController
 
     @PostMapping("/request/{id}/claim")
     @ResponseBody
-    public ResponseEntity<String> claimRequest(@PathVariable long id)
+    public ResponseEntity<ApiResponse> claimRequest(@PathVariable long id)
     {
         printService.setRequestStatus(id, PrintRequest.Status.CLAIMED);
         websocket.convertAndSend("/topic/print/queue", new PrintQueueUpdate(printService.getOpenRequests()));
-        return ResponseEntity.accepted().body("Request claimed");
+        return ResponseEntity.accepted().body(new ApiResponse(true, "Request claimed"));
     }
 
     @PostMapping("/request/{id}/complete")
     @ResponseBody
-    public ResponseEntity<String> completeRequest(@PathVariable long id)
+    public ResponseEntity<ApiResponse> completeRequest(@PathVariable long id)
     {
         printService.setRequestStatus(id, PrintRequest.Status.COMPLETED);
         websocket.convertAndSend("/topic/print/queue", new PrintQueueUpdate(printService.getOpenRequests()));
-        return ResponseEntity.accepted().body("Request completed");
+        return ResponseEntity.accepted().body(new ApiResponse(true, "Request completed"));
     }
 }

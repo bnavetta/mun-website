@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 // Might not actually need sorting?
 // Just column filtering?
 
@@ -94,5 +95,5 @@ export default class SchoolTable extends React.Component {
 }
 
 SchoolTable.propTypes = {
-    schools: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    schools: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

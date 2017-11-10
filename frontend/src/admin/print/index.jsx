@@ -5,9 +5,12 @@ import { AppContainer } from 'react-hot-loader';
 import PrintPage from './PrintPage';
 
 const render = (Component) => {
+    const staffEmail = document.querySelector('meta[name=staffEmail]').getAttribute('content');
+    console.log(`Using staff email ${staffEmail}`);
+
     ReactDOM.render(
         <AppContainer>
-            <Component staffEmail={window.staffEmail}/>
+            <Component staffEmail={staffEmail}/>
         </AppContainer>,
         document.getElementById('react-print')
     );

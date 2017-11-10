@@ -8,9 +8,7 @@
         <title>Print Queue</title>
         <wp:chunk name="index"/>
         <wp:chunk name="print"/>
-        <script type="application/javascript" th:inline="javascript">
-            window.staffEmail = [[${requester}]];
-        </script>
+        <meta name="staffEmail" th:content="${requester}">
     </head>
     <body>
         <header layout:fragment="header">

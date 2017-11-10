@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 export default class RequestForm extends React.Component {
     constructor(props, context) {
@@ -79,7 +80,7 @@ export default class RequestForm extends React.Component {
 
                 <label className="custom-file mx-2">
                     <input type="file" className="custom-file-input" onChange={this.handleFileUpload} />
-                    <span className="custom-file-control"></span>
+                    <span className={classnames('custom-file-control', this.state.file && 'selected')}>{this.state.file && this.state.file.name}</span>
                 </label>
 
                 <button type="submit" className="btn btn-primary mx-2" onClick={this.handleRequest}>Upload</button>

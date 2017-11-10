@@ -56,6 +56,27 @@
         <dd class="col-sm-9" th:text="${school.info.chaperoneInfo}"></dd>
     </dl>
 
+    <h4>Positions</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Delegate Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">Committee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: way to add/remove delegates from here -->
+            <tr th:each="delegate : ${school.delegates}">
+                <th scope="row" th:text="${delegate.name}">Delegate name</th>
+                <td th:text="${delegate.position.name}">Position</td>
+                <td>
+                    <a th:href="${#mvc.url('CC#viewCommittee').arg(0, delegate.position.committee.id).build()}" th:text="${delegate.position.committee.name}">Committee</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     <h4>Logistics</h4>
     <dl class="row">
         <dt class="col-sm-3">Using BUSUN hotel</dt>

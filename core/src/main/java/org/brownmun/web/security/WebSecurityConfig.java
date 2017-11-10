@@ -69,6 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         }
 
         http
+            .csrf()
+                .ignoringAntMatchers("/admin/print/sock/**")
+                .and()
             .headers()
                 .referrerPolicy(ReferrerPolicy.NO_REFERRER).and()
                 .and()
