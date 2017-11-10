@@ -56,6 +56,7 @@
                         <a class="nav-link dropdown-toggle" href="/" id="conferenceMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Conference</a>
                         <div class="dropdown-menu" aria-labelledby="conferenceMenuLink">
                             <a th:href="@{/conference/committees}" class="dropdown-item">Committees</a>
+                            <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/conference/erinn-phelan}" class="dropdown-item">The Erinn Phelan Award</a>
                             <a th:if="${#conference.name == 'BUSUN'}" th:href="@{/conference/preparation}" class="dropdown-item">Preparation &amp; Procedure</a>
                             <a th:if="${#conference.name == 'BUSUN'}" href="https://storage.googleapis.com/busun_assets/delegate-guide.pdf" class="dropdown-item">Delegate Guide</a>
                             <a th:href="@{/conference/schedule}" class="dropdown-item">Schedule</a>
