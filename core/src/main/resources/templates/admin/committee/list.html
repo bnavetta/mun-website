@@ -20,6 +20,7 @@
 		<div layout:fragment="body">
 			<div class="my-2">
 				<a href="#" th:href="${#mvc.url('CC#newCommittee').build()}" class="btn btn-primary">New Committee</a>
+				<a href="#" th:href="${#mvc.url('CC#exportAttendance').build()}" class="btn btn-primary">Export Attendance</a>
 			</div>
 			<section th:each="group : ${committees}">
 				<h2 th:text="${group.key}">Committee Type</h2>

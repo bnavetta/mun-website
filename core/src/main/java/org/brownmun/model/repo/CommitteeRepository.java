@@ -28,4 +28,7 @@ public interface CommitteeRepository extends CrudRepository<Committee, Long>
     @Query("SELECT c FROM Committee  c")
     @EntityGraph(attributePaths = { "positions", "positions.delegate", "positions.delegate.school", "awards", "awards.position" })
     List<Committee> fetchFull();
+
+    @Query("SELECT p.attendance as attendance, p.name as positionName, p.committee.name as committeeName, p.delegate.name as delegateName, p.delegate.school.name as schoolName FROM Position p")
+    List<AttendanceInfo> fetchAllAttendance();
 }
