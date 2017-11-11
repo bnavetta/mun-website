@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:wp="http://brownmun"
+	  xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base}">
     <head>
@@ -11,7 +12,9 @@
             <h1>The Brown University Simulation of the United Nations</h1>
         </header>
         <div layout:fragment="body">
-            <img class="busun-cover" src="https://storage.googleapis.com/busun_assets/busun-cover.png" alt="BUSUN XXI">
+			<a th:href="@{/windmill}">
+				<img class="busun-cover" src="https://storage.googleapis.com/busun_assets/busun-cover.png" alt="BUSUN XXI">
+			</a>
 
 
 			<p>
