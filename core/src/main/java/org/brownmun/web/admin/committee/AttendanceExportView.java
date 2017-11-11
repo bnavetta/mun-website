@@ -3,8 +3,10 @@ package org.brownmun.web.admin.committee;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.brownmun.model.Attendance;
 import org.brownmun.model.committee.AwardInfo;
 import org.brownmun.model.repo.AttendanceInfo;
+import org.brownmun.util.Formatting;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
@@ -41,11 +43,11 @@ public class AttendanceExportView extends AbstractXlsxView
             row.createCell(1).setCellValue(a.getCommitteeName());
             row.createCell(2).setCellValue(a.getSchoolName());
             row.createCell(3).setCellValue(a.getDelegateName());
-            row.createCell(4).setCellValue(a.getAttendance().isPositionPaperSubmitted());
-            row.createCell(5).setCellValue(a.getAttendance().isPresentForSession(1));
-            row.createCell(6).setCellValue(a.getAttendance().isPresentForSession(2));
-            row.createCell(7).setCellValue(a.getAttendance().isPresentForSession(3));
-            row.createCell(8).setCellValue(a.getAttendance().isPresentForSession(4));
+            row.createCell(4).setCellValue(Formatting.yesNo(a.getAttendance().isPositionPaperSubmitted()));
+            for (int session = 1; session <= Attendance.MAX_SESSION; session++)
+            {
+                row.createCell(4 + session).setCellValue(Formatting.yesNo(a.getAttendance().isPresentForSession(session)));
+            }
         }
     }
 }

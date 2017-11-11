@@ -43,6 +43,7 @@ export default class PrintPage extends React.Component {
         }).catch(e => {
             // TODO: show error
             console.error('Error submitting print request', e);
+            this.setState({ error: e.message });
         });
     }
 
@@ -51,6 +52,7 @@ export default class PrintPage extends React.Component {
         return (
             <div>
                 <RequestForm staffEmail={staffEmail} onSubmit={this.handleUpload}/>
+                { this.state.error && <div className="alert alert-danger">{ error }</div> }
                 <PrintQueue queue={this.state.queue} onClaim={claimRequest} onComplete={completeRequest} />
             </div>
         )

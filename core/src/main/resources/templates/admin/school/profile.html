@@ -25,7 +25,7 @@
             <a href="#" class="nav-link" th:href="${#mvc.url('SC#delegates').arg(0, school.id).build()}">Manage Delegates</a>
         </li>
         <li class="nav-item">
-            <form action="post" th:href="${#mvc.url('SC#delete').arg(0, school.id).build()}">
+            <form method="post" th:action="${#mvc.url('SC#delete').arg(0, school.id).build()}">
                 <button class="nav-link btn btn-danger">Delete School</button>
             </form>
         </li>
@@ -69,10 +69,16 @@
             <!-- TODO: way to add/remove delegates from here -->
             <tr th:each="delegate : ${school.delegates}">
                 <th scope="row" th:text="${delegate.name}">Delegate name</th>
-                <td th:text="${delegate.position.name}">Position</td>
-                <td>
-                    <a th:href="${#mvc.url('CC#viewCommittee').arg(0, delegate.position.committee.id).build()}" th:text="${delegate.position.committee.name}">Committee</a>
-                </td>
+                <th:block th:if="${delegate.position != null}">
+                    <td th:text="${delegate.position.name}">Position</td>
+                    <td>
+                        <a th:href="${#mvc.url('CC#viewCommittee').arg(0, delegate.position.committee.id).build()}" th:text="${delegate.position.committee.name}">Committee</a>
+                    </td>
+                </th:block>
+                <th:block th:if="${delegate.position == null}">
+                    <td>Unassigned</td>
+                    <td>Unassigned</td>
+                </th:block>
             </tr>
         </tbody>
     </table>

@@ -53,18 +53,19 @@ public class PrintingController
 
     @PostMapping("/request")
     @ResponseBody
-    public ResponseEntity<PrintRequest> submitRequest(PrintSubmission submission)
+    public ResponseEntity<ApiResponse> submitRequest(PrintSubmission submission)
     {
         try
         {
             PrintRequest req = printService.createRequest(submission);
             websocket.convertAndSend("/topic/print/queue", new PrintQueueUpdate(printService.getOpenRequests()));
-            return ResponseEntity.ok(req);
+            return ResponseEntity.ok(new ApiResponse(true, "Request submitted"));
         }
         catch (IOException e)
         {
             log.warn("Failed to submit print request", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(false, e.getMessage()));
         }
     }
 

@@ -3,6 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:wp="http://brownmun"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{base}">
     <!--/*@thymesVar id="committee" type="org.brownmun.model.committee.Committee"*/-->
 	<head>
@@ -33,7 +34,10 @@
 			<ul>
 				<li th:each="positions : ${committee.positions}" class="Committee--positions" th:classappend="${positions.assigned} ? assigned : unassigned">
 					<span th:text="${positions.name}">Position Name</span>
-					<span th:if="${positions.assigned}"> &mdash; <span th:text="${positions.delegate.school.name}">School Name</span></span>
+					<span th:if="${positions.assigned}">
+						&mdash; <span th:text="${positions.delegate.school.name}">School Name</span>
+						<span sec:authorize="hasRole('SEC')" th:text="|(${positions.delegate.name})|"></span>
+					</span>
 				</li>
 			</ul>
 

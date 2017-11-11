@@ -19,7 +19,7 @@ public class Attendance implements Serializable
 {
     private static final int POSITION_PAPER_INDEX = 0;
     private static final int MIN_SESSION = 1;
-    private static final int MAX_SESSION = 4;
+    public static final int MAX_SESSION = 4;
 
     @Convert(converter = BitSetAttributeConverter.class)
     private BitSet attendanceRecord = new BitSet(MAX_SESSION + 1);

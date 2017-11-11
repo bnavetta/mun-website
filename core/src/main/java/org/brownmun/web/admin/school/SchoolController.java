@@ -3,9 +3,9 @@ package org.brownmun.web.admin.school;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import org.brownmun.model.Delegate;
-import org.brownmun.model.committee.Position;
 import org.brownmun.model.RegistrationStatus;
 import org.brownmun.model.School;
+import org.brownmun.model.committee.Position;
 import org.brownmun.model.repo.DelegateRepository;
 import org.brownmun.model.repo.PositionRepository;
 import org.brownmun.model.repo.SchoolRepository;
@@ -19,9 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/school")
@@ -165,8 +169,29 @@ public class SchoolController
 
 	// Would be nicer to have REST DELETE request
 	@PostMapping("/delete/{id}")
+	@Transactional
 	public String delete(@PathVariable long id)
 	{
+		// TODO: move this into a service
+
+		School school = repo.findById(id);
+		if (school == null)
+		{
+			throw new NoSuchSchoolException(id);
+		}
+
+		List<Position> positions = school.getDelegates().stream()
+				.map(Delegate::getPosition)
+				.filter(Objects::nonNull)
+				.collect(Collectors.toList());
+
+		for (Position p : positions)
+		{
+			p.setDelegate(null);
+		}
+
+		positionRepo.save(positions);
+
 		repo.delete(id);
 		return "redirect:/admin/school";
 	}
