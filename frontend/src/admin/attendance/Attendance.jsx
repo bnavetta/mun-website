@@ -19,7 +19,7 @@ function Present({ attendance, section, onChange }) {
 export default function Attendance({ attendance, onChange }) {
     return (
         <tr>
-            <th>{attendance.positionName}</th>
+            <th>{`${attendance.positionName} (${attendance.schoolName})`}</th>
             <td><Present attendance={attendance} section='positionPaper' onChange={onChange} /></td>
             <td><Present attendance={attendance} section='sessionOne' onChange={onChange} /></td>
             <td><Present attendance={attendance} section='sessionTwo' onChange={onChange}/></td>

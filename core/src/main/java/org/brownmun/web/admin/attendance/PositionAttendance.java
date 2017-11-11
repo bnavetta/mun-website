@@ -11,6 +11,7 @@ public class PositionAttendance
 {
     private long positionId;
     private String positionName;
+    private String schoolName;
     private boolean positionPaper;
     private boolean sessionOne;
     private boolean sessionTwo;
@@ -35,6 +36,16 @@ public class PositionAttendance
     public void setPositionName(String positionName)
     {
         this.positionName = positionName;
+    }
+
+    public String getSchoolName()
+    {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName)
+    {
+        this.schoolName = schoolName;
     }
 
     public boolean isPositionPaper()

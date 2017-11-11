@@ -51,8 +51,10 @@ public class AttendanceController
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(committee.getPositions().stream().map(p -> {
+        return ResponseEntity.ok(committee.getPositions().stream()
+                .filter(p -> p.getDelegate() != null).map(p -> {
             PositionAttendance dto = new PositionAttendance();
+            dto.setSchoolName(p.getDelegate().getSchool().getName());
             dto.setPositionId(p.getId());
             dto.setPositionName(p.getName());
             dto.setPositionPaper(p.getAttendance().isPositionPaperSubmitted());
