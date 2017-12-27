@@ -52,7 +52,7 @@ export default class PrintPage extends React.Component {
         return (
             <div>
                 <RequestForm staffEmail={staffEmail} onSubmit={this.handleUpload}/>
-                { this.state.error && <div className="alert alert-danger">{ error }</div> }
+                {/*{ this.state.error && <div className="alert alert-danger">{ this.state.error }</div> }*/}
                 <PrintQueue queue={this.state.queue} onClaim={claimRequest} onComplete={completeRequest} />
             </div>
         )

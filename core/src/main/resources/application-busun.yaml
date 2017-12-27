@@ -184,6 +184,7 @@ mail:
 
 conference:
   decisions-public: true
+  info-email: info@busun.org
   name: BUSUN
   logo-url: https://storage.googleapis.com/busun_assets/re-aligned-logo.png
   events:

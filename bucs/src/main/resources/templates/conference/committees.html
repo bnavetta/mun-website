@@ -26,7 +26,7 @@
     </th:block>
 
     <p class="my-2">
-        Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a>
+        Contact: <a th:href="${'mailto:' + #conference.getCommitteeEmail(committee.shortName)}" th:text="${#conference.getCommitteeEmail(committee.shortName)}">committee@bucs.org</a>
     </p>
 </div>
 <div layout:fragment="body">
@@ -51,7 +51,7 @@
                     <dl>
                         <th:block th:each="committee : ${crisis.committees}">
                             <dt th:text="${committee.name}">Committee Name</dt>
-                            <dd>Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a></dd>
+                            <dd>Contact: <a th:href="${'mailto:' + #conference.getCommitteeEmail(committee.shortName)}" th:text="${#conference.getCommitteeEmail(committee.shortName)}">committee@bucs.org</a></dd>
                         </th:block>
                     </dl>
                 </li>

@@ -86,6 +86,7 @@ mail:
 
 conference:
   decisions-public: false
+  info-email: info@browncrisis.org
   name: BUCS
   logo-url: https://storage.googleapis.com/bucs_assets/bucs-logo.png
   facebook-url: https://facebook.com/browncrisis

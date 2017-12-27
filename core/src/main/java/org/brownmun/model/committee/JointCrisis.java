@@ -81,13 +81,6 @@ public class JointCrisis
         this.committees = committees;
     }
 
-    @Transient
-    public String getContactEmail()
-    {
-        // TODO: this will break for bucs
-        return getShortName() == null ? "<none>" : getShortName().toLowerCase() + "@busun.org";
-    }
-
     @Override
     public String toString()
     {

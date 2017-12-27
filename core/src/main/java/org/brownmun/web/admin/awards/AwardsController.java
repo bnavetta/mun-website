@@ -1,6 +1,8 @@
 package org.brownmun.web.admin.awards;
 
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
+import org.brownmun.model.committee.Award;
 import org.brownmun.model.committee.Committee;
 import org.brownmun.model.repo.CommitteeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -33,8 +37,11 @@ public class AwardsController
     public String index(@PathVariable("id") long id, Model model)
     {
         Committee committee = committeeRepo.findOne(id);
+        List<Award> awards = Lists.newArrayList(committee.getAwards());
+        awards.sort(Comparator.comparing(Award::getAwardType));
+
         model.addAttribute("committee", committee);
-        model.addAttribute("awards", new AwardsForm(committee.getId(), committee.getAwards()));
+        model.addAttribute("awards", new AwardsForm(committee.getId(), awards));
         return "admin/awards/awards";
     }
 

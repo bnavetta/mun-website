@@ -11,6 +11,8 @@ public class ConferenceProperties
 {
     private String name;
 
+    private String infoEmail;
+
     private boolean decisionsPublic;
 
     private String logoUrl;
@@ -29,6 +31,16 @@ public class ConferenceProperties
     public boolean isDecisionsPublic()
     {
         return decisionsPublic;
+    }
+
+    public String getInfoEmail()
+    {
+        return infoEmail;
+    }
+
+    public void setInfoEmail(String infoEmail)
+    {
+        this.infoEmail = infoEmail;
     }
 
     public String getLogoUrl()
@@ -91,11 +103,34 @@ public class ConferenceProperties
         this.instagramUrl = instagramUrl;
     }
 
+    public boolean isBusun()
+    {
+        return "BUSUN".equals(name);
+    }
+
+    public boolean isBucs()
+    {
+        return "BUCS".equals(name);
+    }
+
+    public String getCommitteeEmail(String shortName)
+    {
+        if (isBucs())
+        {
+            return shortName + "@browncrisis.org";
+        }
+        else
+        {
+            return shortName + "@busun.org";
+        }
+    }
+
     @Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this)
                 .add("name", name)
+                .add("infoEmail", infoEmail)
                 .add("decisionsPublic", decisionsPublic)
                 .add("logoUrl", logoUrl)
                 .add("events", events)

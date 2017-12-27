@@ -28,7 +28,7 @@
             </th:block>
 
             <p class="my-2">
-                Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a>
+                Contact: <a th:href="${'mailto:' + #conference.getCommitteeEmail(committee.shortName)}" th:text="${#conference.getCommitteeEmail(committee.shortName)}">committee@bucs.org</a>
             </p>
         </div>
         <div layout:fragment="body">
@@ -67,14 +67,14 @@
                         <li th:each="crisis : ${jointCrises}" class="list-group-item flex-column align-items-start">
                             <h3 th:text="${crisis.name}">Crisis Name</h3>
                             <p class="mt-2" th:text="${crisis.description}">Crisis Description</p>
-                            <p class="my-1">Contact: <a th:href="|mailto:${crisis.contactEmail}|" th:text="${crisis.contactEmail}">crisis@busun.org</a></p>
+                            <p class="my-1">Contact: <a th:href="|mailto:${#conference.getCommitteeEmail(crisis.shortName)}|" th:text="${#conference.getCommitteeEmail(crisis.shortName)}">crisis@busun.org</a></p>
                             <h4>Committees:</h4>
                             <dl>
                                 <th:block th:each="committee : ${crisis.committees}">
                                     <dt th:text="${committee.name}">Committee Name</dt>
                                     <dd>
                                         <p><a th:href="|https://storage.googleapis.com/busun_assets/background_guides/${committee.shortName}.pdf|">Background Guide</a></p>
-                                        <p>Contact: <a th:href="${'mailto:' + committee.contactEmail}" th:text="${committee.contactEmail}">committee@bucs.org</a></p>
+                                        <p>Contact: <a th:href="${'mailto:' + #conference.getCommitteeEmail(committee.shortName)}" th:text="${#conference.getCommitteeEmail(committee.shortName)}">committee@bucs.org</a></p>
                                     </dd>
                                 </th:block>
                             </dl>

@@ -59,13 +59,6 @@ public class Committee implements Comparable<Committee>
     private int totalPositions;
 
     @Transient
-    public String getContactEmail()
-    {
-        // TODO: this will break for bucs
-        return getShortName().toLowerCase() + "@busun.org";
-    }
-
-    @Transient
     public boolean hasTopics()
     {
         return !Strings.isNullOrEmpty(topic1) || !Strings.isNullOrEmpty(topic2)
