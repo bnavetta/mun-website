@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>Getting to Campus</title>
+        <wp:chunk name="info-page"/>
+    </head>
+
+    <body>
+        <main layout:fragment="content">
+            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/getting-to-campus.jpg" alt="Getting to Campus">
+
+            <section class="info--body">
+                <p class="body-text">
+                    <strong>Check-in during conference weekend will be held at the Stephen Robert &apos;62 Campus Center
+                    on the corner of Brown Street and Waterman Street.</strong> Please see the visitor&apos;s map attached
+                    here for more detailed information. 75 Waterman Street, Providence, RI 02912 is the best address to
+                    use for GPS navigation.
+                </p>
+
+                <p class="body-text">
+                    Providence is also easily accessible by both train and bus. Providence Station is served by Amtrak
+                    (Northeast Regional and Acela Express) and the MBTA Providence/Stoughton Line. Our campus is a short
+                    cab ride or a fifteen minute walk from the train station. Greyhound and Peter Pan bus lines stop at
+                    the Kennedy Plaza bus terminal, also a short cab ride or fifteen minute walk from campus. All of
+                    Rhode Island is served by the RIPTA public bus system, which is also accessible from Kennedy Plaza.
+                    The most accessible RIPTA bus stop on campus is located at the corner of Waterman Street and Thayer
+                    Street at the Thayer Street tunnel.
+                </p>
+
+                <p class="body-text">
+                    If your delegation is traveling from farther away, the closest airport to our campus is T.F. Green
+                    International Airport (PVD). T.F. Green is located in the city of Warwick, approximately 10 miles
+                    from Brown. Delegations traveling to campus from abroad may consider a number of transportation
+                    options from Boston Logan International Airport to Providence, including the MBTA commuter rail
+                    line and bus services mentioned above.
+                </p>
+
+                <p class="body-text">
+                    Please email <a href="mailto:info@busun.org">info@busun.org</a> with any transit-related questions.
+                </p>
+            </section>
+
+        </main>
+    </body>
+</html>

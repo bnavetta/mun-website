@@ -1,0 +1,36 @@
+/*
+ * Styles for the base layout grid
+ */
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+.base {
+    --navbar-height: 100px;
+    --footer-height: 100px;
+
+    display: grid;
+
+    width: 100%;
+    height: 100%;
+
+    grid-template-rows: var(--navbar-height) 1fr var(--footer-height);
+}
+
+.base > header {
+    grid-row: 1;
+}
+
+.base > main {
+    grid-row: 2;
+}
+
+.base > footer {
+    grid-row: 3;
+}

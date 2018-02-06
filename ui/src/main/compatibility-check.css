@@ -1,0 +1,32 @@
+.compat-fail {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    background-color: rgba(255, 0, 0, 0.9);
+}
+
+.compat-fail a {
+    color: white;
+}
+
+.compat-fail > p {
+    padding: 40px;
+    font-size: 36px;
+    text-align: center;
+}
+
+@supports (display: grid) and ((--test: 5)) {
+    .compat-fail {
+        display: none;
+    }
+}

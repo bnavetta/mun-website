@@ -1,0 +1,35 @@
+.button {
+    --button-color: #1976d2;
+    --button-hover-color: color(#1976d2 blackness(10%));
+    --button-active-color: color(#1976d2 blackness(20%));
+    --button-text-color: #fff;
+
+    color: var(--button-text-color);
+    background-color: var(--button-color);
+    border: 0;
+    border-radius: 0.5rem;
+
+    line-height: normal;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    user-select: none;
+
+    cursor: pointer;
+    appearance: button;
+
+    padding: 0.5em;
+}
+
+a.button {
+    color: var(--button-text-color);
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: var(--button-hover-color);
+}
+
+.button:active {
+    background-color: var(--button-active-color);
+}

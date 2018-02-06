@@ -1,8 +1,13 @@
+# Gradle
 !gradle/wrapper/gradle-wrapper.jar
 build/
-.env
 
+.env
 client-secret.json
+
+# Node
+node_modules/
+yarn-error.log
 
 generated_src/
 generated_testSrc/

@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+import os
+import subprocess
+
+import click
+
+
+@click.group()
+def cli():
+    pass
+
+
+@click.group()
+def dev():
+    pass
+
+
+cli.add_command(dev)
+
+
+@click.command()
+def startdb():
+    click.secho('Starting local database...', fg='green')
+    subprocess.call(['docker-compose', 'up', '-d', 'database', 'adminer'])
+
+
+@click.command()
+def stopdb():
+    click.secho('Stopping local database...', fg='green')
+    subprocess.call(['docker-compose', 'stop', 'database', 'adminer'])
+
+
+@click.command()
+def querydb():
+    subprocess.call(['docker-compose', 'exec', 'database', 'psql', '-U', os.environ['DB_USER']])
+
+
+dev.add_command(startdb)
+dev.add_command(stopdb)
+dev.add_command(querydb)
+
+
+@click.group()
+def fmt():
+    pass
+
+
+cli.add_command(fmt)
+
+
+@click.command()
+def prettier():
+    subprocess.call(['./node_modules/.bin/prettier', '--write', 'ui/**/*.{js,jsx,css}'])
+
+
+@click.command()
+def eslint():
+    subprocess.call(['./node_modules/.bin/eslint', '--ext', '.js', '--ext', '.jsx', 'ui'])
+
+
+@click.command()
+def stylelint():
+    subprocess.call(['./node_modules/.bin/stylelint', 'ui/src/**/*.css'])
+
+
+fmt.add_command(prettier)
+fmt.add_command(eslint)
+fmt.add_command(stylelint)
+
+
+if __name__ == '__main__':
+    root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+    os.chdir(root)
+    cli()

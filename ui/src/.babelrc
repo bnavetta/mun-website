@@ -1,0 +1,16 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "browsers": "last 2 versions"
+      },
+      "modules": false,
+      "useBuiltIns": "usage",
+      "shippedProposals": true
+    }],
+    "@babel/react"
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
+}

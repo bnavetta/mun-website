@@ -1,100 +1,85 @@
+import org.springframework.boot.gradle.tasks.run.BootRun;
+
 buildscript {
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE"
-        classpath "com.netflix.nebula:nebula-project-plugin:3.3.0"
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+    repositories {
+        jcenter()
+
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
 
-    repositories {
-        maven {url "https://plugins.gradle.org/m2/"}
-        jcenter()
-        mavenCentral()
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M7'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
     }
+}
+
+plugins {
+    id 'org.hidetake.ssh' version '2.9.0'
 }
 
 allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+}
+
+configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.github.ben-manes.versions'
+
     group = 'org.brownmun'
     version = System.getenv('TRAVIS') ? System.getenv('TRAVIS_BUILD_NUMBER') : 'dev'
 
-    apply plugin: 'idea'
-    apply plugin: 'jacoco'
-    apply plugin: 'com.github.ben-manes.versions'
-
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
-}
-
-task coverage(type: JacocoReport) {
-    reports {
-        html {
-            destination file("$buildDir/reports/coverage")
-        }
-    }
-}
-
-task testReport(type: TestReport) {
-    destinationDir = file("$buildDir/reports/allTests")
-}
-
-task check(dependsOn: [testReport, coverage]) {}
-
-configure([project(':core'), project(':busun'), project(':bucs')]) {
-    apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
+    sourceCompatibility = 1.9
+    targetCompatibility = 1.9
 
     dependencyManagement {
         dependencies {
-            dependency 'com.google.guava:guava:23.3-jre'
-            dependency 'org.apache.commons:commons-lang3:3.6'
-
-            dependency 'org.apache.poi:poi-ooxml:3.17'
-
-            // Use Thymeleaf 3
-            dependencySet(group: 'org.thymeleaf', version: '3.0.8.RELEASE') {
-                entry 'thymeleaf'
-                entry 'thymeleaf-spring4'
-            }
-
-            // Override Spring Boot's Thymeleaf dialect versions
-            dependency 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.2.2'
-            dependency 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE'
-
-            dependencySet(group: 'org.testcontainers', version: '1.1.6') {
-                entry 'postgresql'
-                entry 'jdbc'
-                entry 'testcontainers'
-            }
+            dependency 'com.google.guava:guava:23.6-jre'
+            dependency 'org.springframework.shell:spring-shell-starter:2.0.0.M2'
+            dependency 'org.javassist:javassist:3.22.0-GA'
+            dependency 'com.google.auto.value:auto-value:1.5.3'
         }
     }
 
-    dependencies {
-        compile 'com.google.guava:guava'
-        compile 'org.apache.commons:commons-lang3'
+    repositories {
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
     }
 
-    bootRun {
-        addResources = true
-
+    tasks.withType(BootRun) {
         workingDir rootProject.projectDir
-
-        systemProperty 'debug', 'true'
-        def platformProfile =  System.getenv('TRAVIS') ? 'ci' : 'local'
-        systemProperty 'spring.profiles.active', "${platformProfile},dev-assets"
     }
+}
 
-    rootProject.tasks['coverage'].configure {
-        sourceSets sourceSets.main
+remotes {
+    brownmun {
+        role 'website'
+        host = '104.196.62.13'
+        // TODO: make more generic
+        user = 'ben'
+        identity = file("${System.getProperty("user.home")}/.ssh/google_compute_engine")
     }
+}
 
-    tasks.withType(Test) {
-        rootProject.tasks['coverage'].executionData it
-        rootProject.tasks['testReport'].reportOn it
-    }
+task deploy(dependsOn: [':busun:bootJar', ':ui:build']) {
+    doLast {
+        ssh.run {
+            session(remotes.brownmun) {
+                remove "/srv/http/assets"
+                put from: new File(project(':ui').buildDir, "production"), into: "/srv/http"
+                executeSudo "mv /srv/http/production /srv/http/assets"
+                executeSudo "chgrp -R nginx /srv/http/assets"
 
-    tasks.withType(JavaCompile) {
-//        options.compilerArgs = ['--add-modules', 'java.xml.bind', '--release', '8']
-//        options.compilerArgs = ['--release', '8']
+                put from: project(':busun').tasks['bootJar'].archivePath, into: "/srv/busun/busun.jar"
+                execute 'chgrp busun /srv/busun/busun.jar'
+                executeSudo 'systemctl restart busun'
+            }
+        }
     }
 }

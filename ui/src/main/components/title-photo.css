@@ -1,0 +1,16 @@
+/*
+ * title-photo
+ *
+ * An image that extends the full width of the screen and most of the height, containing
+ * the title of the page.
+ *
+ * Usage:
+ *   <img src=".../brown-busun.png" alt="Brown and BUSUN" class="title-photo" />
+ */
+
+.title-photo {
+    width: 100%;
+    max-height: 75vh;
+    object-position: center top;
+    object-fit: cover;
+}

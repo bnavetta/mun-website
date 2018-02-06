@@ -1,0 +1,72 @@
+@import "../variables.css";
+
+/*
+ * dropdown
+ *
+ * Pure-CSS dropdown menu
+ *
+ * Usage:
+ * TODO: ARIA roles
+ *
+ * <div class="dropdown">
+ *    <button class="dropdown-trigger">A Menu</button>
+ *    <div class="dropdown-content">
+ *        <ul>
+ *            <li>First thing</li>
+ *            <li>Second thing</li>
+ *        </ul>
+ *    </div>
+ * </div>
+ */
+
+.dropdown {
+    /* Need to be able to absolutely position the dropdown content based on this */
+    position: static;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    position: absolute;
+    display: none;
+    /*z-index: 1000;*/
+
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: var(--color-background);
+
+    top: 4em;
+}
+
+.dropdown-trigger {
+    text-decoration: none;
+    color: unset;
+}
+
+.dropdown:hover > .dropdown-content {
+    display: block;
+}
+
+nav.dropdown-menu > ul,
+nav.dropdown-menu > ol {
+    list-style: none;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+nav.dropdown-menu li {
+    width: 100%;
+    display: block;
+    padding: 10px;
+    clear: both;
+    overflow: hidden;
+}
+
+nav.dropdown-menu a, nav.dropdown-menu a:hover {
+    color: unset;
+    text-decoration: none;
+}
+
+nav.dropdown-menu li:hover {
+    background-color: color(#eceff1 shade(20%) a(25%));
+}

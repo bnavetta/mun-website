@@ -1,0 +1,15 @@
+# Local / dev settings
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/busun
+    username: busun
+    password: busunftw
+
+management:
+  endpoints:
+    web:
+      expose: '*'
+
+webpack:
+  asset-base: http://localhost:9090/assets/
+  reload: true

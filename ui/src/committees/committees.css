@@ -1,0 +1,30 @@
+.committees {
+    display: flex;
+    flex-direction: row;
+}
+
+.committees > aside {
+    flex: 1 1 auto;
+}
+
+.committee-list-container {
+    flex: 4 1 auto;
+}
+
+.committee-list {
+    color: var(--color-dark);
+}
+
+.committee-menu {
+    position: sticky;
+    top: 0;
+}
+
+.active {
+    color: red;
+}
+
+.chunk {
+    width: 1200px;
+    height: 600px;
+}

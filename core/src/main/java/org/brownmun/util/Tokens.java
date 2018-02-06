@@ -1,6 +1,5 @@
 package org.brownmun.util;
 
-import com.google.common.hash.Hashing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +13,7 @@ public class Tokens
 {
     private static final Logger log = LoggerFactory.getLogger(Tokens.class);
     private static final SecureRandom random;
+    private static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     static {
         try
@@ -26,17 +26,31 @@ public class Tokens
         }
     }
 
-    public static String generate()
+    /**
+     * Create a random alphanumeric token of a fixed length
+     * @param length length of the token
+     * @return a random token
+     */
+    public static String generate(int length)
     {
-        byte[] buf = new byte[256];
+        StringBuilder buf = new StringBuilder(length);
+        int alphabetLength = alphabet.length();
+
         long start = System.currentTimeMillis();
-        random.nextBytes(buf);
+        for (int i = 0; i < length; i++)
+        {
+
+            buf.append(alphabet.charAt(random.nextInt(alphabetLength)));
+        }
         long end = System.currentTimeMillis();
+
         if (end - start > 5000)
         {
+            // Ran into a tricky-to-debug issue once where the system random number generator (/dev/random) was low on
+            // entropy, so token generation was *super* slow.
             log.error("Slow random number generation: {}ms", end - start);
         }
-        String hash = Hashing.sha256().hashBytes(buf).toString();
-        return hash;
+
+        return buf.toString();
     }
 }

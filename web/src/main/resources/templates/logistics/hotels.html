@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>Partner Hotels</title>
+        <wp:chunk name="info-page"/>
+    </head>
+
+    <body>
+        <main layout:fragment="content">
+            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/partner-hotels.jpg" alt="Partner Hotels">
+
+            <section class="info--body">
+                <p class="body-text">
+                    BUSUN is happy to partner with a number of local hotels to simplify the process of finding
+                    conference accommodations. While delegations are not required to stay at a BUSUN partner hotel,
+                    we have enough rooms set aside to accommodate all delegations. Please note that <strong>reserving
+                    rooms is the responsibility of each individual delegation</strong>; we request that advisors contact
+                    the hotel directly in order to make reservations. Be sure to mention BUSUN (run by Brown Model
+                    United Nations) to receive our negotiated rates. Hotel rooms reserved by BUSUN are available on a
+                    first-come, first-serve basis. Approximately one month before the conference (exact deadlines vary
+                    by hotel), these reserved rooms will be opened to the public and rates will be subject to change.
+                    Therefore, we recommend that advisors arrange accommodations as early as possible. Participating
+                    hotels are as follows:
+                </p>
+
+                <table class="standard-table">
+                    <thead>
+                        <tr>
+                            <th>Hotel Name</th>
+                            <th>Rate</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--/*@thymesVar id="hotels" type="java.util.List<org.brownmun.db.logistics.Hotel>"*/-->
+                        <tr th:each="hotel : ${hotels}">
+                            <td th:text="${hotel.name}">Omni Providence</td>
+
+                            <td th:if="${hotel.rate}" th:text="${'$' + hotel.rate}">$189</td>
+                            <td th:unless="${hotel.rate}"></td>
+
+                            <td th:text="${#objects.nullSafe(hotel.address, '')}">1 W Exchange St, Providence, RI 02912</td>
+
+                            <td th:text="${#objects.nullSafe(hotel.phone, '')}">(401) 598-8012</td>
+
+                            <td th:utext="${#objects.nullSafe(hotel.notes, '')}">Notes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </body>
+</html>

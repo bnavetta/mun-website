@@ -1,0 +1,15 @@
+/*
+ * body-text
+ *
+ * Styles text for legibility, around 80 characters per line?
+ *
+ * Usage:
+ * <p class="body-text">This is a sentence</p>
+ */
+
+.body-text {
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 80ch;
+}

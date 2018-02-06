@@ -1,0 +1,13 @@
+.base > footer {
+    background-color: var(--color-primary);
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.base > footer a {
+    color: white;
+}

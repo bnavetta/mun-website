@@ -1,0 +1,47 @@
+class Webpack extends DefaultTask {
+    @Input
+    String env
+
+    def env(String environment) {
+        this.env = environment
+    }
+
+    @InputFile
+    File yarnLock = project.rootProject.file("yarn.lock")
+
+    @InputFile
+    File webpackConfig = project.file("webpack.config.babel.js")
+
+    @InputFiles
+    FileCollection config = project.files("postcss.config.js", ".babelrc")
+
+    @InputDirectory
+    File srcDir = project.file("src")
+
+    @OutputDirectory
+    def getTargetDir()
+    {
+        return project.file("$project.buildDir/$env")
+    }
+
+    @TaskAction
+    def build() {
+        project.exec {
+            executable "node"
+            args project.rootProject.file("node_modules/.bin/webpack"), "--config", webpackConfig
+            environment "NODE_ENV", this.env
+        }
+    }
+}
+
+task buildDev(type: Webpack) {
+    env "development"
+}
+
+task build(type: Webpack) {
+    env "production"
+}
+
+task clean(type: Delete) {
+    delete buildDir
+}

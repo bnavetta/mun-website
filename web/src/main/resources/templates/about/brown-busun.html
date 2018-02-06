@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>Brown and BUSUN</title>
+        <wp:chunk name="info-page"/>
+    </head>
+
+    <body>
+        <main layout:fragment="content" class="about-brown-busun">
+            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/brown-busun.jpg" alt="Brown and BUSUN">
+
+            <section class="info--body">
+                <p class="body-text">
+                    The Brown University Simulation of the United Nations (BUSUN) is a Model United Nations conference
+                    for high school students held annually on the campus of Brown University. BUSUN is proud to host
+                    over 900 delegates and 100 advisors each year. Since its founding in 1996, BUSUN has valued
+                    diplomacy, integrity, and creativity. The BUSUN Secretariat hopes that delegates will deepen their
+                    understanding of world affairs while developing their skills in debate, public speaking, and
+                    negotiation.
+                </p>
+
+                <p class="body-text">
+                    Delegates at BUSUN participate in one of over 40 committees centralized around a conference theme.
+                    These committees fall into one of three categories: General Assemblies, Specialized Agencies, and
+                    Crisis Committees. Small committee sizes, informed and passionate chairs, and a welcoming atmosphere
+                    are characteristic of the BUSUN experience. Debate topics are carefully chosen to challenge
+                    delegates to think critically about current events and engage thoughtfully with history. Past topics
+                    have included Versailles 1789, the African Union, and a six-joint crisis committee about global
+                    cybersecurity.
+                </p>
+
+                <p class="body-text">All committees at BUSUN are held in classrooms on the historic campus of Brown
+                    University. During the conference weekend, delegates have the unique opportunity to explore Brown,
+                    College Hill, and the city of Providence. The university was founded in 1764, making it the
+                    seventh-oldest college in the United States. Brown is an independent, coeducational Ivy League
+                    institution of over 6,000 undergraduates, 2,000 graduate students, and nearly 700 faculty members.
+                    Students come to Brown from all 50 states and more than 100 countries. Brown was named the #1
+                    College in America for Happiest Students in 2010, and the university is often recognized for its
+                    global reach, engaged students, and flexible curriculum.
+                </p>
+            </section>
+
+        </main>
+    </body>
+</html>

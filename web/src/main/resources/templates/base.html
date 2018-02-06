@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <head>
+        <title>Brown Model UN</title>
+
+        <wp:chunk name="manifest"/>
+        <wp:chunk name="vendor"/>
+        <wp:chunk name="main"/>
+
+        <link rel="icon" th:href="@{/favicon.ico}">
+    </head>
+
+    <body>
+        <div class="compat-fail">
+            <p>
+                This site uses features not supported by your browser. Please try a more recent browser such as
+                <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>,
+                <a href="https://www.google.com/chrome/">Chrome</a>, <a href="https://www.apple.com/safari/">Safari</a>,
+                or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>.
+            </p>
+            <p>Questions? Contact <a href="mailto:technology@busun.org">technology@busun.org</a>.</p>
+        </div>
+
+        <div class="base">
+            <header>
+                <div class="title">
+                    <h1><a th:href="@{/}">BUSUN XXII</a></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-trigger">About Us</a>
+                            <nav class="dropdown-content dropdown-menu">
+                                <ul>
+                                    <li><a th:href="@{/about/secretariat}">Meet the Secretariat</a></li>
+                                    <li><a th:href="@{/about/brown-busun}">Brown &amp; BUSUN</a></li>
+                                </ul>
+                            </nav>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-trigger">Registration</a>
+                            <nav class="dropdown-content dropdown-menu">
+                                <ul>
+                                    <li><a th:href="@{/registration/application}">Application</a></li>
+                                    <li><a th:href="@{/registration/fees-and-deadlines}">Fees &amp; Deadlines</a></li>
+                                    <li><a th:href="@{/registration/financial-aid}">Financial Aid</a></li>
+                                </ul>
+                            </nav>
+                        </li>
+                        <li><a th:href="@{/committees}">Committees</a></li>
+                        <li><a th:href="@{/schedule}">Schedule</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-trigger">Conference Resources</a>
+                            <nav class="dropdown-content dropdown-menu">
+                                <ul>
+                                    <li><a th:href="@{/conference-resources/preparation-and-procedure}">Preparation &amp; Procedure</a></li>
+                                    <li><a th:href="@{/conference-resources/delegate-guide}">Delegate Guide</a></li>
+                                    <li><a th:href="@{/conference-resources/erinn-phelan-award}">The Erinn Phelan Award</a></li>
+                                </ul>
+                            </nav>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-trigger">Logistics</a>
+                            <nav class="dropdown-content dropdown-menu">
+                                <ul>
+                                    <li><a th:href="@{/logistics/getting-to-campus}">Getting to Campus</a></li>
+                                    <li><a th:href="@{/logistics/hotels}">Partner Hotels</a></li>
+                                    <li><a th:href="@{/logistics/shuttles-and-parking}">Shuttles &amp; Parking</a></li>
+                                    <li><a th:href="@{/logistics/local-restaurants}">Local Restaurants</a></li>
+                                </ul>
+                            </nav>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main layout:fragment="content">
+
+            </main>
+
+            <footer>
+                <p><a href="mailto:info@busun.org">info@busun.org</a></p>
+                <p>Copyright 2018 Brown Model United Nations</p>
+            </footer>
+        </div>
+    </body>
+</html>

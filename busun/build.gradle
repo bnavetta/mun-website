@@ -1,20 +1,8 @@
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+
+    compile project(':web')
     compile project(':core')
-    compile 'org.springframework.boot:spring-boot-devtools'
-
-    testCompile 'junit:junit'
 }
-
-bootRun {
-//    jvmArgs '--add-modules', 'java.xml.bind',  '--illegal-access=permit'
-    args '--spring.profiles.active=local,prod-assets'
-}
-
-processResources.dependsOn ':frontend:assembleBusun'
-processResources.with {
-    from(project(':frontend').file('dist/busun/production')) {
-        into 'static'
-    }
-}
-
-compileJava.dependsOn(processResources)

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>Fees and Deadlines</title>
+        <wp:chunk name="info-page"/>
+    </head>
+
+    <body>
+        <main layout:fragment="content">
+            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/financial-aid.jpg" alt="Financial Aid">
+
+            <section class="info--body">
+                <p class="body-text">
+                    The Brown Model United Nations program is aware that high participation costs for Model UN have
+                    historically excluded many students. BUSUN is proud to offer need-based financial aid to delegations
+                    or individual delegates attending the conference. Financial need will not affect conference
+                    acceptance or registration status.
+                </p>
+
+                <p>
+                    Our application for financial aid will be available once your delegation has been accepted to BUSUN.
+                    Please email <a href="mailto:info@busun.org">info@busun.org</a> with any questions or concerns about
+                    financial aid.
+                </p>
+            </section>
+
+        </main>
+    </body>
+</html>

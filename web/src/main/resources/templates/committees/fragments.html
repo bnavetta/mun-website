@@ -1,0 +1,25 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <body>
+        <section class="committee" th:fragment="committee (c)">
+            <h3 th:text="${c.name}">Committee Name</h3>
+            <p th:text="${c.description}" th:unless="${#strings.isEmpty(c.description)}">
+                Description
+            </p>
+            <th:block th:if="${c.hasTopics()}">
+                <p>Topics:</p>
+                <ul>
+                    <li th:text="${c.topic1}" th:if="${!#strings.isEmpty(c.topic1)}">Topic 1</li>
+                    <li th:text="${c.topic2}" th:if="${!#strings.isEmpty(c.topic2)}">Topic 2</li>
+                    <li th:text="${c.topic3}" th:if="${!#strings.isEmpty(c.topic3)}">Topic 3</li>
+                    <li th:text="${c.topic4}" th:if="${!#strings.isEmpty(c.topic4)}">Topic 4</li>
+                </ul>
+            </th:block>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+plugins {
+    id "net.ltgt.apt" version "0.13"
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.google.guava:guava'
+    implementation 'com.github.ben-manes.caffeine:caffeine'
+
+    implementation project(':db')
+    implementation project(':core')
+
+    compileOnly 'com.google.auto.value:auto-value'
+    apt 'com.google.auto.value:auto-value'
+}
+
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = false
+}

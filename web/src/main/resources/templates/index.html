@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>BUSUN XXII</title>
+        <wp:chunk name="home" />
+    </head>
+
+    <body>
+        <main layout:fragment="content" class="home">
+            <th:block conference:if-busun="">
+                <header class="home--cover">
+                    <img src="https://storage.googleapis.com/busun_assets/title-images/home.jpg" alt="BUSUN XXII - November 9-11 2018">
+                </header>
+
+                <div class="home--registration">
+                    <!--<button class="button home&#45;&#45;register-button">Register</button>-->
+                    <div class="home--countdown">
+                        <h3 class="home--countdown-header">Countdown to BUSUN XXII!</h3>
+
+                        <span class="home--countdown-days"></span>
+                        <span class="home--countdown-label">Days</span>
+
+                        <span class="home--countdown-hours"></span>
+                        <span class="home--countdown-label">Hours</span>
+
+                        <span class="home--countdown-minutes"></span>
+                        <span class="home--countdown-label">Minutes</span>
+
+                        <span class="home--countdown-seconds"></span>
+                        <span class="home--countdown-label">Seconds</span>
+                    </div>
+                </div>
+
+                <div class="home--social">
+                    <a href="https://www.facebook.com/busunbuzz" class="social-link">
+                        <img th:src="@{/images/facebook-logo.png}" alt="BUSUN on Facebook">
+                    </a>
+                    <a href="https://twitter.com/busunbuzz" class="social-link">
+                        <img th:src="@{/images/twitter-logo.png}" alt="BUSUN on Twitter">
+                    </a>
+                    <a href="https://www.instagram.com/busunbuzz/" class="social-link">
+                        <img th:src="@{/images/instagram-logo.png}" alt="BUSUN on Instagram"/>
+                    </a>
+                </div>
+
+                <section class="home--content">
+                    <h2>Letter from the Secretaries-General</h2>
+                    <p>Dear Esteemed Delegates and Advisors,</p>
+
+                    <p>
+                        On behalf of the Brown Model United Nations program, we are honored to invite you to the
+                        Twenty-Second Annual Session of the Brown University Simulation of the United Nations (BUSUN),
+                        which will be held on the Brown University campus from November 9-11, 2018.
+                        We are proud to say that BUSUN will welcome over 900 students and 100 advisors to our campus in
+                        November. While BUSUN continues to grow and evolve each year, we are excited to continue some of
+                        the traditions that we believe make our conference special. Delegations return to year after
+                        year because of our small committee sizes, informed and passionate chairs, and welcoming
+                        atmosphere. As a Secretariat and staff, we value diplomacy and do our best to create a
+                        productive and positive experience for all delegates and advisors.
+                    </p>
+
+                    <p>
+                        We are thrilled to announce that the conference theme for BUSUN XXII will be global health.
+                        Delegates will explore not only more traditional aspects of global health &mdash; including
+                        accessibility, equity, and affordability of care &mdash; but also the interconnectivity of human
+                        health and wellness with other topics including bioterrorism, food security, and the rights of
+                        women. We are confident that delegates at BUSUN this year, like those who have attended BUSUN
+                        in the past, will participate in engaging debate that challenges their understanding of current
+                        events and historical topics.
+                    </p>
+
+                    <p>
+                    On behalf of the BUSUN Secretariat and our entire staff, we hope that you will be able to join us in
+                        November. Please contact our Director of External Affairs, Elinor Martinez, at
+                        <a href="mailto:info@busun.org">info@busun.org</a> with any questions or concerns. We look
+                        forward to welcoming you to BUSUN 2018!
+                    </p>
+
+                    <p>
+                        Best,
+                        <br/>
+                        Colette Bare and Jourdan Smithwick
+                        <br/>
+                        Secretaries-General, BUSUN XXII
+                        <br/>
+                        <a href="mailto:sg@busun.org">sg@busun.org</a>
+                    </p>
+
+                    <h2>Announcements</h2>
+
+                </section>
+            </th:block>
+            <th:block conference:if-bucs="">
+                <p>Coming Soon!</p>
+            </th:block>
+        </main>
+    </body>
+</html>

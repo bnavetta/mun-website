@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dialect xmlns="http://www.thymeleaf.org/extras/dialect"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.thymeleaf.org/extras/dialect
+       	                    http://www.thymeleaf.org/xsd/thymeleaf-extras-dialect-3.0.xsd"
+         prefix="wp"
+         namespace-uri="http://brownmun.org/th/webpack"
+         class="org.brownmun.web.resources.WebpackDialect"
+>
+
+    <element-processor name="chunk" class="org.brownmun.web.support.webpack.ChunkElementProcessor" />
+</dialect>

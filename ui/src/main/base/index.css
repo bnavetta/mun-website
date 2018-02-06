@@ -1,0 +1,9 @@
+@import "../variables.css";
+
+@import "grid.css";
+@import "header.css";
+@import "footer.css";
+
+.base > main {
+    background-color: var(--color-background);
+}

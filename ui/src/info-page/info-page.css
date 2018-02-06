@@ -1,0 +1,9 @@
+/*
+ * Container for the body copy on an info page
+ */
+.info--body {
+    margin: 40px auto;
+    max-width: 80ch;
+
+    color: var(--color-dark);
+}

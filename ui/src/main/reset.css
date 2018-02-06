@@ -1,0 +1,9 @@
+@import "~normalize.css/normalize.css";
+
+/*
+ * CSS resets not covered by normalize.css
+ */
+
+* {
+    box-sizing: border-box;
+}
