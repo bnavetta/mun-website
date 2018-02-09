@@ -15,6 +15,10 @@
     <h3 th:text="${committee.name}">My Committee</h3>
     <p class="my-2" th:text="${committee.description}">About the committee.</p>
 
+    <p class="my-2">
+        <a th:href="|https://storage.googleapis.com/bucs_assets/background-guides/${committee.shortName}.pdf|">Background Guide</a>
+    </p>
+
     <th:block th:if="${committee.hasTopics()}">
         <p>Topics:</p>
         <ul>
@@ -47,6 +51,9 @@
                 <li th:each="crisis : ${jointCrises}" class="list-group-item flex-column align-items-start">
                     <h3 th:text="${crisis.name}">Crisis Name</h3>
                     <p class="my-2" th:text="${crisis.description}">Crisis Description</p>
+                    <p class="my-2" th:if="${crisis.shortName}">
+                        <a th:href="|https://storage.googleapis.com/bucs_assets/background-guides/${crisis.shortName}.pdf|">Background Guide</a>
+                    </p>
                     <h4>Committees:</h4>
                     <dl>
                         <th:block th:each="committee : ${crisis.committees}">

@@ -10,6 +10,8 @@ public class App
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(App.class, args);
+		SpringApplication app = new SpringApplication(App.class);
+        app.setAdditionalProfiles("bucs");
+        app.run(args);
 	}
 }

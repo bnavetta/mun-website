@@ -38,6 +38,7 @@ public class StaffService
     {
         Map<String, StaffMember> staff = Maps.newHashMap();
 
+        System.out.println("SECRETARIAT: " + sec);
         for(SecretariatMember secMember : sec.getMembers())
         {
             StaffMember secStaff = new StaffMember(secMember.getEmail(), StaffType.SECRETARIAT, -1);

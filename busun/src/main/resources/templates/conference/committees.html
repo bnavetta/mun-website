@@ -68,6 +68,9 @@
                             <h3 th:text="${crisis.name}">Crisis Name</h3>
                             <p class="mt-2" th:text="${crisis.description}">Crisis Description</p>
                             <p class="my-1">Contact: <a th:href="|mailto:${#conference.getCommitteeEmail(crisis.shortName)}|" th:text="${#conference.getCommitteeEmail(crisis.shortName)}">crisis@busun.org</a></p>
+                            <p class="my-1" th:if="${crisis.shortName}">
+                                <a th:href="|https://storage.googleapis.com/bucs_assets/background-guides/${crisis.shortName}.pdf|">Background Guide</a>
+                            </p>
                             <h4>Committees:</h4>
                             <dl>
                                 <th:block th:each="committee : ${crisis.committees}">
