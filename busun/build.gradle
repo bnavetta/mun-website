@@ -6,3 +6,7 @@ dependencies {
     compile project(':web')
     compile project(':core')
 }
+
+bootJar {
+	launchScript()
+}
