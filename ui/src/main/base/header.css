@@ -1,3 +1,5 @@
+@import "../../lib/responsive.css";
+
 .base > header {
     background-color: var(--color-primary);
     color: white;
@@ -18,10 +20,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex: 1 0 auto;
+
+    font-size: 1em;
+}
+
+.base > header h1 {
+    font-size: 2em;
 }
 
 .base > header > nav {
-    flex: 1 1 auto;
+    flex: 3 1 auto;
 
     display: flex;
     align-items: center;
@@ -30,7 +39,7 @@
 
 .base > header > nav > ul {
     width: 100%;
-    min-width: 800px;
+    /*min-width: 800px;*/
     padding: 0;
     margin: 0;
 

@@ -15,8 +15,10 @@
     "babel-loader": "^7.1.2",
     "cache-loader": "^1.2.0",
     "caniuse-lite": "^1.0.30000787",
+    "chalk": "^2.3.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
+    "doiuse": "^4.0.0",
     "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.5.0",
@@ -55,10 +57,13 @@
     "last 2 versions",
     "> 1%",
     "Firefox ESR",
+    "not Baidu >= 0",
     "not ie >= 0",
     "not ie_mob >= 0",
     "not OperaMini >= 0",
+    "not OperaMobile >= 0",
     "not UCAndroid >= 0",
-    "not Edge < 16"
+    "not Edge < 16",
+    "not BlackBerry >= 0"
   ]
 }
