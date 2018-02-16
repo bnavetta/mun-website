@@ -13,6 +13,7 @@ buildscript {
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M7'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.10.0'
     }
 }
 
@@ -30,6 +31,7 @@ configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'com.github.ben-manes.versions'
+    apply plugin: 'com.diffplug.gradle.spotless'
 
     group = 'org.brownmun'
     version = System.getenv('TRAVIS') ? System.getenv('TRAVIS_BUILD_NUMBER') : 'dev'
@@ -54,6 +56,21 @@ configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
 
     tasks.withType(BootRun) {
         workingDir rootProject.projectDir
+    }
+
+    spotless {
+        java {
+            importOrder 'java', 'javax', 'org', 'com', 'org.brownmun', ''
+            removeUnusedImports()
+            eclipse().configFile rootProject.file('config/eclipse-formatter-settings.xml')
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+
+        sql {
+            target 'src/**/*.sql'
+            dbeaver().configFile rootProject.file('config/dbeaver.properties')
+        }
     }
 }
 
