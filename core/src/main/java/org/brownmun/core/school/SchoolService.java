@@ -7,7 +7,9 @@ public interface SchoolService
 {
     /**
      * Register a new school
-     * @param initialAdvisor information about the advisor account to create for the school
+     *
+     * @param initialAdvisor information about the advisor account to create for the
+     *        school
      * @param name the school's name
      * @return the newly-persisted school
      */

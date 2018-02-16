@@ -1,13 +1,14 @@
 package org.brownmun.web;
 
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.db.committee.Committee;
-import org.brownmun.db.committee.CommitteeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.db.committee.Committee;
+import org.brownmun.db.committee.CommitteeType;
 
 @Controller
 @RequestMapping("/test")
@@ -20,7 +21,6 @@ public class TestController
     {
         this.committees = committees;
     }
-
 
     @GetMapping
     public String index()

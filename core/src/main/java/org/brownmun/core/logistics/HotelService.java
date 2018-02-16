@@ -1,8 +1,8 @@
 package org.brownmun.core.logistics;
 
-import org.brownmun.db.logistics.Hotel;
-
 import java.util.List;
+
+import org.brownmun.db.logistics.Hotel;
 
 public interface HotelService
 {

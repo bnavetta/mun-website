@@ -1,8 +1,8 @@
 package org.brownmun.web.support.webpack;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.net.URI;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("webpack")
 public class WebpackProperties

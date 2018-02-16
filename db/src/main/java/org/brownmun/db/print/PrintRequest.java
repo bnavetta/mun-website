@@ -1,21 +1,23 @@
 package org.brownmun.db.print;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.MoreObjects;
-import org.hibernate.annotations.Type;
+import java.sql.Blob;
+import java.time.Instant;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
-import java.sql.Blob;
-import java.time.Instant;
-import java.util.Objects;
+
+import org.hibernate.annotations.Type;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.MoreObjects;
 
 /**
- * A printing request. Submitted by committees and fulfilled by staffers, who also deliver
- * the printed files in person.
+ * A printing request. Submitted by committees and fulfilled by staffers, who
+ * also deliver the printed files in person.
  */
 @Entity
 public class PrintRequest
@@ -46,9 +48,7 @@ public class PrintRequest
     @JsonIgnore
     private Blob data;
 
-    @Type(
-            type = "org.brownmun.db.support.PostgresEnumType",
-            parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "print_request_status"))
+    @Type(type = "org.brownmun.db.support.PostgresEnumType", parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "print_request_status"))
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -141,16 +141,15 @@ public class PrintRequest
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         PrintRequest that = (PrintRequest) o;
-        return numCopies == that.numCopies &&
-                Objects.equals(deliveryLocation, that.deliveryLocation) &&
-                Objects.equals(submissionTime, that.submissionTime) &&
-                Objects.equals(requester, that.requester) &&
-                Objects.equals(filename, that.filename) &&
-                Objects.equals(status, that.status) &&
-                Objects.equals(contentType, that.contentType);
+        return numCopies == that.numCopies && Objects.equals(deliveryLocation, that.deliveryLocation)
+                && Objects.equals(submissionTime, that.submissionTime) && Objects.equals(requester, that.requester)
+                && Objects.equals(filename, that.filename) && Objects.equals(status, that.status)
+                && Objects.equals(contentType, that.contentType);
     }
 
     @Override
@@ -162,16 +161,10 @@ public class PrintRequest
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("numCopies", numCopies)
-                .add("deliveryLocation", deliveryLocation)
-                .add("submissionTime", submissionTime)
-                .add("requester", requester)
-                .add("filename", filename)
-                .add("contentType", contentType)
-                .add("status", status)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("numCopies", numCopies)
+                .add("deliveryLocation", deliveryLocation).add("submissionTime", submissionTime)
+                .add("requester", requester).add("filename", filename).add("contentType", contentType)
+                .add("status", status).toString();
     }
 
     /**
@@ -185,14 +178,14 @@ public class PrintRequest
         PENDING,
 
         /**
-         * A staffer has claimed the request and is in the process of printing and delivering it.
+         * A staffer has claimed the request and is in the process of printing and
+         * delivering it.
          */
         CLAIMED,
 
         /**
          * The print request has been delivered.
          */
-        COMPLETED
-        ;
+        COMPLETED;
     }
 }

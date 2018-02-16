@@ -5,8 +5,5 @@ package org.brownmun.db.committee;
  */
 public enum CommitteeType
 {
-	GENERAL,
-	CRISIS,
-	SPECIALIZED
-	;
+    GENERAL, CRISIS, SPECIALIZED;
 }

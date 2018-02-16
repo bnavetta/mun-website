@@ -1,8 +1,8 @@
 package org.brownmun.db.school;
 
-import com.google.common.base.MoreObjects;
-
 import javax.persistence.Embeddable;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * A delegate's attendance record, tracking which sessions they've been to.
@@ -88,13 +88,8 @@ public class Attendance
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("positionPaperSubmitted", positionPaperSubmitted)
-                .add("sessionOne", sessionOne)
-                .add("sessionTwo", sessionTwo)
-                .add("sessionThree", sessionThree)
-                .add("sessionFour", sessionFour)
-                .add("sessionFive", sessionFive)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("positionPaperSubmitted", positionPaperSubmitted)
+                .add("sessionOne", sessionOne).add("sessionTwo", sessionTwo).add("sessionThree", sessionThree)
+                .add("sessionFour", sessionFour).add("sessionFive", sessionFive).toString();
     }
 }

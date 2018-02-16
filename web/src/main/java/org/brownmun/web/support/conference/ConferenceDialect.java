@@ -1,6 +1,7 @@
 package org.brownmun.web.support.conference;
 
-import org.brownmun.core.Conference;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.IExpressionContext;
@@ -9,7 +10,7 @@ import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.expression.IExpressionObjectFactory;
 import org.thymeleaf.processor.IProcessor;
 
-import java.util.Set;
+import org.brownmun.core.Conference;
 
 /**
  * Thymeleaf dialect for conference info
@@ -52,10 +53,8 @@ public class ConferenceDialect implements IExpressionObjectDialect, IProcessorDi
     @Override
     public Set<IProcessor> getProcessors(String dialectPrefix)
     {
-        return Set.of(
-                new IfConferenceAttributeProcessor(dialectPrefix, conference, "busun"),
-                new IfConferenceAttributeProcessor(dialectPrefix, conference, "bucs")
-        );
+        return Set.of(new IfConferenceAttributeProcessor(dialectPrefix, conference, "busun"),
+                new IfConferenceAttributeProcessor(dialectPrefix, conference, "bucs"));
     }
 
     private class ConferenceExpressionObjectFactory implements IExpressionObjectFactory

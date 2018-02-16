@@ -1,9 +1,5 @@
 package org.brownmun.web.support.webpack;
 
-import com.google.common.collect.Lists;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -11,6 +7,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Lists;
 
 public class ChunkResolver
 {
@@ -37,9 +38,7 @@ public class ChunkResolver
 
     public Chunk getChunk(String name)
     {
-        List<URI> files = manifestSource.get().getFiles(name)
-                .stream()
-                .map(assetBase::resolve)
+        List<URI> files = manifestSource.get().getFiles(name).stream().map(assetBase::resolve)
                 .collect(Collectors.toList());
 
         List<URI> js = Lists.newArrayList();

@@ -1,23 +1,23 @@
 package org.brownmun.web.support.webpack;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
- * Representation of a Webpack manifest, mapping chunk names to
- * included files.
+ * Representation of a Webpack manifest, mapping chunk names to included files.
  */
 public class Manifest
 {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    private static final TypeReference<Map<String, List<String>>> MANIFEST_TYPE = new TypeReference<>() {};
+    private static final TypeReference<Map<String, List<String>>> MANIFEST_TYPE = new TypeReference<>() {
+    };
     public static final Manifest EMPTY = new Manifest(Map.of());
 
     private final Map<String, List<String>> chunks;
@@ -29,6 +29,7 @@ public class Manifest
 
     /**
      * Create a new {@link Manifest} from an input source
+     *
      * @param in the manifest contents
      * @return the manifest contents
      * @throws IOException if unable to parse the manifest JSON
@@ -40,9 +41,10 @@ public class Manifest
 
     /**
      * Get the files in a chunk
+     *
      * @param chunkName the name of the chunk
-     * @return the names of files in the chunk, relative to the Webpack
-     *     output directory
+     * @return the names of files in the chunk, relative to the Webpack output
+     *         directory
      * @throws IllegalArgumentException if the chunk doesn't exist
      */
     public List<String> getFiles(String chunkName)

@@ -1,13 +1,16 @@
 package org.brownmun.db.committee;
 
-import com.google.common.base.MoreObjects;
-import org.brownmun.db.school.Delegate;
-
-import javax.persistence.*;
 import java.util.Objects;
 
+import javax.persistence.*;
+
+import com.google.common.base.MoreObjects;
+
+import org.brownmun.db.school.Delegate;
+
 /**
- * A position on a committee, such as the United States in the World Health Organization.
+ * A position on a committee, such as the United States in the World Health
+ * Organization.
  */
 @Entity
 public class Position
@@ -77,11 +80,12 @@ public class Position
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Position position = (Position) o;
-        return Objects.equals(name, position.name) &&
-                Objects.equals(committee, position.committee);
+        return Objects.equals(name, position.name) && Objects.equals(committee, position.committee);
     }
 
     @Override
@@ -93,11 +97,7 @@ public class Position
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("delegate", delegate)
-                .add("committee", committee)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("delegate", delegate)
+                .add("committee", committee).toString();
     }
 }

@@ -1,11 +1,12 @@
 package org.brownmun.db.school;
 
-import com.google.common.collect.Sets;
-
-import javax.persistence.*;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.*;
+
+import com.google.common.collect.Sets;
 
 /**
  * Core School entity
@@ -107,8 +108,10 @@ public class School
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         School school = (School) o;
         return Objects.equals(name, school.name);
     }

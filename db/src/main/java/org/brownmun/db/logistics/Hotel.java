@@ -1,16 +1,18 @@
 package org.brownmun.db.logistics;
 
-import com.google.common.base.MoreObjects;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Objects;
+
+import com.google.common.base.MoreObjects;
 
 /**
- * A partner hotel. We store these in the database so that the hotels page and supplemental info forms can use the
- * same backing list and so that we can easily query schools at each hotel.
+ * A partner hotel. We store these in the database so that the hotels page and
+ * supplemental info forms can use the same backing list and so that we can
+ * easily query schools at each hotel.
  */
 @Entity
 public class Hotel
@@ -92,8 +94,10 @@ public class Hotel
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Hotel hotel = (Hotel) o;
         return Objects.equals(name, hotel.name);
     }
@@ -107,13 +111,7 @@ public class Hotel
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("rate", rate)
-                .add("address", address)
-                .add("phone", phone)
-                .add("notes", notes)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("rate", rate)
+                .add("address", address).add("phone", phone).add("notes", notes).toString();
     }
 }

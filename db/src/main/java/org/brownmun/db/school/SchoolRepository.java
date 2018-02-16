@@ -1,10 +1,11 @@
 package org.brownmun.db.school;
 
-import org.brownmun.db.committee.Position;
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Set;
+import org.brownmun.db.committee.Position;
 
 /**
  * Queries relating to {@link School}s.

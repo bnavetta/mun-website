@@ -1,19 +1,18 @@
 package org.brownmun.db.school;
 
-import com.google.common.base.MoreObjects;
-import org.brownmun.db.committee.Position;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
 import javax.persistence.*;
-import java.util.Set;
+
+import com.google.common.base.MoreObjects;
+
+import org.brownmun.db.committee.Position;
 
 /**
- * Links a {@link School} to a {@link Position} and stores information about the actual
- * student.
+ * Links a {@link School} to a {@link Position} and stores information about the
+ * actual student.
  *
- * This can't quite just be a foreign key column on {@link Position} or a JPA-managed join table because of the extra
- * information needed about the student.
+ * This can't quite just be a foreign key column on {@link Position} or a
+ * JPA-managed join table because of the extra information needed about the
+ * student.
  */
 @Entity
 public class Delegate
@@ -100,13 +99,8 @@ public class Delegate
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("attendance", attendance)
-                .add("school", school)
-                .add("position", position)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("attendance", attendance)
+                .add("school", school).add("position", position).toString();
     }
 
 }

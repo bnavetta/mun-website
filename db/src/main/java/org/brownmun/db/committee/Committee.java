@@ -1,11 +1,13 @@
 package org.brownmun.db.committee;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Strings;
-import org.hibernate.annotations.Type;
+import java.util.Objects;
 
 import javax.persistence.*;
-import java.util.Objects;
+
+import org.hibernate.annotations.Type;
+
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Strings;
 
 /**
  * A committee, such as the U.N. Security Council.
@@ -35,15 +37,13 @@ public class Committee implements HasShortName
     /**
      * The type of committee this is
      */
-    @Type(
-            type = "org.brownmun.db.support.PostgresEnumType",
-            parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "committee_type"))
+    @Type(type = "org.brownmun.db.support.PostgresEnumType", parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "committee_type"))
     @Enumerated(EnumType.STRING)
     private CommitteeType type;
 
     /**
-     * Topics for the committee. These are the major agenda items
-     * delegates will address.
+     * Topics for the committee. These are the major agenda items delegates will
+     * address.
      */
 
     private String topic1;
@@ -144,15 +144,17 @@ public class Committee implements HasShortName
 
     public boolean hasTopics()
     {
-        return !Strings.isNullOrEmpty(topic1) || !Strings.isNullOrEmpty(topic2) ||
-                !Strings.isNullOrEmpty(topic3) || !Strings.isNullOrEmpty(topic4);
+        return !Strings.isNullOrEmpty(topic1) || !Strings.isNullOrEmpty(topic2) || !Strings.isNullOrEmpty(topic3)
+                || !Strings.isNullOrEmpty(topic4);
     }
 
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Committee committee = (Committee) o;
         return Objects.equals(name, committee.name);
     }
@@ -166,16 +168,8 @@ public class Committee implements HasShortName
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("description", description)
-                .add("shortName", shortName)
-                .add("type", type)
-                .add("topic1", topic1)
-                .add("topic2", topic2)
-                .add("topic3", topic3)
-                .add("topic4", topic4)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("description", description)
+                .add("shortName", shortName).add("type", type).add("topic1", topic1).add("topic2", topic2)
+                .add("topic3", topic3).add("topic4", topic4).toString();
     }
 }

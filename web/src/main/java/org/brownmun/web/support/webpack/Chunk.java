@@ -1,9 +1,9 @@
 package org.brownmun.web.support.webpack;
 
-import com.google.auto.value.AutoValue;
-
 import java.net.URI;
 import java.util.List;
+
+import com.google.auto.value.AutoValue;
 
 @AutoValue
 public abstract class Chunk
@@ -14,5 +14,6 @@ public abstract class Chunk
     }
 
     abstract List<URI> css();
+
     abstract List<URI> js();
 }

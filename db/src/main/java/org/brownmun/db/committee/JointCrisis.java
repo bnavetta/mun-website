@@ -1,16 +1,17 @@
 package org.brownmun.db.committee;
 
-import com.google.common.base.MoreObjects;
-
-import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.*;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * A Joint Crisis is a group of interrelated crisis committees, all interacting.
  *
- * For example, BUSUN XXI had an Arab Spring joint crisis, with committees for the Egyptian protesters, the
- * Egyptian military, and neighboring countries.
+ * For example, BUSUN XXI had an Arab Spring joint crisis, with committees for
+ * the Egyptian protesters, the Egyptian military, and neighboring countries.
  */
 @Entity
 public class JointCrisis implements HasShortName
@@ -35,15 +36,12 @@ public class JointCrisis implements HasShortName
     private String description;
 
     /**
-     * The committees that are part of this crisis. Even though this is a one-to-many relationship, we use a join
-     * table instead of a column on {@link Committee} because most committees aren't part of a joint crisis.
+     * The committees that are part of this crisis. Even though this is a
+     * one-to-many relationship, we use a join table instead of a column on
+     * {@link Committee} because most committees aren't part of a joint crisis.
      */
     @OneToMany
-    @JoinTable(
-            name = "joint_crisis_committees",
-            joinColumns = @JoinColumn(name = "joint_crisis_id"),
-            inverseJoinColumns = @JoinColumn(name = "committee_id")
-    )
+    @JoinTable(name = "joint_crisis_committees", joinColumns = @JoinColumn(name = "joint_crisis_id"), inverseJoinColumns = @JoinColumn(name = "committee_id"))
     private Set<Committee> committees;
 
     public Long getId()
@@ -100,8 +98,10 @@ public class JointCrisis implements HasShortName
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         JointCrisis that = (JointCrisis) o;
         return Objects.equals(name, that.name);
     }
@@ -115,12 +115,7 @@ public class JointCrisis implements HasShortName
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("shortName", shortName)
-                .add("description", description)
-                .add("committees", committees)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("shortName", shortName)
+                .add("description", description).add("committees", committees).toString();
     }
 }

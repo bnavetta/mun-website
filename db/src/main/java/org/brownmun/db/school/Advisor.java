@@ -1,9 +1,10 @@
 package org.brownmun.db.school;
 
-import com.google.common.base.MoreObjects;
+import java.util.Objects;
 
 import javax.persistence.*;
-import java.util.Objects;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * A school advisor. Usually, this is a teacher.
@@ -100,8 +101,10 @@ public class Advisor
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Advisor advisor = (Advisor) o;
         return Objects.equals(email, advisor.email);
     }
@@ -115,13 +118,7 @@ public class Advisor
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("email", email)
-                .add("phoneNumber", phoneNumber)
-                .add("password", password)
-                .add("school_id", school.getId())
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("email", email)
+                .add("phoneNumber", phoneNumber).add("password", password).add("school_id", school.getId()).toString();
     }
 }

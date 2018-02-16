@@ -1,17 +1,14 @@
 package org.brownmun.db.support;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.Properties;
+
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.type.EnumType;
 import org.postgresql.util.PGobject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
-import java.util.Arrays;
-import java.util.Properties;
 
 /**
  * Adapter for Postgres enum types
@@ -28,7 +25,8 @@ public class PostgresEnumType extends EnumType
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session) throws HibernateException, SQLException
+    public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session)
+            throws HibernateException, SQLException
     {
         if (value == null)
         {

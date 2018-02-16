@@ -3,8 +3,7 @@ package org.brownmun.db.school;
 import javax.persistence.*;
 
 /**
- * A school's supplemental information, filled out after they're
- * accepted.
+ * A school's supplemental information, filled out after they're accepted.
  */
 @Entity
 public class SupplementalInfo

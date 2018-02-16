@@ -66,11 +66,6 @@ configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
             trimTrailingWhitespace()
             endWithNewline()
         }
-
-        sql {
-            target 'src/**/*.sql'
-            dbeaver().configFile rootProject.file('config/dbeaver.properties')
-        }
     }
 }
 

@@ -1,12 +1,13 @@
 package org.brownmun.core.committee.impl;
 
-import org.brownmun.db.committee.*;
-import org.brownmun.core.committee.CommitteeService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.db.committee.*;
 
 @Service
 public class CommitteeServiceImpl implements CommitteeService

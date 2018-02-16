@@ -1,9 +1,9 @@
 package org.brownmun.web.support.webpack;
 
+import java.util.Set;
+
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
-
-import java.util.Set;
 
 public class WebpackDialect implements IProcessorDialect
 {

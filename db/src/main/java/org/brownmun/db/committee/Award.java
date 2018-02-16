@@ -1,14 +1,15 @@
 package org.brownmun.db.committee;
 
-import com.google.common.base.MoreObjects;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
+
+import com.google.common.base.MoreObjects;
+
 /**
- * Records an award given to a position. Almost a join table
- * with extra info about what kind of award it is, but not quite
- * because awards can be unassigned.
+ * Records an award given to a position. Almost a join table with extra info
+ * about what kind of award it is, but not quite because awards can be
+ * unassigned.
  */
 @Entity
 public class Award
@@ -25,9 +26,7 @@ public class Award
     @JoinColumn(name = "committee_id")
     private Committee committee;
 
-    @Type(
-            type = "org.brownmun.db.support.PostgresEnumType",
-            parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "award_type"))
+    @Type(type = "org.brownmun.db.support.PostgresEnumType", parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "award_type"))
     @Enumerated(EnumType.STRING)
     private AwardType type;
 
@@ -74,11 +73,7 @@ public class Award
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("position", position)
-                .add("committee", committee)
-                .add("type", type)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("position", position).add("committee", committee)
+                .add("type", type).toString();
     }
 }

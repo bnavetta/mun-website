@@ -1,12 +1,13 @@
 package org.brownmun.core.school.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.db.school.Advisor;
 import org.brownmun.db.school.School;
 import org.brownmun.db.school.SchoolRepository;
 import org.brownmun.util.Tokens;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class SchoolServiceImpl implements SchoolService

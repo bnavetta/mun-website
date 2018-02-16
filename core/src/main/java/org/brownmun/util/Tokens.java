@@ -1,10 +1,10 @@
 package org.brownmun.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility class for generating secure tokens.
@@ -15,7 +15,8 @@ public class Tokens
     private static final SecureRandom random;
     private static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    static {
+    static
+    {
         try
         {
             random = SecureRandom.getInstanceStrong();
@@ -28,6 +29,7 @@ public class Tokens
 
     /**
      * Create a random alphanumeric token of a fixed length
+     *
      * @param length length of the token
      * @return a random token
      */
@@ -46,7 +48,8 @@ public class Tokens
 
         if (end - start > 5000)
         {
-            // Ran into a tricky-to-debug issue once where the system random number generator (/dev/random) was low on
+            // Ran into a tricky-to-debug issue once where the system random number
+            // generator (/dev/random) was low on
             // entropy, so token generation was *super* slow.
             log.error("Slow random number generation: {}ms", end - start);
         }
