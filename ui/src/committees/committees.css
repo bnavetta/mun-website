@@ -1,30 +1,48 @@
 .committees {
     display: flex;
     flex-direction: row;
+
+    padding-top: 20px;
 }
 
-.committees > aside {
-    flex: 1 1 auto;
+.committee-map-container {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.committee-list-container {
-    flex: 4 1 auto;
+.committee-map-container-loading {
+    height: 100%;
 }
 
-.committee-list {
-    color: var(--color-dark);
+.committee-map-container-map {
+    width: 100vmin;
+    height: 80vmin;
 }
 
-.committee-menu {
-    position: sticky;
-    top: 0;
+.committees-list {
+    display: grid;
+    list-style-type: none;
+
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+
+    grid-gap: 20px;
+
+    padding: 20px;
 }
 
-.active {
-    color: red;
+.committees-list__committee {
+    border: 1px solid var(--color-rule);
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.chunk {
-    width: 1200px;
-    height: 600px;
+.committees-list__committee__image {
+    margin: 10px;
 }

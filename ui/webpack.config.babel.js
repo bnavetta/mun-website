@@ -43,8 +43,9 @@ const webpackConfig = {
 
     module: {
         rules: [
+            // Rule for our JS and JSX
             {
-                test: /.jsx?/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: [
                     { loader: "cache-loader" },
@@ -62,8 +63,10 @@ const webpackConfig = {
                     },
                 ],
             },
+
+            // Rule for our CSS
             {
-                test: /.css/,
+                test: /\.css$/,
                 exclude: /node_modules/,
                 use: config.isDev
                     ? [
@@ -89,6 +92,34 @@ const webpackConfig = {
                               { loader: "postcss-loader" },
                           ],
                       }),
+            },
+
+            // Rule for third-party CSS
+            // Rule for our CSS
+            {
+                test: /node_modules\/.*\.css$/,
+                use: config.isDev
+                    ? [
+                        { loader: "cache-loader" },
+                        { loader: "style-loader" },
+                        {
+                            loader: "css-loader",
+                            options: {
+                                importLoaders: 1,
+                            },
+                        }
+                    ]
+                    : ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: [
+                            {
+                                loader: "css-loader",
+                                options: {
+                                    importLoaders: 1,
+                                },
+                            }
+                        ],
+                    }),
             },
         ],
     },

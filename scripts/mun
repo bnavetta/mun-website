@@ -40,9 +40,15 @@ dev.add_command(stopdb)
 dev.add_command(querydb)
 
 
-@click.group()
+@click.group(invoke_without_command=True)
+@click.pass_context
 def fmt():
-    pass
+    if ctx.invoked_subcommand is None:
+        click.secho('Formatting all files...', fg='green')
+        prettier()
+        eslint()
+        stylelint()
+        spotless()
 
 
 cli.add_command(fmt)
@@ -63,9 +69,15 @@ def stylelint():
     subprocess.call(['./node_modules/.bin/stylelint', 'ui/src/**/*.css'])
 
 
+@click.command()
+def spotless():
+    subprocess.call(['./gradlew', 'spotlessApply'])
+
+
 fmt.add_command(prettier)
 fmt.add_command(eslint)
 fmt.add_command(stylelint)
+fmt.add_command(spotless)
 
 
 if __name__ == '__main__':
