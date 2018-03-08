@@ -1,0 +1,31 @@
+---
+
+- name: Ensure common utilities are installed
+  dnf: name={{ item }} state=present
+  with_items:
+    - htop
+    - lsof
+    - httpie
+    - dnf-plugins-core
+
+# Required for Kubernetes
+# TODO: remove once kubelet supports SELinux
+- name: Disable SELinux
+  selinux: state=disabled
+
+- name: Set timezone
+  timezone: name=America/New_York
+
+- name: Ensure dnf-automatic is installed
+  dnf: name=dnf-automatic state=present
+
+- name: Configure automatic updates
+  copy:
+    src: automatic.conf
+    dest: /etc/dnf/automatic.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable automatic updates
+  service: name=dnf-automatic.timer state=started enabled=yes

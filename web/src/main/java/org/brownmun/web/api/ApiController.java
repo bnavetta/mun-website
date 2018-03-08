@@ -1,18 +1,20 @@
 package org.brownmun.web.api;
 
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.db.committee.Committee;
-import org.brownmun.db.committee.CommitteeType;
-import org.brownmun.db.committee.JointCrisis;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.db.committee.Committee;
+import org.brownmun.db.committee.CommitteeType;
+import org.brownmun.db.committee.JointCrisis;
 
 /**
- * Read-only API for client-side code on the public facing website, such as the committees list.
+ * Read-only API for client-side code on the public facing website, such as the
+ * committees list.
  */
 @RestController
 @RequestMapping("/api")

@@ -1,0 +1,12 @@
+---
+apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+apiServerExtraArgs:
+  token-auth-file: /etc/kubernetes/auth/tokens.csv
+apiServerExtraVolumes:
+- name: k8s-auth
+  hostPath: /etc/kubernetes/auth
+  mountPath: /etc/kubernetes/auth
+apiServerCertSANs:
+- kube.busun.org
+- kube.browncrisis.org

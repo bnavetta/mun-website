@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  roles:
+  - base
+  - docker
+  - kubernetes
+  become: yes

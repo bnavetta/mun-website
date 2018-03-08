@@ -1,0 +1,10 @@
+---
+spring:
+  datasource:
+    url: ${DB_JDBC_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+webpack:
+  asset-base: https://busun.org/assets/
+  prod: true

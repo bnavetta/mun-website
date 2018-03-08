@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:3.2.4'
+    }
+}
+
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+import com.bmuschko.gradle.docker.tasks.image.*
+
+docker {
+    registryCredentials {
+        url = 'https://index.docker.io/v1/'
+        username = 'brownmun'
+        password = 'busunftw'
+        email = 'technology@busun.org'
+    }
+}
+
+task busunImage(type: DockerBuildImage, dependsOn: ':busun:bootJar') {
+    inputDir = project.file('busun')
+    tag = "brownmun/busun:${project.ext.currentVersion}"
+
+    def jarFile = project(':busun').bootJar.archivePath
+    inputs.file jarFile
+    doFirst {
+        copy {
+            from jarFile
+            into 'busun'
+            rename { x -> 'busun-dev.jar' }
+        }
+    }
+}
+
+task busunTagLatest(type: DockerTagImage, dependsOn: busunImage) {
+    repository = 'brownmun/busun'
+    tag = 'latest'
+    targetImageId { busunImage.getImageId() }
+}
+
+task pushBusunImage(type: DockerPushImage, dependsOn: busunImage) {
+    imageName = { busunImage.getTag().split(':')[0] }
+    tag = { busunImage.getTag().split(':')[1] }
+}
+
+task images() {
+    dependsOn busunImage, busunTagLatest, pushBusunImage
+}

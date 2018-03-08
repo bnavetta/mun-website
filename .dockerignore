@@ -1,0 +1,4 @@
+# **/build/
+!busun/build/libs/busun-dev.jar
+**/dist/
+**/node_modules/

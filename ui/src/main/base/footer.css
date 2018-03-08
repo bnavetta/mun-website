@@ -11,3 +11,27 @@
 .base > footer a {
     color: white;
 }
+
+.base > footer > * {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.base--contact {
+    text-align: center;
+}
+
+.base--social {
+    display: inline-flex;
+    justify-content: space-around;
+}
+
+.base--social > .social-link {
+    text-decoration: none;
+    margin: 2em;
+}
+
+.base--social > .social-link > img {
+    width: 2em;
+    height: 2em;
+}

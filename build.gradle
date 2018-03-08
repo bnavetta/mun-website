@@ -1,4 +1,5 @@
 import org.springframework.boot.gradle.tasks.run.BootRun;
+import java.time.*;
 
 buildscript {
     repositories {
@@ -19,11 +20,27 @@ buildscript {
 
 plugins {
     id 'org.hidetake.ssh' version '2.9.0'
+    id 'org.ajoberstar.grgit' version '2.1.1'
 }
+
+def computeVersion() {
+    def head = grgit.head().abbreviatedId
+    def status = grgit.status()
+    def changes = status.staged.allChanges + status.unstaged.allChanges
+    if (changes.empty) {
+        return head
+    } else {
+        return "${head}-dirty-${Instant.now().getEpochSecond()}"
+    }
+}
+
+def currentVersion = computeVersion()
 
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
+
+    ext.currentVersion = currentVersion
 }
 
 configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
@@ -34,7 +51,7 @@ configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
     apply plugin: 'com.diffplug.gradle.spotless'
 
     group = 'org.brownmun'
-    version = System.getenv('TRAVIS') ? System.getenv('TRAVIS_BUILD_NUMBER') : 'dev'
+    version = currentVersion
 
     sourceCompatibility = 1.9
     targetCompatibility = 1.9

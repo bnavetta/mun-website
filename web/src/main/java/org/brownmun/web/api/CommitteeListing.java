@@ -1,16 +1,18 @@
 package org.brownmun.web.api;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
+
 import org.brownmun.db.committee.Committee;
 import org.brownmun.db.committee.JointCrisis;
-
-import java.util.List;
 
 @AutoValue
 public abstract class CommitteeListing
 {
-    public static CommitteeListing create(List<Committee> general, List<Committee> specialized, List<Committee> crisis, List<JointCrisis> jointCrises)
+    public static CommitteeListing create(List<Committee> general, List<Committee> specialized, List<Committee> crisis,
+            List<JointCrisis> jointCrises)
     {
         return new AutoValue_CommitteeListing(general, specialized, crisis, jointCrises);
     }

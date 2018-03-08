@@ -4,7 +4,7 @@
     display: grid;
     grid-template-areas:
         "cover cover"
-        "registration social"
+        "registration registration"
         "content content";
     grid-template-rows: calc(100vh - var(--navbar-height)) 1fr auto;
     grid-template-columns: 1fr 1fr;
@@ -49,16 +49,6 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-}
-
-.home--social > .social-link {
-    text-decoration: none;
-    margin: 2em;
-}
-
-.home--social > .social-link > img {
-    width: 6em;
-    height: 6em;
 }
 
 .home--content {
