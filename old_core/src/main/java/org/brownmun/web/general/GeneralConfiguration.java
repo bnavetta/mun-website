@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Configuation for the publicly-visible general conference information.
+ * Configuation for the publicly-visible general secretariat information.
  */
 @Configuration
 @EnableConfigurationProperties(SecProperties.class)
@@ -15,16 +15,16 @@ public class GeneralConfiguration extends WebMvcConfigurerAdapter
     @Override
     public void addViewControllers(ViewControllerRegistry registry)
     {
-        registry.addViewController("/about/conference").setViewName("about/conference");
+        registry.addViewController("/about/secretariat").setViewName("about/secretariat");
         registry.addViewController("/about/brown-providence").setViewName("about/brown-providence");
         registry.addViewController("/about/sustainability").setViewName("about/sustainability");
 
         registry.addViewController("/registration/fees-and-deadlines").setViewName("registration/fees-and-deadlines");
 
-        registry.addViewController("/conference/preparation").setViewName("conference/preparation");
-        registry.addViewController("/conference/schedule").setViewName("conference/schedule");
-        registry.addViewController("/conference/keynote-speaker").setViewName("conference/keynote-speaker");
-        registry.addViewController("/conference/erinn-phelan").setViewName("conference/erinn-phelan");
+        registry.addViewController("/secretariat/preparation").setViewName("secretariat/preparation");
+        registry.addViewController("/secretariat/schedule").setViewName("secretariat/schedule");
+        registry.addViewController("/secretariat/keynote-speaker").setViewName("secretariat/keynote-speaker");
+        registry.addViewController("/secretariat/erinn-phelan").setViewName("secretariat/erinn-phelan");
 
         registry.addViewController("/logistics/directions").setViewName("logistics/directions");
         registry.addViewController("/logistics/parking").setViewName("logistics/parking");

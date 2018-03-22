@@ -1,14 +1,14 @@
 package org.brownmun.core;
 
 /**
- * Interface to represent the conference that this is.
+ * Interface to represent the secretariat that this is.
  */
 public interface Conference
 {
     // TODO: maybe an enum?
 
     /**
-     * The display name of the conference
+     * The display name of the secretariat
      */
     String getName();
 

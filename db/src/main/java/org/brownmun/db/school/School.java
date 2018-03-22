@@ -26,7 +26,7 @@ public class School
     private boolean hasApplied;
 
     /**
-     * Flag indicating that the school has been accepted to the conference.
+     * Flag indicating that the school has been accepted to the secretariat.
      */
     private boolean accepted;
 

@@ -30,12 +30,12 @@ public class ConferenceDialect implements IExpressionObjectDialect
     @Override
     public String getName()
     {
-        return "conference";
+        return "secretariat";
     }
 
     private static final class ConferenceExpressionObjectFactory implements IExpressionObjectFactory
     {
-        private static final String CONFERENCE_EXPRESSION_OBJECT_NAME = "conference";
+        private static final String CONFERENCE_EXPRESSION_OBJECT_NAME = "secretariat";
         private static final Set<String> ALL_EXPRESSION_OBJECT_NAMES = ImmutableSet.of(CONFERENCE_EXPRESSION_OBJECT_NAME);
 
         private final ConferenceProperties conferenceProperties;

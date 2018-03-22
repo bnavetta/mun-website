@@ -20,6 +20,8 @@ public class BusunApplication
 
     public static void main(String[] args)
     {
-        SpringApplication.run(BusunApplication.class, args);
+        SpringApplication app = new SpringApplication(BusunApplication.class);
+        app.setAdditionalProfiles("busun");
+        app.run(args);
     }
 }
