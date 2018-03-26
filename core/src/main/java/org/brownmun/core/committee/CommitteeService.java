@@ -42,4 +42,9 @@ public interface CommitteeService
     List<JointCrisis> jointCrises();
 
     List<Committee> nonJointCrises();
+
+    /**
+     * Get info about all committees for display.
+     */
+    CommitteeListing displayListing();
 }

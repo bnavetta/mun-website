@@ -22,7 +22,6 @@
     "chalk": "^2.3.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
-    "doiuse": "^4.0.0",
     "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.5.0",

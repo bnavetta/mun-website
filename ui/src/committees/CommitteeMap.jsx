@@ -6,7 +6,70 @@ import { hot } from 'react-hot-loader'
 
 import LoadingPage from '../lib/components/LoadingPage';
 
-const CommitteeMap = compose(
+class CommitteeMap extends React.PureComponent {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            openMarkers: {}
+        };
+
+        this.handleToggleOpen = this.handleToggleOpen.bind(this);
+        this.setMap = this.setMap.bind(this);
+    }
+
+    handleToggleOpen(committeeId) {
+        this.setState({
+            openMarkers: { ...this.state.openMarkers, [committeeId]: !this.state.openMarkers[committeeId] },
+        });
+    }
+
+    setMap(map) {
+        this._map = map;
+        this.updateBounds();
+    }
+
+    render() {
+        const { committees, locations } = this.props;
+        const { openMarkers } = this.state;
+
+        return (
+            <GoogleMap defaultZoom={2} ref={this.setMap}>
+                { committees.map(committee => (
+                    <Marker key={committee.id}
+                            position={locations[committee.id]}
+                            onClick={() => this.handleToggleOpen(committee.id)}
+                    >
+                        { openMarkers[committee.id] && <InfoWindow onCloseClick={() => this.handleToggleOpen(committee.id)}>
+                            <React.Fragment>
+                                <p>{ committee.name }</p>
+                                <p>{ committee.description }</p>
+                            </React.Fragment>
+                        </InfoWindow> }
+                    </Marker>
+                )) }
+            </GoogleMap>
+        );
+    }
+
+    /**
+     * Update the map to fit the locations given in props.locations.
+     */
+    updateBounds() {
+        if (!this._map) {
+            return;
+        }
+
+        const bounds = new google.maps.LatLngBounds();
+        for (let location of Object.values(this.props.locations)) {
+            bounds.extend(location);
+        }
+
+        this._map.fitBounds(bounds);
+    }
+}
+
+CommitteeMap = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&key=AIzaSyD25YgeQlpx3Rg2N9P9K5eXJv8AUXRGbtE",
         loadingElement: <LoadingPage />,
@@ -23,23 +86,7 @@ const CommitteeMap = compose(
             openMarkers: { ...openMarkers, [committeeId]: !openMarkers[committeeId] }
         })
     })
-)(props => (
-    <GoogleMap
-        defaultZoom={2}
-        defaultCenter={{ lat: 44.010549, lng: 25.2794373 }}
-    >
-        { props.committees.map(committee => (
-            <Marker key={committee.id}
-                    position={props.locations[committee.id]}
-                    onClick={() => props.onToggleOpen(committee.id)}
-            >
-                { props.openMarkers[committee.id] && <InfoWindow onCloseClick={() => props.onToggleOpen(committee.id)}>
-                    <p>{ committee.name }</p>
-                </InfoWindow> }
-            </Marker>
-        )) }
-    </GoogleMap>
-));
+)(CommitteeMap);
 
 export default hot(module)(CommitteeMap);
 

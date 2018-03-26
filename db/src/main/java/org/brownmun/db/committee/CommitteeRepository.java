@@ -40,4 +40,10 @@ public interface CommitteeRepository extends JpaRepository<Committee, Long>
 
     @Query("SELECT c FROM Committee c LEFT JOIN JointCrisis j ON c MEMBER OF j.committees WHERE j IS NULL AND c.type = org.brownmun.db.committee.CommitteeType.CRISIS ORDER BY c.name ASC")
     List<Committee> findNonJointCrises();
+
+    /**
+     * Find the {@link CommitteeDisplay} view of all committees.
+     */
+    @Query("SELECT new org.brownmun.db.committee.CommitteeDisplay(c.id, c.name, c.type, c.description, d.longitude, d.latitude, d.image) FROM Committee c LEFT JOIN DisplayInfo d ON d.id = c.id")
+    List<CommitteeDisplay> findAllForDisplay();
 }

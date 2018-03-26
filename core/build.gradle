@@ -4,6 +4,9 @@ dependencies {
     implementation 'com.google.guava:guava'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'com.google.auto.value:auto-value-annotations'
+    annotationProcessor 'com.google.auto.value:auto-value'
 }
 
 compileJava.dependsOn(processResources)

@@ -2,6 +2,8 @@ package org.brownmun.core.committee.impl;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import org.brownmun.core.committee.CommitteeListing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -50,5 +52,14 @@ public class CommitteeServiceImpl implements CommitteeService
     public List<Committee> nonJointCrises()
     {
         return repo.findNonJointCrises();
+    }
+
+    @Override
+    public CommitteeListing displayListing()
+    {
+        List<CommitteeDisplay> committees = repo.findAllForDisplay();
+
+        List<CommitteeDisplay> general = Lists.newArrayList();
+        List<CommitteeDisplay> specialized = Lists.newArrayList();
     }
 }

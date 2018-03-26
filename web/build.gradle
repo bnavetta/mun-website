@@ -1,7 +1,3 @@
-plugins {
-    id "net.ltgt.apt" version "0.13"
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -14,8 +10,8 @@ dependencies {
     implementation project(':db')
     implementation project(':core')
 
-    compileOnly 'com.google.auto.value:auto-value'
-    apt 'com.google.auto.value:auto-value'
+    implementation 'com.google.auto.value:auto-value-annotations'
+    annotationProcessor 'com.google.auto.value:auto-value'
 }
 
 
