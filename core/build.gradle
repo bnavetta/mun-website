@@ -1,7 +1,18 @@
 dependencies {
-    implementation project(':db')
-    implementation 'javax.validation:validation-api'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'com.fasterxml.jackson.core:jackson-annotations'
+
     implementation 'com.google.guava:guava'
+
+    implementation 'javax.validation:validation-api'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'com.googlecode.libphonenumber:libphonenumber'
+
+    runtimeOnly 'org.flywaydb:flyway-core'
+    implementation 'org.postgresql:postgresql'
+
+    runtimeOnly 'javax.xml.bind:jaxb-api:2.3.0'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 

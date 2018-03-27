@@ -2,9 +2,8 @@ package org.brownmun.core.committee;
 
 import java.util.List;
 
-import org.brownmun.db.committee.Committee;
-import org.brownmun.db.committee.CommitteeType;
-import org.brownmun.db.committee.JointCrisis;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.CommitteeType;
 
 /**
  * Responsible for committees.
@@ -37,14 +36,7 @@ public interface CommitteeService
     List<Committee> allByType(CommitteeType type);
 
     /**
-     * Fetch all joint crises.
+     * Get info about all committees.
      */
-    List<JointCrisis> jointCrises();
-
-    List<Committee> nonJointCrises();
-
-    /**
-     * Get info about all committees for display.
-     */
-    CommitteeListing displayListing();
+    CommitteeListing list();
 }

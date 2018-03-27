@@ -1,0 +1,13 @@
+.alert {
+    border: 1px solid var(--alert-color);
+    color: var(--alert-color);
+    padding: 1em;
+}
+
+.alert-error {
+    --alert-color: var(--color-error);
+}
+
+.alert-success {
+    --alert-color: var(--color-success);
+}

@@ -43,7 +43,7 @@ allprojects {
     ext.currentVersion = currentVersion
 }
 
-configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
+configure([':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
@@ -61,6 +61,7 @@ configure([':db', ':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
             dependency 'com.google.guava:guava:23.6-jre'
             dependency 'org.springframework.shell:spring-shell-starter:2.0.0.M2'
             dependency 'org.javassist:javassist:3.22.0-GA'
+            dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
 
             dependencySet(group: 'com.google.auto.value', version: '1.6rc1') {
                 entry 'auto-value'

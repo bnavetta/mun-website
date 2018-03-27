@@ -28,6 +28,7 @@ const webpackConfig = {
         main: entryPoint(path.resolve("src/main/index.js")),
         home: entryPoint(path.resolve("src/home/index.js")),
         committees: entryPoint(path.resolve("src/committees/index.js")),
+        registration: entryPoint(path.resolve("src/registration/index.js")),
         "info-page": entryPoint(path.resolve("src/info-page/index.js")),
         vendor: ["react", "react-dom", "lodash"],
     },

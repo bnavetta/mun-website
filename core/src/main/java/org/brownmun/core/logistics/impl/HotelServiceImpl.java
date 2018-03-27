@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.brownmun.core.logistics.HotelService;
-import org.brownmun.db.logistics.Hotel;
-import org.brownmun.db.logistics.HotelRepository;
+import org.brownmun.core.logistics.model.Hotel;
+import org.brownmun.core.logistics.model.HotelRepository;
 
 @Service
 public class HotelServiceImpl implements HotelService

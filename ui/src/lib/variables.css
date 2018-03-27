@@ -3,4 +3,8 @@
     --color-dark: #002171;
     --color-background: #eceff1;
     --color-rule: #cfd8dc;
+
+    --color-error: #d11229;
+    --color-warning: #d67713;
+    --color-success: #09a51e;
 }

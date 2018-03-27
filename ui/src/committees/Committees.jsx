@@ -6,6 +6,7 @@ import LoadingPage from "../lib/components/LoadingPage";
 
 import CommitteeMap from "./CommitteeMap";
 import CommitteeList from "./CommitteeList";
+import JointCrisisList from "./JointCrisisList";
 
 async function fetchCommittees() {
     const response = await fetch('/api/committee');
@@ -51,6 +52,7 @@ class Committees extends React.Component {
                         <Tab>General</Tab>
                         <Tab>Specialized and Historical</Tab>
                         <Tab>Crisis</Tab>
+                        <Tab>Joint Crisis</Tab>
                     </TabList>
 
                     {/* General */}
@@ -65,7 +67,12 @@ class Committees extends React.Component {
 
                     {/* Crisis */}
                     <TabPanel>
+                        <CommitteeList committees={this.state.committees.crisis}/>
+                    </TabPanel>
 
+                    {/* Joint crisis */}
+                    <TabPanel>
+                        <JointCrisisList jointCrises={this.state.committees.jointCrises} rooms={this.state.committees.jointCrisisRooms}/>
                     </TabPanel>
                 </Tabs>
             );

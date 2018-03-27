@@ -37,13 +37,19 @@ class CommitteeMap extends React.PureComponent {
             <GoogleMap defaultZoom={2} ref={this.setMap}>
                 { committees.map(committee => (
                     <Marker key={committee.id}
-                            position={locations[committee.id]}
+                            position={{ lat: committee.mapLatitude, lng: committee.mapLongitude }}
                             onClick={() => this.handleToggleOpen(committee.id)}
                     >
                         { openMarkers[committee.id] && <InfoWindow onCloseClick={() => this.handleToggleOpen(committee.id)}>
                             <React.Fragment>
                                 <p>{ committee.name }</p>
                                 <p>{ committee.description }</p>
+                                <ul>
+                                    { committee.topic1 && <li>{ committee.topic1 }</li> }
+                                    { committee.topic2 && <li>{ committee.topic2 }</li> }
+                                    { committee.topic3 && <li>{ committee.topic3 }</li> }
+                                    { committee.topic4 && <li>{ committee.topic4 }</li> }
+                                </ul>
                             </React.Fragment>
                         </InfoWindow> }
                     </Marker>
@@ -61,9 +67,11 @@ class CommitteeMap extends React.PureComponent {
         }
 
         const bounds = new google.maps.LatLngBounds();
-        for (let location of Object.values(this.props.locations)) {
-            bounds.extend(location);
+        for (let committee of this.props.committees) {
+            bounds.extend({ lat: committee.mapLatitude, lng: committee.mapLongitude });
         }
+
+        console.log('Using bounds', bounds.toString());
 
         this._map.fitBounds(bounds);
     }
@@ -91,9 +99,11 @@ CommitteeMap = compose(
 export default hot(module)(CommitteeMap);
 
 CommitteeMap.propTypes = {
-    locations: PropTypes.objectOf(PropTypes.shape({ lat: PropTypes.number.isRequired, lng: PropTypes.number.isRequired })),
     committees: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        mapLatitude: PropTypes.number,
+        mapLongitude: PropTypes.number,
     })),
 };

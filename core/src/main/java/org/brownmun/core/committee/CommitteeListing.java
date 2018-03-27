@@ -2,29 +2,33 @@ package org.brownmun.core.committee;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
-import org.brownmun.db.committee.CommitteeDisplay;
-import org.brownmun.db.committee.JointCrisis;
+import org.brownmun.core.committee.model.Committee;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @AutoValue
 public abstract class CommitteeListing
 {
-    public static CommitteeListing create(List<CommitteeDisplay> general, List<CommitteeDisplay> specialized, List<CommitteeDisplay> crisis,
-                                          List<JointCrisis> jointCrises)
+    public static CommitteeListing create(List<Committee> general, List<Committee> specialized, List<Committee> crisis,
+                                          List<Committee> jointCrises, Map<Long, Set<Committee>> jointCrisisRooms)
     {
-        return new AutoValue_CommitteeListing(general, specialized, crisis, jointCrises);
+        return new AutoValue_CommitteeListing(general, specialized, crisis, jointCrises, jointCrisisRooms);
     }
 
     @JsonProperty("general")
-    abstract List<CommitteeDisplay> general();
+    abstract List<Committee> general();
 
     @JsonProperty("specialized")
-    abstract List<CommitteeDisplay> specialized();
+    abstract List<Committee> specialized();
 
     @JsonProperty("crisis")
-    abstract List<CommitteeDisplay> crisis();
+    abstract List<Committee> crisis();
 
     @JsonProperty("jointCrises")
-    abstract List<JointCrisis> jointCrises();
+    abstract List<Committee> jointCrises();
+
+    @JsonProperty("jointCrisisRooms")
+    abstract Map<Long, Set<Committee>> jointCrisisRooms();
 }
