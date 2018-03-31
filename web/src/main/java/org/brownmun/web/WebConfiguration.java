@@ -1,12 +1,11 @@
 package org.brownmun.web;
 
+import org.brownmun.core.CoreConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import org.brownmun.core.CoreConfiguration;
 
 @Configuration
 @ComponentScan
@@ -17,7 +16,6 @@ public class WebConfiguration implements WebMvcConfigurer
     public void addViewControllers(ViewControllerRegistry registry)
     {
         registry.addViewController("/about/brown-busun").setViewName("about/brown-busun");
-        registry.addViewController("/about/secretariat").setViewName("about/secretariat");
 
         registry.addViewController("/registration/application").setViewName("registration/application");
         registry.addViewController("/registration/fees-and-deadlines").setViewName("registration/fees-and-deadlines");

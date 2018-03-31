@@ -3,6 +3,8 @@ import { RingLoader } from "react-spinners";
 
 import { getVariable } from '../util';
 
+import "./loading-page.css";
+
 /**
  * Helper component that renders a spinner taking up all available space
  * @constructor

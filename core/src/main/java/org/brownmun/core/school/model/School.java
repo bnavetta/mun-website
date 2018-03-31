@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
 
 /**
@@ -20,6 +21,7 @@ public class School
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Advisor> advisors = Sets.newHashSet();
 
@@ -33,7 +35,7 @@ public class School
     private boolean hasApplied;
 
     /**
-     * Flag indicating that the school has been accepted to the secretariat.
+     * Flag indicating that the school has been accepted to the conference.
      */
     private boolean accepted;
 

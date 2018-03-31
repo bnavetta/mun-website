@@ -62,7 +62,7 @@ public class ConferenceDialect implements IExpressionObjectDialect, IProcessorDi
         @Override
         public Set<String> getAllExpressionObjectNames()
         {
-            return Set.of("secretariat");
+            return Set.of("conference");
         }
 
         @Override

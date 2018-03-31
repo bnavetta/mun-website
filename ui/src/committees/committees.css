@@ -65,7 +65,7 @@
     display: none;
 }
 
-.committees-list__committee > p.name {
+.committees-list__committee__name {
     font-size: 2em;
     text-align: center;
     margin: 10px;

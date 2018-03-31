@@ -1,8 +1,6 @@
 .form {
     display: flex;
     flex-direction: column;
-
-    margin: 50px 20vw;
 }
 
 .form > fieldset {

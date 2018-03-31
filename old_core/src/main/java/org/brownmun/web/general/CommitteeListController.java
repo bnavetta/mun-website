@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
-@RequestMapping("/secretariat/committees")
+@RequestMapping("/staff/committees")
 public class CommitteeListController
 {
     private final CommitteeRepository repo;
@@ -49,6 +49,6 @@ public class CommitteeListController
         List<Committee> crisisCommittees = Lists.newArrayList(repo.findNonJointCrisisCommittees());
         Collections.sort(crisisCommittees, Comparator.comparing(Committee::getName));
         model.addAttribute("crisisCommittees", crisisCommittees);
-        return "secretariat/committees";
+        return "staff/committees";
     }
 }

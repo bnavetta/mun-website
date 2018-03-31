@@ -34,6 +34,12 @@ public class AdvisorUser implements User
     }
 
     @Override
+    public Advisor asAdvisor()
+    {
+        return advisor;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
         return AUTHORITIES;
@@ -52,32 +58,32 @@ public class AdvisorUser implements User
     }
 
     @Override
-    public boolean isAccountNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled()
-    {
-        return true;
-    }
-
-    @Override
     public String getName()
     {
         return advisor.getName();
+    }
+
+    @Override
+    public boolean canAccessSchool(long schoolId)
+    {
+        return advisor.getSchool().getId() == schoolId;
+    }
+
+    @Override
+    public boolean canModifySchool(long schoolId)
+    {
+        return advisor.getSchool().getId() == schoolId;
+    }
+
+    @Override
+    public boolean canAccessCommittee(long committeeId)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canModifyCommittee(long committeeId)
+    {
+        return false;
     }
 }

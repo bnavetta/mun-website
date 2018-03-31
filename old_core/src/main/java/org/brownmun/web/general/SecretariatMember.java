@@ -1,7 +1,7 @@
 package org.brownmun.web.general;
 
 /**
- * A member of the secretariat. Because I didn't feel like repeating all the HTML so I decided to
+ * A member of the staff. Because I didn't feel like repeating all the HTML so I decided to
  * model them here.
  */
 public class SecretariatMember

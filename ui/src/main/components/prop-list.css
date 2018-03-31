@@ -1,0 +1,23 @@
+/**
+ * Styles a <dl> for key-value properties.
+ */
+
+dl.prop-list {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-auto-rows: 1fr;
+    grid-row-gap: 5px;
+}
+
+.prop-list > dt {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.prop-list > dt::after {
+    content: ":";
+}
+
+.prop-list > dd {
+    grid-column: 2;
+}

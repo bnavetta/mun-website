@@ -5,6 +5,7 @@ import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
 import org.brownmun.web.advisors.DashboardController;
+import org.brownmun.web.security.ConferenceSecurity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +51,15 @@ public class RegistrationController
         school.setAboutSchool(application.getAboutSchool());
         school.setAboutMunProgram(application.getAboutMunProgram());
         school.setDelegationGoals(application.getDelegationGoals());
-        school.setWhyApplied(application.getWhyApply());
+        school.setWhyApplied(application.getWhyApplied());
 
         schoolService.submitApplication(school);
 
         Advisor advisor = Iterables.getOnlyElement(school.getAdvisors());
         URI dashboard = MvcUriComponentsBuilder
                 .fromMethodName(DashboardController.class, "dashboardHome").build().toUri();
+
+        ConferenceSecurity.authenticateAsAdvisor(advisor);
 
         return ResponseEntity.ok(RegistrationResult.create(school.getId(), advisor.getId(), dashboard));
     }

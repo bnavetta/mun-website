@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 import java.util.Objects;
 
-@ConfigurationProperties("secretariat")
+@ConfigurationProperties("staff")
 public class ConferenceProperties
 {
     private String name;

@@ -4,6 +4,17 @@ spring:
     url: jdbc:postgresql://localhost/busun
     username: busun
     password: busunftw
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: '734305313457-0efcsjn2j07bv16sa9ibkn90a4gm7gik.apps.googleusercontent.com'
+            client-secret: 'B2Fi8HkOBfl6CQDzYbK50PRS'
+
+logging:
+  level:
+    org.springframework.security: DEBUG
 
 management:
   endpoints:

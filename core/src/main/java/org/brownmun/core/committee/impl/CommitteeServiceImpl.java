@@ -6,12 +6,14 @@ import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeRepository;
 import org.brownmun.core.committee.model.CommitteeType;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalLong;
 import java.util.Set;
 
 @Service
@@ -55,9 +57,19 @@ public class CommitteeServiceImpl implements CommitteeService
         Map<Long, Set<Committee>> jccRooms = Maps.newHashMap();
         for (Committee jcc : jointCrisis)
         {
-            jccRooms.put(jcc.getId(), jcc.getJointCrisisRooms());
+            // Hibernate 5.2 breaks Jackson's hibernate5 datatype module (which mostly knows how to un-proxy/initialize
+            // things), so we explicitly initialize here.
+            Set<Committee> rooms = jcc.getJointCrisisRooms();
+            Hibernate.initialize(rooms);
+            jccRooms.put(jcc.getId(), rooms);
         }
 
         return CommitteeListing.create(general, specialized, crisis, jointCrisis, jccRooms);
+    }
+
+    @Override
+    public OptionalLong findCommitteeId(long positionId)
+    {
+        return repo.findCommitteeId(positionId);
     }
 }

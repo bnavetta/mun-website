@@ -14,15 +14,16 @@
     padding: 0 10px;
 }
 
-.base > header > .title {
-    width: 25%;
-
+.base > header .title {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    flex: 1 0 auto;
+}
 
-    font-size: 1em;
+.base > header .title img {
+    /* wow css can do math now! */
+    width: calc(0.9 * 1.5 * var(--navbar-height));
+    height: calc(0.9 * var(--navbar-height));
 }
 
 .base > header h1 {

@@ -11,3 +11,17 @@ h1 {
 h2 {
     font-size: 2em;
 }
+
+hr {
+    border: 0;
+    border-top: 0.5px solid var(--color-rule);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-dark);
+}

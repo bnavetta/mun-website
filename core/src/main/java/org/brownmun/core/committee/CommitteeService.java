@@ -1,6 +1,7 @@
 package org.brownmun.core.committee;
 
 import java.util.List;
+import java.util.OptionalLong;
 
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
@@ -39,4 +40,11 @@ public interface CommitteeService
      * Get info about all committees.
      */
     CommitteeListing list();
+
+    /**
+     * Find the ID of the committee that a given position belongs to.
+     * @param positionId the ID of the position
+     * @return the committee ID, if found
+     */
+    OptionalLong findCommitteeId(long positionId);
 }

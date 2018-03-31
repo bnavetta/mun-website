@@ -8,6 +8,12 @@
 >
     <head>
         <title>Advisor Login</title>
+
+        <style>
+            .advisor-login {
+                padding: 20px 10vw;
+            }
+        </style>
     </head>
 
     <body>
@@ -16,7 +22,7 @@
             <h1>Advisor Login</h1>
 
             <form th:action="@{/your-mun/login}" class="form" method="post">
-                <p class="alert alert-error" th:if="${param.error}" th:text="${param.error}">Error logging in</p>
+                <p class="alert alert-error" th:if="${param.error}">Invalid username or password.</p>
                 <p class="alert alert-success" th:if="${param.logout}">You have been logged out.</p>
                 
                 <fieldset>

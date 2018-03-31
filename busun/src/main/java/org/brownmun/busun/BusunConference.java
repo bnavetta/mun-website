@@ -15,4 +15,10 @@ public class BusunConference implements Conference
     {
         return "busun";
     }
+
+    @Override
+    public String getEmailDomain()
+    {
+        return "busun.org";
+    }
 }

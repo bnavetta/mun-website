@@ -13,8 +13,8 @@ function JointCrisisList({ jointCrises, rooms }) {
                     </div>
                     <div className="committees-list__committee-details">
                         <p>{jcc.description}</p>
-                        <dl class="committees-jcc-room-list">
-                            { rooms[jcc.id].map(room => <React.Fragment key={room.id}>
+                        <dl className="committees-jcc-room-list">
+                            { (rooms[jcc.id] || []).map(room => <React.Fragment key={room.id}>
                                 <dt>{room.name}</dt>
                                 <dd>{room.description}</dd>
                             </React.Fragment>) }

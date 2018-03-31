@@ -1,10 +1,10 @@
 import React from "react";
-import { Form, Radio, RadioGroup } from "react-form";
+import { Form } from "react-form";
 import { hot } from "react-hot-loader";
 
 import ValidatedText from "./ValidatedText";
-import ValidatedTextArea from "./ValidatedTextArea";
 import { csrfHeaders } from "../lib/util";
+import ApplicationForm from "./ApplicationForm";
 
 function requiredValidator(message) {
     return value => value ? null : message;
@@ -27,7 +27,8 @@ class RegistrationForm extends React.PureComponent {
             headers: {
                 'Content-Type': 'application/json',
                 ...csrfHeaders,
-            }
+            },
+            credentials: 'same-origin',
         }).then(async res => {
             if (res.ok) {
                 const result = await res.json();
@@ -49,6 +50,15 @@ class RegistrationForm extends React.PureComponent {
             <form onSubmit={formApi.submitForm} className="registration-form form">
 
                 <h1>Apply to BUSUN XXII</h1>
+
+                <p>
+                    Thank you so much for your application to BUSUN XXII. Due to the demand for spots in our conference,
+                    we request that you fill out the supplemental questions below as part of your application. Please
+                    fill out the questions below by April 23rd at midnight. Respond to all of the prompts in no more
+                    than 250 words - the quality of these answers will be valued over length. We look forward to reading
+                    your responses, and we thank you for your interest in attending BUSUN XXII. Please email any
+                    questions, comments, or concerns to <a href="mailto:info@busun.org">info@busun.org</a> .
+                </p>
 
                 <fieldset>
                     <label htmlFor="schoolName">School Name</label>
@@ -74,41 +84,8 @@ class RegistrationForm extends React.PureComponent {
                     <label htmlFor="advisorPassword">Advisor Password</label>
                     <ValidatedText field="advisorPassword" id="advisorPassword" validate={requiredValidator("Advisor password is required")} type="password" />
                 </fieldset>
-
-                <fieldset>
-                    <label htmlFor="hasAttended">Have you attended BUSUN before?</label>
-                    <RadioGroup field="hasAttended" id="hasAttended">
-                        <label htmlFor="hasAttended-yes">Yes</label>
-                        <Radio value={true} id="hasAttended-yes" />
-                        <label htmlFor="hasAttended-no">No</label>
-                        <Radio value={false} id="hasAttended-no" />
-                    </RadioGroup>
-
-                    { formApi.values.hasAttended && (<React.Fragment>
-                        <label htmlFor="yearsAttended">Which years have you attended?</label>
-                        <ValidatedText field="yearsAttended" id="yearsAttended" />
-                    </React.Fragment>) }
-                </fieldset>
-
-                <fieldset>
-                    <label htmlFor="aboutSchool">Tell us about your school</label>
-                    <ValidatedTextArea field="aboutSchool" id="aboutSchool"/>
-                </fieldset>
-
-                <fieldset>
-                    <label htmlFor="aboutMunProgram">Briefly describe your Model UN program</label>
-                    <ValidatedTextArea field="aboutMunProgram" id="aboutMunProgram" />
-                </fieldset>
-
-                <fieldset>
-                    <label htmlFor="delegationGoals">What are your delegation's goals at BUSUN?</label>
-                    <ValidatedTextArea field="delegationGoals" id="delegationGoals"/>
-                </fieldset>
-
-                <fieldset>
-                    <label htmlFor="whyApply">What drew you to apply to BUSUN?</label>
-                    <ValidatedTextArea field="whyApply" id="whyApply"/>
-                </fieldset>
+                
+                <ApplicationForm formApi={formApi}/>
 
                 <button className="button" type="submit">Apply!</button>
             </form>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.brownmun.core.secretariat.SecretariatProperties;
+import org.brownmun.core.staff.SecretariatProperties;
 
 /**
  * Controller for the {@code /about/secretariat} page. All it really does is

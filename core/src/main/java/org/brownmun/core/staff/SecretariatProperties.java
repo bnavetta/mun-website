@@ -1,4 +1,4 @@
-package org.brownmun.core.secretariat;
+package org.brownmun.core.staff;
 
 import java.util.List;
 

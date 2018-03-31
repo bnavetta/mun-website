@@ -41,7 +41,7 @@ public class Application
     private String delegationGoals;
 
     @NotBlank
-    private String whyApply;
+    private String whyApplied;
 
     public String getSchoolName()
     {
@@ -143,13 +143,13 @@ public class Application
         this.delegationGoals = delegationGoals;
     }
 
-    public String getWhyApply()
+    public String getWhyApplied()
     {
-        return whyApply;
+        return whyApplied;
     }
 
-    public void setWhyApply(String whyApply)
+    public void setWhyApplied(String whyApplied)
     {
-        this.whyApply = whyApply;
+        this.whyApplied = whyApplied;
     }
 }

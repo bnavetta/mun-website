@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.MoreObjects;
 import org.brownmun.util.PhoneNumber;
 
@@ -41,12 +42,14 @@ public class Advisor
     /**
      * A hash of the advisor's password
      */
+    @JsonIgnore
     @NotBlank
     private String password;
 
     /**
      * The school the advisor represents
      */
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
     private School school;

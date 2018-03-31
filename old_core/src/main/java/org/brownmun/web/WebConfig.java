@@ -37,7 +37,7 @@ public class WebConfig extends WebMvcConfigurerAdapter
 
         if (conference.getName().equals("BUSUN"))
         {
-            registry.addViewController("/secretariat/classes").setViewName("secretariat/classes");
+            registry.addViewController("/staff/classes").setViewName("staff/classes");
         }
     }
 

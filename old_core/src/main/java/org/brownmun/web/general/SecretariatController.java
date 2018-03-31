@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Because we want to feel like real people.
  */
 @Controller
-@RequestMapping("/about/secretariat")
+@RequestMapping("/about/staff")
 public class SecretariatController
 {
     private final SecProperties sec;
@@ -25,6 +25,6 @@ public class SecretariatController
     public String secretariat(Model model)
     {
         model.addAttribute("sec", sec.getMembers());
-        return "about/secretariat";
+        return "about/staff";
     }
 }

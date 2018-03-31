@@ -1,6 +1,7 @@
 package org.brownmun.core.committee.model;
 
 import java.util.List;
+import java.util.OptionalLong;
 import java.util.Set;
 
 import org.brownmun.core.award.model.Award;
@@ -38,4 +39,7 @@ public interface CommitteeRepository extends JpaRepository<Committee, Long>
     Set<Award> fetchAwards(Committee committee);
 
     List<Committee> findAllByTypeOrderByNameAsc(CommitteeType type);
+
+    @Query("SELECT p.committee.id FROM Position p WHERE p.id = ?1")
+    OptionalLong findCommitteeId(long positionId);
 }
