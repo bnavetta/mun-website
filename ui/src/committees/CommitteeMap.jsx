@@ -41,16 +41,17 @@ class CommitteeMap extends React.PureComponent {
                             onClick={() => this.handleToggleOpen(committee.id)}
                     >
                         { openMarkers[committee.id] && <InfoWindow onCloseClick={() => this.handleToggleOpen(committee.id)}>
-                            <React.Fragment>
-                                <p>{ committee.name }</p>
-                                <p>{ committee.description }</p>
+                            <div className="committee-map__committee">
+                                <img className="committee-map__committee-image" src={ committee.image } alt={ committee.name }/>
+                                <h3 className="committee-map__committee-name">{ committee.name }</h3>
+                                <p dangerouslySetInnerHTML={{ __html: committee.description }}/>
                                 <ul>
                                     { committee.topic1 && <li>{ committee.topic1 }</li> }
                                     { committee.topic2 && <li>{ committee.topic2 }</li> }
                                     { committee.topic3 && <li>{ committee.topic3 }</li> }
                                     { committee.topic4 && <li>{ committee.topic4 }</li> }
                                 </ul>
-                            </React.Fragment>
+                            </div>
                         </InfoWindow> }
                     </Marker>
                 )) }
