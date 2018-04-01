@@ -61,29 +61,31 @@ class RegistrationForm extends React.PureComponent {
                 </p>
 
                 <fieldset>
-                    <label htmlFor="schoolName">School Name</label>
-                    <ValidatedText field="schoolName" id="schoolName" validate={requiredValidator("School name is required")} />
+                    <label htmlFor="schoolName">What is your school's name?</label>
+                    <ValidatedText placeholder="School Name" field="schoolName" id="schoolName" validate={requiredValidator("School name is required")} />
                 </fieldset>
 
                 <fieldset>
-                    <label htmlFor="advisorName">Advisor Name</label>
-                    <ValidatedText field="advisorName" id="advisorName" validate={requiredValidator("Advisor name is required")} />
+                    <label htmlFor="advisorName">What is your name?</label>
+                    <ValidatedText placeholder="Advisor Name" field="advisorName" id="advisorName" validate={requiredValidator("Advisor name is required")} />
                 </fieldset>
 
                 <fieldset>
-                    <label htmlFor="advisorEmail">Advisor Email Address</label>
-                    <ValidatedText field="advisorEmail" id="advisorEmail" validate={requiredValidator("Advisor email is required")} type="email" />
+                    <label htmlFor="advisorEmail">What is your email address?</label>
+                    <ValidatedText placeholder="Advisor Email" field="advisorEmail" id="advisorEmail" validate={requiredValidator("Advisor email is required")} type="email" />
                 </fieldset>
 
                 <fieldset>
-                    <label htmlFor="advisorPhoneNumber">Advisor Phone Number</label>
-                    <ValidatedText field="advisorPhoneNumber" id="advisorPhoneNumber" validate={requiredValidator("Phone number is required")} type="tel" />
+                    <label htmlFor="advisorPhoneNumber">What is your phone number?</label>
+                    <ValidatedText placeholder="Advisor Phone Number" field="advisorPhoneNumber" id="advisorPhoneNumber" validate={requiredValidator("Phone number is required")} type="tel" />
                 </fieldset>
 
                 <fieldset>
-                    <label htmlFor="advisorPassword">Advisor Password</label>
+                    <label htmlFor="advisorPassword">Please choose a password.</label>
                     <ValidatedText field="advisorPassword" id="advisorPassword" validate={requiredValidator("Advisor password is required")} type="password" />
                 </fieldset>
+
+                <p>You will use this password with your email address to log into your BUSUN account.</p>
                 
                 <ApplicationForm formApi={formApi}/>
 

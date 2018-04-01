@@ -24,18 +24,18 @@ export default function ApplicationForm({ readOnly = false, formApi }) {
                 </RadioGroup>
 
                 { formApi.values.hasAttended && (<React.Fragment>
-                    <label htmlFor="yearsAttended">Which years have you attended?</label>
+                    <label htmlFor="yearsAttended">Which years have you attended BUSUN in the past?</label>
                     <ValidatedText disabled={readOnly} field="yearsAttended" id="yearsAttended" />
                 </React.Fragment>) }
             </fieldset>
 
             <fieldset>
-                <label htmlFor="aboutSchool">Tell us about your school</label>
+                <label htmlFor="aboutSchool">Please tell us a bit about your school.</label>
                 <ValidatedTextArea disabled={readOnly} field="aboutSchool" id="aboutSchool"/>
             </fieldset>
 
             <fieldset>
-                <label htmlFor="aboutMunProgram">Briefly describe your Model UN program</label>
+                <label htmlFor="aboutMunProgram">Briefly describe your school’s Model UN Program.</label>
                 <ValidatedTextArea disabled={readOnly} field="aboutMunProgram" id="aboutMunProgram" />
             </fieldset>
 
@@ -45,7 +45,7 @@ export default function ApplicationForm({ readOnly = false, formApi }) {
             </fieldset>
 
             <fieldset>
-                <label htmlFor="whyApplied">What drew you to apply to BUSUN?</label>
+                <label htmlFor="whyApplied">What drew your delegation to apply to BUSUN this year?</label>
                 <ValidatedTextArea disabled={readOnly} field="whyApplied" id="whyApplied"/>
             </fieldset>
         </React.Fragment>
