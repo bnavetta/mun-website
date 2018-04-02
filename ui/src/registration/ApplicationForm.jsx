@@ -31,22 +31,22 @@ export default function ApplicationForm({ readOnly = false, formApi }) {
 
             <fieldset>
                 <label htmlFor="aboutSchool">Please tell us a bit about your school.</label>
-                <ValidatedTextArea disabled={readOnly} field="aboutSchool" id="aboutSchool"/>
+                <ValidatedTextArea rows={8} disabled={readOnly} field="aboutSchool" id="aboutSchool"/>
             </fieldset>
 
             <fieldset>
                 <label htmlFor="aboutMunProgram">Briefly describe your school’s Model UN Program.</label>
-                <ValidatedTextArea disabled={readOnly} field="aboutMunProgram" id="aboutMunProgram" />
+                <ValidatedTextArea rows={8} disabled={readOnly} field="aboutMunProgram" id="aboutMunProgram" />
             </fieldset>
 
             <fieldset>
                 <label htmlFor="delegationGoals">What are your delegation's goals at BUSUN?</label>
-                <ValidatedTextArea disabled={readOnly} field="delegationGoals" id="delegationGoals"/>
+                <ValidatedTextArea rows={8} disabled={readOnly} field="delegationGoals" id="delegationGoals"/>
             </fieldset>
 
             <fieldset>
                 <label htmlFor="whyApplied">What drew your delegation to apply to BUSUN this year?</label>
-                <ValidatedTextArea disabled={readOnly} field="whyApplied" id="whyApplied"/>
+                <ValidatedTextArea rows={8} disabled={readOnly} field="whyApplied" id="whyApplied"/>
             </fieldset>
         </React.Fragment>
     );
