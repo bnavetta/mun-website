@@ -24,6 +24,7 @@
 .form input[type="radio"] {
     display: inline;
     margin: 10px;
+    width: unset;
 }
 
 .form .form-error, .form-warning {

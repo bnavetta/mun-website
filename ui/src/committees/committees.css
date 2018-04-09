@@ -61,6 +61,11 @@
     overflow-y: auto;
 }
 
+.committees-list__joint_crisis {
+    /* Make JCCs taller to accommodate room info */
+    height: 24em;
+}
+
 .committees-list__committee-details {
     display: none;
 }

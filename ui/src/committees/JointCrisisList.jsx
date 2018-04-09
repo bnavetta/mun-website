@@ -6,7 +6,7 @@ function JointCrisisList({ jointCrises, rooms }) {
     return (
         <ul className="committees-list">
             {
-                jointCrises.map(jcc => <li className="committees-list__committee" key={jcc.id}>
+                jointCrises.map(jcc => <li className="committees-list__committee committees-list__joint_crisis" key={jcc.id}>
                     <div className="committees-list__committee-overview">
                         <img className="committees-list__committee__image" src={jcc.image} />
                         <p className="committees-list__committee__name">{jcc.name}</p>
