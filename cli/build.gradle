@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':core')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
+    implementation 'com.google.guava:guava'
+}
+
+bootRun {
+    standardInput = System.in
+    args '--debug', '--conference.name=BUSUN', '--conference.key=busun', '--conference.domainName=busun.org'
+}
+
+bootJar {
+    launchScript()
+}

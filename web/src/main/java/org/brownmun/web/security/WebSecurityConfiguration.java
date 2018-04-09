@@ -32,6 +32,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
             .authorizeRequests()
                 .antMatchers("/staff/**")
                 .hasRole("STAFF")
+                .antMatchers("/your-mun/password/**")
+                .permitAll()
                 .antMatchers("/your-mun/**")
                 .hasRole("ADVISOR")
                 .and()

@@ -33,6 +33,6 @@ public class StaffService
      */
     public boolean isStaffEmail(String email)
     {
-        return email.endsWith("@" + conference.getEmailDomain());
+        return email.endsWith("@" + conference.getDomainName());
     }
 }

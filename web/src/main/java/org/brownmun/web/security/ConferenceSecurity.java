@@ -31,7 +31,9 @@ public class ConferenceSecurity
         // I'm not *entirely* sure that part is necessary.
 
         User user = new AdvisorUser(advisor);
-        Authentication auth = new UsernamePasswordAuthenticationToken(user, user.getPassword());
+        // sorta subtle, but we *must* use the 3-argument UsernamePasswordAuthenticationToken constructor (the one that
+        // takes a list of authorities), because that's the one that marks it as trusted
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(auth);
 

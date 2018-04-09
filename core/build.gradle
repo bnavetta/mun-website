@@ -1,6 +1,7 @@
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'com.fasterxml.jackson.core:jackson-annotations'
 
     implementation 'com.google.guava:guava'
@@ -8,6 +9,10 @@ dependencies {
     implementation 'javax.validation:validation-api'
     implementation 'org.hibernate.validator:hibernate-validator'
     implementation 'com.googlecode.libphonenumber:libphonenumber'
+
+    // For emails
+    implementation 'org.thymeleaf:thymeleaf-spring5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
 
     runtimeOnly 'org.flywaydb:flyway-core'
     implementation 'org.postgresql:postgresql'

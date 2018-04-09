@@ -17,7 +17,7 @@ public class BusunConference implements Conference
     }
 
     @Override
-    public String getEmailDomain()
+    public String getDomainName()
     {
         return "busun.org";
     }

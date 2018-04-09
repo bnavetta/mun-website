@@ -43,7 +43,7 @@ allprojects {
     ext.currentVersion = currentVersion
 }
 
-configure([':web', ':busun', ':bucs', ':core'].collect { project(it) }) {
+configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'

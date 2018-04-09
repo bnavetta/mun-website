@@ -9,8 +9,8 @@ spring:
       client:
         registration:
           google:
-            client-id: '734305313457-0efcsjn2j07bv16sa9ibkn90a4gm7gik.apps.googleusercontent.com'
-            client-secret: 'B2Fi8HkOBfl6CQDzYbK50PRS'
+            client-id: "${GOOGLE_CLIENT_ID}"
+            client-secret: "${GOOGLE_CLIENT_SECRET}"
 
 logging:
   level:
@@ -24,3 +24,11 @@ management:
 webpack:
   asset-base: http://localhost:9090/assets/
   reload: true
+
+mail:
+  from-address: no-reply@busun.org
+  reply-to-address: technology@busun.org
+
+mailgun:
+  base-uri: https://api.mailgun.net/v3/mg.busun.org
+  api-key: "${MAILGUN_API_KEY}"

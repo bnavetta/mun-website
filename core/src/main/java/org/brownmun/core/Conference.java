@@ -18,7 +18,7 @@ public interface Conference
     String getKey();
 
     /**
-     * The Google Apps email domain.
+     * The conference domain, used for emails, etc..
      */
-    String getEmailDomain();
+    String getDomainName();
 }
