@@ -25,7 +25,7 @@ public class StaffService
      */
     public boolean isSecretariatEmail(String email)
     {
-        return secretariat.getMembers().stream().anyMatch(s -> s.getEmailAddress().equals(email));
+        return secretariat.getMembers().stream().anyMatch(s -> s.getEmail().equals(email));
     }
 
     /**

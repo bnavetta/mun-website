@@ -41,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .loginPage("/staff/login")
                 .permitAll()
                 .userInfoEndpoint()
-                    .userService(new StaffOAuth2UserService(staffService))
+                    .oidcUserService(new StaffOAuth2UserService(staffService))
                     .and()
                 .and()
             .formLogin()

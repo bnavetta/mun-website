@@ -40,4 +40,13 @@ public class StaffController
 
         return "staff/login";
     }
+
+    /**
+     * Support HTML5 pushState URLs
+     */
+    @RequestMapping("/**")
+    public String ui()
+    {
+        return "forward:/staff/";
+    }
 }

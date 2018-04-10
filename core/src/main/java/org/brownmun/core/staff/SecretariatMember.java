@@ -28,7 +28,7 @@ public class SecretariatMember
     private URI image;
 
     @Email
-    private String emailAddress;
+    private String email;
 
     public String getTitle()
     {
@@ -70,14 +70,14 @@ public class SecretariatMember
         this.image = image;
     }
 
-    public String getEmailAddress()
+    public String getEmail()
     {
-        return emailAddress;
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress)
+    public void setEmail(String email)
     {
-        this.emailAddress = emailAddress;
+        this.email = email;
     }
 
     @Override
@@ -89,19 +89,19 @@ public class SecretariatMember
             return false;
         SecretariatMember that = (SecretariatMember) o;
         return Objects.equals(title, that.title) && Objects.equals(name, that.name) && Objects.equals(bio, that.bio)
-                && Objects.equals(image, that.image) && Objects.equals(emailAddress, that.emailAddress);
+                && Objects.equals(image, that.image) && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(title, name, bio, image, emailAddress);
+        return Objects.hash(title, name, bio, image, email);
     }
 
     @Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this).add("title", title).add("name", name).add("bio", bio)
-                .add("image", image).add("emailAddress", emailAddress).toString();
+                .add("image", image).add("email", email).toString();
     }
 }

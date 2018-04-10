@@ -8,11 +8,13 @@ import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
 
@@ -99,5 +101,11 @@ public class SchoolServiceImpl implements SchoolService
         appRepo.save(application);
         emf.getCache().evict(School.class, application.getId());
         emf.getCache().evict(SchoolStatus.class, application.getId());
+    }
+
+    @Override
+    public List<School> listSchools()
+    {
+        return repo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 }

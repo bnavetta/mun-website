@@ -3,7 +3,9 @@ package org.brownmun.web.security;
 import org.brownmun.core.school.model.Advisor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.Set;
  * The staff can access and modify anything. Other staff members have read-only access to school information.
  * Staff can modify their associated committees.
  */
-public class StaffUser implements User, OAuth2User
+public class StaffUser implements User, OidcUser
 {
     private final String email;
     private final String name;
@@ -26,15 +28,17 @@ public class StaffUser implements User, OAuth2User
 
     private final Set<Long> committeeIds;
     private final boolean isSecretariat;
+    private final OidcUser underlying;
 
-    public StaffUser(String email, String name, Set<Long> committeeIds, boolean isSecretariat)
+    public StaffUser(OidcUser underlying, Set<Long> committeeIds, boolean isSecretariat)
     {
-        this.email = email;
-        this.name = name;
+        this.email = underlying.getEmail();
+        this.name = underlying.getName();
         this.committeeIds = committeeIds;
         this.isSecretariat = isSecretariat;
         this.authorities = isSecretariat ? AuthorityUtils.createAuthorityList("ROLE_SECRETARIAT", "ROLE_STAFF")
                 : AuthorityUtils.createAuthorityList("ROLE_STAFF");
+        this.underlying = underlying;
     }
 
     @Override
@@ -112,5 +116,23 @@ public class StaffUser implements User, OAuth2User
     public boolean canModifyCommittee(long committeeId)
     {
         return isSecretariat || committeeIds.contains(committeeId);
+    }
+
+    @Override
+    public Map<String, Object> getClaims()
+    {
+        return underlying.getClaims();
+    }
+
+    @Override
+    public OidcUserInfo getUserInfo()
+    {
+        return underlying.getUserInfo();
+    }
+
+    @Override
+    public OidcIdToken getIdToken()
+    {
+        return underlying.getIdToken();
     }
 }

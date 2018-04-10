@@ -4,6 +4,7 @@ import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
 import org.brownmun.core.school.model.SchoolApplication;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
 
@@ -54,4 +55,6 @@ public interface SchoolService
      * @return a non-proxied {@link School}, which can be safely serialized as JSON, etc.
      */
     School loadSchool(Advisor advisor);
+
+    List<School> listSchools();
 }
