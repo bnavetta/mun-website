@@ -4,6 +4,7 @@ import org.brownmun.core.staff.SecretariatProperties;
 import org.brownmun.core.staff.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -36,6 +37,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .permitAll()
                 .antMatchers("/your-mun/**")
                 .hasRole("ADVISOR")
+                .antMatchers("/registration/register")
+                .denyAll()
                 .and()
             .oauth2Login()
                 .loginPage("/staff/login")

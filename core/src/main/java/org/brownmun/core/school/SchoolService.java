@@ -57,4 +57,14 @@ public interface SchoolService
     School loadSchool(Advisor advisor);
 
     List<School> listSchools();
+
+    /**
+     * Find all advisors for the given school ID
+     */
+    List<Advisor> getAdvisors(long schoolId);
+
+    /**
+     * List all school advisors.
+     */
+    List<Advisor> listAdvisors();
 }

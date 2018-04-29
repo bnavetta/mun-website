@@ -40,3 +40,7 @@ export async function request(url, options = {}) {
         throw new Error(body.error);
     }
 }
+
+export function yesNo(value) {
+    return value ? 'Yes' : 'No';
+}

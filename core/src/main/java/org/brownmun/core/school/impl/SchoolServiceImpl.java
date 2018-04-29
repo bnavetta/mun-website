@@ -108,4 +108,16 @@ public class SchoolServiceImpl implements SchoolService
     {
         return repo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
+
+    @Override
+    public List<Advisor> getAdvisors(long schoolId)
+    {
+        return advisorRepo.findBySchoolId(schoolId);
+    }
+
+    @Override
+    public List<Advisor> listAdvisors()
+    {
+        return advisorRepo.findAll();
+    }
 }

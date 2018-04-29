@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import org.brownmun.util.PhoneNumber;
 
@@ -53,6 +54,12 @@ public class Advisor
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
     private School school;
+
+    @JsonProperty
+    public Long getSchoolId()
+    {
+        return school.getId();
+    }
 
     public Long getId()
     {

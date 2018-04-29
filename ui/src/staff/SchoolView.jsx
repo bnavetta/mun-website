@@ -2,16 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import "regenerator-runtime/runtime"; // for some reason this doesn't get picked up
 import { Form } from "react-form";
+import { yesNo } from "../lib/util";
 
 import ApplicationForm from "../registration/ApplicationForm";
 
-import { selectSchool } from "./state";
+import { selectSchool, selectAdvisors } from "./state";
 
-const mapStateToProps = (state, props) => ({
-    school: selectSchool(parseInt(props.match.params.id), state)
-});
+const mapStateToProps = (state, props) => {
+    const id = parseInt(props.match.params.id);
+    return {
+      school: selectSchool(id, state),
+      advisors: selectAdvisors(id, state),
+    };
+} ;
 
-function SchoolView({ school }) {
+function SchoolView({ school, advisors }) {
     return (
         <div>
             <h1>{ school.name }</h1>
@@ -22,8 +27,29 @@ function SchoolView({ school }) {
                 <dt>Registration Code</dt>
                 <dd>{ school.registrationCode }</dd>
                 <dt>Accepted</dt>
-                <dd>{ school.accepted ? 'Yes' : 'No' }</dd>
+                <dd>{ yesNo(school.accepted) }</dd>
             </dl>
+
+            <h2>Advisors</h2>
+
+            <table className="standard-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { advisors.map(advisor => (
+                        <tr key={advisor.id}>
+                            <td>{advisor.name}</td>
+                            <td>{advisor.email}</td>
+                            <td>{advisor.phoneNumber}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
             <h2>Application Responses</h2>
 

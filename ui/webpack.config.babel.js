@@ -24,6 +24,8 @@ const webpackConfig = {
     cache: true,
     devtool: config.isDev ? "cheap-module-source-map" : undefined,
 
+    mode: config.isDev ? 'development' : 'production',
+
     entry: {
         main: entryPoint(path.resolve("src/main/index.js")),
         home: entryPoint(path.resolve("src/home/index.js")),
@@ -157,15 +159,15 @@ const webpackConfig = {
                   new ExtractTextPlugin("[name].[chunkhash].css"),
               ]),
 
-        // Dependencies
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-        }),
-
-        // Webpack boilerplate and manifest
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "manifest",
-        }),
+        // // Dependencies
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: "vendor",
+        // }),
+        //
+        // // Webpack boilerplate and manifest
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: "manifest",
+        // }),
     ]),
 };
 

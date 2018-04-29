@@ -1,0 +1,10 @@
+---
+
+# Production settings
+server:
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    accesslog:
+      enabled: true
+      request-attributes-enabled: true

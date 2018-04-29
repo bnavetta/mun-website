@@ -5,14 +5,18 @@ import {hot} from "react-hot-loader";
 
 import SchoolList from "./SchoolList";
 import SchoolView from "./SchoolView";
-import { fetchSchools } from "./api";
-import { loadSchools } from "./state";
+import { fetchSchools, fetchAdvisors } from "./api";
+import { loadSchools, loadAdvisors } from "./state";
 
 class StaffDashboard extends React.Component {
     componentDidMount() {
         fetchSchools()
             .then(schools => this.props.store.dispatch(loadSchools(schools)))
             .catch(e => console.error('Error loading schools', e));
+
+        fetchAdvisors()
+            .then(advisors => this.props.store.dispatch(loadAdvisors(advisors)))
+            .catch(e => console.error('Error loading advisors', e));
     }
 
     render() {

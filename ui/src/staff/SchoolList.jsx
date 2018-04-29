@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { selectSchools } from "./state";
+import { yesNo } from "../lib/util";
 
 const mapStateToProps = state => ({ schools: selectSchools(state) });
 
@@ -14,6 +15,7 @@ function SchoolList({ match, schools }) {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Registration Code</th>
+                    <th>Accepted</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +26,7 @@ function SchoolList({ match, schools }) {
                             <Link to={`${match.path}/${school.id}`}>{ school.name}</Link>
                         </td>
                         <td>{ school.registrationCode }</td>
+                        <td>{ yesNo(school.accepted) }</td>
                     </tr>
                 )) }
             </tbody>

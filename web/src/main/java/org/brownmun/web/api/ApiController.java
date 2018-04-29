@@ -3,10 +3,12 @@ package org.brownmun.web.api;
 import org.brownmun.core.committee.CommitteeListing;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +43,19 @@ public class ApiController
     public List<School> listSchools()
     {
         return schools.listSchools();
+    }
+
+    @GetMapping("/school/:id/advisors")
+    @PreAuthorize("hasRole('STAFF')")
+    public List<Advisor> getAdvisors(@PathVariable Long id)
+    {
+        return schools.getAdvisors(id);
+    }
+
+    @GetMapping("/advisors")
+    @PreAuthorize("hasRole('STAFF')")
+    public List<Advisor> listAdvisors()
+    {
+        return schools.listAdvisors();
     }
 }
