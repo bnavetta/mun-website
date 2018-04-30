@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public interface User extends UserDetails
 {
+    String getEmail();
+
     boolean isAdvisor();
     boolean isStaff();
 

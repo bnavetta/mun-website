@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>Error</title>
+
+        <style>
+            .error {
+                padding: 0 10vw;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main layout:fragment="content" class="error">
+            <h1>An error has occurred</h1>
+            <p>
+                We apologize for the inconvenience. It might turn into a crisis committee topic
+                for next year, but in the meantime, try refreshing the page.
+            </p>
+            <p>
+                If the error persists, please contact our
+                <a href="mailto:technology@busun.org">Director of Technology</a> with the following information:
+            </p>
+            <dl class="prop-list">
+                <dt>Error</dt>
+                <dd th:text="${message}">Error message</dd>
+                <dt>HTTP Status</dt>
+                <dd th:text="|${status} ${error}|">404 Not Found</dd>
+                <dt>Timestamp</dt>
+                <dd th:text="${#dates.format(timestamp)}">Mon Apr 30 23:43:56 EST 2018</dd>
+            </dl>
+        </main>
+    </body>
+</html>

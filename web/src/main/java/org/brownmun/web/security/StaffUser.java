@@ -42,6 +42,12 @@ public class StaffUser implements User, OidcUser
     }
 
     @Override
+    public String getEmail()
+    {
+        return email;
+    }
+
+    @Override
     public boolean isAdvisor()
     {
         return false;

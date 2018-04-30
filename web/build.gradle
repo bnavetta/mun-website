@@ -10,6 +10,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.google.guava:guava'
     implementation 'com.github.ben-manes.caffeine:caffeine'
+    implementation 'io.sentry:sentry-spring'
 
     implementation project(':core')
 

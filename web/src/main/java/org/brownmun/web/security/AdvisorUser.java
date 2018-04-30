@@ -64,6 +64,12 @@ public class AdvisorUser implements User
     }
 
     @Override
+    public String getEmail()
+    {
+        return advisor.getEmail();
+    }
+
+    @Override
     public boolean canAccessSchool(long schoolId)
     {
         return advisor.getSchool().getId() == schoolId;
