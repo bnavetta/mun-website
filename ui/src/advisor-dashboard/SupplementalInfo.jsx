@@ -18,7 +18,8 @@ class SupplementalInfo extends React.PureComponent {
             loading: true,
             error: null,
             supplementalInfo: null,
-            status: null,
+            successMessage: null,
+            errorMessage: null,
             hotels: [],
         };
 
@@ -40,8 +41,8 @@ class SupplementalInfo extends React.PureComponent {
             <form onSubmit={formApi.submitForm} className="supplemental-info-form form">
                 <h2>Supplemental Delegation Information</h2>
 
-                { this.state.status && <p className="alert alert-success">{ this.state.status }</p> }
-                { this.state.error && <p className="alert alert-error">{ this.state.error }</p> }
+                { this.state.successMessage && <p className="alert alert-success">{ this.state.successMessage }</p> }
+                { this.state.errorMessage && <p className="alert alert-error">{ this.state.errorMessage }</p> }
 
                 <SupplementalInfoForm formApi={formApi} busunHotels={this.state.hotels}/>
 
@@ -55,16 +56,17 @@ class SupplementalInfo extends React.PureComponent {
             const result = await updateSupplementalInfo(values);
 
             if (result.success) {
-                this.setState({ status: 'Supplemental information updated', error: null });
+                this.setState({ successMessage: 'Supplemental information updated', errorMessage: null });
             } else {
                 for (let field of Object.keys(result.errors)) {
                     formApi.setError(field, result.errors[field][0]);
                 }
+                this.setState({ successMessage: null, errorMessage: 'Some fields were invalid' });
             }
 
         } catch (error) {
             console.error('Error submitting supplemental info', error);
-            this.setState({ status: null, error });
+            this.setState({ successMessage: null, errorMessage: error });
         }
     }
 

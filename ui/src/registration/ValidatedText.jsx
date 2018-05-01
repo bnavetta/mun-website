@@ -7,7 +7,7 @@ export default function ValidatedText(props) {
     return (
         <Field validate={validate} field={field}>
             { fieldApi => {
-                const { value, error, warning, success, setValue, setTouched } = fieldApi;
+                const { value, error, warning, success, setValue, setTouched, setError } = fieldApi;
                 return (
                     <React.Fragment>
                         <input
@@ -21,6 +21,7 @@ export default function ValidatedText(props) {
                             }}
                             onBlur={e => {
                                 setTouched();
+                                setError(null);
                                 if (onBlur) {
                                     onBlur(e);
                                 }

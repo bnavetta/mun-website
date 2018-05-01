@@ -17,3 +17,5 @@ data/
 bin/
 
 .vscode/
+
+spring-shell.log
