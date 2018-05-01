@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
 /**
@@ -30,6 +32,22 @@ public class Hotel
     private String phone;
 
     private String notes;
+
+    /**
+     * Creates a {@link Hotel} with only an ID, for deserializing JSON form responses
+     */
+    public Hotel(long id)
+    {
+        this.id = id;
+    }
+
+    /**
+     * Default constructor for Hibernate
+     */
+    public Hotel()
+    {
+
+    }
 
     public Long getId()
     {

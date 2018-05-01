@@ -3,7 +3,9 @@ package org.brownmun.core.school;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
 import org.brownmun.core.school.model.SchoolApplication;
+import org.brownmun.core.school.model.SupplementalInfo;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -67,4 +69,14 @@ public interface SchoolService
      * List all school advisors.
      */
     List<Advisor> listAdvisors();
+
+    /**
+     * Get the supplemental info form responses for the given school
+     */
+    SupplementalInfo getSupplementalInfo(long schoolId);
+
+    /**
+     * Save a school's supplemental info form
+     */
+    SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info);
 }

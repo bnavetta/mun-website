@@ -1,5 +1,6 @@
-package org.brownmun.core.school.model;
+package org.brownmun.core.school.impl;
 
+import org.brownmun.core.school.model.Advisor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -4,6 +4,7 @@ import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
 import org.brownmun.core.school.model.SchoolApplication;
+import org.brownmun.core.school.model.SupplementalInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/your-mun")
@@ -60,10 +63,27 @@ public class DashboardController
         return ResponseEntity.ok(app);
     }
 
+    @PreAuthorize("hasRole('ADVISOR')")
+    @GetMapping("/supplemental-info")
+    @ResponseBody
+    public SupplementalInfo getSupplementalInfo(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
+    {
+        return schoolService.getSupplementalInfo(currentUser.getSchoolId());
+    }
+
+    @PreAuthorize("hasRole('ADVISOR')")
+    @PostMapping("/supplemental-info")
+    @ResponseBody
+    public ResponseEntity<SupplementalInfo> updateSupplementalInfo(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser, @RequestBody @Valid SupplementalInfo info)
+    {
+        info = schoolService.updateSupplementalInfo(currentUser, info);
+        return ResponseEntity.ok(info);
+    }
+
     /**
      * Support HTML5 pushState URLs
      */
-    @RequestMapping({ "/application", "/advisors" })
+    @RequestMapping({ "/application", "/advisors", "/supplemental" })
     public String ui()
     {
         return "forward:/your-mun/";

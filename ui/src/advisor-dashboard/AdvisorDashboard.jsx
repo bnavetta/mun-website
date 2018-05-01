@@ -9,6 +9,7 @@ import {fetchAdvisor, fetchSchool} from "./api";
 import Home from "./Home";
 import "./dashboard.css";
 import Application from "./Application";
+import SupplementalInfo from "./SupplementalInfo";
 
 function DashboardContent({ advisor, school, setSchool }) {
     return (
@@ -16,13 +17,13 @@ function DashboardContent({ advisor, school, setSchool }) {
             <ul className="dashboard-nav">
                 <li><NavLink exact to="/">Home</NavLink></li>
                 <li><NavLink exact to="/application">Application</NavLink></li>
-                {/*<li><NavLink exact to="/advisors">Advisors</NavLink></li>*/}
+                { school.accepted && <li><NavLink exact to="/supplemental">Supplemental Information</NavLink></li> }
             </ul>
 
             <div className="dashboard-main">
                 <Switch>
-                    <Route path="/advisors" component={() => <h1>Advisors</h1>} />
                     <Route path="/application" render={props => <Application {...props} school={school} setSchool={setSchool} />} />
+                    { school.accepted && <Route path="/supplemental" render={props => <SupplementalInfo {...props} school={school}/>}/>}
                     <Route exact path="/" render={props => <Home {...props} school={school} advisor={advisor}/>} />
                 </Switch>
             </div>

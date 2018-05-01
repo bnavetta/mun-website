@@ -27,15 +27,17 @@ public class SchoolServiceImpl implements SchoolService
     private final SchoolRepository repo;
     private final AdvisorRepository advisorRepo;
     private final SchoolApplicationRepository appRepo;
+    private final SupplementalInfoRepository infoRepo;
     private final EntityManagerFactory emf;
 
     @Autowired
-    public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo, SchoolApplicationRepository appRepo, EntityManagerFactory emf)
+    public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo, SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, EntityManagerFactory emf)
     {
         this.passwordEncoder = passwordEncoder;
         this.repo = repo;
         this.advisorRepo = advisorRepo;
         this.appRepo = appRepo;
+        this.infoRepo = infoRepo;
         this.emf = emf;
     }
 
@@ -119,5 +121,37 @@ public class SchoolServiceImpl implements SchoolService
     public List<Advisor> listAdvisors()
     {
         return advisorRepo.findAll();
+    }
+
+    /**
+     * Fetches the school's supplemental info, creating a new object if necessary.
+     */
+    @Override
+    public SupplementalInfo getSupplementalInfo(long schoolId)
+    {
+        return infoRepo.findById(schoolId).orElseGet(() -> {
+            SupplementalInfo info = new SupplementalInfo();
+            info.setSchool(repo.getOne(schoolId));
+            return info;
+        });
+    }
+
+    @Transactional
+    @Override
+    public SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info)
+    {
+        School school = loadSchool(advisor);
+//
+//        SupplementalInfo toSave = infoRepo.findById(school.getId()).map(existingInfo -> {
+//            existingInfo.setPhoneNumber();
+//        })
+//
+//        Optional<SupplementalInfo> mergedInfo = infoRepo.findById(school.getId());
+//        if
+
+        log.info("Updating supplemental information for school {}", school.getName());
+        info.setId(school.getId());
+        info.setSchool(school);
+        return infoRepo.save(info);
     }
 }

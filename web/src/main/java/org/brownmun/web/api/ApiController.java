@@ -2,6 +2,8 @@ package org.brownmun.web.api;
 
 import org.brownmun.core.committee.CommitteeListing;
 import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.core.logistics.HotelService;
+import org.brownmun.core.logistics.model.Hotel;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
@@ -24,12 +26,14 @@ public class ApiController
 {
     private final CommitteeService committees;
     private final SchoolService schools;
+    private final HotelService hotels;
 
     @Autowired
-    public ApiController(CommitteeService committees, SchoolService schools)
+    public ApiController(CommitteeService committees, SchoolService schools, HotelService hotels)
     {
         this.committees = committees;
         this.schools = schools;
+        this.hotels = hotels;
     }
 
     @GetMapping("/committee")
@@ -57,5 +61,11 @@ public class ApiController
     public List<Advisor> listAdvisors()
     {
         return schools.listAdvisors();
+    }
+
+    @GetMapping("/hotels")
+    public List<Hotel> getHotels()
+    {
+        return hotels.allHotels();
     }
 }
