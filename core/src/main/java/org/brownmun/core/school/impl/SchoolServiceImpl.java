@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -29,9 +30,10 @@ public class SchoolServiceImpl implements SchoolService
     private final SchoolApplicationRepository appRepo;
     private final SupplementalInfoRepository infoRepo;
     private final EntityManagerFactory emf;
+    private final EntityManager em;
 
     @Autowired
-    public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo, SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, EntityManagerFactory emf)
+    public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo, SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, EntityManagerFactory emf, EntityManager em)
     {
         this.passwordEncoder = passwordEncoder;
         this.repo = repo;
@@ -39,6 +41,7 @@ public class SchoolServiceImpl implements SchoolService
         this.appRepo = appRepo;
         this.infoRepo = infoRepo;
         this.emf = emf;
+        this.em = em;
     }
 
     @Override
@@ -140,18 +143,26 @@ public class SchoolServiceImpl implements SchoolService
     @Override
     public SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info)
     {
+        /*
+         * Because we're using @MapsId on SupplementalInfo, Spring thinks we're always updating an existing entity.
+         * To work around that, we first check if we're *actually* updating an entity or need to persist a new one.
+         */
+
         School school = loadSchool(advisor);
-//
-//        SupplementalInfo toSave = infoRepo.findById(school.getId()).map(existingInfo -> {
-//            existingInfo.setPhoneNumber();
-//        })
-//
-//        Optional<SupplementalInfo> mergedInfo = infoRepo.findById(school.getId());
-//        if
 
         log.info("Updating supplemental information for school {}", school.getName());
         info.setId(school.getId());
         info.setSchool(school);
-        return infoRepo.save(info);
+
+        Optional<SupplementalInfo> existing = infoRepo.findById(school.getId());
+        if (existing.isPresent())
+        {
+            return em.merge(info);
+        }
+        else
+        {
+            em.persist(info);
+            return info;
+        }
     }
 }
