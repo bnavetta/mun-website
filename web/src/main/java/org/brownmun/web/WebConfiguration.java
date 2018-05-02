@@ -35,5 +35,8 @@ public class WebConfiguration implements WebMvcConfigurer
         registry.addViewController("/logistics/local-restaurants").setViewName("logistics/local-restaurants");
 
         registry.addViewController("/your-mun/login").setViewName("advisor-dashboard/login");
+
+        // Redirect last year's link
+        registry.addRedirectViewController("/yourbusun", "/your-mun");
     }
 }
