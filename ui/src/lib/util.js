@@ -1,3 +1,4 @@
+import Raven from 'raven-js';
 import { mergeDeepLeft } from "ramda";
 
 /**
@@ -29,6 +30,9 @@ export async function request(url, options = {}) {
 
     if (!response.headers.get('Content-Type').startsWith('application/json')) {
         const body = await response.text();
+        Raven.captureException(new Error('Non-JSON API response'), {
+            extra: { url, body }
+        });
         throw new Error(`Not JSON: ${body}`);
     }
 
@@ -37,7 +41,9 @@ export async function request(url, options = {}) {
     if (response.ok)  {
         return body;
     } else {
-        throw new Error(body.error);
+        const exception = new Error(body.error);
+        Raven.captureException(exception, { extra: { url } });
+        throw exception;
     }
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 import { Form } from "react-form";
+import Raven from "raven-js";
 
 import {fetchHotels, fetchSupplementalInfo, updateSupplementalInfo} from "./api";
 import LoadingPage from "../lib/components/LoadingPage";
@@ -32,6 +33,7 @@ class SupplementalInfo extends React.PureComponent {
             const [info, hotels] = await Promise.all([fetchSupplementalInfo(), fetchHotels()]);
             this.setState({ supplementalInfo: info, loading: false, error: null, hotels });
         } catch (error) {
+            Raven.captureException(error);
             this.setState({ supplementalInfo: null, loading: false, error })
         }
     }
@@ -59,14 +61,20 @@ class SupplementalInfo extends React.PureComponent {
                 this.setState({ successMessage: 'Supplemental information updated', errorMessage: null });
             } else {
                 for (let field of Object.keys(result.errors)) {
-                    formApi.setError(field, result.errors[field][0]);
+                    formApi.setError(field, result.errors[field].join(', '));
                 }
-                this.setState({ successMessage: null, errorMessage: 'Some fields were invalid' });
+
+                if (result.errors._global) {
+                    this.setState({ successMessage: null, errorMessage: result.errors._global.join(', ') });
+                } else {
+                    this.setState({ successMessage: null, errorMessage: 'Some fields were invalid' });
+                }
             }
 
         } catch (error) {
             console.error('Error submitting supplemental info', error);
-            this.setState({ successMessage: null, errorMessage: error });
+            Raven.captureException(error);
+            this.setState({ successMessage: null, errorMessage: error.message });
         }
     }
 

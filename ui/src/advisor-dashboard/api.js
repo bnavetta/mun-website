@@ -1,4 +1,5 @@
-import {csrfHeaders, request} from "../lib/util";
+import Raven from "raven-js";
+import { csrfHeaders, request } from "../lib/util";
 
 export function fetchSchool() {
     return request('/your-mun/school');
@@ -13,20 +14,26 @@ export function fetchSupplementalInfo() {
 }
 
 export async function updateSupplementalInfo(info) {
-    const res = await fetch('/your-mun/supplemental-info', {
-        method: 'POST',
-        body: JSON.stringify(info),
-        headers: {
-            'Content-Type': 'application/json',
-            ...csrfHeaders
-        },
-        credentials: 'same-origin'
-    });
+    try {
+        const res = await fetch('/your-mun/supplemental-info', {
+            method: 'POST',
+            body: JSON.stringify(info),
+            headers: {
+                'Content-Type': 'application/json',
+                ...csrfHeaders
+            },
+            credentials: 'same-origin'
+        });
 
-    if (res.ok) {
-        return { success: true, result: await res.json() };
-    } else {
-        return { success: false, errors: await res.json() };
+        if (res.ok) {
+            return { success: true, result: await res.json() };
+        } else {
+            return { success: false, errors: await res.json() };
+        }
+    }
+    catch (e) {
+        Raven.captureException(e, { extra: { supplementalInfo: info } });
+        throw e;
     }
 }
 
