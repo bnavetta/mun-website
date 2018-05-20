@@ -118,7 +118,7 @@ export default function SupplementalInfoForm({ readOnly = false, formApi, busunH
 
             <fieldset>
                 <label htmlFor="arrivalTime">When do you plan to arrive on Friday</label>
-                <ValidatedText disabled={readOnly} field="arrivalTime" id="arrivalTime" type="time" step={60}/>
+                <ValidatedText disabled={readOnly} field="arrivalTime" id="arrivalTime" />
             </fieldset>
 
             <fieldset>

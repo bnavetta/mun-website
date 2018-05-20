@@ -7,6 +7,9 @@ const LOAD_SCHOOLS = "schools:load";
 // Action for loading advisors into the store
 const LOAD_ADVISORS = "advisors:load";
 
+// Action for loading a particular school's supplemental information
+const LOAD_SUPPLEMENTAL_INFO = "supplemental_info:load";
+
 // Schools reducer - handles a [school id -> school] map
 function schoolsReducer(state = {}, action) {
     switch (action.type) {
@@ -17,6 +20,14 @@ function schoolsReducer(state = {}, action) {
                 schools[school.id] = school;
             }
             return schools;
+        case LOAD_SUPPLEMENTAL_INFO:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    supplementalInfo: action.supplementalInfo,
+                },
+            };
         default:
             return state;
     }
@@ -39,6 +50,8 @@ export const loadSchools = (schools) => ({ type: LOAD_SCHOOLS, schools });
 
 export const loadAdvisors = (advisors) => ({ type: LOAD_ADVISORS, advisors });
 
+export const loadSupplementalInfo = (id, supplementalInfo) => ({ type: LOAD_SUPPLEMENTAL_INFO, id, supplementalInfo });
+
 // Selectors like this are a handy Redux pattern so you don't have to change a bunch of things if your state
 // structure changes a bit
 export const selectSchool = (id, state) => state.schools[id];
@@ -46,6 +59,8 @@ export const selectSchool = (id, state) => state.schools[id];
 export const selectSchools = (state) => R.sortBy(R.prop('name'), R.values(state.schools));
 
 export const selectAdvisors = (schoolId, state) => state.advisors[schoolId];
+
+export const selectSupplementalInfo = (schoolId, state) => state.schools[schoolId].supplementalInfo;
 
 export default function configureStore() {
     return createStore(combineReducers({

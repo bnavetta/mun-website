@@ -7,3 +7,7 @@ export function fetchSchools() {
 export function fetchAdvisors() {
     return request('/api/advisors');
 }
+
+export function fetchSupplementalInfo(schoolId) {
+    return request(`/api/school/${schoolId}/supplemental-info`);
+}

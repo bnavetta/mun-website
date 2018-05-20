@@ -7,6 +7,7 @@ import org.brownmun.core.logistics.model.Hotel;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
+import org.brownmun.core.school.model.SupplementalInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,11 +50,18 @@ public class ApiController
         return schools.listSchools();
     }
 
-    @GetMapping("/school/:id/advisors")
+    @GetMapping("/school/{id}/advisors")
     @PreAuthorize("hasRole('STAFF')")
     public List<Advisor> getAdvisors(@PathVariable Long id)
     {
         return schools.getAdvisors(id);
+    }
+
+    @GetMapping("/school/{id}/supplemental-info")
+    @PreAuthorize("hasRole('STAFF')")
+    public SupplementalInfo getSupplementalInfo(@PathVariable Long id)
+    {
+        return schools.getSupplementalInfo(id);
     }
 
     @GetMapping("/advisors")

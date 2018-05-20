@@ -2,13 +2,9 @@ package org.brownmun.core.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.brownmun.core.logistics.model.Hotel;
-import org.brownmun.util.PhoneNumber;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import java.time.LocalTime;
 
 /**
  * A school's supplemental information, filled out after they're accepted.
@@ -26,26 +22,26 @@ public class SupplementalInfo
     @JoinColumn(name = "id")
     private School school;
 
-    @PhoneNumber
-    @NotBlank
+    // @PhoneNumber
+    // @NotBlank
     private String phoneNumber;
 
-    @NotBlank
+    // @NotBlank
     private String streetAddress;
 
-    @NotBlank
+    // @NotBlank
     private String city;
 
     private String state;
 
     private String postalCode;
 
-    @NotBlank
+    // @NotBlank
     private String country;
 
     private boolean financialAid;
 
-    @Min(0)
+    // @Min(0)
     private double financialAidAmount = 0;
     private String financialAidDocumentation;
 
@@ -67,19 +63,20 @@ public class SupplementalInfo
      * is {@code carsParking * carParkingDays}, and the same for buses.
      */
 
-    @Min(0)
+    // @Min(0)
     private int carsParking;
 
-    @Min(0)
+    // @Min(0)
     private int carParkingDays;
 
-    @Min(0)
+    // @Min(0)
     private int busParking;
 
-    @Min(0)
+    // @Min(0)
     private int busParkingDays;
 
-    private LocalTime arrivalTime;
+    // Would be nice to have this be a LocalTime, but we've had issues with parsing time info from the user forms.
+    private String arrivalTime;
 
     @Type(type = "org.brownmun.core.db.PostgresEnumType", parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "luggage_storage"))
     @Enumerated(EnumType.STRING)
@@ -91,24 +88,24 @@ public class SupplementalInfo
      */
     private boolean delegateSocialNeedAdvisor;
 
-    @Min(0)
+    // @Min(0)
     private int delegateCount;
 
-    @Min(0)
+    // @Min(0)
     private int chaperoneCount;
 
     private String chaperoneInfo;
 
-    @Min(0)
+    // @Min(0)
     private int parliProTrainingCount;
 
-    @Min(0)
+    // @Min(0)
     private int crisisTrainingCount;
 
-    @Min(0)
+    // @Min(0)
     private int tourCount;
 
-    @Min(0)
+    // @Min(0)
     private int infoSessionCount;
 
     public Long getId()
@@ -291,12 +288,12 @@ public class SupplementalInfo
         this.busParkingDays = busParkingDays;
     }
 
-    public LocalTime getArrivalTime()
+    public String getArrivalTime()
     {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalTime arrivalTime)
+    public void setArrivalTime(String arrivalTime)
     {
         this.arrivalTime = arrivalTime;
     }

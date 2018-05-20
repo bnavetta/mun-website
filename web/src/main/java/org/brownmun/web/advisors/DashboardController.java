@@ -74,7 +74,7 @@ public class DashboardController
     @PreAuthorize("hasRole('ADVISOR')")
     @PostMapping("/supplemental-info")
     @ResponseBody
-    public ResponseEntity<SupplementalInfo> updateSupplementalInfo(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser, @RequestBody @Valid SupplementalInfo info)
+    public ResponseEntity<SupplementalInfo> updateSupplementalInfo(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser, @RequestBody SupplementalInfo info)
     {
         info = schoolService.updateSupplementalInfo(currentUser, info);
         return ResponseEntity.ok(info);

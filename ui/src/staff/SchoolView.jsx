@@ -5,8 +5,10 @@ import { Form } from "react-form";
 import { yesNo } from "../lib/util";
 
 import ApplicationForm from "../registration/ApplicationForm";
+import SupplementalInfo from "./SupplementalInfo";
 
 import { selectSchool, selectAdvisors } from "./state";
+import LoadingPage from "../lib/components/LoadingPage";
 
 const mapStateToProps = (state, props) => {
     const id = parseInt(props.match.params.id);
@@ -17,6 +19,10 @@ const mapStateToProps = (state, props) => {
 } ;
 
 function SchoolView({ school, advisors }) {
+    if (!school) {
+        return <LoadingPage />;
+    }
+
     return (
         <div>
             <h1>{ school.name }</h1>
@@ -41,7 +47,7 @@ function SchoolView({ school, advisors }) {
                     </tr>
                 </thead>
                 <tbody>
-                    { advisors.map(advisor => (
+                    { advisors && advisors.map(advisor => (
                         <tr key={advisor.id}>
                             <td>{advisor.name}</td>
                             <td>{advisor.email}</td>
@@ -58,6 +64,10 @@ function SchoolView({ school, advisors }) {
                     <ApplicationForm formApi={formApi} readOnly/>
                 </form>
             )}/>
+
+            <h2>Supplemental Information</h2>
+
+            <SupplementalInfo id={school.id}/>
         </div>
     );
 }

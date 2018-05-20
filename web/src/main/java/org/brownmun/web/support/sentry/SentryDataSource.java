@@ -6,6 +6,8 @@ import io.sentry.event.UserBuilder;
 import org.brownmun.core.Conference;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.web.security.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.EventListener;
@@ -23,6 +25,8 @@ import java.util.Map;
 @Component
 public class SentryDataSource implements ApplicationListener<InteractiveAuthenticationSuccessEvent>
 {
+    private static final Logger log = LoggerFactory.getLogger(SentryDataSource.class);
+
     private final Conference conference;
 
     @Autowired
@@ -34,6 +38,7 @@ public class SentryDataSource implements ApplicationListener<InteractiveAuthenti
     @PostConstruct
     public void configureSentry()
     {
+        log.info("Adding Sentry tags");
         Sentry.getContext().addTag("conference", conference.getKey());
     }
 
@@ -54,7 +59,9 @@ public class SentryDataSource implements ApplicationListener<InteractiveAuthenti
             data.put("phoneNumber", advisor.getPhoneNumber());
         }
         userBuilder.setData(data);
+        io.sentry.event.User sentryUser = userBuilder.build();
+        log.info("Associating user {} with Sentry", sentryUser);
 
-        Sentry.getContext().setUser(userBuilder.build());
+        Sentry.getContext().setUser(sentryUser);
     }
 }
