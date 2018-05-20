@@ -1,4 +1,5 @@
 import Raven from 'raven-js';
+import "core-js/fn/set"; // Needed for React on some browsers
 
 import "./styles.css";
 
