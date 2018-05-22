@@ -1,9 +1,10 @@
 # Local / dev settings
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/busun
-    username: busun
-    password: busunftw
+    url: "${DB_JDBC_URL}"
+    #url: 'jdbc:postgresql://foo/bar'
+    username: "${DB_USER}"
+    password: "${DB_PASSWORD}"
   security:
     oauth2:
       client:
