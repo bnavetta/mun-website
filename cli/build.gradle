@@ -12,4 +12,6 @@ bootRun {
 
 bootJar {
     launchScript()
+
+    version = 'latest'
 }
