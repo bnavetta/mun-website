@@ -44,9 +44,16 @@ def querydb():
 
 
 @dev.command()
-def run():
+@click.option('--debug/--no-debug', default=False)
+def run(debug):
     subprocess.call(['./gradlew', '-PstableVersion', 'busun:bootJar'])
-    subprocess.call(['java', '-jar', 'busun/build/libs/busun-latest.jar'])
+    args = ['java']
+    if debug:
+        args.append('-agentlib:jdwp=transport=dt_socket,address=localhost:5005,server=y,suspend=y')
+    args.extend(('-jar', 'busun/build/libs/busun-latest.jar'))
+    if debug:
+        args.append('--debug')
+    subprocess.call(args)
 
 
 dev.add_command(startdb)

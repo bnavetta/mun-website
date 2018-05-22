@@ -15,6 +15,7 @@ generated_testSrc/
 data/
 
 bin/
+out/
 
 .vscode/
 
