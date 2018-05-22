@@ -1,1 +1,0 @@
-ALTER TABLE new_advisor_token RENAME TO advisor_creation_token;

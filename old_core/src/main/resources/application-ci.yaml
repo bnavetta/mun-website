@@ -1,4 +1,0 @@
-DB_USER: postgres
-DB_PASSWORD:
-DB_NAME: brownmun_travis
-DB_JDBC_URL: jdbc:postgresql://localhost/${DB_NAME}
