@@ -1,11 +1,12 @@
 package org.brownmun.cli;
 
-import org.brownmun.core.Conference;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.jline.PromptProvider;
 import org.springframework.stereotype.Component;
+
+import org.brownmun.core.Conference;
 
 @Component
 public class ConferencePromptProvider implements PromptProvider
@@ -21,6 +22,7 @@ public class ConferencePromptProvider implements PromptProvider
     @Override
     public AttributedString getPrompt()
     {
-        return new AttributedString(conference.getName() + " $ ", AttributedStyle.DEFAULT.foreground(AttributedStyle.BLUE));
+        return new AttributedString(conference.getName() + " $ ",
+                AttributedStyle.DEFAULT.foreground(AttributedStyle.BLUE));
     }
 }

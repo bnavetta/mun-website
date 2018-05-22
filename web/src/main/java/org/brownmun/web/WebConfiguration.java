@@ -1,11 +1,12 @@
 package org.brownmun.web;
 
-import org.brownmun.core.CoreConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import org.brownmun.core.CoreConfiguration;
 
 @Configuration
 @ComponentScan

@@ -1,6 +1,5 @@
 package org.brownmun.core.mail.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -8,8 +7,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Optional;
 
 /**
  * Very simple client for the Mailgun API.
@@ -22,13 +19,12 @@ public class MailgunClient
 
     public MailgunClient(MailgunProperties properties, RestTemplateBuilder builder)
     {
-        this.restTemplate = builder
-                .rootUri(properties.getBaseUri())
-                .basicAuthorization(properties.getUsername(), properties.getApiKey())
-                .build();
+        this.restTemplate = builder.rootUri(properties.getBaseUri())
+                .basicAuthorization(properties.getUsername(), properties.getApiKey()).build();
     }
 
-    public void send(String from, String to, String replyTo, String subject, String html, String text) throws RestClientException
+    public void send(String from, String to, String replyTo, String subject, String html, String text)
+            throws RestClientException
     {
         MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
         params.add("from", from);

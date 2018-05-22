@@ -15,6 +15,7 @@ buildscript {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M7'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.10.0'
+        classpath 'net.ltgt.gradle:gradle-apt-plugin:0.15'
     }
 }
 
@@ -24,6 +25,10 @@ plugins {
 }
 
 def computeVersion() {
+    if (project.hasProperty('stableVersion')) {
+        return 'latest';
+    }
+
     def head = grgit.head().abbreviatedId
     def status = grgit.status()
     def changes = status.staged.allChanges + status.unstaged.allChanges
@@ -43,12 +48,19 @@ allprojects {
     ext.currentVersion = currentVersion
 }
 
+idea {
+    project {
+        vcs = 'Git'
+    }
+}
+
 configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'com.github.ben-manes.versions'
     apply plugin: 'com.diffplug.gradle.spotless'
+    apply plugin: 'net.ltgt.apt-idea'
 
     group = 'org.brownmun'
     version = currentVersion
@@ -90,6 +102,12 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
             endWithNewline()
         }
     }
+//
+//    idea {
+//        module {
+//            scopes.COMPILE.plus += [configurations.annotationProcessor]
+//        }
+//    }
 }
 
 remotes {

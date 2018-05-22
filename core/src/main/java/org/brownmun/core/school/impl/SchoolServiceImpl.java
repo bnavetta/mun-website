@@ -1,9 +1,13 @@
 package org.brownmun.core.school.impl;
 
-import com.google.common.base.Preconditions;
-import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.*;
-import org.brownmun.util.Tokens;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
+
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
+import com.google.common.base.Preconditions;
+
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.*;
+import org.brownmun.util.Tokens;
 
 @Service
 public class SchoolServiceImpl implements SchoolService
@@ -33,7 +36,9 @@ public class SchoolServiceImpl implements SchoolService
     private final EntityManager em;
 
     @Autowired
-    public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo, SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, EntityManagerFactory emf, EntityManager em)
+    public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo,
+            SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, EntityManagerFactory emf,
+            EntityManager em)
     {
         this.passwordEncoder = passwordEncoder;
         this.repo = repo;
@@ -45,7 +50,8 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
-    public School registerSchool(String name, String advisorName, String advisorEmail, String advisorPassword, String advisorPhoneNumber)
+    public School registerSchool(String name, String advisorName, String advisorEmail, String advisorPassword,
+            String advisorPhoneNumber)
     {
         School school = new School();
         school.setAccepted(false);
@@ -144,8 +150,9 @@ public class SchoolServiceImpl implements SchoolService
     public SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info)
     {
         /*
-         * Because we're using @MapsId on SupplementalInfo, Spring thinks we're always updating an existing entity.
-         * To work around that, we first check if we're *actually* updating an entity or need to persist a new one.
+         * Because we're using @MapsId on SupplementalInfo, Spring thinks we're always
+         * updating an existing entity. To work around that, we first check if we're
+         * *actually* updating an entity or need to persist a new one.
          */
 
         School school = loadSchool(advisor);

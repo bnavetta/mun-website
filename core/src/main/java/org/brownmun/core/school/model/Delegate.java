@@ -1,9 +1,10 @@
 package org.brownmun.core.school.model;
 
-import com.google.common.base.MoreObjects;
-import org.brownmun.core.committee.model.Position;
-
 import javax.persistence.*;
+
+import com.google.common.base.MoreObjects;
+
+import org.brownmun.core.committee.model.Position;
 
 /**
  * Links a {@link School} to a {@link Position} and stores information about the

@@ -1,14 +1,12 @@
-package org.brownmun.core.school;
+package org.brownmun.core.school.impl;
 
-import org.brownmun.core.Conference;
-import org.brownmun.core.mail.EmailMessage;
-import org.brownmun.core.mail.MailException;
-import org.brownmun.core.mail.MailSender;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.core.school.impl.AdvisorRepository;
-import org.brownmun.core.school.model.PasswordReset;
-import org.brownmun.core.school.impl.PasswordResetRepository;
-import org.brownmun.util.Tokens;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Map;
+
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +14,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Map;
+import org.brownmun.core.Conference;
+import org.brownmun.core.mail.EmailMessage;
+import org.brownmun.core.mail.MailException;
+import org.brownmun.core.mail.MailSender;
+import org.brownmun.core.school.AdvisorService;
+import org.brownmun.core.school.PasswordResetException;
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Advisor;
+import org.brownmun.core.school.model.PasswordReset;
+import org.brownmun.util.Tokens;
 
 /**
  * Implementation of password resets.
  */
 @Service
-public class PasswordResetService
+public class AdvisorServiceImpl implements AdvisorService
 {
-    private static final Logger log = LoggerFactory.getLogger(PasswordResetService.class);
+    private static final Logger log = LoggerFactory.getLogger(AdvisorService.class);
 
     private static final Duration RESET_TOKEN_LIFESPAN = Duration.ofDays(1);
 
@@ -40,7 +43,8 @@ public class PasswordResetService
     private final PasswordEncoder encoder;
 
     @Autowired
-    public PasswordResetService(PasswordResetRepository repo, SchoolService schoolService, AdvisorRepository advisorRepo, MailSender mailSender, Conference conference, PasswordEncoder encoder)
+    public AdvisorServiceImpl(PasswordResetRepository repo, SchoolService schoolService, AdvisorRepository advisorRepo,
+            MailSender mailSender, Conference conference, PasswordEncoder encoder)
     {
         this.repo = repo;
         this.schoolService = schoolService;
@@ -50,10 +54,12 @@ public class PasswordResetService
         this.encoder = encoder;
     }
 
+    @Override
     @Transactional
     public void requestPasswordReset(String email) throws PasswordResetException
     {
-        Advisor advisor = schoolService.findAdvisor(email).orElseThrow(() -> new PasswordResetException("No advisor with that email address exists", email));
+        Advisor advisor = schoolService.findAdvisor(email)
+                .orElseThrow(() -> new PasswordResetException("No advisor with that email address exists", email));
 
         PasswordReset reset = new PasswordReset();
         reset.setResetCode(Tokens.generate(32));
@@ -61,19 +67,12 @@ public class PasswordResetService
         reset.setRequestedAt(Instant.now());
         reset = repo.save(reset);
 
-        String resetUrl = UriComponentsBuilder.newInstance()
-                .scheme("https")
-                .host(conference.getDomainName())
-                .path("/your-mun/password/reset")
-                .queryParam("token", reset.getResetCode())
-                .build().toUriString();
+        String resetUrl = UriComponentsBuilder.newInstance().scheme("https").host(conference.getDomainName())
+                .path("/your-mun/password/reset").queryParam("token", reset.getResetCode()).build().toUriString();
 
-        EmailMessage message = EmailMessage.builder()
-                .recipient(email)
-                .subject(String.format("[%s] Password Reset", conference.getName()))
-                .messageTemplate("password-reset")
-                .variables(Map.of("advisor", advisor, "resetUrl", resetUrl))
-                .build();
+        EmailMessage message = EmailMessage.builder().recipient(email)
+                .subject(String.format("[%s] Password Reset", conference.getName())).messageTemplate("password-reset")
+                .variables(Map.of("advisor", advisor, "resetUrl", resetUrl)).build();
 
         try
         {
@@ -85,6 +84,7 @@ public class PasswordResetService
         }
     }
 
+    @Override
     @Transactional
     public Advisor resetPassword(String code, String newPassword) throws PasswordResetException
     {
@@ -112,5 +112,14 @@ public class PasswordResetService
         {
             throw new PasswordResetException("Invalid token", null);
         }
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(Advisor advisor, String newPassword)
+    {
+        advisor.setPassword(encoder.encode(newPassword));
+        advisorRepo.save(advisor);
+        log.debug("Changed password for {}", advisor.getEmail());
     }
 }

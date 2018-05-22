@@ -1,21 +1,24 @@
 package org.brownmun.web.security;
 
-import org.brownmun.core.school.model.Advisor;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import org.brownmun.core.school.model.Advisor;
+
 /**
- * Abstraction over a logged-in user, which could be a school advisor or conference staff.
+ * Abstraction over a logged-in user, which could be a school advisor or
+ * conference staff.
  */
 public interface User extends UserDetails
 {
     String getEmail();
 
     boolean isAdvisor();
+
     boolean isStaff();
 
     /**
-     * Checks whether this user can access information about the given school,
-     * like the list of students.
+     * Checks whether this user can access information about the given school, like
+     * the list of students.
      */
     boolean canAccessSchool(long schoolId);
 
@@ -25,8 +28,8 @@ public interface User extends UserDetails
     boolean canModifySchool(long schoolId);
 
     /**
-     * Checks whether this user can access non-public information about the given committee,
-     * like its position assignments.
+     * Checks whether this user can access non-public information about the given
+     * committee, like its position assignments.
      */
     boolean canAccessCommittee(long committeeId);
 
@@ -37,6 +40,7 @@ public interface User extends UserDetails
 
     /**
      * Returns the underlying {@link Advisor}.
+     *
      * @throws IllegalStateException if this user is not an advisor
      */
     Advisor asAdvisor();

@@ -53,13 +53,15 @@ public class ChunkResolver
             {
                 css.add(asset);
             }
-            else
+            else if (!asset.getPath().endsWith(".map"))
             {
                 log.warn("Unknown asset type: {}", asset);
             }
         }
 
-        return Chunk.create(css, js);
+        Chunk chunk = Chunk.create(css, js);
+        log.debug("Loaded chunk {} for {}", chunk, name);
+        return chunk;
     }
 
     private Manifest loadManifest()

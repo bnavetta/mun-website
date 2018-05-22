@@ -3,6 +3,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:wp="http://brownmun.org/th/webpack"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
     <head>
         <title>Brown Model UN</title>
@@ -80,6 +81,12 @@
                             </nav>
                         </li>
                         <li><a th:href="@{/your-mun}">Your BUSUN</a></li>
+                        <li sec:authorize="hasRole('ROLE_ADVISOR')">
+                            <form action="/logout" method="post">
+                                <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}">
+                                <button type="submit">Log Out</button>
+                            </form>
+                        </li>
                     </ul>
                 </nav>
             </header>

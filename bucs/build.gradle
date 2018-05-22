@@ -1,0 +1,12 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+
+    compile project(':web')
+    compile project(':core')
+}
+
+bootJar {
+    launchScript()
+}

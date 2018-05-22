@@ -1,16 +1,17 @@
 package org.brownmun.core.award.model;
 
-import com.google.common.base.MoreObjects;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Type;
+
+import com.google.common.base.MoreObjects;
+
 /**
- * View over the {@link Award} table that includes information from
- * other tables for printing awards.
+ * View over the {@link Award} table that includes information from other tables
+ * for printing awards.
  */
 @Entity
 public class AwardPrint
@@ -60,13 +61,8 @@ public class AwardPrint
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("type", type)
-                .add("committeeName", committeeName)
-                .add("positionName", positionName)
-                .add("schoolName", schoolName)
-                .add("delegateName", delegateName)
+        return MoreObjects.toStringHelper(this).add("id", id).add("type", type).add("committeeName", committeeName)
+                .add("positionName", positionName).add("schoolName", schoolName).add("delegateName", delegateName)
                 .toString();
     }
 }

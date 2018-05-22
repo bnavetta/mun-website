@@ -1,10 +1,9 @@
 package org.brownmun.web.registration;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.net.URI;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
-
-import java.net.URI;
 
 @AutoValue
 public abstract class RegistrationResult

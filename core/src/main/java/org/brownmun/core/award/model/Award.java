@@ -2,11 +2,12 @@ package org.brownmun.core.award.model;
 
 import javax.persistence.*;
 
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.Position;
 import org.hibernate.annotations.Type;
 
 import com.google.common.base.MoreObjects;
+
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.Position;
 
 /**
  * Records an award given to a position. Almost a join table with extra info

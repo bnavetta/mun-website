@@ -1,9 +1,9 @@
 package org.brownmun.web.advisors;
 
-import org.brownmun.core.school.PasswordResetException;
-import org.brownmun.core.school.PasswordResetService;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.web.security.ConferenceSecurity;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.util.Map;
+import org.brownmun.core.school.AdvisorService;
+import org.brownmun.core.school.PasswordResetException;
+import org.brownmun.core.school.model.Advisor;
+import org.brownmun.web.security.ConferenceSecurity;
 
 /**
  * Handles advisor passwords, mostly for password resets.
@@ -24,10 +26,10 @@ public class PasswordController
 {
     private static final Logger log = LoggerFactory.getLogger(PasswordController.class);
 
-    private final PasswordResetService resetService;
+    private final AdvisorService resetService;
 
     @Autowired
-    public PasswordController(PasswordResetService resetService)
+    public PasswordController(AdvisorService resetService)
     {
         this.resetService = resetService;
     }
@@ -45,18 +47,14 @@ public class PasswordController
         {
             resetService.requestPasswordReset(email);
 
-            return new ModelAndView("advisor-dashboard/forgot-password.html", Map.of(
-                    "email", email,
-                    "message", "Please check your email for a password reset link"
-            ));
+            return new ModelAndView("advisor-dashboard/forgot-password.html",
+                    Map.of("email", email, "message", "Please check your email for a password reset link"));
         }
         catch (PasswordResetException e)
         {
             log.error("Failed to request password reset", e);
-            return new ModelAndView("advisor-dashboard/forgot-password.html", Map.of(
-                    "email", email,
-                    "error", e.getMessage()
-            ));
+            return new ModelAndView("advisor-dashboard/forgot-password.html",
+                    Map.of("email", email, "error", e.getMessage()));
         }
     }
 
@@ -68,7 +66,8 @@ public class PasswordController
     }
 
     @PostMapping("/reset")
-    public String submitPasswordReset(@Valid @ModelAttribute("form") PasswordResetForm form, BindingResult bindingResult)
+    public String submitPasswordReset(@Valid @ModelAttribute("form") PasswordResetForm form,
+            BindingResult bindingResult)
     {
         if (bindingResult.hasErrors())
         {

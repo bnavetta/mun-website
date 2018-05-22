@@ -1,11 +1,12 @@
 package org.brownmun.core.school.impl;
 
-import org.brownmun.core.school.model.Advisor;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
-import java.util.Optional;
+import org.brownmun.core.school.model.Advisor;
 
 /**
  * Access to the {@link Advisor} database table.

@@ -1,10 +1,7 @@
 package org.brownmun.web.security;
 
-import org.brownmun.core.staff.SecretariatProperties;
-import org.brownmun.core.staff.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,8 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import org.brownmun.core.staff.StaffService;
+
 @Configuration
-//@EnableWebSecurity
+// @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
     @Autowired
@@ -28,36 +27,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http
-            .csrf().and().cors().and()
-            .authorizeRequests()
-                .antMatchers("/staff/**")
-                .hasRole("STAFF")
-                .antMatchers("/your-mun/password/**")
-                .permitAll()
-                .antMatchers("/your-mun/**")
-                .hasRole("ADVISOR")
-                .antMatchers("/registration/register")
-                .denyAll()
-                .and()
-            .oauth2Login()
-                .loginPage("/staff/login")
-                .permitAll()
-                .userInfoEndpoint()
-                    .oidcUserService(new StaffOAuth2UserService(staffService))
-                    .and()
-                .and()
-            .formLogin()
-                .loginPage("/your-mun/login")
-                .permitAll()
-                .and()
-            .logout()
-                .logoutUrl("/logout")
-                .permitAll()
-                .and()
-            .exceptionHandling()
-                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/staff/login"), new AntPathRequestMatcher("/staff/**"))
-                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/your-mun/login"), new AntPathRequestMatcher("/your-mun/**"));
+        http.csrf().and().cors().and().authorizeRequests().antMatchers("/staff/**").hasRole("STAFF")
+                .antMatchers("/your-mun/password/**").permitAll().antMatchers("/your-mun/**").hasRole("ADVISOR")
+                .antMatchers("/registration/register").denyAll().and().oauth2Login().loginPage("/staff/login")
+                .permitAll().userInfoEndpoint().oidcUserService(new StaffOAuth2UserService(staffService)).and().and()
+                .formLogin().loginPage("/your-mun/login").permitAll().and().logout().logoutUrl("/logout").permitAll()
+                .and().exceptionHandling()
+                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/staff/login"),
+                        new AntPathRequestMatcher("/staff/**"))
+                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/your-mun/login"),
+                        new AntPathRequestMatcher("/your-mun/**"));
     }
 
     @Override

@@ -1,7 +1,8 @@
 package org.brownmun.core.school.impl;
 
-import org.brownmun.core.school.model.SupplementalInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.brownmun.core.school.model.SupplementalInfo;
 
 /**
  * Database operations for {@link SupplementalInfo}

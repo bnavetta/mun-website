@@ -1,23 +1,24 @@
 package org.brownmun.web.security;
 
+import java.io.Serializable;
+import java.util.OptionalLong;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.PermissionEvaluator;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Delegate;
 import org.brownmun.core.school.model.School;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.PermissionEvaluator;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
-import java.util.OptionalLong;
 
 /**
- * Hooks into Spring Security's {@link PermissionEvaluator} abstraction. This lets us use things like
- * {@code hasPermission(#myCommittee, 'modify')} in {@link org.springframework.security.access.prepost.PreAuthorize}
- * annotations.
+ * Hooks into Spring Security's {@link PermissionEvaluator} abstraction. This
+ * lets us use things like {@code hasPermission(#myCommittee, 'modify')} in
+ * {@link org.springframework.security.access.prepost.PreAuthorize} annotations.
  */
 @Service
 public class ModelUNPermissionEvaluator implements PermissionEvaluator
@@ -99,7 +100,8 @@ public class ModelUNPermissionEvaluator implements PermissionEvaluator
     }
 
     @Override
-    public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission)
+    public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType,
+            Object permission)
     {
         if (!(authentication.getPrincipal() instanceof User))
         {

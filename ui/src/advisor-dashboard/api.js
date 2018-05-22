@@ -50,3 +50,13 @@ export function updateApplication(app) {
 export function fetchHotels() {
     return request('/api/hotels');
 }
+
+export function changePassword(password, confirm) {
+    return request('/your-mun/change-password', {
+        method: 'POST',
+        body: JSON.stringify({ password, confirm }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}

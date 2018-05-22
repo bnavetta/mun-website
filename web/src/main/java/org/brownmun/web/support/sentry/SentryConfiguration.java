@@ -1,11 +1,12 @@
 package org.brownmun.web.support.sentry;
 
-import io.sentry.spring.SentryExceptionResolver;
-import io.sentry.spring.SentryServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+
+import io.sentry.spring.SentryExceptionResolver;
+import io.sentry.spring.SentryServletContextInitializer;
 
 @Configuration
 public class SentryConfiguration

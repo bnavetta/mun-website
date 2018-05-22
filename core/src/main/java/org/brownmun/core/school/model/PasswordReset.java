@@ -1,10 +1,11 @@
 package org.brownmun.core.school.model;
 
+import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.Instant;
 
 /**
  * A password reset request

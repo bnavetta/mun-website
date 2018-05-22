@@ -7,6 +7,7 @@ dependencies {
     implementation 'org.springframework.security:spring-security-oauth2-jose'
 
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.google.guava:guava'
     implementation 'com.github.ben-manes.caffeine:caffeine'

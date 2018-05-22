@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * View over the {@link School} table only containing the
- * school's application to the conference
+ * View over the {@link School} table only containing the school's application
+ * to the conference
  */
 @Entity
 public class SchoolApplication

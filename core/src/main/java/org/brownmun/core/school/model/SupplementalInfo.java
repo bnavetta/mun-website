@@ -1,10 +1,12 @@
 package org.brownmun.core.school.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.brownmun.core.logistics.model.Hotel;
+import javax.persistence.*;
+
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.brownmun.core.logistics.model.Hotel;
 
 /**
  * A school's supplemental information, filled out after they're accepted.
@@ -59,8 +61,9 @@ public class SupplementalInfo
     private boolean commuting;
 
     /*
-     * These are how many cars/buses are coming and how many days they'll be parked. So the number of car parking passes
-     * is {@code carsParking * carParkingDays}, and the same for buses.
+     * These are how many cars/buses are coming and how many days they'll be parked.
+     * So the number of car parking passes is {@code carsParking * carParkingDays},
+     * and the same for buses.
      */
 
     // @Min(0)
@@ -75,7 +78,8 @@ public class SupplementalInfo
     // @Min(0)
     private int busParkingDays;
 
-    // Would be nice to have this be a LocalTime, but we've had issues with parsing time info from the user forms.
+    // Would be nice to have this be a LocalTime, but we've had issues with parsing
+    // time info from the user forms.
     private String arrivalTime;
 
     @Type(type = "org.brownmun.core.db.PostgresEnumType", parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "luggage_storage"))
@@ -83,8 +87,8 @@ public class SupplementalInfo
     private LuggageStorage luggageStorage;
 
     /**
-     * If true, delegates can only leave the social with an advisor. If false, they can leave accompanied by a staff
-     * member.
+     * If true, delegates can only leave the social with an advisor. If false, they
+     * can leave accompanied by a staff member.
      */
     private boolean delegateSocialNeedAdvisor;
 
@@ -430,10 +434,7 @@ public class SupplementalInfo
 
     public enum LuggageStorage
     {
-        FRIDAY,
-        SUNDAY,
-        BOTH,
-        NONE
+        FRIDAY, SUNDAY, BOTH, NONE
     }
 
 }

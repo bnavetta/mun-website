@@ -43,6 +43,7 @@ public interface CommitteeService
 
     /**
      * Find the ID of the committee that a given position belongs to.
+     *
      * @param positionId the ID of the position
      * @return the committee ID, if found
      */

@@ -1,8 +1,8 @@
 package org.brownmun.core.mail;
 
-import com.google.auto.value.AutoValue;
-
 import java.util.Map;
+
+import com.google.auto.value.AutoValue;
 
 /**
  * Description of an email.
@@ -21,8 +21,9 @@ public abstract class EmailMessage
     public abstract String subject();
 
     /**
-     * The name of the message template (relative to {@code src/main/resources/emails}). This should not
-     * include the {@code .txt} and {@code .html} extensions - those will be added automatically.
+     * The name of the message template (relative to
+     * {@code src/main/resources/emails}). This should not include the {@code .txt}
+     * and {@code .html} extensions - those will be added automatically.
      */
     public abstract String messageTemplate();
 
@@ -40,9 +41,13 @@ public abstract class EmailMessage
     public abstract static class Builder
     {
         public abstract Builder recipient(String recipient);
+
         public abstract Builder subject(String subject);
+
         public abstract Builder messageTemplate(String messageTemplate);
+
         public abstract Builder variables(Map<String, Object> variables);
+
         public abstract EmailMessage build();
     }
 }

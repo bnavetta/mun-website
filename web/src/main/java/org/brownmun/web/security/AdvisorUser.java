@@ -1,11 +1,12 @@
 package org.brownmun.web.security;
 
-import org.brownmun.core.school.model.Advisor;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import java.util.Collection;
-import java.util.List;
+import org.brownmun.core.school.model.Advisor;
 
 /**
  * A {@link User} backed by an {@link Advisor}.

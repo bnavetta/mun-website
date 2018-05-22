@@ -1,23 +1,24 @@
 package org.brownmun.web.support.sentry;
 
-import com.google.common.collect.Maps;
-import io.sentry.Sentry;
-import io.sentry.event.UserBuilder;
-import org.brownmun.core.Conference;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.web.security.User;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.EventListener;
-import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
-import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Map;
+import com.google.common.collect.Maps;
+
+import org.brownmun.core.Conference;
+import org.brownmun.core.school.model.Advisor;
+import org.brownmun.web.security.User;
+
+import io.sentry.Sentry;
+import io.sentry.event.UserBuilder;
 
 /**
  * Adds extra context information to Sentry, like user info

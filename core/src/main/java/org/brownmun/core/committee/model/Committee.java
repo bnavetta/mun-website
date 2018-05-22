@@ -6,11 +6,11 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Preconditions;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
@@ -29,10 +29,9 @@ public class Committee
     private String name;
 
     /**
-     * Short names are human-readable
-     *  identifiers for committees and joint crises. They're used as the account
-     *  names for email addresses and as filenames for external content, like
-     *  background guides.
+     * Short names are human-readable identifiers for committees and joint crises.
+     * They're used as the account names for email addresses and as filenames for
+     * external content, like background guides.
      */
     private String shortName;
 
@@ -45,11 +44,7 @@ public class Committee
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "joint_crisis_rooms",
-            joinColumns = @JoinColumn(name = "joint_crisis_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id")
-    )
+    @JoinTable(name = "joint_crisis_rooms", joinColumns = @JoinColumn(name = "joint_crisis_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
     private Set<Committee> jointCrisisRooms;
 
     /**
@@ -237,10 +232,6 @@ public class Committee
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("shortName", shortName)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("shortName", shortName).toString();
     }
 }

@@ -26,7 +26,7 @@ public class School
     private Set<Advisor> advisors = Sets.newHashSet();
 
     /*******************************
-     *  Application status fields  *
+     * Application status fields *
      *******************************/
 
     /**
@@ -45,7 +45,7 @@ public class School
     private String registrationCode;
 
     /************************
-     *  Application fields  *
+     * Application fields *
      ************************/
 
     /**

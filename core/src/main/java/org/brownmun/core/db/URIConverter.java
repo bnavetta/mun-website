@@ -1,10 +1,11 @@
 package org.brownmun.core.db;
 
-import com.google.common.base.Strings;
+import java.net.URI;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.net.URI;
+
+import com.google.common.base.Strings;
 
 @Converter(autoApply = true)
 public class URIConverter implements AttributeConverter<URI, String>

@@ -1,11 +1,9 @@
 package org.brownmun.web.registration;
 
-import com.google.common.collect.Iterables;
-import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.core.school.model.School;
-import org.brownmun.web.advisors.DashboardController;
-import org.brownmun.web.security.ConferenceSecurity;
+import java.net.URI;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.net.URI;
+import com.google.common.collect.Iterables;
+
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Advisor;
+import org.brownmun.core.school.model.School;
+import org.brownmun.web.advisors.DashboardController;
+import org.brownmun.web.security.ConferenceSecurity;
 
 @Controller
 @RequestMapping("/registration/register")
@@ -42,7 +45,8 @@ public class RegistrationController
     {
         log.info("Submitting application for school {}", application.getSchoolName());
 
-        School school = schoolService.registerSchool(application.getSchoolName(), application.getAdvisorName(), application.getAdvisorEmail(), application.getAdvisorPassword(), application.getAdvisorPhoneNumber());
+        School school = schoolService.registerSchool(application.getSchoolName(), application.getAdvisorName(),
+                application.getAdvisorEmail(), application.getAdvisorPassword(), application.getAdvisorPhoneNumber());
 
         school.setId(school.getId());
         school.setName(school.getName());
@@ -56,8 +60,8 @@ public class RegistrationController
         schoolService.submitApplication(school);
 
         Advisor advisor = Iterables.getOnlyElement(school.getAdvisors());
-        URI dashboard = MvcUriComponentsBuilder
-                .fromMethodName(DashboardController.class, "dashboardHome").build().toUri();
+        URI dashboard = MvcUriComponentsBuilder.fromMethodName(DashboardController.class, "dashboardHome").build()
+                .toUri();
 
         ConferenceSecurity.authenticateAsAdvisor(advisor);
 

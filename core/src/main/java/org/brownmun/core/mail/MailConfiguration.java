@@ -1,8 +1,7 @@
 package org.brownmun.core.mail;
 
-import org.brownmun.core.mail.impl.MailgunClient;
-import org.brownmun.core.mail.impl.MailgunMailSender;
-import org.brownmun.core.mail.impl.MailgunProperties;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
@@ -17,7 +16,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-import java.util.Collection;
+import org.brownmun.core.mail.impl.MailgunClient;
+import org.brownmun.core.mail.impl.MailgunMailSender;
+import org.brownmun.core.mail.impl.MailgunProperties;
 
 @Configuration
 @EnableConfigurationProperties({ MailProperties.class, MailgunProperties.class })
@@ -76,7 +77,8 @@ public class MailConfiguration
     }
 
     @Bean
-    public MailgunMailSender mailSender(@Qualifier("emailTemplateEngine") TemplateEngine engine, MailgunClient client, MailProperties mailProperties)
+    public MailgunMailSender mailSender(@Qualifier("emailTemplateEngine") TemplateEngine engine, MailgunClient client,
+            MailProperties mailProperties)
     {
         return new MailgunMailSender(mailProperties, engine, client);
     }

@@ -1,16 +1,16 @@
 package org.brownmun.core.mail.impl;
 
-import org.brownmun.core.Conference;
-import org.brownmun.core.mail.EmailMessage;
-import org.brownmun.core.mail.MailException;
-import org.brownmun.core.mail.MailProperties;
-import org.brownmun.core.mail.MailSender;
+import java.util.Locale;
+
 import org.springframework.web.client.RestClientException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.exceptions.TemplateEngineException;
 
-import java.util.Locale;
+import org.brownmun.core.mail.EmailMessage;
+import org.brownmun.core.mail.MailException;
+import org.brownmun.core.mail.MailProperties;
+import org.brownmun.core.mail.MailSender;
 
 /**
  * Mailgun-based {@link MailSender}
@@ -37,7 +37,8 @@ public class MailgunMailSender implements MailSender
             String text = engine.process(email.messageTemplate() + ".txt", context);
             String html = engine.process(email.messageTemplate() + ".html", context);
 
-            client.send(mailProperties.getFromAddress(), email.recipient(), mailProperties.getReplyToAddress(), email.subject(), html, text);
+            client.send(mailProperties.getFromAddress(), email.recipient(), mailProperties.getReplyToAddress(),
+                    email.subject(), html, text);
         }
         catch (TemplateEngineException e)
         {

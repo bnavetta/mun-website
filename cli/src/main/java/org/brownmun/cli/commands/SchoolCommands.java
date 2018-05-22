@@ -1,12 +1,13 @@
 package org.brownmun.cli.commands;
 
-import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.School;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import java.util.stream.Collectors;
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.School;
 
 @ShellComponent
 public class SchoolCommands
@@ -32,8 +33,7 @@ public class SchoolCommands
     public Iterable<School> findSchools(String nameQuery)
     {
         String queryLower = nameQuery.toLowerCase();
-        return schoolService.listSchools().stream()
-                .filter(s -> s.getName().toLowerCase().contains(queryLower))
+        return schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower))
                 .collect(Collectors.toList());
     }
 }

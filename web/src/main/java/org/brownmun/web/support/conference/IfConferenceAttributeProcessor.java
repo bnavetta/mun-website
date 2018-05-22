@@ -5,7 +5,6 @@ import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
-import org.thymeleaf.standard.processor.AbstractStandardConditionalVisibilityTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import org.brownmun.core.Conference;
@@ -26,7 +25,8 @@ public class IfConferenceAttributeProcessor extends AbstractAttributeTagProcesso
     }
 
     @Override
-    protected void doProcess(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue, IElementTagStructureHandler structureHandler)
+    protected void doProcess(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName,
+            String attributeValue, IElementTagStructureHandler structureHandler)
     {
         if (!show)
         {

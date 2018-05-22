@@ -1,9 +1,9 @@
 package org.brownmun.web.registration;
 
-import org.brownmun.util.PhoneNumber;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+
+import org.brownmun.util.PhoneNumber;
 
 /**
  * Representation of the application form.

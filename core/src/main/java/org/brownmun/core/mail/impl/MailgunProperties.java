@@ -1,7 +1,8 @@
 package org.brownmun.core.mail.impl;
 
-import com.google.common.base.MoreObjects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * Mailgun settings
@@ -10,7 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MailgunProperties
 {
     /**
-     * The base API URL. Usually something like {@code https://api.mailgun.netv3/<domain name>}
+     * The base API URL. Usually something like
+     * {@code https://api.mailgun.netv3/<domain name>}
      */
     private String baseUri;
 
@@ -64,10 +66,7 @@ public class MailgunProperties
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this)
-                .add("baseUri", baseUri)
-                .add("username", username)
-                .add("apiKey", apiKey)
+        return MoreObjects.toStringHelper(this).add("baseUri", baseUri).add("username", username).add("apiKey", apiKey)
                 .toString();
     }
 }

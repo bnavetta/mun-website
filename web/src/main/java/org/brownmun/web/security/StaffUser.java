@@ -1,24 +1,26 @@
 package org.brownmun.web.security;
 
-import org.brownmun.core.school.model.Advisor;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import org.brownmun.core.school.model.Advisor;
 
 /**
  * Represents a staff member.
  *
- * A note on the access policy re: {@link #canAccessCommittee(long)}, {@link #canAccessSchool(long)}, and so on:
+ * A note on the access policy re: {@link #canAccessCommittee(long)},
+ * {@link #canAccessSchool(long)}, and so on:
  *
- * The staff can access and modify anything. Other staff members have read-only access to school information.
- * Staff can modify their associated committees.
+ * The staff can access and modify anything. Other staff members have read-only
+ * access to school information. Staff can modify their associated committees.
  */
 public class StaffUser implements User, OidcUser
 {
@@ -68,12 +70,7 @@ public class StaffUser implements User, OidcUser
     @Override
     public Map<String, Object> getAttributes()
     {
-        return Map.of(
-                "email", email,
-                "name", name,
-                "committeeIds", committeeIds,
-                "isSecretariat", isSecretariat
-        );
+        return Map.of("email", email, "name", name, "committeeIds", committeeIds, "isSecretariat", isSecretariat);
     }
 
     @Override

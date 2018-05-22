@@ -1,8 +1,9 @@
 package org.brownmun.core.staff;
 
-import org.brownmun.core.Conference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.brownmun.core.Conference;
 
 /**
  * Helper service for dealing with conference staff.

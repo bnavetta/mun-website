@@ -10,6 +10,7 @@ import Home from "./Home";
 import "./dashboard.css";
 import Application from "./Application";
 import SupplementalInfo from "./SupplementalInfo";
+import ChangePassword from "./ChangePassword";
 
 function DashboardContent({ advisor, school, setSchool }) {
     return (
@@ -18,12 +19,14 @@ function DashboardContent({ advisor, school, setSchool }) {
                 <li><NavLink exact to="/">Home</NavLink></li>
                 <li><NavLink exact to="/application">Application</NavLink></li>
                 { school.accepted && <li><NavLink exact to="/supplemental">Supplemental Information</NavLink></li> }
+                <li><NavLink exact to="/change-password">Change Password</NavLink></li>
             </ul>
 
             <div className="dashboard-main">
                 <Switch>
                     <Route path="/application" render={props => <Application {...props} school={school} setSchool={setSchool} />} />
                     { school.accepted && <Route path="/supplemental" render={props => <SupplementalInfo {...props} school={school}/>}/>}
+                    <Route exact path="/change-password" component={ChangePassword}/>
                     <Route exact path="/" render={props => <Home {...props} school={school} advisor={advisor}/>} />
                 </Switch>
             </div>

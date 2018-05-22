@@ -28,12 +28,14 @@ export async function request(url, options = {}) {
         credentials: 'same-origin'
     }));
 
+    // Support non-JSON responses
     if (!response.headers.get('Content-Type').startsWith('application/json')) {
         const body = await response.text();
-        Raven.captureException(new Error('Non-JSON API response'), {
-            extra: { url, body }
-        });
-        throw new Error(`Not JSON: ${body}`);
+        if (response.ok) {
+            return body;
+        } else {
+            throw new Error(body);
+        }
     }
 
     const body = await response.json();
