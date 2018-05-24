@@ -1,5 +1,0 @@
-declare interface SystemType {
-	import(module: string): Promise<*>
-}
-
-declare var System: SystemType;
