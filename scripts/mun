@@ -13,6 +13,15 @@ def tunnel(target_port):
     )
 
 
+def run_shell(extra_args, env):
+    """Runs the command-line shell application"""
+    subprocess.check_call(['./gradlew', '--console', 'plain', '-q', '-PstableVersion', 'cli:bootJar'])
+    # Make sure the CLI runs with direct terminal access and the correct (non-daemon) environment variables
+    subprocess.call([
+        'java', '-Djava.library.path=cli/or-tools/lib', '-jar', 'cli/build/libs/cli-latest.jar',
+        '--conference.name=BUSUN', '--conference.key=busun', '--conference.domainName=busun.org'
+    ] + list(extra_args), env=env)
+
 @click.group()
 def cli():
     pass
@@ -56,6 +65,12 @@ def run(debug):
     subprocess.call(args)
 
 
+@dev.command('shell', context_settings=dict(ignore_unknown_options=True))
+@click.argument('extra_args', nargs=-1, type=click.UNPROCESSED)
+def dev_shell(extra_args):
+    run_shell(extra_args, os.environ)
+
+
 dev.add_command(startdb)
 dev.add_command(stopdb)
 dev.add_command(querydb)
@@ -78,10 +93,7 @@ def prod_shell(extra_args):
     with tunnel(5432) as t:
         env = dict(os.environ)
         env['DB_JDBC_URL'] = 'jdbc:postgresql://localhost:{}/busun'.format(t.local_bind_port)
-        subprocess.call(['./gradlew', '--console', 'plain', '-q', '-PstableVersion', 'cli:bootJar'])
-        # Make sure the CLI runs with direct terminal access and the correct (non-daemon) environment variables
-        subprocess.call(['java', '-Djava.library.path=cli/or-tools/lib', '-jar', 'cli/build/libs/cli-latest.jar',
-            '--conference.name=BUSUN', '--conference.key=busun', '--conference.domainName=busun.org'] + list(extra_args), env=env)
+        run_shell(extra_args, env)
 
 
 @click.group(invoke_without_command=True)

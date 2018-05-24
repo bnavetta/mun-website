@@ -1,4 +1,4 @@
-package org.brownmun.cli.assignment;
+package org.brownmun.cli.positions.allocation;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
+import org.brownmun.cli.positions.SchoolAllocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +38,7 @@ public class Allocator
     private static final Logger log = LoggerFactory.getLogger(Allocator.class);
 
     private final CsvMapper mapper;
+    private final CsvSchema allocationSchema;
 
     // There are a couple weird one-off queries used here, so we use the
     // EntityManager API
@@ -47,20 +49,21 @@ public class Allocator
     {
         this.mapper = mapper;
         this.em = em;
+        this.allocationSchema = mapper.schemaFor(SchoolAllocation.class).withHeader();
     }
 
-    private List<SchoolPreferences> loadPreferences(File source) throws IOException
+    private List<SchoolAllocation> loadPreferences(File source) throws IOException
     {
-        CsvSchema schema = mapper.schemaFor(SchoolPreferences.class).withHeader();
-        MappingIterator<SchoolPreferences> iter = mapper.readerFor(SchoolPreferences.class).with(schema)
+        MappingIterator<SchoolAllocation> iter = mapper.readerFor(SchoolAllocation.class).with(allocationSchema)
                 .readValues(source);
-        return iter.readAll();
+        List<SchoolAllocation> alloc = iter.readAll();
+        iter.close();
+        return alloc;
     }
 
     private void writeAllocations(List<SchoolAllocation> allocations, File output) throws IOException
     {
-        CsvSchema schema = mapper.schemaFor(SchoolAllocation.class).withHeader();
-        SequenceWriter out = mapper.writer(schema).writeValues(output);
+        SequenceWriter out = mapper.writer(allocationSchema).writeValues(output);
         out.writeAll(allocations);
         out.close();
     }
@@ -92,11 +95,11 @@ public class Allocator
      *
      * @return a list of errors in the preferences
      */
-    private List<String> validatePreferences(List<SchoolPreferences> preferences)
+    private List<String> validatePreferences(List<SchoolAllocation> preferences)
     {
         List<String> errors = Lists.newArrayList();
-        Map<Long, SchoolPreferences> prefMap = preferences.stream()
-                .collect(Collectors.toMap(p -> (long) p.schoolId(), Function.identity()));
+        Map<Long, SchoolAllocation> prefMap = preferences.stream()
+                .collect(Collectors.toMap(SchoolAllocation::id, Function.identity()));
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Tuple> countQuery = cb.createQuery(Tuple.class);
@@ -107,7 +110,7 @@ public class Allocator
             long id = (Long) t.get(0);
             int delegateCount = (Integer) t.get(1);
 
-            SchoolPreferences prefs = prefMap.get(id);
+            SchoolAllocation prefs = prefMap.get(id);
             if (prefs == null)
             {
                 errors.add("Preferences missing for school " + id);
@@ -134,7 +137,7 @@ public class Allocator
             throws IOException, IllegalArgumentException
     {
         log.info("Generating allocations from {} into {}", preferencesSource, allocationDest);
-        List<SchoolPreferences> preferences = loadPreferences(preferencesSource);
+        List<SchoolAllocation> preferences = loadPreferences(preferencesSource);
         List<String> errors = validatePreferences(preferences);
         if (!errors.isEmpty())
         {

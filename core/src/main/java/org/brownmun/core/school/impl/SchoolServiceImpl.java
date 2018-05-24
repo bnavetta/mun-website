@@ -50,6 +50,12 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
+    public Optional<School> getSchool(long id)
+    {
+        return repo.findById(id);
+    }
+
+    @Override
     public School registerSchool(String name, String advisorName, String advisorEmail, String advisorPassword,
             String advisorPhoneNumber)
     {

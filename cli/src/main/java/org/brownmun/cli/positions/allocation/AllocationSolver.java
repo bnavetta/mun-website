@@ -1,7 +1,8 @@
-package org.brownmun.cli.assignment;
+package org.brownmun.cli.positions.allocation;
 
 import java.util.List;
 
+import org.brownmun.cli.positions.SchoolAllocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,11 +87,11 @@ public class AllocationSolver
      * Adds constraints so that each school is allocated enough positions for all
      * its delegates.
      */
-    private void applyDelegateTotals(List<SchoolPreferences> preferences)
+    private void applyDelegateTotals(List<SchoolAllocation> preferences)
     {
-        for (SchoolPreferences prefs : preferences)
+        for (SchoolAllocation prefs : preferences)
         {
-            int id = prefs.schoolId();
+            int id = (int) prefs.id();
             MPConstraint constraint = solver.makeConstraint(prefs.totalDelegates(), prefs.totalDelegates(),
                     "school_" + id + "_total_delegates");
             for (int type = 0; type < NUM_TYPES; type++)
@@ -108,7 +109,7 @@ public class AllocationSolver
      * @return the error variables, which will be minimized as the objective
      *         function
      */
-    private List<MPVariable> createErrorVariables(List<SchoolPreferences> preferences)
+    private List<MPVariable> createErrorVariables(List<SchoolAllocation> preferences)
     {
         // See https://math.stackexchange.com/a/623569 for the general idea
         // Basically, we create extra variables and constrain them to be the absolute
@@ -116,9 +117,9 @@ public class AllocationSolver
         // between the requested and actual values.
 
         List<MPVariable> errors = Lists.newArrayList();
-        for (SchoolPreferences prefs : preferences)
+        for (SchoolAllocation prefs : preferences)
         {
-            int id = prefs.schoolId();
+            int id = (int) prefs.id();
             int[] requested = new int[] { prefs.general(), prefs.specialized(), prefs.crisis() };
 
             for (int type = 0; type < NUM_TYPES; type++)
@@ -150,38 +151,38 @@ public class AllocationSolver
      * crisis. Schools indicate this by putting a {@code 0} as their requested
      * amount for that type.
      */
-    private void applyProhibitions(List<SchoolPreferences> preferences)
+    private void applyProhibitions(List<SchoolAllocation> preferences)
     {
-        for (SchoolPreferences prefs : preferences)
+        for (SchoolAllocation prefs : preferences)
         {
             if (prefs.general() == 0)
             {
-                log.debug("School {} will not be assigned any GA positions", prefs.schoolId());
-                MPConstraint constraint = solver.makeConstraint(0, 0, "prohibit_general_" + prefs.schoolId());
-                constraint.setCoefficient(allocationVars[prefs.schoolId()][GENERAL], 1);
+                log.debug("School {} will not be assigned any GA positions", prefs.id());
+                MPConstraint constraint = solver.makeConstraint(0, 0, "prohibit_general_" + prefs.id());
+                constraint.setCoefficient(allocationVars[(int) prefs.id()][GENERAL], 1);
             }
 
             if (prefs.specialized() == 0)
             {
-                log.debug("School {} will not be assigned any specialized positions", prefs.schoolId());
-                MPConstraint constraint = solver.makeConstraint(0, 0, "prohibit_specialized_" + prefs.schoolId());
-                constraint.setCoefficient(allocationVars[prefs.schoolId()][SPECIALIZED], 1);
+                log.debug("School {} will not be assigned any specialized positions", prefs.id());
+                MPConstraint constraint = solver.makeConstraint(0, 0, "prohibit_specialized_" + prefs.id());
+                constraint.setCoefficient(allocationVars[(int) prefs.id()][SPECIALIZED], 1);
             }
 
             if (prefs.crisis() == 0)
             {
-                log.debug("School {} will not be assigned any crisis positions", prefs.schoolId());
-                MPConstraint constraint = solver.makeConstraint(0, 0, "prohibit_crisis_" + prefs.schoolId());
-                constraint.setCoefficient(allocationVars[prefs.schoolId()][CRISIS], 1);
+                log.debug("School {} will not be assigned any crisis positions", prefs.id());
+                MPConstraint constraint = solver.makeConstraint(0, 0, "prohibit_crisis_" + prefs.id());
+                constraint.setCoefficient(allocationVars[(int) prefs.id()][CRISIS], 1);
             }
         }
     }
 
     public List<SchoolAllocation> allocate(int totalGeneral, int totalSpecialized, int totalCrisis,
-            List<SchoolPreferences> preferences)
+            List<SchoolAllocation> preferences)
     {
         int totalRequested = 0;
-        for (SchoolPreferences prefs : preferences)
+        for (SchoolAllocation prefs : preferences)
         {
             totalRequested += prefs.totalDelegates();
         }
@@ -221,13 +222,13 @@ public class AllocationSolver
             log.debug("Objective value (sum of error variables): {}", solver.objective().value());
 
             List<SchoolAllocation> allocation = Lists.newArrayListWithExpectedSize(allocationVars.length);
-            for (SchoolPreferences prefs : preferences)
+            for (SchoolAllocation prefs : preferences)
             {
-                int id = prefs.schoolId();
+                int id = (int) prefs.id();
                 int general = (int) allocationVars[id][GENERAL].solutionValue();
                 int specialized = (int) allocationVars[id][SPECIALIZED].solutionValue();
                 int crisis = (int) allocationVars[id][CRISIS].solutionValue();
-                allocation.add(SchoolAllocation.create(prefs.schoolId(), prefs.name(), general, specialized, crisis));
+                allocation.add(SchoolAllocation.create(id, general, specialized, crisis));
             }
 
             return allocation;

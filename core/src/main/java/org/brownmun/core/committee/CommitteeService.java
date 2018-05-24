@@ -1,16 +1,25 @@
 package org.brownmun.core.committee;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalLong;
+import java.util.stream.Stream;
 
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
+import org.brownmun.core.committee.model.Position;
 
 /**
  * Responsible for committees.
  */
 public interface CommitteeService
 {
+    /**
+     * Find the committee with the given ID
+     */
+    Optional<Committee> getCommittee(long id);
+
     /**
      * Save a committee to the database
      *
@@ -34,7 +43,7 @@ public interface CommitteeService
      * @param type the type of committee to fetch
      * @return all committees of that type
      */
-    List<Committee> allByType(CommitteeType type);
+    Stream<Committee> allByType(CommitteeType type);
 
     /**
      * Get info about all committees.
@@ -48,4 +57,9 @@ public interface CommitteeService
      * @return the committee ID, if found
      */
     OptionalLong findCommitteeId(long positionId);
+
+    /**
+     * Gets all positions on a committee.
+     */
+    Collection<Position> getPositions(Committee c);
 }

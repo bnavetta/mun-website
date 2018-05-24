@@ -12,6 +12,11 @@ import org.brownmun.core.school.model.SupplementalInfo;
 public interface SchoolService
 {
     /**
+     * Finds the school with the given ID
+     */
+    Optional<School> getSchool(long id);
+
+    /**
      * Register a new school
      *
      * @param name the school's name

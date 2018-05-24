@@ -2,6 +2,8 @@ package org.brownmun.cli.commands;
 
 import java.util.stream.Collectors;
 
+import de.vandermeer.asciitable.AsciiTable;
+import de.vandermeer.asciithemes.a8.A8_Grids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -30,10 +32,20 @@ public class SchoolCommands
     }
 
     @ShellMethod("Find schools by name")
-    public Iterable<School> findSchools(String nameQuery)
+    public String findSchools(String nameQuery)
     {
         String queryLower = nameQuery.toLowerCase();
-        return schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower))
-                .collect(Collectors.toList());
+
+        AsciiTable table = new AsciiTable();
+        table.getContext().setGrid(A8_Grids.lineDoubleBlocks());
+        table.addRow("School ID", "School Name", "Accepted");
+        table.addStrongRule();
+
+        schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower)).forEach(school -> {
+            table.addRow(school.getId(), school.getName(), school.isAccepted());
+            table.addRule();
+        });
+
+        return table.render();
     }
 }

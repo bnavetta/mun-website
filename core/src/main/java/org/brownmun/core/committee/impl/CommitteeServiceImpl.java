@@ -1,12 +1,12 @@
 package org.brownmun.core.committee.impl;
 
-import java.util.List;
-import java.util.Map;
-import java.util.OptionalLong;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.brownmun.core.committee.model.Position;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Override
-    public List<Committee> allByType(CommitteeType type)
+    public Stream<Committee> allByType(CommitteeType type)
     {
         return repo.findAllByTypeOrderByNameAsc(type);
     }
@@ -52,10 +52,10 @@ public class CommitteeServiceImpl implements CommitteeService
     @Override
     public CommitteeListing list()
     {
-        List<Committee> general = allByType(CommitteeType.GENERAL);
-        List<Committee> specialized = allByType(CommitteeType.SPECIALIZED);
-        List<Committee> crisis = allByType(CommitteeType.CRISIS);
-        List<Committee> jointCrisis = allByType(CommitteeType.JOINT_CRISIS);
+        List<Committee> general = allByType(CommitteeType.GENERAL).collect(Collectors.toList());
+        List<Committee> specialized = allByType(CommitteeType.SPECIALIZED).collect(Collectors.toList());
+        List<Committee> crisis = allByType(CommitteeType.CRISIS).collect(Collectors.toList());
+        List<Committee> jointCrisis = allByType(CommitteeType.JOINT_CRISIS).collect(Collectors.toList());
 
         Map<Long, Set<Committee>> jccRooms = Maps.newHashMap();
         for (Committee jcc : jointCrisis)
@@ -75,5 +75,17 @@ public class CommitteeServiceImpl implements CommitteeService
     public OptionalLong findCommitteeId(long positionId)
     {
         return repo.findCommitteeId(positionId);
+    }
+
+    @Override
+    public Collection<Position> getPositions(Committee c)
+    {
+        return repo.fetchPositions(c);
+    }
+
+    @Override
+    public Optional<Committee> getCommittee(long id)
+    {
+        return repo.findById(id);
     }
 }

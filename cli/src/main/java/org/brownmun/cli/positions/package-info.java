@@ -5,7 +5,7 @@
  * <ol>
  * <li>Allocation - determining how many positions in committees of each type a
  * school will have. This is implemented in
- * {@link org.brownmun.cli.assignment.Allocator}.</li>
+ * {@link org.brownmun.cli.positions.allocation.Allocator}.</li>
  * <li>Assignment - given an allocation, assign specific positions to schools.
  * </li>
  * </ol>
@@ -14,4 +14,4 @@
  * and special cases. For example, crisis committees are less common outside of
  * the US, so some international schools don't want any crisis spots.
  */
-package org.brownmun.cli.assignment;
+package org.brownmun.cli.positions;

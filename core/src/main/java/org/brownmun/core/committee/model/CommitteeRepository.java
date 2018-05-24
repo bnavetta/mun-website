@@ -1,15 +1,14 @@
 package org.brownmun.core.committee.model;
 
-import java.util.List;
-import java.util.OptionalLong;
-import java.util.Set;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
 import org.brownmun.core.award.model.Award;
 import org.brownmun.core.school.model.Delegate;
 import org.brownmun.core.school.model.School;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.OptionalLong;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /** Queries related to {@link Committee}s */
 public interface CommitteeRepository extends JpaRepository<Committee, Long>
@@ -38,7 +37,7 @@ public interface CommitteeRepository extends JpaRepository<Committee, Long>
     @Query("SELECT a FROM Award a WHERE a.committee = ?1")
     Set<Award> fetchAwards(Committee committee);
 
-    List<Committee> findAllByTypeOrderByNameAsc(CommitteeType type);
+    Stream<Committee> findAllByTypeOrderByNameAsc(CommitteeType type);
 
     @Query("SELECT p.committee.id FROM Position p WHERE p.id = ?1")
     OptionalLong findCommitteeId(long positionId);
