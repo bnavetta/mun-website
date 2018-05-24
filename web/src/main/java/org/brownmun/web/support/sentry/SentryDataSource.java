@@ -49,7 +49,7 @@ public class SentryDataSource implements ApplicationListener<InteractiveAuthenti
         User user = (User) event.getAuthentication().getPrincipal();
         UserBuilder userBuilder = new UserBuilder();
         userBuilder.setEmail(user.getEmail());
-        userBuilder.setUsername(user.getName());
+        userBuilder.setUsername(user.getUsername());
 
         Map<String, Object> data = Maps.newHashMap();
         data.put("staff", user.isStaff());

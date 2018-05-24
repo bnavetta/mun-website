@@ -72,14 +72,16 @@ def prod_querydb():
         subprocess.call(['psql', '-h', 'localhost', '-p', str(t.local_bind_port), '-U', os.environ['DB_USER']])
 
 
-@prod.command('shell')
-def prod_shell():
+@prod.command('shell', context_settings=dict(ignore_unknown_options=True))
+@click.argument('extra_args', nargs=-1, type=click.UNPROCESSED)
+def prod_shell(extra_args):
     with tunnel(5432) as t:
         env = dict(os.environ)
         env['DB_JDBC_URL'] = 'jdbc:postgresql://localhost:{}/busun'.format(t.local_bind_port)
         subprocess.call(['./gradlew', '--console', 'plain', '-q', '-PstableVersion', 'cli:bootJar'])
         # Make sure the CLI runs with direct terminal access and the correct (non-daemon) environment variables
-        subprocess.call(['java', '-jar', 'cli/build/libs/cli-latest.jar', '--conference.name=BUSUN', '--conference.key=busun', '--conference.domainName=busun.org'], env=env)
+        subprocess.call(['java', '-Djava.library.path=cli/or-tools/lib', '-jar', 'cli/build/libs/cli-latest.jar',
+            '--conference.name=BUSUN', '--conference.key=busun', '--conference.domainName=busun.org'] + list(extra_args), env=env)
 
 
 @click.group(invoke_without_command=True)

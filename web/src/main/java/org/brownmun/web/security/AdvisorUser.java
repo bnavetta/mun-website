@@ -59,12 +59,6 @@ public class AdvisorUser implements User
     }
 
     @Override
-    public String getName()
-    {
-        return advisor.getName();
-    }
-
-    @Override
     public String getEmail()
     {
         return advisor.getEmail();

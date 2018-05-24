@@ -4,15 +4,11 @@ import java.time.*;
 buildscript {
     repositories {
         jcenter()
-
-        maven { url 'http://repo.spring.io/snapshot' }
-        maven { url 'http://repo.spring.io/milestone' }
-
         maven { url 'https://plugins.gradle.org/m2/' }
     }
 
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M7'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.10.0'
         classpath 'net.ltgt.gradle:gradle-apt-plugin:0.15'
@@ -75,18 +71,20 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
             dependency 'org.javassist:javassist:3.22.0-GA'
             dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
             dependency 'io.sentry:sentry-spring:1.7.3'
+            dependency 'de.vandermeer:asciitable:0.3.2'
 
             dependencySet(group: 'com.google.auto.value', version: '1.6rc1') {
                 entry 'auto-value'
                 entry 'auto-value-annotations'
             }
+
+            // Override for Java 10 support
+            dependency 'org.hibernate:hibernate-jpamodelgen:5.3.0.Final'
         }
     }
 
     repositories {
         jcenter()
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
     }
 
     tasks.withType(BootRun) {

@@ -1,8 +1,21 @@
+import java.time.Duration
+import java.time.Instant
+
+ext.orToolsDir = file('or-tools')
+ext.orToolsRelease = '6.7.1'
+ext.orToolsTag = 'MacOsX-10.13.3_v6.7.4973' // The specific platform/release combination
+
 dependencies {
     compile project(':core')
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
     implementation 'com.google.guava:guava'
+    implementation 'de.vandermeer:asciitable'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+    implementation fileTree(dir: "$orToolsDir/lib", includes: ['*.jar'])
+
+    implementation 'com.google.auto.value:auto-value-annotations'
+    annotationProcessor 'com.google.auto.value:auto-value'
 }
 
 bootRun {
@@ -12,4 +25,32 @@ bootRun {
 
 bootJar {
     launchScript()
+}
+
+// Download and extract Google's OR-Tools optimization suite
+// https://developers.google.com/optimization
+task downloadOrTools {
+    inputs.property 'release', orToolsRelease
+    inputs.property 'tag', orToolsTag
+    outputs.dir(orToolsDir)
+
+    doLast {
+        def url = "https://github.com/google/or-tools/releases/download/v${orToolsRelease}/or-tools_${orToolsTag}.tar.gz"
+        def tarFile = new File(temporaryDir, "or-tools-${orToolsRelease}.tar.gz")
+        def start = Instant.now()
+        ant.get(src: url, dest: tarFile, verbose: true, skipexisting: true)
+        def downloadTime = Duration.between(start, Instant.now())
+        println "Downloaded $url in $downloadTime"
+        def prefix = "or-tools_${orToolsTag}"
+
+
+        copy {
+            from tarTree(tarFile)
+            into temporaryDir
+        }
+
+        delete orToolsDir
+
+        ant.move(file: new File(temporaryDir, "or-tools_${orToolsTag}"), tofile: orToolsDir)
+    }
 }
