@@ -1,1 +1,0 @@
-brownmun ansible_ssh_host=165.227.204.213 ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3
