@@ -1,15 +1,14 @@
 package org.brownmun.cli.commands;
 
-import java.util.stream.Collectors;
-
-import de.vandermeer.asciitable.AsciiTable;
-import de.vandermeer.asciithemes.a8.A8_Grids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.School;
+
+import de.vandermeer.asciitable.AsciiTable;
+import de.vandermeer.asciithemes.a8.A8_Grids;
 
 @ShellComponent
 public class SchoolCommands
@@ -41,10 +40,11 @@ public class SchoolCommands
         table.addRow("School ID", "School Name", "Accepted");
         table.addStrongRule();
 
-        schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower)).forEach(school -> {
-            table.addRow(school.getId(), school.getName(), school.isAccepted());
-            table.addRule();
-        });
+        schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower))
+                .forEach(school -> {
+                    table.addRow(school.getId(), school.getName(), school.isAccepted());
+                    table.addRule();
+                });
 
         return table.render();
     }

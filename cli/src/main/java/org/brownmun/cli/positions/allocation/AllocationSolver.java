@@ -2,7 +2,6 @@ package org.brownmun.cli.positions.allocation;
 
 import java.util.List;
 
-import org.brownmun.cli.positions.SchoolAllocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +10,8 @@ import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
 import com.google.ortools.linearsolver.MPSolver;
 import com.google.ortools.linearsolver.MPVariable;
+
+import org.brownmun.cli.positions.SchoolAllocation;
 
 /**
  * System for determining how many positions in each committee type each school

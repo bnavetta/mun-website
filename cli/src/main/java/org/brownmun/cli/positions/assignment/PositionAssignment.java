@@ -1,6 +1,7 @@
 package org.brownmun.cli.positions.assignment;
 
 import com.google.auto.value.AutoValue;
+
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.model.School;
@@ -17,21 +18,30 @@ public abstract class PositionAssignment
     }
 
     public abstract long positionId();
+
     public abstract String positionName();
 
     public abstract long committeeId();
+
     public abstract String committeeName();
 
     public abstract long schoolId();
+
     public abstract String schoolName();
 
     @AutoValue.Builder
-    abstract static class Builder {
+    abstract static class Builder
+    {
         public abstract Builder positionId(long positionId);
+
         public abstract Builder positionName(String positionName);
+
         public abstract Builder committeeId(long committeeId);
+
         public abstract Builder committeeName(String committeeName);
+
         public abstract Builder schoolId(long schoolId);
+
         public abstract Builder schoolName(String schoolName);
 
         public Builder withPosition(Position p)

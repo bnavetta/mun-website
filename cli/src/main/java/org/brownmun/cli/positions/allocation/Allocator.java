@@ -14,7 +14,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
-import org.brownmun.cli.positions.SchoolAllocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +23,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.google.common.collect.Lists;
 
+import org.brownmun.cli.positions.SchoolAllocation;
 import org.brownmun.core.committee.model.*;
 import org.brownmun.core.school.model.School;
 import org.brownmun.core.school.model.School_;
