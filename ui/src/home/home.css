@@ -93,6 +93,9 @@
     border-right: 1px solid var(--color-rule);
 }
 
-.home--countdown-days, .home--countdown-hours, .home--countdown-minutes, .home--countdown-seconds {
+.home--countdown-days,
+.home--countdown-hours,
+.home--countdown-minutes,
+.home--countdown-seconds {
     color: var(--color-primary);
 }

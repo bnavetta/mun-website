@@ -1,18 +1,19 @@
 table.standard-table {
-  border-collapse: collapse;
+    border-collapse: collapse;
 
-  width: 100%;
+    width: 100%;
 
-  margin: 20px;
+    margin: 20px;
 }
 
-table.standard-table td, table.standard-table th {
-  border-top: 1px solid var(--color-rule);
+table.standard-table td,
+table.standard-table th {
+    border-top: 1px solid var(--color-rule);
 
-  padding: 10px;
-  text-align: left;
+    padding: 10px;
+    text-align: left;
 }
 
 table.standard-table thead th {
-  border-bottom: 2px solid var(--color-rule);
+    border-bottom: 2px solid var(--color-rule);
 }

@@ -6,13 +6,21 @@ export default function ValidatedText(props) {
 
     return (
         <Field validate={validate} field={field}>
-            { fieldApi => {
-                const { value, error, warning, success, setValue, setTouched, setError } = fieldApi;
+            {fieldApi => {
+                const {
+                    value,
+                    error,
+                    warning,
+                    success,
+                    setValue,
+                    setTouched,
+                    setError,
+                } = fieldApi;
                 return (
                     <React.Fragment>
                         <input
                             {...rest}
-                            value={value || ''}
+                            value={value || ""}
                             onChange={e => {
                                 setValue(e.target.value);
                                 if (onChange) {
@@ -27,11 +35,13 @@ export default function ValidatedText(props) {
                                 }
                             }}
                         />
-                        { error ? <p className="form-error">{ error }</p> : null }
-                        { !error && warning ? <p className="form-warning">{ warning }</p> : null }
+                        {error ? <p className="form-error">{error}</p> : null}
+                        {!error && warning ? (
+                            <p className="form-warning">{warning}</p>
+                        ) : null}
                     </React.Fragment>
                 );
-            } }
+            }}
         </Field>
     );
 }

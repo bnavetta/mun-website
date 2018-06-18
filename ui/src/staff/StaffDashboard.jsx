@@ -1,7 +1,12 @@
 import React from "react";
-import {BrowserRouter as Router, NavLink, Route, Switch} from "react-router-dom";
-import {Provider} from "react-redux";
-import {hot} from "react-hot-loader";
+import {
+    BrowserRouter as Router,
+    NavLink,
+    Route,
+    Switch,
+} from "react-router-dom";
+import { Provider } from "react-redux";
+import { hot } from "react-hot-loader";
 
 import SchoolList from "./SchoolList";
 import SchoolView from "./SchoolView";
@@ -12,26 +17,37 @@ class StaffDashboard extends React.Component {
     componentDidMount() {
         fetchSchools()
             .then(schools => this.props.store.dispatch(loadSchools(schools)))
-            .catch(e => console.error('Error loading schools', e));
+            .catch(e => console.error("Error loading schools", e));
 
         fetchAdvisors()
             .then(advisors => this.props.store.dispatch(loadAdvisors(advisors)))
-            .catch(e => console.error('Error loading advisors', e));
+            .catch(e => console.error("Error loading advisors", e));
     }
 
     render() {
-        return(
+        return (
             <Provider store={this.props.store}>
                 <Router basename="/staff">
                     <div className="dashboard-root">
                         <ul className="dashboard-nav">
-                            <li><NavLink exact to="/schools">Schools</NavLink></li>
+                            <li>
+                                <NavLink exact to="/schools">
+                                    Schools
+                                </NavLink>
+                            </li>
                         </ul>
 
                         <div className="dashboard-main">
                             <Switch>
-                                <Route exact path="/schools" component={SchoolList}/>
-                                <Route path="/schools/:id" component={SchoolView} />
+                                <Route
+                                    exact
+                                    path="/schools"
+                                    component={SchoolList}
+                                />
+                                <Route
+                                    path="/schools/:id"
+                                    component={SchoolView}
+                                />
                             </Switch>
                         </div>
                     </div>

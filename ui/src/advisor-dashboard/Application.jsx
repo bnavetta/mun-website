@@ -18,15 +18,17 @@ export default class Application extends React.PureComponent {
     }
 
     handleSubmit(values, event, formApi) {
-        console.log('Saving changes to application...');
+        console.log("Saving changes to application...");
         const { school } = this.props;
         this.setState({ error: null, editing: false });
         updateApplication({ ...values, id: school.id, name: school.name })
             .then(() => {
-                console.log('Updated application!');
+                console.log("Updated application!");
                 this.props.setSchool({ ...school, ...values });
             })
-            .catch(error => this.setState({ error: error.message, editing: true }));
+            .catch(error =>
+                this.setState({ error: error.message, editing: true })
+            );
     }
 
     render() {
@@ -34,17 +36,38 @@ export default class Application extends React.PureComponent {
         const { editing, error } = this.state;
 
         return (
-            <Form onSubmit={this.handleSubmit} defaultValues={school} pure={false} render={formApi => (
-                <form className="form" onSubmit={formApi.submitForm}>
-                    { error && <div className="alert alert-error">{ error }</div> }
+            <Form
+                onSubmit={this.handleSubmit}
+                defaultValues={school}
+                pure={false}
+                render={formApi => (
+                    <form className="form" onSubmit={formApi.submitForm}>
+                        {error && (
+                            <div className="alert alert-error">{error}</div>
+                        )}
 
-                    { !editing && <button className="button" onClick={this.startEditing}>Edit Application</button> }
+                        {!editing && (
+                            <button
+                                className="button"
+                                onClick={this.startEditing}
+                            >
+                                Edit Application
+                            </button>
+                        )}
 
-                    <ApplicationForm formApi={formApi} readOnly={!editing}/>
+                        <ApplicationForm
+                            formApi={formApi}
+                            readOnly={!editing}
+                        />
 
-                    { editing && <button className="button" type="submit">Save Changes</button> }
-                </form>
-            )} />
+                        {editing && (
+                            <button className="button" type="submit">
+                                Save Changes
+                            </button>
+                        )}
+                    </form>
+                )}
+            />
         );
     }
 }

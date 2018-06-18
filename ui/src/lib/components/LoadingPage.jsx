@@ -1,7 +1,7 @@
 import React from "react";
 import { RingLoader } from "react-spinners";
 
-import { getVariable } from '../util';
+import { getVariable } from "../util";
 
 import "./loading-page.css";
 
@@ -12,7 +12,7 @@ import "./loading-page.css";
 export default function LoadingPage() {
     return (
         <div className="loading-page">
-            <RingLoader color={getVariable('--color-primary')} loading={true} />
+            <RingLoader color={getVariable("--color-primary")} loading={true} />
         </div>
-    )
+    );
 }

@@ -1,4 +1,4 @@
-import Raven from 'raven-js';
+import Raven from "raven-js";
 import { mergeDeepLeft } from "ramda";
 
 /**
@@ -7,7 +7,7 @@ import { mergeDeepLeft } from "ramda";
  * @returns {string} the variable value
  */
 export function getVariable(varName) {
-    const root = document.querySelector(':root');
+    const root = document.querySelector(":root");
     return getComputedStyle(root).getPropertyValue(varName);
 }
 
@@ -16,20 +16,27 @@ export function getVariable(varName) {
  */
 export let csrfHeaders = {};
 
-window.addEventListener('DOMContentLoaded', () => {
-    const csrfHeader = document.querySelector('meta[name=_csrf_header]').getAttribute('content');
-    const csrfToken = document.querySelector('meta[name=_csrf]').getAttribute('content');
+window.addEventListener("DOMContentLoaded", () => {
+    const csrfHeader = document
+        .querySelector("meta[name=_csrf_header]")
+        .getAttribute("content");
+    const csrfToken = document
+        .querySelector("meta[name=_csrf]")
+        .getAttribute("content");
     csrfHeaders[csrfHeader] = csrfToken;
 });
 
 export async function request(url, options = {}) {
-    const response = await fetch(url, mergeDeepLeft(options, {
-        headers: csrfHeaders,
-        credentials: 'same-origin'
-    }));
+    const response = await fetch(
+        url,
+        mergeDeepLeft(options, {
+            headers: csrfHeaders,
+            credentials: "same-origin",
+        })
+    );
 
     // Support non-JSON responses
-    if (!response.headers.get('Content-Type').startsWith('application/json')) {
+    if (!response.headers.get("Content-Type").startsWith("application/json")) {
         const body = await response.text();
         if (response.ok) {
             return body;
@@ -40,7 +47,7 @@ export async function request(url, options = {}) {
 
     const body = await response.json();
 
-    if (response.ok)  {
+    if (response.ok) {
         return body;
     } else {
         const exception = new Error(body.error);
@@ -50,5 +57,5 @@ export async function request(url, options = {}) {
 }
 
 export function yesNo(value) {
-    return value ? 'Yes' : 'No';
+    return value ? "Yes" : "No";
 }

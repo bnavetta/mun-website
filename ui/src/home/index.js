@@ -7,13 +7,13 @@ const MS_PER_SECOND = 1000;
 
 const countdownDate = new Date("November 9, 2018 13:00:00").getTime();
 
-document.addEventListener('DOMContentLoaded', () => {
-    const target = document.querySelector('.home--countdown');
+document.addEventListener("DOMContentLoaded", () => {
+    const target = document.querySelector(".home--countdown");
 
-    const daysElt = target.querySelector('.home--countdown-days');
-    const hoursElt = target.querySelector('.home--countdown-hours');
-    const minutesElt = target.querySelector('.home--countdown-minutes');
-    const secondsElt = target.querySelector('.home--countdown-seconds');
+    const daysElt = target.querySelector(".home--countdown-days");
+    const hoursElt = target.querySelector(".home--countdown-hours");
+    const minutesElt = target.querySelector(".home--countdown-minutes");
+    const secondsElt = target.querySelector(".home--countdown-seconds");
 
     setInterval(() => {
         const now = new Date().getTime();
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const minutes = Math.floor((delta % MS_PER_HOUR) / MS_PER_MINUTE);
         const seconds = Math.floor((delta % MS_PER_MINUTE) / MS_PER_SECOND);
 
-        daysElt.innerHTML = days.toString().padStart(3, '0');
-        hoursElt.innerHTML = hours.toString().padStart(2, '0');
-        minutesElt.innerHTML = minutes.toString().padStart(2, '0');
-        secondsElt.innerHTML = seconds.toString().padStart(2, '0');
+        daysElt.innerHTML = days.toString().padStart(3, "0");
+        hoursElt.innerHTML = hours.toString().padStart(2, "0");
+        minutesElt.innerHTML = minutes.toString().padStart(2, "0");
+        secondsElt.innerHTML = seconds.toString().padStart(2, "0");
     }, 1000);
 });

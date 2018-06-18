@@ -8,24 +8,33 @@ class ChangePassword extends React.PureComponent {
         super(props, context);
 
         this.state = {
-            password: '',
-            confirm: '',
+            password: "",
+            confirm: "",
             errorMessage: null,
             successMessage: null,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.handlePasswordChange = e => this.setState({ password: e.target.value });
-        this.handleConfirmChange = e => this.setState({ confirm: e.target.value });
+        this.handlePasswordChange = e =>
+            this.setState({ password: e.target.value });
+        this.handleConfirmChange = e =>
+            this.setState({ confirm: e.target.value });
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
         changePassword(this.state.password, this.state.confirm)
-            .then(message => this.setState({ successMessage: message, errorMessage: null }))
-            .catch(error => this.setState({ successMessage: null, errorMessage: error.message }))
+            .then(message =>
+                this.setState({ successMessage: message, errorMessage: null })
+            )
+            .catch(error =>
+                this.setState({
+                    successMessage: null,
+                    errorMessage: error.message,
+                })
+            );
     }
 
     render() {
@@ -33,23 +42,41 @@ class ChangePassword extends React.PureComponent {
 
         return (
             <div>
-                { successMessage && <p className="alert alert-success">{ successMessage }</p> }
-                { errorMessage && <p className="alert alert-error">{ errorMessage }</p> }
+                {successMessage && (
+                    <p className="alert alert-success">{successMessage}</p>
+                )}
+                {errorMessage && (
+                    <p className="alert alert-error">{errorMessage}</p>
+                )}
                 <form onSubmit={this.handleSubmit} className="form">
                     <fieldset>
                         <label htmlFor="password">Password</label>
-                        <input type="password" value={password} onChange={this.handlePasswordChange} id="password" name="password" />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={this.handlePasswordChange}
+                            id="password"
+                            name="password"
+                        />
                     </fieldset>
 
                     <fieldset>
                         <label htmlFor="confirm">Confirm Password</label>
-                        <input type="password" value={confirm} onChange={this.handleConfirmChange} id="confirm" name="confirm" />
+                        <input
+                            type="password"
+                            value={confirm}
+                            onChange={this.handleConfirmChange}
+                            id="confirm"
+                            name="confirm"
+                        />
                     </fieldset>
 
-                    <button className="button" type="submit">Change Password</button>
+                    <button className="button" type="submit">
+                        Change Password
+                    </button>
                 </form>
             </div>
-        )
+        );
     }
 }
 

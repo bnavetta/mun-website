@@ -19,16 +19,18 @@ function SchoolList({ match, schools }) {
                 </tr>
             </thead>
             <tbody>
-                { schools.map(school => (
+                {schools.map(school => (
                     <tr key={school.id}>
-                        <td>{ school.id }</td>
+                        <td>{school.id}</td>
                         <td>
-                            <Link to={`${match.path}/${school.id}`}>{ school.name}</Link>
+                            <Link to={`${match.path}/${school.id}`}>
+                                {school.name}
+                            </Link>
                         </td>
-                        <td>{ school.registrationCode }</td>
-                        <td>{ yesNo(school.accepted) }</td>
+                        <td>{school.registrationCode}</td>
+                        <td>{yesNo(school.accepted)}</td>
                     </tr>
-                )) }
+                ))}
             </tbody>
         </table>
     );

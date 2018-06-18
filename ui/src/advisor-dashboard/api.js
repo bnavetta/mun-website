@@ -2,27 +2,27 @@ import Raven from "raven-js";
 import { csrfHeaders, request } from "../lib/util";
 
 export function fetchSchool() {
-    return request('/your-mun/school');
+    return request("/your-mun/school");
 }
 
 export function fetchAdvisor() {
-    return request('/your-mun/self');
+    return request("/your-mun/self");
 }
 
 export function fetchSupplementalInfo() {
-    return request('/your-mun/supplemental-info')
+    return request("/your-mun/supplemental-info");
 }
 
 export async function updateSupplementalInfo(info) {
     try {
-        const res = await fetch('/your-mun/supplemental-info', {
-            method: 'POST',
+        const res = await fetch("/your-mun/supplemental-info", {
+            method: "POST",
             body: JSON.stringify(info),
             headers: {
-                'Content-Type': 'application/json',
-                ...csrfHeaders
+                "Content-Type": "application/json",
+                ...csrfHeaders,
             },
-            credentials: 'same-origin'
+            credentials: "same-origin",
         });
 
         if (res.ok) {
@@ -30,33 +30,32 @@ export async function updateSupplementalInfo(info) {
         } else {
             return { success: false, errors: await res.json() };
         }
-    }
-    catch (e) {
+    } catch (e) {
         Raven.captureException(e, { extra: { supplementalInfo: info } });
         throw e;
     }
 }
 
 export function updateApplication(app) {
-    return request('/your-mun/update-application', {
-        method: 'POST',
+    return request("/your-mun/update-application", {
+        method: "POST",
         body: JSON.stringify(app),
         headers: {
-            'Content-Type': 'application/json'
-        }
+            "Content-Type": "application/json",
+        },
     });
 }
 
 export function fetchHotels() {
-    return request('/api/hotels');
+    return request("/api/hotels");
 }
 
 export function changePassword(password, confirm) {
-    return request('/your-mun/change-password', {
-        method: 'POST',
+    return request("/your-mun/change-password", {
+        method: "POST",
         body: JSON.stringify({ password, confirm }),
         headers: {
-            'Content-Type': 'application/json'
-        }
+            "Content-Type": "application/json",
+        },
     });
 }

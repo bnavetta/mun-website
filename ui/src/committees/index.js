@@ -1,12 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 import Committees from "./Committees";
 import "./committees.css";
 
+document.addEventListener("DOMContentLoaded", () => {
+    const root = document.querySelector(".committees");
 
-document.addEventListener('DOMContentLoaded', () => {
-    const root = document.querySelector('.committees');
-
-    ReactDOM.render(<Committees/>, root);
+    ReactDOM.render(<Committees />, root);
 });

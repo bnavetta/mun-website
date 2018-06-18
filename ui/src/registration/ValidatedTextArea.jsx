@@ -6,13 +6,20 @@ export default function ValidatedTextArea(props) {
 
     return (
         <Field validate={validate} field={field}>
-            { fieldApi => {
-                const { value, error, warning, success, setValue, setTouched } = fieldApi;
+            {fieldApi => {
+                const {
+                    value,
+                    error,
+                    warning,
+                    success,
+                    setValue,
+                    setTouched,
+                } = fieldApi;
                 return (
                     <React.Fragment>
                         <textarea
                             {...rest}
-                            value={value || ''}
+                            value={value || ""}
                             onChange={e => {
                                 setValue(e.target.value);
                                 if (onChange) {
@@ -26,11 +33,13 @@ export default function ValidatedTextArea(props) {
                                 }
                             }}
                         />
-                        { error ? <p className="form-error">{ error }</p> : null }
-                        { !error && warning ? <p className="form-warning">{ warning }</p> : null }
+                        {error ? <p className="form-error">{error}</p> : null}
+                        {!error && warning ? (
+                            <p className="form-warning">{warning}</p>
+                        ) : null}
                     </React.Fragment>
                 );
-            } }
+            }}
         </Field>
     );
 }

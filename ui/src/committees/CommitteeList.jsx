@@ -6,16 +6,21 @@ function Committee({ committee }) {
     return (
         <React.Fragment>
             <div className="committees-list__committee-overview">
-                <img className="committees-list__committee__image" src={committee.image} />
-                <p className="committees-list__committee__name">{committee.name}</p>
+                <img
+                    className="committees-list__committee__image"
+                    src={committee.image}
+                />
+                <p className="committees-list__committee__name">
+                    {committee.name}
+                </p>
             </div>
             <div className="committees-list__committee-details">
                 <p>{committee.description}</p>
                 <ul>
-                    { committee.topic1 && <li>{committee.topic1}</li> }
-                    { committee.topic2 && <li>{committee.topic2}</li> }
-                    { committee.topic3 && <li>{committee.topic3}</li> }
-                    { committee.topic4 && <li>{committee.topic4}</li> }
+                    {committee.topic1 && <li>{committee.topic1}</li>}
+                    {committee.topic2 && <li>{committee.topic2}</li>}
+                    {committee.topic3 && <li>{committee.topic3}</li>}
+                    {committee.topic4 && <li>{committee.topic4}</li>}
                 </ul>
             </div>
         </React.Fragment>
@@ -34,17 +39,17 @@ const CommitteeType = PropTypes.shape({
 });
 
 Committee.propTypes = {
-    committee: CommitteeType
+    committee: CommitteeType,
 };
 
 function CommitteeList({ committees }) {
     return (
         <ul className="committees-list">
-            {
-                committees.map(c => <li key={c.id} className="committees-list__committee">
-                    <Committee committee={c}/>
-                </li>)
-            }
+            {committees.map(c => (
+                <li key={c.id} className="committees-list__committee">
+                    <Committee committee={c} />
+                </li>
+            ))}
         </ul>
     );
 }

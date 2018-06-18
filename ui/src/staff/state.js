@@ -37,7 +37,7 @@ function schoolsReducer(state = {}, action) {
 function advisorsReducer(state = {}, action) {
     switch (action.type) {
         case LOAD_ADVISORS:
-            return R.groupBy(R.prop('schoolId'), action.advisors);
+            return R.groupBy(R.prop("schoolId"), action.advisors);
         default:
             return state;
     }
@@ -46,27 +46,37 @@ function advisorsReducer(state = {}, action) {
 // Action creator for loading schools
 // It's good practice to wrap actions in these creator functions to encapsulate the internal structure that the
 // reducer uses.
-export const loadSchools = (schools) => ({ type: LOAD_SCHOOLS, schools });
+export const loadSchools = schools => ({ type: LOAD_SCHOOLS, schools });
 
-export const loadAdvisors = (advisors) => ({ type: LOAD_ADVISORS, advisors });
+export const loadAdvisors = advisors => ({ type: LOAD_ADVISORS, advisors });
 
-export const loadSupplementalInfo = (id, supplementalInfo) => ({ type: LOAD_SUPPLEMENTAL_INFO, id, supplementalInfo });
+export const loadSupplementalInfo = (id, supplementalInfo) => ({
+    type: LOAD_SUPPLEMENTAL_INFO,
+    id,
+    supplementalInfo,
+});
 
 // Selectors like this are a handy Redux pattern so you don't have to change a bunch of things if your state
 // structure changes a bit
 export const selectSchool = (id, state) => state.schools[id];
 
-export const selectSchools = (state) => R.sortBy(R.prop('name'), R.values(state.schools));
+export const selectSchools = state =>
+    R.sortBy(R.prop("name"), R.values(state.schools));
 
 export const selectAdvisors = (schoolId, state) => state.advisors[schoolId];
 
-export const selectSupplementalInfo = (schoolId, state) => state.schools[schoolId].supplementalInfo;
+export const selectSupplementalInfo = (schoolId, state) =>
+    state.schools[schoolId].supplementalInfo;
 
 export default function configureStore() {
-    return createStore(combineReducers({
-        schools: schoolsReducer,
-        advisors: advisorsReducer,
-    }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+    return createStore(
+        combineReducers({
+            schools: schoolsReducer,
+            advisors: advisorsReducer,
+        }),
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+            window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
 
     // There's a browser extension you can install (https://github.com/zalmoxisus/redux-devtools-extension) to get
     // Redux tools within your browser developer tools.

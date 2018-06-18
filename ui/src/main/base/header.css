@@ -62,6 +62,7 @@
     text-decoration: none;
 }
 
-.base > header a:hover, .base > header button:hover {
+.base > header a:hover,
+.base > header button:hover {
     color: color(white blackness(15%));
 }

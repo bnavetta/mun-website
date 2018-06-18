@@ -61,7 +61,8 @@ nav.dropdown-menu li {
     overflow: hidden;
 }
 
-nav.dropdown-menu a, nav.dropdown-menu a:hover {
+nav.dropdown-menu a,
+nav.dropdown-menu a:hover {
     color: unset;
     text-decoration: none;
 }

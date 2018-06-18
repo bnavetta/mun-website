@@ -15,38 +15,84 @@ export default function ApplicationForm({ readOnly = false, formApi }) {
     return (
         <React.Fragment>
             <fieldset>
-                <label htmlFor="hasAttended">Have you attended BUSUN before?</label>
+                <label htmlFor="hasAttended">
+                    Have you attended BUSUN before?
+                </label>
                 <RadioGroup field="hasAttended" id="hasAttended">
                     <label htmlFor="hasAttended-yes">Yes</label>
-                    <Radio disabled={readOnly} value={true} id="hasAttended-yes" />
+                    <Radio
+                        disabled={readOnly}
+                        value={true}
+                        id="hasAttended-yes"
+                    />
                     <label htmlFor="hasAttended-no">No</label>
-                    <Radio disabled={readOnly} value={false} id="hasAttended-no" />
+                    <Radio
+                        disabled={readOnly}
+                        value={false}
+                        id="hasAttended-no"
+                    />
                 </RadioGroup>
 
-                { formApi.values.hasAttended && (<React.Fragment>
-                    <label htmlFor="yearsAttended">Which years have you attended BUSUN in the past?</label>
-                    <ValidatedText disabled={readOnly} field="yearsAttended" id="yearsAttended" />
-                </React.Fragment>) }
+                {formApi.values.hasAttended && (
+                    <React.Fragment>
+                        <label htmlFor="yearsAttended">
+                            Which years have you attended BUSUN in the past?
+                        </label>
+                        <ValidatedText
+                            disabled={readOnly}
+                            field="yearsAttended"
+                            id="yearsAttended"
+                        />
+                    </React.Fragment>
+                )}
             </fieldset>
 
             <fieldset>
-                <label htmlFor="aboutSchool">Please tell us a bit about your school.</label>
-                <ValidatedTextArea rows={8} disabled={readOnly} field="aboutSchool" id="aboutSchool"/>
+                <label htmlFor="aboutSchool">
+                    Please tell us a bit about your school.
+                </label>
+                <ValidatedTextArea
+                    rows={8}
+                    disabled={readOnly}
+                    field="aboutSchool"
+                    id="aboutSchool"
+                />
             </fieldset>
 
             <fieldset>
-                <label htmlFor="aboutMunProgram">Briefly describe your school’s Model UN Program.</label>
-                <ValidatedTextArea rows={8} disabled={readOnly} field="aboutMunProgram" id="aboutMunProgram" />
+                <label htmlFor="aboutMunProgram">
+                    Briefly describe your school’s Model UN Program.
+                </label>
+                <ValidatedTextArea
+                    rows={8}
+                    disabled={readOnly}
+                    field="aboutMunProgram"
+                    id="aboutMunProgram"
+                />
             </fieldset>
 
             <fieldset>
-                <label htmlFor="delegationGoals">What are your delegation's goals at BUSUN?</label>
-                <ValidatedTextArea rows={8} disabled={readOnly} field="delegationGoals" id="delegationGoals"/>
+                <label htmlFor="delegationGoals">
+                    What are your delegation's goals at BUSUN?
+                </label>
+                <ValidatedTextArea
+                    rows={8}
+                    disabled={readOnly}
+                    field="delegationGoals"
+                    id="delegationGoals"
+                />
             </fieldset>
 
             <fieldset>
-                <label htmlFor="whyApplied">What drew your delegation to apply to BUSUN this year?</label>
-                <ValidatedTextArea rows={8} disabled={readOnly} field="whyApplied" id="whyApplied"/>
+                <label htmlFor="whyApplied">
+                    What drew your delegation to apply to BUSUN this year?
+                </label>
+                <ValidatedTextArea
+                    rows={8}
+                    disabled={readOnly}
+                    field="whyApplied"
+                    id="whyApplied"
+                />
             </fieldset>
         </React.Fragment>
     );

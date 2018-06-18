@@ -9,9 +9,9 @@ import CommitteeList from "./CommitteeList";
 import JointCrisisList from "./JointCrisisList";
 
 async function fetchCommittees() {
-    const response = await fetch('/api/committee');
+    const response = await fetch("/api/committee");
     if (!response.ok) {
-        throw new Error('Failed to load committees');
+        throw new Error("Failed to load committees");
     }
 
     return await response.json();
@@ -19,7 +19,7 @@ async function fetchCommittees() {
 
 const locations = {
     4: { lat: 40, lng: 40 },
-    5: { lat: -30, lng: 20 }
+    5: { lat: -30, lng: 20 },
 };
 
 class Committees extends React.Component {
@@ -41,7 +41,7 @@ class Committees extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return <LoadingPage/>;
+            return <LoadingPage />;
         } else if (this.state.error) {
             // TODO: error page
             return null;
@@ -57,22 +57,32 @@ class Committees extends React.Component {
 
                     {/* General */}
                     <TabPanel>
-                        <CommitteeList committees={this.state.committees.general}/>
+                        <CommitteeList
+                            committees={this.state.committees.general}
+                        />
                     </TabPanel>
 
                     {/* Specialized */}
                     <TabPanel>
-                        <CommitteeMap committees={this.state.committees.specialized} locations={locations}/>
+                        <CommitteeMap
+                            committees={this.state.committees.specialized}
+                            locations={locations}
+                        />
                     </TabPanel>
 
                     {/* Crisis */}
                     <TabPanel>
-                        <CommitteeList committees={this.state.committees.crisis}/>
+                        <CommitteeList
+                            committees={this.state.committees.crisis}
+                        />
                     </TabPanel>
 
                     {/* Joint crisis */}
                     <TabPanel>
-                        <JointCrisisList jointCrises={this.state.committees.jointCrises} rooms={this.state.committees.jointCrisisRooms}/>
+                        <JointCrisisList
+                            jointCrises={this.state.committees.jointCrises}
+                            rooms={this.state.committees.jointCrisisRooms}
+                        />
                     </TabPanel>
                 </Tabs>
             );
