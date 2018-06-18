@@ -1,0 +1,4 @@
+# Ansible inventory
+
+[brownmun]
+159.89.247.170 ansible_user=brownmun ansible_ssh_private_key_file=keys/id_rsa ansible_python_interpreter=/opt/local/bin/pypy

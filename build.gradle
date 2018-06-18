@@ -1,5 +1,4 @@
 import org.springframework.boot.gradle.tasks.run.BootRun;
-import java.time.*;
 
 buildscript {
     repositories {
@@ -31,7 +30,7 @@ def computeVersion() {
     if (changes.empty) {
         return head
     } else {
-        return "${head}-dirty-${Instant.now().getEpochSecond()}"
+        return "${head}-dirty"
     }
 }
 
@@ -41,7 +40,7 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-    ext.currentVersion = currentVersion
+    version = currentVersion
 }
 
 idea {
@@ -59,7 +58,6 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
     apply plugin: 'net.ltgt.apt-idea'
 
     group = 'org.brownmun'
-    version = currentVersion
 
     sourceCompatibility = 1.10
     targetCompatibility = 1.10
@@ -100,12 +98,6 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
             endWithNewline()
         }
     }
-//
-//    idea {
-//        module {
-//            scopes.COMPILE.plus += [configurations.annotationProcessor]
-//        }
-//    }
 }
 
 remotes {
@@ -132,5 +124,11 @@ task deploy(dependsOn: [':busun:bootJar', ':ui:build']) {
                 executeSudo 'systemctl restart busun'
             }
         }
+    }
+}
+
+task printVersion {
+    doLast {
+        println project.version
     }
 }

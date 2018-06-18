@@ -1,0 +1,14 @@
+# Terraform
+*.tfvars
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Private keys
+keys/id_rsa
+
+# Ansible
+*.retry
+.fact-cache/
+vault-password.txt
+

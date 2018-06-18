@@ -1,0 +1,22 @@
+---
+
+# Play to bootstrap a new Container Linux system for Ansible
+
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Run bootstrap script
+      script: bootstrap.sh
+      args:
+        creates: "{{ ansible_python_interpreter }}"
+
+# This block is for bootstrap tasks that require facts
+- hosts: all
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/opt/local/bin"
+  tasks:
+    - name: Ensure Pip is installed
+      command: "{{ ansible_python_interpreter }} -m ensurepip"
+    - name: Install docker-py
+      pip: name=docker-py state=present
+  become: true

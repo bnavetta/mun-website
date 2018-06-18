@@ -1,0 +1,7 @@
+---
+
+- name: Configure the custom Docker bridge network
+  docker_network:
+    driver: bridge
+    name: mun-net
+    state: present

@@ -1,0 +1,19 @@
+[Unit]
+Description={{ conference.name }} backend
+After=docker.service
+Requires=docker.service
+
+[Service]
+User={{ conference.name }}
+EnvironmentFile=/etc/{{ conference.name }}/environment
+EnvironmentFile=/etc/{{ conference.name }}/version
+ExecStartPre=-/usr/bin/docker kill {{ conference.name }}
+ExecStartPre=-/usr/bin/docker rm {{ conference.name }}
+ExecStartPre=/usr/bin/docker pull {{ docker_registry }}/{{ conference.name }}:${VERSION}
+ExecStart=/usr/bin/docker run --name {{ conference.name }} \
+    -v /etc/{{ conference.name }}:/srv/config \
+    --network mun-net \
+    {{docker_registry }}/{{ conference.name }}:${VERSION}
+
+[Install]
+WantedBy=multi-user.target

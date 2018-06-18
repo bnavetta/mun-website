@@ -1,0 +1,54 @@
+---
+
+- name: Ensure postgres user exists
+  user: name=postgres uid=1030 groups=docker create_home=no state=present
+
+- name: Configure postgres service
+  copy:
+    src: postgres.service
+    dest: /etc/systemd/system/postgres.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart postgres
+
+# This *won't* look like a standard postgres configuration directory.
+# Instead it has environment files and init scripts for the Docker container.
+- name: Ensure postgres configuration directory exists
+  file:
+    path: /etc/postgres
+    state: directory
+    owner: postgres
+    mode: 0755
+
+- name: Install postgres init scripts
+  template:
+    src: init.sql.j2
+    dest: /etc/postgres/init.sql
+    owner: postgres
+    # lock down since this could contain passwords
+    mode: 0600
+  notify:
+    - restart postgres
+
+- name: Set up postgres environment variables
+  copy:
+    src: environment
+    dest: /etc/postgres/environment
+    owner: postgres
+    mode: 0644
+  notify:
+    - restart postgres
+
+# This will be bind-mounted to the container's postgres data directory
+- name: Create postgres data directory
+  file:
+    path: /var/lib/postgresql/data
+    state: directory
+    owner: postgres
+    mode: 0644
+
+- name: Ensure postgres is running
+  service: name=postgres state=started enabled=yes

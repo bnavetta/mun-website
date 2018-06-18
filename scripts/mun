@@ -22,32 +22,35 @@ def run_shell(extra_args, env):
         '--conference.name=BUSUN', '--conference.key=busun', '--conference.domainName=busun.org'
     ] + list(extra_args), env=env)
 
+
+def version():
+    """Gets the current project version from Gradle"""
+    output = subprocess.check_output(['./gradlew', '--console', 'plain', '-q', 'printVersion'])
+    return output.decode(encoding='utf-8').strip()
+
 @click.group()
 def cli():
     pass
 
 
-@click.group()
+@cli.group()
 def dev():
     pass
 
 
-cli.add_command(dev)
-
-
-@click.command()
+@dev.command()
 def startdb():
     click.secho('Starting local database...', fg='green')
     subprocess.call(['docker-compose', 'up', '-d', 'database', 'adminer'])
 
 
-@click.command()
+@dev.command()
 def stopdb():
     click.secho('Stopping local database...', fg='green')
     subprocess.call(['docker-compose', 'stop', 'database', 'adminer'])
 
 
-@click.command()
+@dev.command()
 def querydb():
     subprocess.call(['docker-compose', 'exec', 'database', 'psql', '-U', os.environ['DB_USER']])
 
@@ -71,11 +74,6 @@ def dev_shell(extra_args):
     run_shell(extra_args, os.environ)
 
 
-dev.add_command(startdb)
-dev.add_command(stopdb)
-dev.add_command(querydb)
-
-
 @cli.group()
 def prod():
     pass
@@ -96,9 +94,14 @@ def prod_shell(extra_args):
         run_shell(extra_args, env)
 
 
-@click.group(invoke_without_command=True)
+@prod.command('ssh')
+def prod_ssh():
+    subprocess.call(['ssh', '-i', 'provisioning/keys/id_rsa', 'brownmun@159.89.247.170'])
+
+
+@cli.group(invoke_without_command=True, chain=True)
 @click.pass_context
-def fmt():
+def fmt(ctx):
     if ctx.invoked_subcommand is None:
         click.secho('Formatting all files...', fg='green')
         prettier()
@@ -107,34 +110,36 @@ def fmt():
         spotless()
 
 
-cli.add_command(fmt)
-
-
-@click.command()
+@fmt.command()
 def prettier():
     subprocess.call(['./node_modules/.bin/prettier', '--write', 'ui/**/*.{js,jsx,css}'])
 
 
-@click.command()
+@fmt.command()
 def eslint():
     subprocess.call(['./node_modules/.bin/eslint', '--ext', '.js', '--ext', '.jsx', 'ui'])
 
 
-@click.command()
+@fmt.command()
 def stylelint():
     subprocess.call(['./node_modules/.bin/stylelint', 'ui/src/**/*.css'])
 
 
-@click.command()
+@fmt.command()
 def spotless():
     subprocess.call(['./gradlew', 'spotlessApply'])
 
 
-fmt.add_command(prettier)
-fmt.add_command(eslint)
-fmt.add_command(stylelint)
-fmt.add_command(spotless)
-
+@cli.command()
+def deploy():
+    click.secho("Pushing new Docker images", fg='green')
+    subprocess.check_call(['./gradlew', 'dockerPush'])
+    ver = version()
+    click.secho("Deploying version {}".format(ver), fg='green')
+    subprocess.check_call(
+        ['ansible-playbook', 'deploy-conference.yml', '-e', 'conference=busun tag={}'.format(ver)],
+        cwd='provisioning'
+    )
 
 if __name__ == '__main__':
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')

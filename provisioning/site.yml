@@ -1,0 +1,15 @@
+---
+
+# Main play for the website
+
+- hosts: brownmun
+  roles:
+    - base
+    - traefik
+    - postgres
+    - role: conference-service
+      vars:
+        conference:
+          name: busun
+          user_id: 1040
+  become: yes

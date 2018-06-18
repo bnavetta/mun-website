@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
-import org.brownmun.core.committee.model.Position;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeRepository;
 import org.brownmun.core.committee.model.CommitteeType;
+import org.brownmun.core.committee.model.Position;
 
 @Service
 public class CommitteeServiceImpl implements CommitteeService

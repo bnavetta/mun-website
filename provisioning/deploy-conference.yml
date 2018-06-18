@@ -1,0 +1,15 @@
+---
+# This play deploys a new version of a conference backend.
+#
+# Usage:
+#    ansible-playbook deploy-conference.yml -e "conference=busun tag=abcdefg"
+
+- hosts: brownmun
+  tasks:
+  - name: Update configured version
+    copy:
+      dest: /etc/{{ conference | mandatory }}/version
+      content: "VERSION={{ tag | quote }}"
+      owner: "{{ conference }}"
+  - name: Restart service
+    service: name={{ conference }} state=restarted

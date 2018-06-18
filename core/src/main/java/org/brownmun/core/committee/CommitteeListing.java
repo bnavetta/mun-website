@@ -15,9 +15,7 @@ public abstract class CommitteeListing
     public static CommitteeListing create(List<Committee> general, List<Committee> specialized, List<Committee> crisis,
             List<Committee> jointCrises, Map<Long, Set<Committee>> jointCrisisRooms)
     {
-        return null;
-        // return new AutoValue_CommitteeListing(general, specialized, crisis,
-        // jointCrises, jointCrisisRooms);
+        return new AutoValue_CommitteeListing(general, specialized, crisis, jointCrises, jointCrisisRooms);
     }
 
     @JsonProperty("general")

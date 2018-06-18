@@ -1,3 +1,17 @@
+plugins {
+    id 'com.palantir.docker' version '0.19.2'
+}
+
+docker {
+    name 'gcr.io/busun-158105/busun'
+    tags project.version
+    files tasks.bootJar.outputs
+    buildArgs(['BUILD_VERSION': project.version])
+    labels(['version': project.version, 'head': grgit.head().abbreviatedId])
+}
+
+docker.dependsOn bootJar
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
 

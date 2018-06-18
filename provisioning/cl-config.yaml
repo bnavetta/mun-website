@@ -1,0 +1,30 @@
+# Base Container Linux Config
+# https://coreos.com/os/docs/latest/provisioning.html
+
+# Configure etcd for DigitalOcean
+etcd:
+  advertise_client_urls:       "http://{PRIVATE_IPV4}:2379"
+  initial_advertise_peer_urls: "http://{PRIVATE_IPV4}:2380"
+  listen_client_urls:          "http://0.0.0.0:2379"
+  listen_peer_urls:            "http://{PRIVATE_IPV4}:2380"
+  discovery:                   "https://discovery.etcd.io/03fc8a50154e4cb39fd30acbbb9549c3"
+
+# Add the shared brownmun user
+passwd:
+  users:
+    - name: brownmun
+      password_hash: $6$20G2IIK.vV.shsqv$ZPrsS3jLVEmq3.r7EvqgjesGGIv.z.08rqD2o.46ddvT4tdin861nYXzbRkWPf3Aczwet7YitBxCm/4U6bYR11
+      groups: [sudo, docker, systemd-journal]
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdqgaHQ2KDRcUhlRHWd61DWwoSYcCda23RhbF5l61Viik5SJ31RiK2bPMAzf8T7ScixLn7vnwOxAvzVzVLUOjjYURt6nMZcApQM2yQA19cgNOZ/J72ei3X4UKoRXiHI6baczbp453/NcEAgQDKniAOqAM83Kf2Wf8ksDPLDslN/Hyt4gWmvEracZ3xRy9M1LCT/geYDBHdRLZhCCALLkHeTpxFBilaR+/aLl8EYpe5Ha7JJJlOp3P5opS5q1Aew7qcDuWLRKoHwkufNzGWg44MshLw9mNJn1RRnE0T2DIQ84pCE0JwHxnTxgVSTxeSl2d0maG/2OAGpdEKU54iJMAv
+
+# Configure automatic updates
+update:
+  group: stable
+locksmith:
+  # Reboot without any coordination through etcd
+  reboot_strategy: reboot
+  # Allow reboots from 3-5 AM on Sundays
+  window_start: "Sun 3:00"
+  window_length: "2h"
+

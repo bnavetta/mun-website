@@ -1,0 +1,26 @@
+[Unit]
+Description=Traefik reverse HTTP proxy
+Documentation=https://traefik.io/
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=traefik
+EnvironmentFile=/etc/traefik/environment
+ExecStartPre=-/usr/bin/docker kill traefik
+ExecStartPre=-/usr/bin/docker rm traefik
+ExecStartPre=/usr/bin/docker pull traefik:${TRAEFIK_VERSION}
+ExecStart=/usr/bin/docker run --name traefik \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /etc/traefik/traefik.toml:/traefik.toml \
+    -v /var/lib/traefik/acme.json:/acme.json \
+    -p 80:80 -p 443:443 \
+    -l traefik.docker.network=traefik.docker.network \
+    -l traefik.frontend.rule=Host:traefik.busun.org \
+    -l traefik.port=8080 \
+    -l traefik.enable=true \
+    --network mun-net \
+    traefik:${TRAEFIK_VERSION}
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,57 @@
+---
+
+- name: Ensure traefik user exists
+  user: name=traefik uid=1020 groups=docker create_home=no state=present
+
+- name: Configure traefik service
+  copy:
+    src: traefik.service
+    dest: /etc/systemd/system/traefik.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart traefik
+
+- name: Ensure traefik configuration directory exists
+  file:
+    path: /etc/traefik
+    state: directory  
+    owner: traefik
+    mode: 0755
+
+- name: Configure traefik
+  copy:
+    src: traefik.toml
+    dest: /etc/traefik/traefik.toml
+    owner: traefik
+    mode: 0644
+  notify:
+    - restart traefik
+
+- name: Set up traefik environment variables
+  copy:
+    src: environment
+    dest: /etc/traefik/environment
+    owner: traefik
+    mode: 0644
+  notify:
+    - restart traefik
+
+- name: Create traefik data directory
+  file:
+    path: /var/lib/traefik
+    state: directory
+    owner: traefik
+    mode: 0755
+
+- name: Set permissions on ACME storage file
+  file:
+    path: /var/lib/traefik/acme.json
+    state: touch
+    owner: traefik
+    mode: 0600
+
+- name: Ensure traefik is running
+  service: name=traefik state=started enabled=yes

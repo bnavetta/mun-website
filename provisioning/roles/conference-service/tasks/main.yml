@@ -1,0 +1,6 @@
+---
+
+- import_tasks: conference-service.yml
+  tags:
+    - conference
+    - "{{ conference.name }}"

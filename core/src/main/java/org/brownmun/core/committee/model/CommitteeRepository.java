@@ -1,14 +1,15 @@
 package org.brownmun.core.committee.model;
 
-import org.brownmun.core.award.model.Award;
-import org.brownmun.core.school.model.Delegate;
-import org.brownmun.core.school.model.School;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
 import java.util.OptionalLong;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import org.brownmun.core.award.model.Award;
+import org.brownmun.core.school.model.Delegate;
+import org.brownmun.core.school.model.School;
 
 /** Queries related to {@link Committee}s */
 public interface CommitteeRepository extends JpaRepository<Committee, Long>

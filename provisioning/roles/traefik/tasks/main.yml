@@ -1,0 +1,6 @@
+---
+
+# This is an Ansible pattern for giving task files more meaningful names (helpful when you have a lot of editor
+# tabs open). As an added bonus, it's a convenient way to apply tags to all tasks in a role.
+- import_tasks: traefik.yml
+  tags: [traefik]

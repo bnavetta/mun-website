@@ -1,0 +1,40 @@
+defaultEntryPoints = ["http", "https"]
+
+# Traefik web dashboard
+[web]
+address = ":8080"
+
+[web.auth.basic]
+# Password is the usual
+users = ["admin:$apr1$/JkXfW..$iQVp1HgXb0JlgCqOvY2Lg."]
+
+[entryPoints]
+
+[entryPoints.http]
+address = ":80"
+redirect = { entryPoint = "https" }
+
+[entryPoints.https]
+address = ":443"
+[entryPoints.https.tls]
+
+[retry]
+
+[docker]
+endpoint = "unix://var/run/docker.sock"
+domain = "busun.org"
+watch = true
+exposedByDefault = false
+
+# Let's Encrypt configuration
+[acme]
+email = "technology@busun.org"
+storage = "/acme.json"
+entryPoint = "https"
+# These settings mean to eagerly provision a certificate for each host domain, rather than
+# waiting until a client connects.
+onHostRule = true
+onDemand = false
+# Enable ACME HTTP verification
+[acme.httpChallenge]
+entryPoint = "http"
