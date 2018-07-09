@@ -7,10 +7,28 @@
   user:
     name: "{{ conference.name }}"
     uid: "{{ conference.user_id }}"
-    groups: docker
-    create_home: no
+    groups: [docker, gcp]
+    create_home: yes
     state: present
-  
+
+- name: Ensure default .bash_logout is absent
+  file:
+    path: /home/{{ conference.name }}/.bash_logout
+    state: absent
+
+- name: Ensure the Docker GCR credential helper is configured
+  command: docker-credential-gcr configure-docker
+  args:
+    creates: /home/{{ conference.name }}/.docker/config.json
+  become_user: "{{ conference.name }}"
+
+- name: Ensure the {{ conference.name }} user has access to GCR credentials
+  copy:
+    src: gcp_credentials.json
+    dest: /home/{{ conference.name }}/.config/gcloud/application_default_credentials.json
+    owner: "{{ conference.name }}"
+    group: "{{ conference.name }}"
+    mode: 0600
 
 - name: Configure the systemd service for {{ conference.name }}
   template:

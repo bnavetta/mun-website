@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+{% for database in postgres.databases %}
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --password "$POSTGRES_PASSWORD" <<-EOSQL
+    CREATE DATABASE {{ database.name }};
+    CREATE USER {{ database.user }} WITH PASSWORD '{{ database.password }}';
+    GRANT ALL PRIVILEGES ON DATABASE {{ database.name }} TO {{ database.user }};
+EOSQL
+{% endfor %}
+
+{% for database in postgres.databases %}
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --password "$POSTGRES_PASSWORD" --dbname "{{ database.name }}" <<-EOSQL
+    CREATE EXTENSION lo;
+EOSQL
+{% endfor %}

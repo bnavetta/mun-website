@@ -1,0 +1,4 @@
+---
+
+- name: Configure Docker for GCR authentication
+  command: docker-credential-gcr configure-docker

@@ -6,6 +6,7 @@
 
 # Private keys
 keys/id_rsa
+gcp_credentials.json
 
 # Ansible
 *.retry

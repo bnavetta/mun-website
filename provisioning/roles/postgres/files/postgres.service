@@ -10,12 +10,10 @@ EnvironmentFile=/etc/postgres/environment
 ExecStartPre=-/usr/bin/docker stop postgres
 ExecStartPre=-/usr/bin/docker rm postgres
 ExecStartPre=/usr/bin/docker pull postgres:${POSTGRES_VERSION}
-# Use the host /etc/passwd file so we can initialize as the host postres user
 ExecStart=/usr/bin/docker run --name postgres \
-    -v /etc/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql \
+    -v /etc/postgres/init.sh:/docker-entrypoint-initdb.d/init.sh \
     -v /var/lib/postgresql/data:/var/lib/postgresql/data \
-    -v /etc/passwd:/etc/passwd:ro \
-    --user 1030:1030 \
+    -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
     --network mun-net \
     postgres:${POSTGRES_VERSION}
 

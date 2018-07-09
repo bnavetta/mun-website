@@ -1,5 +1,0 @@
-{% for database in postgres.databases %}
-CREATE DATABASE {{ database.name }};
-CREATE USER {{ database.user }} WITH PASSWORD '{{ database.password }}';
-GRANT ALL PRIVILEGES ON DATABASE {{ database.name }} TO {{ database.user }};
-{% endfor %}

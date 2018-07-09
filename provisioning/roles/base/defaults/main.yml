@@ -1,0 +1,5 @@
+---
+
+# Version of the GCR Docker credentials helper to use
+# See https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases
+docker_credential_gcr_version: 1.5.0

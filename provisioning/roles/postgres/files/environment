@@ -1,2 +1,0 @@
-# Version of the Postgres image to use
-POSTGRES_VERSION=10.4

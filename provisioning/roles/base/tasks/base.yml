@@ -5,3 +5,35 @@
     driver: bridge
     name: mun-net
     state: present
+
+- name: Ensure /opt/bin exists
+  file:
+    path: /opt/bin
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install Docker credential helper for GCR
+  unarchive:
+    src: https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v{{ docker_credential_gcr_version }}/docker-credential-gcr_linux_amd64-{{ docker_credential_gcr_version }}.tar.gz
+    dest: /opt/bin
+    remote_src: yes
+    owner: root
+    group: root
+  notify:
+  - Configure Docker for GCR authentication
+
+- name: Ensure GCR credential helper is executable
+  file:
+    path: /opt/bin/docker-credential-gcr
+    mode: 0755
+    state: file
+
+- name: Ensure old gcp group is gone
+  group: name=gcp gid=1100 state=absent
+
+- name: Ensure old GCP configuration directory is absent
+  file:
+    path: /etc/gcp
+    state: absent

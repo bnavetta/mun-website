@@ -25,20 +25,20 @@
 
 - name: Install postgres init scripts
   template:
-    src: init.sql.j2
-    dest: /etc/postgres/init.sql
+    src: init.sh.j2
+    dest: /etc/postgres/init.sh
     owner: postgres
     # lock down since this could contain passwords
-    mode: 0600
+    mode: 0700
   notify:
     - restart postgres
 
 - name: Set up postgres environment variables
-  copy:
-    src: environment
+  template:
+    src: environment.j2
     dest: /etc/postgres/environment
     owner: postgres
-    mode: 0644
+    mode: 0600
   notify:
     - restart postgres
 

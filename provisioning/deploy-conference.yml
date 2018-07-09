@@ -11,5 +11,8 @@
       dest: /etc/{{ conference | mandatory }}/version
       content: "VERSION={{ tag | quote }}"
       owner: "{{ conference }}"
+    become: yes
+    become_user: "{{ conference }}"
   - name: Restart service
     service: name={{ conference }} state=restarted
+    become: yes

@@ -5,6 +5,7 @@ Requires=docker.service
 
 [Service]
 User={{ conference.name }}
+PassEnvironment=GOOGLE_APPLICATION_CREDENTIALS VERSION
 EnvironmentFile=/etc/{{ conference.name }}/environment
 EnvironmentFile=/etc/{{ conference.name }}/version
 ExecStartPre=-/usr/bin/docker kill {{ conference.name }}
