@@ -6,7 +6,10 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.brownmun.core.school.model.Delegate;
 import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +18,22 @@ import com.google.common.collect.Maps;
 import org.brownmun.core.committee.CommitteeListing;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.CommitteeRepository;
 import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.committee.model.Position;
 
 @Service
 public class CommitteeServiceImpl implements CommitteeService
 {
+    private static final Logger log = LoggerFactory.getLogger(CommitteeServiceImpl.class);
+
     private final CommitteeRepository repo;
+    private final PositionRepository positionRepo;
 
     @Autowired
-    public CommitteeServiceImpl(CommitteeRepository repo)
+    public CommitteeServiceImpl(CommitteeRepository repo, PositionRepository positionRepo)
     {
         this.repo = repo;
+        this.positionRepo = positionRepo;
     }
 
     @Override
@@ -87,5 +93,32 @@ public class CommitteeServiceImpl implements CommitteeService
     public Optional<Committee> getCommittee(long id)
     {
         return repo.findById(id);
+    }
+
+    @Override
+    public Optional<Position> getPosition(long id) {
+        return positionRepo.findById(id);
+    }
+
+    @Override
+    public Delegate assignPosition(long positionId, long schoolId)
+    {
+        Position position = positionRepo.getOne(positionId);
+
+        Delegate old = position.getDelegate();
+        if (old != null)
+        {
+            log.info("Unassigning {} from {}", position, old);
+            old.setPosition(null);
+        }
+
+        // TODO: do we delete the old delegate? should there ever be delegates w/o positions
+        // or are they basically just a join table?
+        // by the time a delegate has attendance info, the conference has already started
+        // if a delegate has a name but we unassign their position, it's probably because they're not coming
+        // there could be position swaps, but maybe we implement that separately
+        // so just treat delegates as join table
+
+        return null;
     }
 }

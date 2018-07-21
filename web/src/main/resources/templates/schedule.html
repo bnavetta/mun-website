@@ -8,11 +8,79 @@
 >
     <head>
         <title>Schedule</title>
+        <wp:chunk name="info-page"/>
     </head>
 
     <body>
-        <main layout:fragment="content" class="registration-application">
-            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/coming-soon.jpg" alt="Coming Soon!">
+        <main layout:fragment="content" class="schedule">
+            <th:block conference:if-busun>
+                <h1>BUSUN 2018 Schedule</h1>
+
+                <div class="schedule-container">
+                    <h2 class="schedule-date day-fri">Friday, November 9</h2>
+
+                    <span class="schedule-time day-fri">9:00 AM - 3:00 PM</span>
+                    <span class="schedule-event day-fri">International Relations classes open to delegates</span>
+
+                    <span class="schedule-time day-fri">1:00 - 6:00 PM</span>
+                    <span class="schedule-event day-fri">Conference Registration</span>
+
+                    <span class="schedule-time day-fri">2:00 - 3:00 PM</span>
+                    <span class="schedule-event day-fri">Campus Tour</span>
+
+                    <span class="schedule-time day-fri">3:15 PM - 4:00 PM</span>
+                    <span class="schedule-event day-fri">Admissions Information Session</span>
+
+                    <span class="schedule-time day-fri">4:00 PM - 5:00 PM</span>
+                    <span class="schedule-event day-fri">Parliamentary Procedure Training</span>
+
+                    <span class="schedule-time day-fri">4:00 PM - 5:00 PM</span>
+                    <span class="schedule-event day-fri">Crisis Committee Workshop</span>
+
+                    <span class="schedule-time day-fri">6:00 PM - 6:45 PM</span>
+                    <span class="schedule-event day-fri">Opening Ceremonies</span>
+
+                    <span class="schedule-time day-fri">7:00 PM - 10:30 PM</span>
+                    <span class="schedule-event day-fri">Committee Session I</span>
+
+                    <span class="schedule-time day-fri">9:30 PM - 10:30 PM</span>
+                    <span class="schedule-event day-fri">Advisor Meeting I</span>
+
+                    <h2 class="schedule-date day-sat">Saturday, November 10</h2>
+
+                    <span class="schedule-time day-sat">9:00 AM - 12:30 PM</span>
+                    <span class="schedule-event day-sat">Committee Session II</span>
+
+                    <span class="schedule-time day-sat">10:30 AM - 11:30 AM</span>
+                    <span class="schedule-event day-sat">Advisor Meeting II</span>
+
+                    <span class="schedule-time day-sat">12:30 PM - 2:30 PM</span>
+                    <span class="schedule-event day-sat">Lunch Break</span>
+
+                    <span class="schedule-time day-sat">2:30 PM - 6:00 PM</span>
+                    <span class="schedule-event day-sat">Committee Session III</span>
+
+                    <span class="schedule-time day-sat">4:30 PM - 5:30 PM</span>
+                    <span class="schedule-event day-sat">Advisor Meeting III</span>
+
+                    <span class="schedule-time day-sat">6:00 PM - 8:00 PM</span>
+                    <span class="schedule-event day-sat">Dinner Break</span>
+
+                    <span class="schedule-time day-sat">8:00 PM - 10:00 PM</span>
+                    <span class="schedule-event day-sat">A Night at Brown: Delegate Social</span>
+
+                    <h2 class="schedule-date day-sun">Sunday, November 11</h2>
+
+                    <span class="schedule-time day-sun">9:00 AM - 12:00 PM</span>
+                    <span class="schedule-event day-sun">Committee Session IV</span>
+
+                    <span class="schedule-time day-sun">12:15 PM - 1:30 PM</span>
+                    <span class="schedule-event day-sun">Closing Ceremonies</span>
+                </div>
+            </th:block>
+            <th:block conference:if-bucs>
+                <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/coming-soon.jpg" alt="Coming Soon!">
+            </th:block>
         </main>
     </body>
 </html>

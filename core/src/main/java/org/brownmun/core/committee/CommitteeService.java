@@ -6,9 +6,11 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.stream.Stream;
 
+import javafx.geometry.Pos;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.model.Delegate;
 
 /**
  * Responsible for committees.
@@ -19,6 +21,11 @@ public interface CommitteeService
      * Find the committee with the given ID
      */
     Optional<Committee> getCommittee(long id);
+
+    /**
+     * Find the position with the given ID
+     */
+    Optional<Position> getPosition(long id);
 
     /**
      * Save a committee to the database
@@ -62,4 +69,12 @@ public interface CommitteeService
      * Gets all positions on a committee.
      */
     Collection<Position> getPositions(Committee c);
+
+    /**
+     * Assign a position to a school. If the position is already assigned, it will be unassigned from its
+     * current delegate. A new delegate will be created if needed.
+     *
+     * @return the {@link Delegate} representing the assignment.
+     */
+    Delegate assignPosition(long positionId, long schoolId);
 }

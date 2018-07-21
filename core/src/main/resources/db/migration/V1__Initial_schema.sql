@@ -125,8 +125,7 @@ CREATE VIEW award_print AS
 
 ---  Print Requests
 
--- This extension must be created by a superuser account.
--- CREATE EXTENSION IF NOT EXISTS lo;
+CREATE EXTENSION IF NOT EXISTS lo;
 
 CREATE TABLE print_request (
   id SERIAL PRIMARY KEY,
