@@ -1,16 +1,28 @@
 plugins {
-    id 'com.palantir.docker' version '0.19.2'
+    id 'com.google.cloud.tools.jib' version '0.9.4'
 }
 
-docker {
-    name 'gcr.io/busun-158105/busun'
-    tags project.version
-    files tasks.bootJar.outputs
-    buildArgs(['BUILD_VERSION': project.version])
-    labels(['version': project.version, 'head': grgit.head().abbreviatedId])
+jib {
+   from {
+       image = "openjdk:10-slim"
+       credHelper = "osxkeychain"
+   }
+
+    to {
+        image = "gcr.io/busun-158105/busun:${project.version}"
+        credHelper = "gcloud"
+    }
 }
 
-docker.dependsOn bootJar
+//docker {
+//    name 'gcr.io/busun-158105/busun'
+//    tags project.version
+//    files tasks.bootJar.outputs
+//    buildArgs(['BUILD_VERSION': project.version])
+//    labels(['version': project.version, 'head': grgit.head().abbreviatedId])
+//}
+//
+//docker.dependsOn bootJar
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'

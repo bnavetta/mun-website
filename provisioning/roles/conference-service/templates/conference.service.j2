@@ -8,11 +8,11 @@ User={{ conference.name }}
 PassEnvironment=GOOGLE_APPLICATION_CREDENTIALS VERSION
 EnvironmentFile=/etc/{{ conference.name }}/environment
 EnvironmentFile=/etc/{{ conference.name }}/version
-ExecStartPre=-/usr/bin/docker kill {{ conference.name }}
-ExecStartPre=-/usr/bin/docker rm {{ conference.name }}
-ExecStartPre=/usr/bin/docker pull {{ docker_registry }}/{{ conference.name }}:${VERSION}
+ExecStartPre=-/bin/sh -c '/usr/bin/docker kill {{ conference.name }} 2>/dev/null'
+ExecStartPre=-/bin/sh -c '/usr/bin/docker rm {{ conference.name }} 2>/dev/null'
 ExecStart=/usr/bin/docker run --name {{ conference.name }} \
     -v /etc/{{ conference.name }}:/srv/config \
+    --workdir /srv \
     --network mun-net \
     {{docker_registry }}/{{ conference.name }}:${VERSION}
 

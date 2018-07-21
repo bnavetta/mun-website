@@ -7,7 +7,7 @@
   user:
     name: "{{ conference.name }}"
     uid: "{{ conference.user_id }}"
-    groups: [docker, gcp]
+    groups: [docker]
     create_home: yes
     state: present
 
@@ -38,8 +38,12 @@
     group: root
     mode: 0644
   notify:
-    - reload systemd
     - restart backend
+  register: conference_service
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+  when: conference_service is changed
 
 # Don't actually copy over any configuration, since
 # that's done by the deploy play

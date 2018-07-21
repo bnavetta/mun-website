@@ -28,8 +28,7 @@
     src: init.sh.j2
     dest: /etc/postgres/init.sh
     owner: postgres
-    # lock down since this could contain passwords
-    mode: 0700
+    mode: 0750
   notify:
     - restart postgres
 

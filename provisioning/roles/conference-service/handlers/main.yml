@@ -1,7 +1,4 @@
 ---
 
-- name: reload systemd
-  command: systemctl daemon-reload
-
 - name: restart backend
   service: name={{ conference.name }} state=restarted
