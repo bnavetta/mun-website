@@ -33,7 +33,7 @@ resource "digitalocean_firewall" "public" {
     },
   ]
 
-  # Allow outbound DNS, HTTP, and HTTPS
+  # Allow outbound DNS, NTP, HTTP, and HTTPS
   outbound_rule = [
     {
       protocol              = "tcp"
@@ -43,6 +43,11 @@ resource "digitalocean_firewall" "public" {
     {
       protocol              = "udp"
       port_range            = "53"
+      destination_addresses = ["0.0.0.0/0", "::/0"]
+    },
+    {
+      protocol              = "udp"
+      port_range            = "123"
       destination_addresses = ["0.0.0.0/0", "::/0"]
     },
     {
