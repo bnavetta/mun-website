@@ -16,14 +16,6 @@ public class StaffController
 {
     private static final Logger log = LoggerFactory.getLogger(StaffController.class);
 
-    private final ClientRegistrationRepository clients;
-
-    @Autowired
-    public StaffController(ClientRegistrationRepository clients)
-    {
-        this.clients = clients;
-    }
-
     @GetMapping
     public String staffHome(@AuthenticationPrincipal Object currentUser)
     {
@@ -35,9 +27,6 @@ public class StaffController
     @GetMapping("/login")
     public String loginPage()
     {
-        ClientRegistration google = clients.findByRegistrationId("google");
-        log.info("Google: oauth2/authorization/{}", google.getRegistrationId());
-
         return "staff/login";
     }
 

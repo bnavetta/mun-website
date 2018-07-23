@@ -21,7 +21,7 @@ public class StaffOAuth2UserService implements OAuth2UserService<OidcUserRequest
     private final OidcUserService base = new OidcUserService();
     private final StaffService staff;
 
-    public StaffOAuth2UserService(StaffService staff)
+    StaffOAuth2UserService(StaffService staff)
     {
         this.staff = staff;
     }
@@ -29,11 +29,22 @@ public class StaffOAuth2UserService implements OAuth2UserService<OidcUserRequest
     @Override
     public StaffUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException
     {
-        OidcUser oidcUser = base.loadUser(userRequest);
+        OidcUser oidcUser;
+        try
+        {
+            oidcUser = base.loadUser(userRequest);
+            log.info("Loaded OIDC user {}", oidcUser.getClaims());
+        }
+        catch (OAuth2AuthenticationException e)
+        {
+            log.error("Error loading OIDC user", e);
+            throw e;
+        }
 
         String email = oidcUser.getEmail();
         if (email == null)
         {
+            log.warn("OIDC user {} missing email claim", oidcUser.getClaims());
             OAuth2Error error = new OAuth2Error("missing_email", "Missing required \"email\" attribute", null);
             throw new OAuth2AuthenticationException(error, error.toString());
         }
