@@ -1,0 +1,20 @@
+[Unit]
+Description=Web asset server
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=www
+PassEnvironment=VERSION
+EnvironmentFile=/etc/asset-server/version
+ExecStartPre=-/bin/sh -c '/usr/bin/docker kill asset-server 2>/dev/null'
+ExecStartPre=-/bin/sh -c '/usr/bin/docker rm asset-server 2>/dev/null'
+ExecStart=/usr/bin/docker run --name asset-server \
+    -l traefik.enable=true \
+    -l traefik.frontend.rule=PathPrefixStrip:/assets,Host:new.busun.org,busun.org,browncrisis.org \
+    -l traefik.port=80 \
+    --network mun-net \
+    {{docker_registry }}/ui:${VERSION}
+
+[Install]
+WantedBy=multi-user.target

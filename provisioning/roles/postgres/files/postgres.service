@@ -10,7 +10,7 @@ EnvironmentFile=/etc/postgres/environment
 ExecStartPre=-/bin/bash -c '/usr/bin/docker stop postgres 2>/dev/null'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm postgres 2>/dev/null'
 ExecStart=/usr/bin/docker run --name postgres \
-    -v /etc/postgres/init.sh:/docker-entrypoint-initdb.d/init.sh \
+    -v /etc/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql \
     -v /var/lib/postgresql/data:/var/lib/postgresql/data \
     -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
     --network mun-net \

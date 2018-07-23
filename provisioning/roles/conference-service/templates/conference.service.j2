@@ -12,6 +12,9 @@ ExecStartPre=-/bin/sh -c '/usr/bin/docker kill {{ conference.name }} 2>/dev/null
 ExecStartPre=-/bin/sh -c '/usr/bin/docker rm {{ conference.name }} 2>/dev/null'
 ExecStart=/usr/bin/docker run --name {{ conference.name }} \
     -v /etc/{{ conference.name }}:/srv/config \
+    -l traefik.enable=true \
+    -l traefik.frontend.rule=Host:{{ conference.domain }} \
+    -l traefik.port=8080 \
     --workdir /srv \
     --network mun-net \
     {{docker_registry }}/{{ conference.name }}:${VERSION}

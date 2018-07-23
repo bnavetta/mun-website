@@ -1,0 +1,3 @@
+{% for database in postgres.databases %}
+CREATE DATABASE {{ database.name }};
+{% endfor %}

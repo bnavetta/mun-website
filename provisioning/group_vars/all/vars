@@ -7,8 +7,4 @@ postgres_admin_password: "{{ vault_postgres_admin_password }}"
 postgres:
     databases:
         - name: busun
-          user: busun
-          password: "{{ vault_postgres_busun_password }}"
         - name: bucs
-          user: bucs
-          password: "{{ vault_postgres_bucs_password }}"

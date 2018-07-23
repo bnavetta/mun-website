@@ -1,3 +1,7 @@
+plugins {
+    id 'com.palantir.docker' version '0.20.1'
+}
+
 class Webpack extends DefaultTask {
     @Input
     String env
@@ -45,3 +49,11 @@ task build(type: Webpack) {
 task clean(type: Delete) {
     delete buildDir
 }
+
+docker {
+    name 'gcr.io/busun-158105/ui'
+    tags project.version
+    files build.outputs
+}
+
+tasks.docker.dependsOn tasks.build

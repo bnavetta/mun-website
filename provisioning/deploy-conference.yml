@@ -13,6 +13,8 @@
       owner: "{{ conference }}"
     become: yes
     become_user: "{{ conference }}"
+  - name: Pull Docker image
+    docker_image: name=gcr.io/busun-158105/{{ conference }}:{{ tag }}
   - name: Restart service
     service: name={{ conference }} state=restarted
     become: yes

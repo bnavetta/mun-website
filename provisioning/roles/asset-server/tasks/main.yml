@@ -1,0 +1,6 @@
+---
+
+- import_tasks: asset-server.yml
+  tags:
+    - conference
+    - asset-server

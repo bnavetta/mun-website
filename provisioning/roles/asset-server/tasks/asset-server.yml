@@ -1,0 +1,56 @@
+---
+
+- name: Ensure www user exists
+  user:
+    name: www
+    uid: "1100" 
+    groups: [docker]
+    create_home: yes
+    state: present
+
+- name: Ensure default .bash_logout is absent
+  file:
+    path: /home/www/.bash_logout
+    state: absent
+
+- name: Ensure the Docker GCR credential helper is configured
+  command: docker-credential-gcr configure-docker
+  args:
+    creates: /home/www/.docker/config.json
+  become_user: www
+
+- name: Ensure gcloud config directory exists
+  file:
+    path: /home/www/.config/gcloud
+    state: directory
+    owner: www
+    group: www
+    mode: 0755
+
+- name: Ensure the www user has access to GCR credentials
+  copy:
+    src: gcp_credentials.json
+    dest: /home/www/.config/gcloud/application_default_credentials.json
+    owner: www
+    group: www
+    mode: 0600
+
+- name: Ensure the configuration directory exists
+  file:
+    path: /etc/asset-server
+    state: directory
+    owner: www
+    group: www
+    mode: 0755
+
+- name: Configure the asset server systemd service
+  template:
+    src: asset-server.service.j2
+    dest: /etc/systemd/system/asset-server.service
+    owner: root
+    group: root
+    mode: 0644
+  register: asset_service
+
+- name: Ensure asset server is running
+  systemd: name=asset-server state=started enabled=yes daemon_reload={{ asset_service is changed }}

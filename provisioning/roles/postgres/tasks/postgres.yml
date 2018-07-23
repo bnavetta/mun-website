@@ -25,10 +25,10 @@
 
 - name: Install postgres init scripts
   template:
-    src: init.sh.j2
-    dest: /etc/postgres/init.sh
+    src: init.sql.j2
+    dest: /etc/postgres/init.sql
     owner: postgres
-    mode: 0750
+    mode: 0644
   notify:
     - restart postgres
 

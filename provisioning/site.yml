@@ -12,4 +12,6 @@
         conference:
           name: busun
           user_id: 1040
+          domain: new.busun.org
+    - asset-server
   become: yes
