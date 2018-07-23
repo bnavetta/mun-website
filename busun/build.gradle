@@ -12,6 +12,10 @@ jib {
         image = "gcr.io/busun-158105/busun:${project.version}"
         credHelper = "gcloud"
     }
+
+    container {
+        args = ['--spring.profiles.active=prod']
+    }
 }
 
 //docker {
