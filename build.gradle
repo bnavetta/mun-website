@@ -133,4 +133,11 @@ task printVersion {
     }
 }
 
-task pushImages(dependsOn: [':busun:jib', ':ui:dockerTag', ":ui:dockerPush${project.version}"]) {}
+task pushImages(dependsOn: [':busun:jib', ':ui:dockerTag', ":ui:dockerPush${ucfirst(project.version)}"]) {}
+
+// Copied from com.palantir.gradle plugin for consistency
+String ucfirst(String str) {
+    StringBuffer sb = new StringBuffer(str);
+    sb.replace(0, 1, str.substring(0, 1).toUpperCase());
+    return sb.toString();
+}
