@@ -132,10 +132,8 @@ def spotless():
 
 @cli.command()
 def deploy():
-    click.secho("Tagging Docker images", fg="green")
-    subprocess.check_call(['./gradlew', 'dockerTag'])
-    click.secho("Pushing new Docker images", fg='green')
-    subprocess.check_call(['./gradlew', 'dockerPush'])
+    click.secho("Building Docker images", fg="green")
+    subprocess.check_call(['./gradlew', 'pushImages'])
     ver = version()
     click.secho("Deploying version {}".format(ver), fg='green')
     subprocess.check_call(

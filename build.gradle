@@ -132,3 +132,5 @@ task printVersion {
         println project.version
     }
 }
+
+task pushImages(dependsOn: [':busun:jib', ':ui:dockerTag', ":ui:dockerPush${project.version}"]) {}
