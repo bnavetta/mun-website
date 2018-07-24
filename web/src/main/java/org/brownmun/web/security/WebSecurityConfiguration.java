@@ -43,7 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                     .and()
                     .contentSecurityPolicy(CONTENT_SECURITY_POLICY)
                     .and()
-                    .addHeaderWriter(new FeaturePolicyWriter(""))
+                    .addHeaderWriter(new FeaturePolicyWriter(FEATURE_POLICY))
                     .and()
                 .authorizeRequests()
                     .antMatchers("/staff/**").hasRole("STAFF")
