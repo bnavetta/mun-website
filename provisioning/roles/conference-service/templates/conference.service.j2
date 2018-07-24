@@ -13,7 +13,9 @@ ExecStartPre=-/bin/sh -c '/usr/bin/docker rm {{ conference.name }} 2>/dev/null'
 ExecStart=/usr/bin/docker run --name {{ conference.name }} \
     -v /etc/{{ conference.name }}:/srv/config \
     -l traefik.enable=true \
-    -l traefik.frontend.rule=Host:{{ conference.domain }} \
+    -l traefik.frontend.rule=Host:{{ conference.domain }},www.{{ conference.domain }} \
+    -l traefik.frontend.redirect.regex=^https?//www.{{ conference.domain }}/(.*) \
+    -l traefik.frontend.redirect.replacement=https://{{ conference.domain }}/$${1} \
     -l traefik.port=8080 \
     --workdir /srv \
     --network mun-net \

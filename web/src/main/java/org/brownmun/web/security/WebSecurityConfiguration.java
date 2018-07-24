@@ -18,7 +18,7 @@ import org.brownmun.core.staff.StaffService;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
     private static final String CONTENT_SECURITY_POLICY =
-            "default-src 'self'; frame-src 'none'; img-src 'self' https://storage.googleapis.com; manifest-src 'none'; media-src 'none'; object-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri https://brownmun.report-uri.com/r/d/csp/reportOnly";
+            "default-src 'self'; frame-src 'none'; img-src 'self' https://storage.googleapis.com; manifest-src 'none'; media-src 'none'; object-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri https://brownmun.report-uri.com/r/d/csp/enforce";
 
     private static final String FEATURE_POLICY =
             "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'self'; usb 'none'; vibrate 'none'; vr 'none'";
@@ -42,8 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                     .referrerPolicy(ReferrerPolicy.NO_REFERRER)
                     .and()
                     .contentSecurityPolicy(CONTENT_SECURITY_POLICY)
-                        .reportOnly()
-                        .and()
+                    .and()
                     .addHeaderWriter(new FeaturePolicyWriter(""))
                     .and()
                 .authorizeRequests()
