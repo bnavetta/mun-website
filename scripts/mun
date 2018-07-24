@@ -132,14 +132,18 @@ def spotless():
 
 @cli.command()
 def deploy():
+    ver = version()
+    click.secho("Will deploy version {}".format(ver), fg='green')
+
     click.secho("Building Docker images", fg="green")
     subprocess.check_call(['./gradlew', 'pushImages'])
-    ver = version()
-    click.secho("Deploying version {}".format(ver), fg='green')
+
+    click.secho("Running Ansible deploy playbook for BUSUN", fg="green")
     subprocess.check_call(
         ['ansible-playbook', 'deploy-conference.yml', '-e', 'conference=busun tag={}'.format(ver)],
         cwd='provisioning'
     )
+    # TODO: BUCS and asset server
 
 if __name__ == '__main__':
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
