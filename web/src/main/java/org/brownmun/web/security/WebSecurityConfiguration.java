@@ -18,7 +18,7 @@ import org.brownmun.core.staff.StaffService;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
     private static final String CONTENT_SECURITY_POLICY =
-            "default-src 'self'; frame-src 'none'; img-src 'self' https://storage.googleapis.com; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self' https://maps.googleapis.com https://sentry.io; style-src 'self'; worker-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri https://brownmun.report-uri.com/r/d/csp/enforce";
+            "default-src 'self'; font-src 'self' https://fonts.googleapis.com; frame-src 'none'; img-src 'self' https://storage.googleapis.com https://maps.googleapis.com https://maps.gstatic.com; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self' https://maps.googleapis.com https://sentry.io; style-src 'self' https://fonts.googleapis.com; worker-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri https://brownmun.report-uri.com/r/d/csp/enforce";
 
     private static final String FEATURE_POLICY =
             "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'self'; usb 'none'; vibrate 'none'; vr 'none'";
@@ -41,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .headers()
                     .referrerPolicy(ReferrerPolicy.NO_REFERRER)
                     .and()
-                    .contentSecurityPolicy(CONTENT_SECURITY_POLICY)
+                    .contentSecurityPolicy(CONTENT_SECURITY_POLICY).reportOnly()
                     .and()
                     .addHeaderWriter(new FeaturePolicyWriter(FEATURE_POLICY))
                     .and()
