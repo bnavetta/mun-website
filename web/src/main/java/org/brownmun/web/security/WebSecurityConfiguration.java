@@ -13,12 +13,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import org.brownmun.core.staff.StaffService;
 
+import java.time.Duration;
+
 @Configuration
 // @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
     private static final String CONTENT_SECURITY_POLICY =
-            "default-src 'self'; font-src 'self' https://fonts.googleapis.com; frame-src 'none'; img-src 'self' https://storage.googleapis.com https://maps.googleapis.com https://maps.gstatic.com; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self' https://maps.googleapis.com https://sentry.io; style-src 'self' https://fonts.googleapis.com; worker-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri https://brownmun.report-uri.com/r/d/csp/enforce";
+            "connect-src 'self'; default-src 'self'; font-src 'self' https://fonts.googleapis.com; frame-src 'none'; img-src 'self' https://storage.googleapis.com https://maps.googleapis.com https://maps.gstatic.com; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self' https://maps.googleapis.com https://sentry.io; style-src 'self' https://fonts.googleapis.com; worker-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri https://brownmun.report-uri.com/r/d/csp/reportOnly";
 
     private static final String FEATURE_POLICY =
             "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'self'; usb 'none'; vibrate 'none'; vr 'none'";
@@ -44,6 +46,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                     .contentSecurityPolicy(CONTENT_SECURITY_POLICY).reportOnly()
                     .and()
                     .addHeaderWriter(new FeaturePolicyWriter(FEATURE_POLICY))
+                .addHeaderWriter(new ExpectCTHeaderWriter(false, Duration.ofDays(2), "https://brownmun.report-uri.com/r/d/ct/reportOnly"))
                     .and()
                 .authorizeRequests()
                     .antMatchers("/staff/**").hasRole("STAFF")
