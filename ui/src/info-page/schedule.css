@@ -10,62 +10,38 @@
     display: grid;
     grid-auto-flow: dense;
 
-    grid-template-columns: repeat(2, 2fr 1fr);
-    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-auto-rows: 1fr;
 
     grid-gap: 10px;
 }
 
 .schedule-date {
-    grid-row: 1;
+    grid-column: 1 / 3;
     justify-self: center;
 
     color: var(--color-primary);
     font-size: 1.2em;
 }
 
-.schedule-date.day-fri {
-    grid-column: 1 / 3;
-}
-
-.schedule-date.day-sat {
-    grid-column: 3 / 5;
-}
-
-.schedule-date.day-sun {
-    grid-row: 11;
-    grid-column: 1 / 3;
-}
-
 .schedule-event {
+    grid-column: 1;
+
     font-weight: bold;
 }
 
-.schedule-event.day-fri {
-    grid-column: 1;
-}
-
-.schedule-event.day-sat {
-    grid-column: 3;
-}
-
-.schedule-event.day-sun {
-    grid-column: 1;
-}
-
 .schedule-time {
-    /*color: var(--color-accent);*/
-}
-
-.schedule-time.day-fri {
     grid-column: 2;
 }
 
-.schedule-time.day-sat {
-    grid-column: 4;
+.schedule-date.day-fri {
+    grid-row: 1
 }
 
-.schedule-time.day-sun {
-    grid-column: 2;
+.schedule-date.day-sat {
+    grid-row: 11;
+}
+
+.schedule-date.day-sun {
+    grid-row: 19;
 }
