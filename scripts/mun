@@ -8,7 +8,8 @@ from sshtunnel import SSHTunnelForwarder
 
 def tunnel(target_port):
     return SSHTunnelForwarder(
-        'brownmun.us-east1-b.busun-158105',
+        'busun.org',
+        ssh_username='brownmun',
         remote_bind_address=('127.0.0.1', target_port),
     )
 
@@ -96,7 +97,7 @@ def prod_shell(extra_args):
 
 @prod.command('ssh')
 def prod_ssh():
-    subprocess.call(['ssh', '-i', 'provisioning/keys/id_rsa', 'brownmun@159.89.247.170'])
+    subprocess.call(['ssh', '-i', 'provisioning/keys/id_rsa', 'brownmun@busun.org'])
 
 
 @cli.group(invoke_without_command=True, chain=True)
