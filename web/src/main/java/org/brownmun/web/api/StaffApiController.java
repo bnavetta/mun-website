@@ -18,7 +18,7 @@ import java.util.Optional;
  * API for the staff dashboard
  */
 @RestController
-@RequestMapping("/api/staff")
+@RequestMapping("/api")
 @PreAuthorize("hasRole('STAFF')")
 public class StaffApiController
 {
