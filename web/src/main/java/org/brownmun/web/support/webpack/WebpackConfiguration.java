@@ -19,4 +19,10 @@ public class WebpackConfiguration
     {
         return new WebpackDialect(resolver);
     }
+
+    @Bean
+    public WebpackActuatorEndpoint webpackActuatorEndpoint(ChunkResolver chunkResolver)
+    {
+        return new WebpackActuatorEndpoint(chunkResolver);
+    }
 }

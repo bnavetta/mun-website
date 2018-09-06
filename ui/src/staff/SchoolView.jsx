@@ -28,6 +28,7 @@ const ghostLogin = async id => {
         console.log(`Error authenticating as advisor ${id}: ${e}`);
         new Noty({
             text: `Ghost login failed: ${e}`,
+            type: 'error',
             animation: {
                 open: 'animated bounceInRight',
                 close: 'animated bounceOutRight'

@@ -18,12 +18,14 @@ public class ChunkResolver
     private static final Logger log = LoggerFactory.getLogger(ChunkResolver.class);
 
     private final URI assetBase;
-    private final Supplier<Manifest> manifestSource;
+    private Supplier<Manifest> manifestSource;
+    private final boolean reload;
 
     public ChunkResolver(URI assetBase, boolean reload)
     {
         log.debug("Using Webpack assets from {}", assetBase);
         this.assetBase = assetBase;
+        this.reload = reload;
 
         if (reload)
         {
@@ -34,6 +36,22 @@ public class ChunkResolver
             Manifest manifest = loadManifest();
             this.manifestSource = () -> manifest;
         }
+    }
+
+    public void resetManifest()
+    {
+        // If we already reload the manifest every time, there's nothing to do here
+        if (!reload)
+        {
+            log.debug("Reloading cached manifest");
+            Manifest manifest = loadManifest();
+            this.manifestSource = () -> manifest;
+        }
+    }
+
+    public Manifest getManifest()
+    {
+        return manifestSource.get();
     }
 
     public Chunk getChunk(String name)
