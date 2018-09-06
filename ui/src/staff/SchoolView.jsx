@@ -2,13 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import "regenerator-runtime/runtime"; // for some reason this doesn't get picked up
 import { Form } from "react-form";
+import Noty from "noty";
+
 import { yesNo } from "../lib/util";
-
-import ApplicationForm from "../registration/ApplicationForm";
-import SupplementalInfo from "./SupplementalInfo";
-
-import { selectSchool, selectAdvisors } from "./state";
 import LoadingPage from "../lib/components/LoadingPage";
+import ApplicationForm from "../registration/ApplicationForm";
+
+import SupplementalInfo from "./SupplementalInfo";
+import { authenticateAs } from "./api";
+import { selectSchool, selectAdvisors } from "./state";
 
 const mapStateToProps = (state, props) => {
     const id = parseInt(props.match.params.id);
@@ -16,6 +18,22 @@ const mapStateToProps = (state, props) => {
         school: selectSchool(id, state),
         advisors: selectAdvisors(id, state),
     };
+};
+
+const ghostLogin = async id => {
+    try {
+        await authenticateAs(id);
+        window.location.assign('/your-mun');
+    } catch (e) {
+        console.log(`Error authenticating as advisor ${id}: ${e}`);
+        new Noty({
+            text: `Ghost login failed: ${e}`,
+            animation: {
+                open: 'animated bounceInRight',
+                close: 'animated bounceOutRight'
+            }
+        }).show();
+    }
 };
 
 function SchoolView({ school, advisors }) {
@@ -44,6 +62,7 @@ function SchoolView({ school, advisors }) {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +72,11 @@ function SchoolView({ school, advisors }) {
                                 <td>{advisor.name}</td>
                                 <td>{advisor.email}</td>
                                 <td>{advisor.phoneNumber}</td>
+                                <td>
+                                    <button className="button" onClick={() => ghostLogin(advisor.id)}>
+                                        Ghost Login
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                 </tbody>

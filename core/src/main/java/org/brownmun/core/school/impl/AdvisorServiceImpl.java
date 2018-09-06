@@ -3,15 +3,17 @@ package org.brownmun.core.school.impl;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 
+import org.brownmun.core.school.model.School;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import org.brownmun.core.Conference;
@@ -52,6 +54,13 @@ public class AdvisorServiceImpl implements AdvisorService
         this.mailSender = mailSender;
         this.conference = conference;
         this.encoder = encoder;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Advisor> getAdvisor(long id)
+    {
+        return advisorRepo.findById(id);
     }
 
     @Override
@@ -112,6 +121,22 @@ public class AdvisorServiceImpl implements AdvisorService
         {
             throw new PasswordResetException("Invalid token", null);
         }
+    }
+
+    @Override
+    @Transactional
+    public Advisor createAdvisor(long schoolId, String name, String password, String email, String phoneNumber)
+    {
+        School school = schoolService.getSchool(schoolId)
+                .orElseThrow(() -> new IllegalArgumentException("No school with ID " + schoolId));
+
+        Advisor advisor = new Advisor();
+        advisor.setName(name);
+        advisor.setEmail(email);
+        advisor.setPassword(encoder.encode(password));
+        advisor.setPhoneNumber(phoneNumber);
+        school.addAdvisor(advisor);
+        return advisorRepo.save(advisor);
     }
 
     @Override

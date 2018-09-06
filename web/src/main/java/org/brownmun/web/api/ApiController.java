@@ -51,27 +51,6 @@ public class ApiController
         return schools.listSchools();
     }
 
-    @GetMapping("/school/{id}/advisors")
-    @PreAuthorize("hasRole('STAFF')")
-    public List<Advisor> getAdvisors(@PathVariable Long id)
-    {
-        return schools.getAdvisors(id);
-    }
-
-    @GetMapping("/school/{id}/supplemental-info")
-    @PreAuthorize("hasRole('STAFF')")
-    public SupplementalInfo getSupplementalInfo(@PathVariable Long id)
-    {
-        return schools.getSupplementalInfo(id);
-    }
-
-    @GetMapping("/advisors")
-    @PreAuthorize("hasRole('STAFF')")
-    public List<Advisor> listAdvisors()
-    {
-        return schools.listAdvisors();
-    }
-
     @GetMapping("/hotels")
     public List<Hotel> getHotels()
     {

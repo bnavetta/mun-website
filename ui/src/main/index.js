@@ -1,6 +1,7 @@
 import Raven from "raven-js";
 import "core-js/fn/set"; // Needed for React on some browsers
 
+import "animate.css/animate.min.css";
 import "./styles.css";
 
 console.log("Hello, Model UN!");

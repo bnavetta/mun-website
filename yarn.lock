@@ -718,6 +718,10 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
 
+animate.css@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.7.0.tgz#5de25d1ee5fba11ba6a1e2c4fa568f512eb7d4da"
+
 ansi-escapes@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -1111,7 +1115,7 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-emotion@^9.0.1, babel-plugin-emotion@^9.1.2:
+babel-plugin-emotion@^9.1.2:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-9.1.2.tgz#e26b313fa0fecd0f2cc07b1e4ef05da167e4f740"
   dependencies:
@@ -2714,7 +2718,7 @@ emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
 
-emotion@^9.0.1, emotion@^9.1.1:
+emotion@^9.1.1:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/emotion/-/emotion-9.1.2.tgz#b89ff80c8449a2eb146a4a0fc87f3e1aefedd253"
   dependencies:
@@ -5020,6 +5024,10 @@ normalize.css@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.0.tgz#14ac5e461612538a4ce9be90a7da23f86e718493"
 
+noty@^3.2.0-beta:
+  version "3.2.0-beta"
+  resolved "https://registry.yarnpkg.com/noty/-/noty-3.2.0-beta.tgz#cd1117277a1b83c9b08dfc78f968c6c5960d3cfa"
+
 npm-bundled@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.3.tgz#7e71703d973af3370a9591bafe3a63aca0be2308"
@@ -6178,7 +6186,7 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-emotion@^9.0.1, react-emotion@^9.1.1:
+react-emotion@^9.1.1:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-9.1.2.tgz#fca18bcb827809de2a5d73fb996b717ed4fada02"
   dependencies:

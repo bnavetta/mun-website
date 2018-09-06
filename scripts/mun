@@ -3,15 +3,35 @@ import os
 import subprocess
 
 import click
+import paramiko
 from sshtunnel import SSHTunnelForwarder
 
 
-def tunnel(target_port):
+def ssh_client():
+    client = paramiko.SSHClient()
+    client.load_system_host_keys()
+    client.connect('busun.org', username='brownmun')
+    return client
+
+
+def tunnel(target_address, target_port):
     return SSHTunnelForwarder(
         'busun.org',
         ssh_username='brownmun',
-        remote_bind_address=('127.0.0.1', target_port),
+        remote_bind_address=(target_address, target_port),
     )
+
+
+def container_ip(container_name):
+    """
+    Get the bridge network IP address of a container. Since our Docker containers run on a user-defined bridge
+    network, we need to look up their IP address to connect to them from the host server
+    """
+    client = ssh_client()
+    _, stdout, _ = client.exec_command('docker inspect -f \'{{ (index .NetworkSettings.Networks "mun-net").IPAddress }}\' ' + container_name)
+    ip = stdout.read().strip()
+    client.close()
+    return ip.decode('utf-8')
 
 
 def run_shell(extra_args, env):
@@ -82,15 +102,17 @@ def prod():
 
 @prod.command('querydb')
 def prod_querydb():
-    with tunnel(5432) as t:
+    with tunnel(container_ip('postgres'), 5432) as t:
         subprocess.call(['psql', '-h', 'localhost', '-p', str(t.local_bind_port), '-U', os.environ['DB_USER']])
 
 
 @prod.command('shell', context_settings=dict(ignore_unknown_options=True))
 @click.argument('extra_args', nargs=-1, type=click.UNPROCESSED)
 def prod_shell(extra_args):
-    with tunnel(5432) as t:
+    with tunnel(container_ip('postgres'), 5432) as t:
         env = dict(os.environ)
+        env['DB_USER'] = 'postgres'
+        env['DB_PASSWORD'] = env['PROD_DB_PASSWORD']
         env['DB_JDBC_URL'] = 'jdbc:postgresql://localhost:{}/busun'.format(t.local_bind_port)
         run_shell(extra_args, env)
 
