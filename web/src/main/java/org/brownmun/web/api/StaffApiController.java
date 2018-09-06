@@ -3,6 +3,7 @@ package org.brownmun.web.api;
 import org.brownmun.core.school.AdvisorService;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
+import org.brownmun.core.school.model.School;
 import org.brownmun.core.school.model.SupplementalInfo;
 import org.brownmun.web.security.ConferenceSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Optional;
  * API for the staff dashboard
  */
 @RestController
-@RequestMapping("/staff/api")
+@RequestMapping("/api/staff")
 @PreAuthorize("hasRole('STAFF')")
 public class StaffApiController
 {
@@ -29,6 +30,12 @@ public class StaffApiController
     {
         this.schools = schools;
         this.advisors = advisors;
+    }
+
+    @GetMapping("/school")
+    public List<School> listSchools()
+    {
+        return schools.listSchools();
     }
 
     @GetMapping("/school/{id}/advisors")

@@ -1,22 +1,15 @@
 package org.brownmun.web.api;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import org.brownmun.core.committee.CommitteeListing;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.logistics.HotelService;
 import org.brownmun.core.logistics.model.Hotel;
-import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.core.school.model.School;
-import org.brownmun.core.school.model.SupplementalInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Read-only API for client-side code on the public facing website, such as the
@@ -27,14 +20,12 @@ import org.brownmun.core.school.model.SupplementalInfo;
 public class ApiController
 {
     private final CommitteeService committees;
-    private final SchoolService schools;
     private final HotelService hotels;
 
     @Autowired
-    public ApiController(CommitteeService committees, SchoolService schools, HotelService hotels)
+    public ApiController(CommitteeService committees, HotelService hotels)
     {
         this.committees = committees;
-        this.schools = schools;
         this.hotels = hotels;
     }
 
@@ -42,13 +33,6 @@ public class ApiController
     public CommitteeListing listCommittees()
     {
         return committees.list();
-    }
-
-    @GetMapping("/school")
-    @PreAuthorize("hasRole('STAFF')")
-    public List<School> listSchools()
-    {
-        return schools.listSchools();
     }
 
     @GetMapping("/hotels")
