@@ -36,7 +36,8 @@ export async function request(url, options = {}) {
     );
 
     // Support non-JSON responses
-    if (!response.headers.get("Content-Type").startsWith("application/json")) {
+    const contentType = response.headers.get("Content-Type");
+    if (contentType === null || !contentType.startsWith("application/json")) {
         const body = await response.text();
         if (response.ok) {
             return body;
