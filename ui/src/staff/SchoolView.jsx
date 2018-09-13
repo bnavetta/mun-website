@@ -39,7 +39,7 @@ const ghostLogin = async id => {
     }
 };
 
-const formatDate = date => format(parse(date), 'ddd, MMM D [at] h:mm A');
+const formatDate = date => format(parse(date), 'ddd, MMM D YYYY [at] h:mm A');
 
 function SchoolView({ school, advisors }) {
     if (!school) {
