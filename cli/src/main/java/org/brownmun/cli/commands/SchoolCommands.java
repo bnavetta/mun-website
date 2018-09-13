@@ -1,12 +1,12 @@
 package org.brownmun.cli.commands;
 
-import org.brownmun.core.school.AdvisorService;
-import org.brownmun.core.school.model.Advisor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import org.brownmun.core.school.AdvisorService;
 import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.School;
 
 import de.vandermeer.asciitable.AsciiTable;
@@ -44,8 +44,8 @@ public class SchoolCommands
         table.addRow("School ID", "School Name", "Accepted");
         table.addStrongRule();
 
-        schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower))
-                .forEach(school -> {
+        schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower)).forEach(
+                school -> {
                     table.addRow(school.getId(), school.getName(), school.isAccepted());
                     table.addRule();
                 });
@@ -62,8 +62,7 @@ public class SchoolCommands
     @ShellMethod("Reset advisor password")
     public void resetAdvisorPassword(String advisorEmail, String password)
     {
-        Advisor advisor = schoolService
-                .findAdvisor(advisorEmail)
+        Advisor advisor = schoolService.findAdvisor(advisorEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Advisor not found"));
 
         advisorService.changePassword(advisor, password);

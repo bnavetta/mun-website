@@ -101,7 +101,12 @@ public class SecretariatMember
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("title", title).add("name", name).add("bio", bio)
-                .add("image", image).add("email", email).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("title", title)
+                .add("name", name)
+                .add("bio", bio)
+                .add("image", image)
+                .add("email", email)
+                .toString();
     }
 }

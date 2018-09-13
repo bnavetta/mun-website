@@ -20,7 +20,8 @@ public class MailgunClient
     public MailgunClient(MailgunProperties properties, RestTemplateBuilder builder)
     {
         this.restTemplate = builder.rootUri(properties.getBaseUri())
-                .basicAuthorization(properties.getUsername(), properties.getApiKey()).build();
+                .basicAuthorization(properties.getUsername(), properties.getApiKey())
+                .build();
     }
 
     public void send(String from, String to, String replyTo, String subject, String html, String text)

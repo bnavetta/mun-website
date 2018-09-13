@@ -3,12 +3,12 @@ package org.brownmun.core.school.impl;
 import java.util.OptionalLong;
 import java.util.Set;
 
-import org.brownmun.core.school.model.Delegate;
-import org.brownmun.core.school.model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.model.Delegate;
+import org.brownmun.core.school.model.School;
 
 /**
  * Queries relating to {@link School}s.

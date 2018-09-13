@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
-import org.brownmun.core.school.model.Delegate;
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,7 @@ import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.model.Delegate;
 
 @Service
 public class CommitteeServiceImpl implements CommitteeService
@@ -96,7 +96,8 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Override
-    public Optional<Position> getPosition(long id) {
+    public Optional<Position> getPosition(long id)
+    {
         return positionRepo.findById(id);
     }
 
@@ -112,10 +113,13 @@ public class CommitteeServiceImpl implements CommitteeService
             old.setPosition(null);
         }
 
-        // TODO: do we delete the old delegate? should there ever be delegates w/o positions
+        // TODO: do we delete the old delegate? should there ever be delegates w/o
+        // positions
         // or are they basically just a join table?
-        // by the time a delegate has attendance info, the conference has already started
-        // if a delegate has a name but we unassign their position, it's probably because they're not coming
+        // by the time a delegate has attendance info, the conference has already
+        // started
+        // if a delegate has a name but we unassign their position, it's probably
+        // because they're not coming
         // there could be position swaps, but maybe we implement that separately
         // so just treat delegates as join table
 

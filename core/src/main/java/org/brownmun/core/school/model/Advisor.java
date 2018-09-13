@@ -9,8 +9,10 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.MoreObjects;
 
+import org.brownmun.core.api.Views;
 import org.brownmun.util.PhoneNumber;
 
 /**
@@ -63,6 +65,7 @@ public class Advisor
      * Advisors... aren't always the best at communication, so this is a way of
      * knowing if they're actually checking the things we need them to check.
      */
+    @JsonView(Views.Staff.class)
     private Instant lastSeen;
 
     @JsonProperty
@@ -156,7 +159,14 @@ public class Advisor
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("email", email)
-                .add("phoneNumber", phoneNumber).add("password", password).add("schoolId", school.getId()).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("email", email)
+                .add("phoneNumber", phoneNumber)
+                .add("password", password)
+                .add("schoolId", school.getId())
+                .add("lastSeen", lastSeen)
+                .toString();
     }
 }

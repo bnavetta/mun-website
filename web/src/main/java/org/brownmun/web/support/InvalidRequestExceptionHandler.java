@@ -50,8 +50,11 @@ public class InvalidRequestExceptionHandler extends ResponseEntityExceptionHandl
         Map<String, List<String>> errors = Maps.newHashMap();
 
         // Stick global errors under _global
-        List<String> globalErrors = ex.getBindingResult().getGlobalErrors().stream()
-                .map(error -> messageSource.getMessage(error, Locale.US)).collect(Collectors.toList());
+        List<String> globalErrors = ex.getBindingResult()
+                .getGlobalErrors()
+                .stream()
+                .map(error -> messageSource.getMessage(error, Locale.US))
+                .collect(Collectors.toList());
         errors.put("_global", globalErrors);
 
         for (FieldError error : ex.getBindingResult().getFieldErrors())

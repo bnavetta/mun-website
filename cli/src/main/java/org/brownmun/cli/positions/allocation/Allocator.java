@@ -54,7 +54,8 @@ public class Allocator
 
     private List<SchoolAllocation> loadPreferences(File source) throws IOException
     {
-        MappingIterator<SchoolAllocation> iter = mapper.readerFor(SchoolAllocation.class).with(allocationSchema)
+        MappingIterator<SchoolAllocation> iter = mapper.readerFor(SchoolAllocation.class)
+                .with(allocationSchema)
                 .readValues(source);
         List<SchoolAllocation> alloc = iter.readAll();
         iter.close();

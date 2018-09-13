@@ -128,7 +128,13 @@ public class Hotel
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("rate", rate)
-                .add("address", address).add("phone", phone).add("notes", notes).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("rate", rate)
+                .add("address", address)
+                .add("phone", phone)
+                .add("notes", notes)
+                .toString();
     }
 }

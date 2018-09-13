@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.brownmun.core.school.model.School;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import org.brownmun.core.school.PasswordResetException;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.PasswordReset;
+import org.brownmun.core.school.model.School;
 import org.brownmun.util.Tokens;
 
 /**
@@ -76,12 +76,20 @@ public class AdvisorServiceImpl implements AdvisorService
         reset.setRequestedAt(Instant.now());
         reset = repo.save(reset);
 
-        String resetUrl = UriComponentsBuilder.newInstance().scheme("https").host(conference.getDomainName())
-                .path("/your-mun/password/reset").queryParam("token", reset.getResetCode()).build().toUriString();
+        String resetUrl = UriComponentsBuilder.newInstance()
+                .scheme("https")
+                .host(conference.getDomainName())
+                .path("/your-mun/password/reset")
+                .queryParam("token", reset.getResetCode())
+                .build()
+                .toUriString();
 
-        EmailMessage message = EmailMessage.builder().recipient(email)
-                .subject(String.format("[%s] Password Reset", conference.getName())).messageTemplate("password-reset")
-                .variables(Map.of("advisor", advisor, "resetUrl", resetUrl)).build();
+        EmailMessage message = EmailMessage.builder()
+                .recipient(email)
+                .subject(String.format("[%s] Password Reset", conference.getName()))
+                .messageTemplate("password-reset")
+                .variables(Map.of("advisor", advisor, "resetUrl", resetUrl))
+                .build();
 
         try
         {
@@ -146,5 +154,13 @@ public class AdvisorServiceImpl implements AdvisorService
         advisor.setPassword(encoder.encode(newPassword));
         advisorRepo.save(advisor);
         log.debug("Changed password for {}", advisor.getEmail());
+    }
+
+    @Override
+    @Transactional
+    public void markSeen(Advisor advisor)
+    {
+        advisor.setLastSeen(Instant.now());
+        advisorRepo.save(advisor);
     }
 }

@@ -22,7 +22,7 @@ public class AdvisorUserDetailsService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
     {
-        return schoolService.findAdvisor(s).map(AdvisorUser::new)
-                .orElseThrow(() -> new UsernameNotFoundException("No advisor found with email address " + s));
+        return schoolService.findAdvisor(s).map(AdvisorUser::new).orElseThrow(
+                () -> new UsernameNotFoundException("No advisor found with email address " + s));
     }
 }

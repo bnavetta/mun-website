@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import "regenerator-runtime/runtime"; // for some reason this doesn't get picked up
 import { Form } from "react-form";
 import Noty from "noty";
+import parse from "date-fns/parse";
+import format from "date-fns/format";
 
 import { yesNo } from "../lib/util";
 import LoadingPage from "../lib/components/LoadingPage";
@@ -37,6 +39,8 @@ const ghostLogin = async id => {
     }
 };
 
+const formatDate = date => format(parse(date), 'ddd, MMM D [at] h:mm A');
+
 function SchoolView({ school, advisors }) {
     if (!school) {
         return <LoadingPage />;
@@ -63,6 +67,7 @@ function SchoolView({ school, advisors }) {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Last Seen</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -73,6 +78,7 @@ function SchoolView({ school, advisors }) {
                                 <td>{advisor.name}</td>
                                 <td>{advisor.email}</td>
                                 <td>{advisor.phoneNumber}</td>
+                                <td>{formatDate(advisor.lastSeen)}</td>
                                 <td>
                                     <button className="button" onClick={() => ghostLogin(advisor.id)}>
                                         Ghost Login

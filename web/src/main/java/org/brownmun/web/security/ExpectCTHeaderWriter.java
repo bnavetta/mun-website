@@ -1,18 +1,21 @@
 package org.brownmun.web.security;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import org.springframework.security.web.header.HeaderWriter;
+import java.time.Duration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.Duration;
-import java.util.List;
+
+import org.springframework.security.web.header.HeaderWriter;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 /**
  * Adds the {@code Expect-CT} header to requests.
  *
- * @see <a href="https://scotthelme.co.uk/a-new-security-header-expect-ct">A new security header: Expect-CT</a>
+ * @see <a href="https://scotthelme.co.uk/a-new-security-header-expect-ct">A new
+ *      security header: Expect-CT</a>
  */
 public class ExpectCTHeaderWriter implements HeaderWriter
 {

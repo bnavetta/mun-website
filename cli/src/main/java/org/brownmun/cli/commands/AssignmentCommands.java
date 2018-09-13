@@ -4,21 +4,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.core.committee.model.Position;
-import org.brownmun.core.school.model.Delegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 import org.brownmun.cli.positions.SchoolAllocation;
 import org.brownmun.cli.positions.allocation.Allocator;
 import org.brownmun.cli.positions.assignment.Assigner;
 import org.brownmun.cli.positions.assignment.PositionAssignment;
+import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Delegate;
 import org.brownmun.core.school.model.School;
 
 import de.vandermeer.asciitable.AsciiTable;
@@ -34,7 +34,8 @@ public class AssignmentCommands
     private final CsvMapper csvMapper;
 
     @Autowired
-    public AssignmentCommands(SchoolService schoolService, CommitteeService committeeService, Allocator allocator, Assigner assigner, CsvMapper csvMapper)
+    public AssignmentCommands(SchoolService schoolService, CommitteeService committeeService, Allocator allocator,
+            Assigner assigner, CsvMapper csvMapper)
     {
         this.schoolService = schoolService;
         this.committeeService = committeeService;
@@ -87,16 +88,19 @@ public class AssignmentCommands
         CsvSchema assignmentSchema = csvMapper.typedSchemaFor(PositionAssignment.class).withHeader();
 
         List<PositionAssignment> assignments;
-        try (MappingIterator<PositionAssignment> iter = csvMapper
-                .readerFor(PositionAssignment.class).with(assignmentSchema).readValues(assignmentsFile)) {
+        try (MappingIterator<PositionAssignment> iter = csvMapper.readerFor(PositionAssignment.class)
+                .with(assignmentSchema)
+                .readValues(assignmentsFile))
+        {
             assignments = iter.readAll();
         }
 
-        for (PositionAssignment assignment : assignments) {
+        for (PositionAssignment assignment : assignments)
+        {
             School school = schoolService.getSchool(assignment.schoolId())
                     .orElseThrow(() -> new RuntimeException("No school with ID " + assignment.schoolId()));
 
-//            Position position = committeeService.getCommittee();
+            // Position position = committeeService.getCommittee();
 
             Delegate delegate = new Delegate();
             delegate.setSchool(school);

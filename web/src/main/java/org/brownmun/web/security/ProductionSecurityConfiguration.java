@@ -19,14 +19,13 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http
-                .requiresChannel()
-                    .anyRequest()
-                    .requiresSecure()
-                    .and()
+        http.requiresChannel()
+                .anyRequest()
+                .requiresSecure()
+                .and()
                 .requestMatcher(EndpointRequest.toAnyEndpoint())
-                    .authorizeRequests()
-                    .anyRequest()
-                    .hasIpAddress(adminIpRange);
+                .authorizeRequests()
+                .anyRequest()
+                .hasIpAddress(adminIpRange);
     }
 }

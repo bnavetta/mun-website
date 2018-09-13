@@ -61,8 +61,13 @@ public class AwardPrint
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("id", id).add("type", type).add("committeeName", committeeName)
-                .add("positionName", positionName).add("schoolName", schoolName).add("delegateName", delegateName)
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("type", type)
+                .add("committeeName", committeeName)
+                .add("positionName", positionName)
+                .add("schoolName", schoolName)
+                .add("delegateName", delegateName)
                 .toString();
     }
 }

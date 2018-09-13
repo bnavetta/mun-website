@@ -161,10 +161,16 @@ public class PrintRequest
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("id", id).add("numCopies", numCopies)
-                .add("deliveryLocation", deliveryLocation).add("submissionTime", submissionTime)
-                .add("requester", requester).add("filename", filename).add("contentType", contentType)
-                .add("status", status).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("numCopies", numCopies)
+                .add("deliveryLocation", deliveryLocation)
+                .add("submissionTime", submissionTime)
+                .add("requester", requester)
+                .add("filename", filename)
+                .add("contentType", contentType)
+                .add("status", status)
+                .toString();
     }
 
     /**

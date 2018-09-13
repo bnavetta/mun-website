@@ -74,7 +74,12 @@ public class SchoolStatus
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("hasApplied", hasApplied)
-                .add("accepted", accepted).add("registrationCode", registrationCode).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("hasApplied", hasApplied)
+                .add("accepted", accepted)
+                .add("registrationCode", registrationCode)
+                .toString();
     }
 }

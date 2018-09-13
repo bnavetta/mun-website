@@ -89,8 +89,11 @@ public class Assigner
                 int assigned = solver.getDelegates(school.getId(), committee.getId());
                 for (int i = 0; i < assigned; i++)
                 {
-                    assignments.add(PositionAssignment.builder().withCommittee(committee).withSchool(school)
-                            .withPosition(available.remove()).build());
+                    assignments.add(PositionAssignment.builder()
+                            .withCommittee(committee)
+                            .withSchool(school)
+                            .withPosition(available.remove())
+                            .build());
                 }
             }
         }
@@ -107,18 +110,23 @@ public class Assigner
      */
     public List<PositionAssignment> assign(AssignmentSettings settings, List<SchoolAllocation> allocations)
     {
-        List<AssignableCommittee> ga = committeeService.allByType(CommitteeType.GENERAL).map(this::toAssignable)
+        List<AssignableCommittee> ga = committeeService.allByType(CommitteeType.GENERAL)
+                .map(this::toAssignable)
                 .collect(Collectors.toList());
-        List<AssignableCommittee> spec = committeeService.allByType(CommitteeType.SPECIALIZED).map(this::toAssignable)
+        List<AssignableCommittee> spec = committeeService.allByType(CommitteeType.SPECIALIZED)
+                .map(this::toAssignable)
                 .collect(Collectors.toList());
 
         List<AssignableCommittee> crisis = Stream
                 .concat(committeeService.allByType(CommitteeType.CRISIS),
                         committeeService.allByType(CommitteeType.JOINT_CRISIS_ROOM))
-                .map(this::toAssignable).collect(Collectors.toList());
+                .map(this::toAssignable)
+                .collect(Collectors.toList());
 
         long maxCommitteeId = Stream.concat(ga.stream(), Stream.concat(spec.stream(), crisis.stream()))
-                .mapToLong(AssignableCommittee::id).max().getAsLong();
+                .mapToLong(AssignableCommittee::id)
+                .max()
+                .getAsLong();
         long maxSchoolId = allocations.stream().mapToLong(SchoolAllocation::id).max().getAsLong();
 
         AssignmentSolver solver = new AssignmentSolver((int) maxSchoolId, (int) maxCommitteeId);
@@ -140,7 +148,8 @@ public class Assigner
     private List<SchoolAllocation> readAllocations(File source) throws IOException
     {
         try (MappingIterator<SchoolAllocation> allocationIter = csvMapper.readerFor(SchoolAllocation.class)
-                .with(allocationSchema).readValues(source))
+                .with(allocationSchema)
+                .readValues(source))
         {
             return allocationIter.readAll();
         }

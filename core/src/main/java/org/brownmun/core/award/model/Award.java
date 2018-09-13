@@ -76,7 +76,11 @@ public class Award
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("id", id).add("position", position).add("committee", committee)
-                .add("type", type).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("position", position)
+                .add("committee", committee)
+                .add("type", type)
+                .toString();
     }
 }

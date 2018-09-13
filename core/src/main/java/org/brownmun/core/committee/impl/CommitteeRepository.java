@@ -4,13 +4,13 @@ import java.util.OptionalLong;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.CommitteeType;
-import org.brownmun.core.committee.model.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import org.brownmun.core.award.model.Award;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.CommitteeType;
+import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.model.Delegate;
 import org.brownmun.core.school.model.School;
 

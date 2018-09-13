@@ -56,8 +56,8 @@ public class ChunkResolver
 
     public Chunk getChunk(String name)
     {
-        List<URI> files = manifestSource.get().getFiles(name).stream().map(assetBase::resolve)
-                .collect(Collectors.toList());
+        List<URI> files = manifestSource.get().getFiles(name).stream().map(assetBase::resolve).collect(
+                Collectors.toList());
 
         List<URI> js = Lists.newArrayList();
         List<URI> css = Lists.newArrayList();

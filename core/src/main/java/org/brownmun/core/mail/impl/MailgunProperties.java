@@ -66,7 +66,10 @@ public class MailgunProperties
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("baseUri", baseUri).add("username", username).add("apiKey", apiKey)
+        return MoreObjects.toStringHelper(this)
+                .add("baseUri", baseUri)
+                .add("username", username)
+                .add("apiKey", apiKey)
                 .toString();
     }
 }

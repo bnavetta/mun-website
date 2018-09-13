@@ -88,8 +88,13 @@ public class Attendance
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("positionPaperSubmitted", positionPaperSubmitted)
-                .add("sessionOne", sessionOne).add("sessionTwo", sessionTwo).add("sessionThree", sessionThree)
-                .add("sessionFour", sessionFour).add("sessionFive", sessionFive).toString();
+        return MoreObjects.toStringHelper(this)
+                .add("positionPaperSubmitted", positionPaperSubmitted)
+                .add("sessionOne", sessionOne)
+                .add("sessionTwo", sessionTwo)
+                .add("sessionThree", sessionThree)
+                .add("sessionFour", sessionFour)
+                .add("sessionFive", sessionFive)
+                .toString();
     }
 }

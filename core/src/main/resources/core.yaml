@@ -6,3 +6,6 @@ spring:
     properties:
       hibernate:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+  jackson:
+    mapper:
+      default_view_inclusion: true

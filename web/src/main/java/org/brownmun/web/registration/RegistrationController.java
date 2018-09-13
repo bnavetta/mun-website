@@ -60,7 +60,8 @@ public class RegistrationController
         schoolService.submitApplication(school);
 
         Advisor advisor = Iterables.getOnlyElement(school.getAdvisors());
-        URI dashboard = MvcUriComponentsBuilder.fromMethodName(DashboardController.class, "dashboardHome").build()
+        URI dashboard = MvcUriComponentsBuilder.fromMethodName(DashboardController.class, "dashboardHome")
+                .build()
                 .toUri();
 
         ConferenceSecurity.authenticateAsAdvisor(advisor);

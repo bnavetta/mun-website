@@ -1,13 +1,13 @@
 package org.brownmun.web.security;
 
-import org.springframework.security.web.header.HeaderWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.web.header.HeaderWriter;
+
 /**
- * {@link HeaderWriter} implementation for the
- * <a href="https://scotthelme.co.uk/a-new-security-header-feature-policy/"><code>Feature-Policy</code></a>
+ * {@link HeaderWriter} implementation for the <a href=
+ * "https://scotthelme.co.uk/a-new-security-header-feature-policy/"><code>Feature-Policy</code></a>
  * header.
  */
 public class FeaturePolicyWriter implements HeaderWriter
