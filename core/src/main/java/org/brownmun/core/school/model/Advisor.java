@@ -1,5 +1,6 @@
 package org.brownmun.core.school.model;
 
+import java.time.Instant;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -55,6 +56,14 @@ public class Advisor
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
     private School school;
+
+    /**
+     * Timestamp of the last time the advisor was signed in on the site.
+     *
+     * Advisors... aren't always the best at communication, so this is a way of
+     * knowing if they're actually checking the things we need them to check.
+     */
+    private Instant lastSeen;
 
     @JsonProperty
     public Long getSchoolId()
@@ -117,6 +126,16 @@ public class Advisor
         this.school = school;
     }
 
+    public Instant getLastSeen()
+    {
+        return lastSeen;
+    }
+
+    public void setLastSeen(Instant lastSeen)
+    {
+        this.lastSeen = lastSeen;
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -138,6 +157,6 @@ public class Advisor
     public String toString()
     {
         return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("email", email)
-                .add("phoneNumber", phoneNumber).add("password", password).add("school_id", school.getId()).toString();
+                .add("phoneNumber", phoneNumber).add("password", password).add("schoolId", school.getId()).toString();
     }
 }
