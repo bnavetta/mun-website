@@ -43,6 +43,17 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Override
+    public Position savePosition(Position position)
+    {
+        if (position.getCommittee() == null)
+        {
+            throw new IllegalStateException("Position not assigned a committee");
+        }
+
+        return positionRepo.save(position);
+    }
+
+    @Override
     public List<Committee> all()
     {
         return repo.findAll();
@@ -84,6 +95,7 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Override
+    @Transactional
     public Collection<Position> getPositions(Committee c)
     {
         return repo.fetchPositions(c);
@@ -93,6 +105,12 @@ public class CommitteeServiceImpl implements CommitteeService
     public Optional<Committee> getCommittee(long id)
     {
         return repo.findById(id);
+    }
+
+    @Override
+    public Optional<Committee> findByShortName(String shortName)
+    {
+        return repo.findByShortName(shortName);
     }
 
     @Override

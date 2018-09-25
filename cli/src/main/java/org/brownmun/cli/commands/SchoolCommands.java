@@ -34,6 +34,14 @@ public class SchoolCommands
         return school.getId();
     }
 
+    @ShellMethod("Mark a school as accepted")
+    public void acceptSchool(long id)
+    {
+        School school = schoolService.getSchool(id)
+                .orElseThrow(() -> new IllegalArgumentException("School not found"));
+        schoolService.accept(school);
+    }
+
     @ShellMethod("Find schools by name")
     public String findSchools(String nameQuery)
     {

@@ -121,6 +121,13 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
+    public void accept(School school) {
+        log.info("Accepting {} ({})", school.getId(), school.getName());
+        school.setAccepted(true);
+        repo.save(school);
+    }
+
+    @Override
     public List<School> listSchools()
     {
         return repo.findAll(Sort.by(Sort.Direction.ASC, "name"));

@@ -45,6 +45,12 @@ public interface SchoolService
     void updateApplication(Advisor advisor, SchoolApplication application);
 
     /**
+     * Mark a school as accepted.
+     * @param school the school to accept
+     */
+    void accept(School school);
+
+    /**
      * Find an advisor by email address
      *
      * @param email the advisor's email address

@@ -1,5 +1,6 @@
 package org.brownmun.core.committee.impl;
 
+import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,6 +18,11 @@ import org.brownmun.core.school.model.School;
 /** Queries related to {@link Committee}s */
 public interface CommitteeRepository extends JpaRepository<Committee, Long>
 {
+    /**
+     * Find the committee with the given short name
+     */
+    Optional<Committee> findByShortName(String shortName);
+
     /**
      * Find the positions that are part of the given committee.
      */

@@ -22,6 +22,11 @@ public interface CommitteeService
     Optional<Committee> getCommittee(long id);
 
     /**
+     * Find the committee with the given short name.
+     */
+    Optional<Committee> findByShortName(String shortName);
+
+    /**
      * Find the position with the given ID
      */
     Optional<Position> getPosition(long id);
@@ -35,6 +40,12 @@ public interface CommitteeService
      *         {@link Committee#getId()} field populated.
      */
     Committee save(Committee c);
+
+    /**
+     * Save a position to the database. The position <em>must</em> be assigned to a
+     * committee, but need not be assigned a delegate.
+     */
+    Position savePosition(Position position);
 
     /**
      * Load all committees from the database
