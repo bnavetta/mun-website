@@ -167,12 +167,6 @@ def deploy():
     client.exec_command('docker pull gcr.io/busun-158105/ui:' + ver)
     client.close()
 
-    _, stdout, _ = client.exec_command('docker inspect -f \'{{ (index .NetworkSettings.Networks "mun-net").IPAddress }}\' ' + container_name)
-    ip = stdout.read().strip()
-    client.close()
-    return ip.decode('utf-8')
-
-
     click.secho("Running Ansible deploy playbook for BUSUN", fg="green")
     subprocess.check_call(
         ['ansible-playbook', 'deploy-conference.yml', '-e', 'conference=busun tag={}'.format(ver)],
