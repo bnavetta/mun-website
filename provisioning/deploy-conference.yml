@@ -18,8 +18,8 @@
       dest: /etc/asset-server/version
       content: "VERSION={{ tag | quote }}"
     become: yes
-  - name: Pull Docker image
-    docker_image: name=gcr.io/busun-158105/{{ conference }}:{{ tag }}
+  # - name: Pull Docker image
+  #   docker_image: name=gcr.io/busun-158105/{{ conference }}:{{ tag }}
   - name: Restart service
     service: name={{ conference }} state=restarted
     become: yes
