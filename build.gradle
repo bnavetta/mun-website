@@ -3,20 +3,28 @@ import org.springframework.boot.gradle.tasks.run.BootRun;
 buildscript {
     repositories {
         jcenter()
-        maven { url 'https://plugins.gradle.org/m2/' }
+        maven {
+            name 'gradle-plugins'
+            url 'https://plugins.gradle.org/m2/'
+        }
+        
+        maven {
+            name 'spring-milestones'
+            url 'https://repo.spring.io/milestone'
+        }
     }
 
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
-        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.10.0'
-        classpath 'net.ltgt.gradle:gradle-apt-plugin:0.15'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.0.M4'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.15.0'
+        classpath 'net.ltgt.gradle:gradle-apt-plugin:0.18'
     }
 }
 
 plugins {
     id 'org.hidetake.ssh' version '2.9.0'
-    id 'org.ajoberstar.grgit' version '2.1.1'
+    id 'org.ajoberstar.grgit' version '2.3.0'
 }
 
 def computeVersion() {
@@ -83,6 +91,11 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
 
     repositories {
         jcenter()
+
+        maven {
+            name 'spring-milestones'
+            url 'https://repo.spring.io/milestone'
+        }
     }
 
     tasks.withType(BootRun) {
