@@ -13,5 +13,11 @@
           name: busun
           user_id: 1040
           domain: busun.org
+    - role: conference-service
+      vars:
+        conference:
+          name: bucs
+          user_id: 1050
+          domain: browncrisis.org
     - asset-server
   become: yes
