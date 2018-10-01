@@ -4,19 +4,8 @@ import React from 'react';
 import { HOC } from 'formsy-react';
 import classNames from 'classnames';
 
-type Props = {
-    getErrorMessages: () => Array<string>,
-    getValue: () => boolean,
-    isPristine: () => boolean,
-    label: string | React.Element<any>,
-    name: string,
-    setValue: (boolean) => void,
-    showError: () => boolean,
-    showRequired: () => boolean,
-}
-
 class Checkbox extends React.Component {
-    constructor(props: Props, context: Object) {
+    constructor(props, context) {
         super(props, context);
 
         this.state = {
@@ -35,16 +24,6 @@ class Checkbox extends React.Component {
             this.setState({ focused: false });
         };
     }
-
-    state: {
-        focused: boolean,
-    }
-
-    props: Props
-
-    handleChange: (SyntheticInputEvent) => void
-    handleFocus: () => void
-    handleBlur: () => void
 
     renderErrors() {
         // console.log(this.props.getErrorMessages());

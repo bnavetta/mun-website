@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import './positions-page.scss';
 
-function renderAddPositions(elem: HTMLElement) {
+function renderAddPositions(elem) {
     System.import('./add-positions').then((module) => {
         const AddPositions = module.default;
         ReactDOM.render(<AddPositions />, elem);

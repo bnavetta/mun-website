@@ -4,36 +4,14 @@ import React from 'react';
 import { HOC } from 'formsy-react';
 import classNames from 'classnames';
 
-type Props = {
-    getErrorMessages: () => [string],
-    getValue: () => string,
-    help: ?string | ?React.Element<*>,
-    isPristine: () => boolean,
-    isRequired: () => boolean,
-    label: string,
-    name: string,
-    setValue: (string) => void,
-    showError: () => boolean,
-    showRequired: () => boolean,
-    type: string,
-};
-
 class Input extends React.Component {
-    static defaultProps: {
-        help: ?string | ?React.Element<*>,
-    }
-
-    constructor(props: Props, context: Object) {
+    constructor(props, context) {
         super(props, context);
 
         this.handleChange = (e) => {
             this.props.setValue(e.target.value);
         };
     }
-
-    props: Props
-
-    handleChange: (SyntheticInputEvent) => void
 
     renderErrors() {
         return this.props.getErrorMessages().map(message => <div key={message} className="form-control-feedback">{message}</div>);

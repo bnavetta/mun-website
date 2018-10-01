@@ -2,17 +2,11 @@ import React from 'react';
 import R from 'ramda';
 import request from '../util/superagent';
 
-type Advisor = { name: string, email: string };
-
 const nameLens = R.lensProp('name');
 const emailLens = R.lensProp('email');
 
-type Props = {
-    schoolId: number,
-};
-
 export default class AddAdvisorsForm extends React.Component {
-    constructor(props: Props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -21,7 +15,7 @@ export default class AddAdvisorsForm extends React.Component {
             message: null,
         };
 
-        this.renderAdvisor = (advisor: Advisor, index: number) => (
+        this.renderAdvisor = (advisor, index) => (
             <tr key={index}>
                 <td><input type="text" className="form-control" value={advisor.name} onChange={e => this.updateName(index, e.target.value)} /></td>
                 <td><input type="email" className="form-control" value={advisor.email} onChange={e => this.updateEmail(index, e.target.value)} /></td>
@@ -54,37 +48,23 @@ export default class AddAdvisorsForm extends React.Component {
         };
     }
 
-    state: {
-        advisors: Array<Advisor>,
-        error: ?string,
-        message: ?string,
-    };
-
-    props: Props;
-
-    addAdvisor: () => void;
-
-    removeAdvisor(index: number) {
+    removeAdvisor(index) {
         this.setState({
             advisors: R.remove(index, 1, this.state.advisors),
         });
     }
 
-    updateName(index: number, name: string) {
+    updateName(index, name) {
         this.setState({
             advisors: R.adjust(R.set(nameLens, name), index, this.state.advisors),
         });
     }
 
-    updateEmail(index: number, email: string) {
+    updateEmail(index, email) {
         this.setState({
             advisors: R.adjust(R.set(emailLens, email), index, this.state.advisors),
         });
     }
-
-    submitAdvisors: () => void;
-
-    renderAdvisor: (advisor: Advisor, index: number) => React.Element<*>;
 
     render() {
         return (

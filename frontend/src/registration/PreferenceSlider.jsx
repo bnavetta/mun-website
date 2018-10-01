@@ -7,26 +7,8 @@ import classNames from 'classnames';
 
 import 'rc-slider/assets/index.css';
 
-type CommitteePreferences = {
-    general: number,
-    specialized: number,
-    crisis: number,
-}
-
-type Props = {
-    getErrorMessages: () => Array<string>,
-    getValue: () => CommitteePreferences,
-    isPristine: () => boolean,
-    isRequired: () => boolean,
-    label: string,
-    name: string,
-    setValue: (CommitteePreferences) => void,
-    showError: () => boolean,
-    showRequired: () => boolean,
-}
-
 class PreferenceSlider extends React.Component {
-    constructor(props: Props, context: Object) {
+    constructor(props, context) {
         super(props, context);
 
         this.state = {
@@ -60,17 +42,6 @@ class PreferenceSlider extends React.Component {
             return v.toString();
         };
     }
-
-    state: {
-        focused: boolean,
-    }
-
-    props: Props
-
-    handleChange: (Array<number>) => void
-    handleFocus: () => void
-    handleBlur: () => void
-    formatTooltip: (number, number) => string
 
     renderErrors() {
         // console.log(this.props.getErrorMessages());

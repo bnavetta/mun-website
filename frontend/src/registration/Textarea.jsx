@@ -4,20 +4,8 @@ import React from 'react';
 import { HOC } from 'formsy-react';
 import classNames from 'classnames';
 
-type Props = {
-    getErrorMessages: () => Array<string>,
-    getValue: () => string,
-    isPristine: () => boolean,
-    isRequired: () => boolean,
-    label: string,
-    name: string,
-    setValue: (string) => void,
-    showError: () => boolean,
-    showRequired: () => boolean,
-}
-
 class Textarea extends React.Component {
-    constructor(props: Props, context: Object) {
+    constructor(props, context) {
         super(props, context);
 
         this.state = {
@@ -36,16 +24,6 @@ class Textarea extends React.Component {
             this.setState({ focused: false });
         };
     }
-
-    state: {
-        focused: boolean,
-    }
-
-    props: Props
-
-    handleChange: (SyntheticInputEvent) => void
-    handleFocus: () => void
-    handleBlur: () => void
 
     renderErrors() {
         return this.props.getErrorMessages().map(message => <div key={message} className="form-control-feedback">{message}</div>);

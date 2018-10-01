@@ -38,16 +38,7 @@ export default class AddPositions extends React.Component {
         };
     }
 
-    state: {
-        positions: Array<string>,
-        newPosition: string,
-    }
-
-    handleNewPositionKeyDown: (SyntheticKeyboardEvent) => void
-    handleNewPositionChange: (SyntheticInputEvent) => void
-    handleSavePositions: () => void
-
-    render() {
+	render() {
         const positions = this.state.positions.map(position => <li key={position}>{position}</li>);
 
         return (

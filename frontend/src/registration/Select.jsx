@@ -4,27 +4,8 @@ import React from 'react';
 import { HOC } from 'formsy-react';
 import classNames from 'classnames';
 
-type Props = {
-    getErrorMessages: () => Array<string>,
-    getValue: () => string,
-    isPristine: () => boolean,
-    isRequired: () => boolean,
-    help: ?string | ?React.Element<*>,
-    label: ?string,
-    name: string,
-    options: Array<{ label: string, value: string }>,
-    setValue: (string) => void,
-    showError: () => boolean,
-    showRequired: () => boolean,
-}
-
 class Select extends React.Component {
-    static defaultProps: {
-        help: ?string | ?React.Element<*>,
-        label: ?string,
-    }
-
-    constructor(props: Props, context: Object) {
+    constructor(props, context) {
         super(props, context);
 
         this.state = {
@@ -44,19 +25,9 @@ class Select extends React.Component {
         };
     }
 
-    state: {
-        focused: boolean,
-    }
-
     componentDidMount() {
         this.props.setValue(this.props.options[0].value);
     }
-
-    props: Props
-
-    handleChange: (SyntheticInputEvent) => void
-    handleFocus: () => void
-    handleBlur: () => void
 
     renderErrors() {
         // console.log(this.props.getErrorMessages());

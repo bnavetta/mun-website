@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function renderSchoolDisplay(elem: HTMLElement) {
+function renderSchoolDisplay(elem) {
     System.import('./list').then((module) => {
         const SchoolDisplay = module.default;
         ReactDOM.render(<SchoolDisplay />, elem);

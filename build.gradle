@@ -1,8 +1,10 @@
 buildscript {
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE"
-        classpath "com.netflix.nebula:nebula-project-plugin:3.3.0"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.+"
+        classpath "com.netflix.nebula:nebula-project-plugin:5.1.2"
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE'
+        classpath 'com.google.guava:guava:26.0-jre'
     }
 
     repositories {
@@ -43,10 +45,11 @@ task check(dependsOn: [testReport, coverage]) {}
 configure([project(':core'), project(':busun'), project(':bucs')]) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencyManagement {
         dependencies {
-            dependency 'com.google.guava:guava:23.3-jre'
+            dependency 'com.google.guava:guava:26.0-jre'
             dependency 'org.apache.commons:commons-lang3:3.6'
 
             dependency 'org.apache.poi:poi-ooxml:3.17'
@@ -75,9 +78,9 @@ configure([project(':core'), project(':busun'), project(':bucs')]) {
     }
 
     bootRun {
-        addResources = true
-
         workingDir rootProject.projectDir
+
+        addResources = true
 
         systemProperty 'debug', 'true'
         def platformProfile =  System.getenv('TRAVIS') ? 'ci' : 'local'

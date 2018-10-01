@@ -25,12 +25,6 @@ export default class SchoolDisplay extends React.Component {
         };
     }
 
-    state: {
-        fetching: boolean,
-        schools: Array<Object>,
-        error: ?string,
-    }
-
     componentDidMount() {
         loadSchools()
             .then((schools) => {

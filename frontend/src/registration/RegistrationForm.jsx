@@ -70,25 +70,12 @@ export default class RegistrationForm extends React.Component {
         };
     }
 
-    state: {
-        submitEnabled: boolean,
-        values: Object,
-        hotels: Array<Object>,
-        countries: Array<{ label: string, value: string }>,
-    }
 
     componentDidMount() {
         loadHotels()
             .then((hotels) => { this.setState({ hotels }); })
             .catch((e) => { console.error(e); }); // eslint-disable-line no-console
     }
-
-    handleSubmit: (model: Object,
-                   resetForm: () => void,
-                   invalidateForm: (Array<any>) => void) => void
-    handleChange: (Object) => void
-    enableSubmit: () => void
-    disableSubmit: () => void
 
     renderFinancialAidInfo() {
         if (this.state.values.applyingForFinancialAid) {

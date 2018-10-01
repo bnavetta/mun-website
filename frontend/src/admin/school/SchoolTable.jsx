@@ -13,12 +13,8 @@ const columnDefinitions = [
     { field: 'numberOfYearsAttended', title: 'Years Attended' },
 ];
 
-type Props = {
-    schools: Array<Object>,
-};
-
 export default class SchoolTable extends React.Component {
-    constructor(props: Props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -26,13 +22,7 @@ export default class SchoolTable extends React.Component {
         };
     }
 
-    state: {
-        visibleColumns: { [columnName: string]: boolean },
-    }
-
-    props: Props
-
-    toggleColumn(field: string) {
+    toggleColumn(field) {
         const { visibleColumns } = this.state;
         this.setState({ visibleColumns: { ...visibleColumns, [field]: !visibleColumns[field] } });
     }
