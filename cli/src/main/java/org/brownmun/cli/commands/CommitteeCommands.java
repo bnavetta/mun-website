@@ -1,22 +1,23 @@
 package org.brownmun.cli.commands;
 
-import com.google.common.io.Files;
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.Position;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+
+import com.google.common.io.Files;
+
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.Position;
 
 @ShellComponent
 public class CommitteeCommands
@@ -30,13 +31,16 @@ public class CommitteeCommands
     }
 
     /**
-     * This command is for bulk-creating committee positions. It uses a file format designed for easy
-     * copy-and-pasting from background guides and other documents.
+     * This command is for bulk-creating committee positions. It uses a file format
+     * designed for easy copy-and-pasting from background guides and other
+     * documents.
      *
-     * The input file consists of groups, one per committee. Each group starts with a header indicating
-     * the committee by its short name. After that, each line contains a position name:
+     * The input file consists of groups, one per committee. Each group starts with
+     * a header indicating the committee by its short name. After that, each line
+     * contains a position name:
      *
-     * <pre>{@code
+     * <pre>
+     * {@code
      *     <ecosoc>
      *     United States
      *     Canada
@@ -45,7 +49,8 @@ public class CommitteeCommands
      *     <adhoc>
      *     Some Position
      *     Another Position
-     * }</pre>
+     * }
+     * </pre>
      *
      * @param input file to read positions from
      */
@@ -67,8 +72,8 @@ public class CommitteeCommands
                     String committeeSlug = headerMatch.group(1);
                     committee = committees.findByShortName(committeeSlug)
                             .orElseThrow(() -> new IllegalArgumentException("Committee not found: " + committeeSlug));
-                    positionNames = committees.getPositions(committee).stream()
-                            .map(Position::getName).collect(Collectors.toSet());
+                    positionNames = committees.getPositions(committee).stream().map(Position::getName).collect(
+                            Collectors.toSet());
                     System.out.printf("\n\nCreating positions for %s\n", committee.getName());
                 }
                 else if (committee == null)

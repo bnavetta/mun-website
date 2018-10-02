@@ -27,6 +27,9 @@ webpack:
   asset-base: http://localhost:9090/assets/
   reload: true
 
+webSecurity:
+  enableCsp: false
+
 mail:
   from-address: no-reply@busun.org
   reply-to-address: technology@busun.org

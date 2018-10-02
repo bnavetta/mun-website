@@ -5,5 +5,11 @@ package org.brownmun.core.api;
  */
 public class Views
 {
-    public static final class Staff {}
+    public static final class Staff
+    {
+    }
+
+    public static final class AdvisorDashboard
+    {
+    }
 }

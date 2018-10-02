@@ -29,12 +29,6 @@ public class AllocationSolver
     private static final int NUM_TYPES = 3;
     private static final String[] TYPE_NAMES = new String[] { "general", "specialized", "crisis" };
 
-    static
-    {
-        // TODO: put this somewhere else
-        System.loadLibrary("jniortools");
-    }
-
     /**
      * A matrix of solver variables representing how many positions of a given type
      * to give to a particular school. The first index is the school ID and the

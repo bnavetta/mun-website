@@ -1,5 +1,7 @@
 package org.brownmun.cli.positions.assignment;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.auto.value.AutoValue;
 
 import org.brownmun.core.committee.model.Committee;
@@ -10,6 +12,7 @@ import org.brownmun.core.school.model.School;
  * Represents the assignment of a specific position to a particular school.
  */
 @AutoValue
+@JsonPropertyOrder({ "positionId", "positionName", "committeeId", "committeeName", "schoolId", "schoolName" })
 public abstract class PositionAssignment
 {
     public static Builder builder()
@@ -17,16 +20,22 @@ public abstract class PositionAssignment
         return new AutoValue_PositionAssignment.Builder();
     }
 
+    @JsonProperty("positionId")
     public abstract long positionId();
 
+    @JsonProperty("positionName")
     public abstract String positionName();
 
+    @JsonProperty("committeeId")
     public abstract long committeeId();
 
+    @JsonProperty("committeeName")
     public abstract String committeeName();
 
+    @JsonProperty("schoolId")
     public abstract long schoolId();
 
+    @JsonProperty("schoolName")
     public abstract String schoolName();
 
     @AutoValue.Builder

@@ -24,6 +24,7 @@ public interface AdvisorService
 
     /**
      * Update the advisor's {@link Advisor#lastSeen} timestamp
+     *
      * @param advisor the advisor to update
      */
     void markSeen(Advisor advisor);

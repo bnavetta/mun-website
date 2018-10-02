@@ -51,4 +51,7 @@ public interface CommitteeRepository extends JpaRepository<Committee, Long>
 
     @Query("SELECT p.committee.id FROM Position p WHERE p.id = ?1")
     OptionalLong findCommitteeId(long positionId);
+
+    @Query("SELECT c FROM Committee  c WHERE ?1 MEMBER OF c.jointCrisisRooms")
+    Optional<Committee> findJointCrisis(Committee c);
 }

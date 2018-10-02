@@ -3,6 +3,7 @@ package org.brownmun.core.school.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,19 +33,21 @@ public class SchoolServiceImpl implements SchoolService
     private final AdvisorRepository advisorRepo;
     private final SchoolApplicationRepository appRepo;
     private final SupplementalInfoRepository infoRepo;
+    private final DelegateRepository delegateRepo;
     private final EntityManagerFactory emf;
     private final EntityManager em;
 
     @Autowired
     public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo,
-            SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, EntityManagerFactory emf,
-            EntityManager em)
+            SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, DelegateRepository delegateRepo,
+            EntityManagerFactory emf, EntityManager em)
     {
         this.passwordEncoder = passwordEncoder;
         this.repo = repo;
         this.advisorRepo = advisorRepo;
         this.appRepo = appRepo;
         this.infoRepo = infoRepo;
+        this.delegateRepo = delegateRepo;
         this.emf = emf;
         this.em = em;
     }
@@ -121,7 +124,8 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
-    public void accept(School school) {
+    public void accept(School school)
+    {
         log.info("Accepting {} ({})", school.getId(), school.getName());
         school.setAccepted(true);
         repo.save(school);
@@ -184,5 +188,45 @@ public class SchoolServiceImpl implements SchoolService
             em.persist(info);
             return info;
         }
+    }
+
+    @Override
+    @Transactional
+    public void clearDelegates()
+    {
+        log.warn("Deleting all delegates");
+        delegateRepo.deleteAllInBatch();
+    }
+
+    @Override
+    @Transactional
+    public Set<Delegate> getDelegates(long schoolId)
+    {
+        School school = repo.findById(schoolId)
+                .orElseThrow(() -> new IllegalArgumentException("No school with ID " + schoolId));
+
+        Set<Delegate> delegates = repo.fetchDelegates(school);
+        for (Delegate delegate : delegates)
+        {
+            Hibernate.initialize(delegate.getPosition());
+            Hibernate.initialize(delegate.getPosition().getCommittee());
+            Hibernate.initialize(delegate.getSchool());
+        }
+
+        return delegates;
+    }
+
+    @Override
+    @Transactional
+    public Optional<Delegate> getDelegate(long id)
+    {
+        return delegateRepo.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Delegate saveDelegate(Delegate delegate)
+    {
+        return delegateRepo.save(delegate);
     }
 }

@@ -37,8 +37,7 @@ public class SchoolCommands
     @ShellMethod("Mark a school as accepted")
     public void acceptSchool(long id)
     {
-        School school = schoolService.getSchool(id)
-                .orElseThrow(() -> new IllegalArgumentException("School not found"));
+        School school = schoolService.getSchool(id).orElseThrow(() -> new IllegalArgumentException("School not found"));
         schoolService.accept(school);
     }
 

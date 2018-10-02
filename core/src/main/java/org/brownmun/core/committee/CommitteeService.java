@@ -32,6 +32,11 @@ public interface CommitteeService
     Optional<Position> getPosition(long id);
 
     /**
+     * Get the full name of a committee, including any joint crisis information.
+     */
+    String getFullName(Committee c);
+
+    /**
      * Save a committee to the database
      *
      * @param c the committee to save

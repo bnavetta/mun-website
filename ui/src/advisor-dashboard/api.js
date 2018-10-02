@@ -13,6 +13,21 @@ export function fetchSupplementalInfo() {
     return request("/your-mun/supplemental-info");
 }
 
+export function fetchDelegates() {
+    return request("/your-mun/delegates");
+}
+
+export function setDelegateName(id, name) {
+    return request(
+        `/your-mun/delegates/set-name?id=${encodeURIComponent(
+            id
+        )}&name=${encodeURIComponent(name)}`,
+        {
+            method: "PUT",
+        }
+    );
+}
+
 export async function updateSupplementalInfo(info) {
     try {
         const res = await fetch("/your-mun/supplemental-info", {

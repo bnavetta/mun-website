@@ -13,10 +13,10 @@ export function fetchSupplementalInfo(schoolId) {
 }
 
 export async function authenticateAs(advisorId) {
-    let url = new URL('/api/advisors/authenticate-as', window.location.href);
-    url.searchParams.set('advisorId', advisorId.toString());
+    let url = new URL("/api/advisors/authenticate-as", window.location.href);
+    url.searchParams.set("advisorId", advisorId.toString());
 
     await request(url, {
-        method: 'PUT'
+        method: "PUT",
     });
 }

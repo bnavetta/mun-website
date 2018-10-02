@@ -11,6 +11,7 @@ import "./dashboard.css";
 import Application from "./Application";
 import SupplementalInfo from "./SupplementalInfo";
 import ChangePassword from "./ChangePassword";
+import Delegation from "./Delegation";
 
 function DashboardContent({ advisor, school, setSchool }) {
     return (
@@ -21,6 +22,13 @@ function DashboardContent({ advisor, school, setSchool }) {
                         Home
                     </NavLink>
                 </li>
+                {school.accepted && (
+                    <li>
+                        <NavLink exact to="/delegation">
+                            Delegation
+                        </NavLink>
+                    </li>
+                )}
                 <li>
                     <NavLink exact to="/application">
                         Application
@@ -52,6 +60,14 @@ function DashboardContent({ advisor, school, setSchool }) {
                             />
                         )}
                     />
+                    {school.accepted && (
+                        <Route
+                            path="/delegation"
+                            render={props => (
+                                <Delegation {...props} school={school} />
+                            )}
+                        />
+                    )}
                     {school.accepted && (
                         <Route
                             path="/supplemental"

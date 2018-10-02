@@ -2,11 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import "regenerator-runtime/runtime"; // for some reason this doesn't get picked up
 import { Form } from "react-form";
-import Noty from "noty";
 import parse from "date-fns/parse";
 import format from "date-fns/format";
 
-import { yesNo } from "../lib/util";
+import { yesNo, displayError } from "../lib/util";
 import LoadingPage from "../lib/components/LoadingPage";
 import ApplicationForm from "../registration/ApplicationForm";
 
@@ -25,21 +24,14 @@ const mapStateToProps = (state, props) => {
 const ghostLogin = async id => {
     try {
         await authenticateAs(id);
-        window.location.assign('/your-mun');
+        window.location.assign("/your-mun");
     } catch (e) {
         console.log(`Error authenticating as advisor ${id}: ${e}`);
-        new Noty({
-            text: `Ghost login failed: ${e}`,
-            type: 'error',
-            animation: {
-                open: 'animated bounceInRight',
-                close: 'animated bounceOutRight'
-            }
-        }).show();
+        displayError(`Ghost login failed: ${e}`);
     }
 };
 
-const formatDate = date => format(parse(date), 'ddd, MMM D YYYY [at] h:mm A');
+const formatDate = date => format(parse(date), "ddd, MMM D YYYY [at] h:mm A");
 
 function SchoolView({ school, advisors }) {
     if (!school) {
@@ -80,7 +72,10 @@ function SchoolView({ school, advisors }) {
                                 <td>{advisor.phoneNumber}</td>
                                 <td>{formatDate(advisor.lastSeen)}</td>
                                 <td>
-                                    <button className="button" onClick={() => ghostLogin(advisor.id)}>
+                                    <button
+                                        className="button"
+                                        onClick={() => ghostLogin(advisor.id)}
+                                    >
                                         Ghost Login
                                     </button>
                                 </td>

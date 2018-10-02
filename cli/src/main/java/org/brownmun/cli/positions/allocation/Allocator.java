@@ -133,16 +133,20 @@ public class Allocator
      *
      * @param preferencesSource the file to read school preferences from
      * @param allocationDest the file to write allocations to
+     * @param validate if true, check that the preferences are valid
      */
-    public List<SchoolAllocation> generateAllocations(File preferencesSource, File allocationDest)
+    public List<SchoolAllocation> generateAllocations(File preferencesSource, File allocationDest, boolean validate)
             throws IOException, IllegalArgumentException
     {
         log.info("Generating allocations from {} into {}", preferencesSource, allocationDest);
         List<SchoolAllocation> preferences = loadPreferences(preferencesSource);
-        List<String> errors = validatePreferences(preferences);
-        if (!errors.isEmpty())
+        if (validate)
         {
-            throw new IllegalArgumentException("Invalid preferences: " + String.join("\n", errors));
+            List<String> errors = validatePreferences(preferences);
+            if (!errors.isEmpty())
+            {
+                throw new IllegalArgumentException("Invalid preferences: " + String.join("\n", errors));
+            }
         }
 
         AllocationSolver solver = new AllocationSolver((int) getMaxId());

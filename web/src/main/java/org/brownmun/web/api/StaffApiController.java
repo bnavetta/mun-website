@@ -3,13 +3,14 @@ package org.brownmun.web.api;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import org.brownmun.core.api.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import org.brownmun.core.api.Views;
 import org.brownmun.core.school.AdvisorService;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;

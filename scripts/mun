@@ -127,10 +127,10 @@ def prod_ssh():
 def fmt(ctx):
     if ctx.invoked_subcommand is None:
         click.secho('Formatting all files...', fg='green')
-        prettier()
-        eslint()
-        stylelint()
-        spotless()
+        ctx.invoke(prettier)
+        ctx.invoke(eslint)
+        ctx.invoke(stylelint)
+        ctx.invoke(spotless)
 
 
 @fmt.command()

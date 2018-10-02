@@ -102,6 +102,21 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Override
+    @Transactional
+    public String getFullName(Committee c)
+    {
+        switch (c.getType())
+        {
+            case JOINT_CRISIS_ROOM:
+                Committee jc = repo.findJointCrisis(c).orElseThrow(
+                        () -> new IllegalStateException("Cannot find joint crisis containing " + c.getId()));
+                return String.format("%s (%s)", c.getName(), jc.getName());
+            default:
+                return c.getName();
+        }
+    }
+
+    @Override
     public Optional<Committee> getCommittee(long id)
     {
         return repo.findById(id);

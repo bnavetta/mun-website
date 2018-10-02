@@ -1,5 +1,6 @@
 import Raven from "raven-js";
 import { mergeDeepLeft } from "ramda";
+import Noty from "noty";
 
 /**
  * Look up a global CSS variable value
@@ -59,4 +60,19 @@ export async function request(url, options = {}) {
 
 export function yesNo(value) {
     return value ? "Yes" : "No";
+}
+
+/**
+ * Display an error popup to the user.
+ * @param message the error message
+ */
+export function displayError(message) {
+    new Noty({
+        text: message,
+        type: "error",
+        animation: {
+            open: "animated bounceInRight",
+            close: "animated bounceOutRight",
+        },
+    }).show();
 }

@@ -35,7 +35,7 @@
 }
 
 .schedule-date.day-fri {
-    grid-row: 1
+    grid-row: 1;
 }
 
 .schedule-date.day-sat {

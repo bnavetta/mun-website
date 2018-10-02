@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -17,20 +18,15 @@ import org.brownmun.core.school.SchoolService;
 public class PositionConfiguration
 {
     @Bean
-    public CsvMapper csvMapper()
-    {
-        return new CsvMapper();
-    }
-
-    @Bean
     public Allocator allocator(EntityManager em)
     {
-        return new Allocator(csvMapper(), em);
+        return new Allocator(new CsvMapper(), em);
     }
 
     @Bean
-    public Assigner assigner(SchoolService schoolService, CommitteeService committeeService, ObjectMapper jsonMapper)
+    public Assigner assigner(SchoolService schoolService, CommitteeService committeeService, ObjectMapper jsonMapper,
+            TransactionTemplate tx)
     {
-        return new Assigner(jsonMapper, csvMapper(), committeeService, schoolService);
+        return new Assigner(jsonMapper, new CsvMapper(), committeeService, schoolService, tx);
     }
 }

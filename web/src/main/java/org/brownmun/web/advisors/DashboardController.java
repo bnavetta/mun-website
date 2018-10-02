@@ -1,6 +1,10 @@
 package org.brownmun.web.advisors;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.google.common.base.Strings;
 
+import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.school.AdvisorService;
 import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.core.school.model.School;
-import org.brownmun.core.school.model.SchoolApplication;
-import org.brownmun.core.school.model.SupplementalInfo;
+import org.brownmun.core.school.model.*;
 
 @Controller
 @RequestMapping("/your-mun")
@@ -28,12 +30,15 @@ public class DashboardController
 
     private final SchoolService schoolService;
     private final AdvisorService advisorService;
+    private final CommitteeService committeeService;
 
     @Autowired
-    public DashboardController(SchoolService schoolService, AdvisorService advisorService)
+    public DashboardController(SchoolService schoolService, AdvisorService advisorService,
+            CommitteeService committeeService)
     {
         this.schoolService = schoolService;
         this.advisorService = advisorService;
+        this.committeeService = committeeService;
     }
 
     @GetMapping
@@ -123,9 +128,44 @@ public class DashboardController
     }
 
     /**
+     * Handler for an endpoint returning the delegates for the advisor's school.
+     */
+    @PreAuthorize("hasRole('ADVISOR')")
+    @GetMapping("/delegates")
+    @ResponseBody
+    public List<DelegateDTO> getDelegates(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
+    {
+        return schoolService.getDelegates(currentUser.getSchoolId())
+                .stream()
+                .sorted(Comparator.comparing(d -> d.getPosition().getName()))
+                .map(d -> DelegateDTO.create(d.getId(), d.getName(), d.getPosition().getName(),
+                        committeeService.getFullName(d.getPosition().getCommittee())))
+                .collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasRole('ADVISOR')")
+    @PutMapping("/delegates/set-name")
+    @ResponseBody
+    public ResponseEntity<Void> setDelegateName(@RequestParam long id, @RequestParam String name)
+    {
+        Optional<Delegate> d = schoolService.getDelegate(id);
+        if (d.isPresent())
+        {
+            Delegate delegate = d.get();
+            delegate.setName(name);
+            schoolService.saveDelegate(delegate);
+            return ResponseEntity.ok().build();
+        }
+        else
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    /**
      * Support HTML5 pushState URLs
      */
-    @GetMapping({ "/application", "/advisors", "/supplemental", "/change-password" })
+    @GetMapping({ "/application", "/advisors", "/supplemental", "/change-password", "/delegation" })
     public String ui()
     {
         return "forward:/your-mun/";

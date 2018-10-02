@@ -9,6 +9,9 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
+
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -38,12 +41,13 @@ public class Assigner
     private final CsvMapper csvMapper;
     private final CommitteeService committeeService;
     private final SchoolService schoolService;
+    private final TransactionTemplate tx;
 
     private final CsvSchema allocationSchema;
     private final CsvSchema assignmentSchema;
 
     public Assigner(ObjectMapper jsonMapper, CsvMapper csvMapper, CommitteeService committeeService,
-            SchoolService schoolService)
+            SchoolService schoolService, TransactionTemplate tx)
     {
         this.jsonMapper = jsonMapper;
         this.csvMapper = csvMapper;
@@ -51,6 +55,7 @@ public class Assigner
         this.schoolService = schoolService;
         this.allocationSchema = csvMapper.typedSchemaFor(SchoolAllocation.class).withHeader();
         this.assignmentSchema = csvMapper.typedSchemaFor(PositionAssignment.class).withHeader();
+        this.tx = tx;
     }
 
     private AssignableCommittee toAssignable(Committee c)
@@ -108,20 +113,30 @@ public class Assigner
      * @param allocations the predefined school allocations
      * @return a list of all position assignments
      */
+    @Transactional(readOnly = true)
     public List<PositionAssignment> assign(AssignmentSettings settings, List<SchoolAllocation> allocations)
     {
-        List<AssignableCommittee> ga = committeeService.allByType(CommitteeType.GENERAL)
-                .map(this::toAssignable)
-                .collect(Collectors.toList());
-        List<AssignableCommittee> spec = committeeService.allByType(CommitteeType.SPECIALIZED)
-                .map(this::toAssignable)
-                .collect(Collectors.toList());
+        List<AssignableCommittee> ga = tx.execute(t -> {
+            try (Stream<Committee> cs = committeeService.allByType(CommitteeType.GENERAL))
+            {
+                return cs.map(this::toAssignable).collect(Collectors.toList());
+            }
+        });
 
-        List<AssignableCommittee> crisis = Stream
-                .concat(committeeService.allByType(CommitteeType.CRISIS),
-                        committeeService.allByType(CommitteeType.JOINT_CRISIS_ROOM))
-                .map(this::toAssignable)
-                .collect(Collectors.toList());
+        List<AssignableCommittee> spec = tx.execute(t -> {
+            try (Stream<Committee> cs = committeeService.allByType(CommitteeType.SPECIALIZED))
+            {
+                return cs.map(this::toAssignable).collect(Collectors.toList());
+            }
+        });
+
+        List<AssignableCommittee> crisis = tx.execute(t -> {
+            try (Stream<Committee> cs = committeeService.allByType(CommitteeType.CRISIS);
+                    Stream<Committee> jcs = committeeService.allByType(CommitteeType.JOINT_CRISIS_ROOM))
+            {
+                return Stream.concat(cs, jcs).map(this::toAssignable).collect(Collectors.toList());
+            }
+        });
 
         long maxCommitteeId = Stream.concat(ga.stream(), Stream.concat(spec.stream(), crisis.stream()))
                 .mapToLong(AssignableCommittee::id)

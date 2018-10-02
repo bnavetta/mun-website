@@ -3,11 +3,9 @@ package org.brownmun.core.school;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
+import java.util.Set;
 
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.core.school.model.School;
-import org.brownmun.core.school.model.SchoolApplication;
-import org.brownmun.core.school.model.SupplementalInfo;
+import org.brownmun.core.school.model.*;
 
 public interface SchoolService
 {
@@ -46,6 +44,7 @@ public interface SchoolService
 
     /**
      * Mark a school as accepted.
+     *
      * @param school the school to accept
      */
     void accept(School school);
@@ -89,6 +88,11 @@ public interface SchoolService
     List<Advisor> listAdvisors();
 
     /**
+     * Find all of a school's delegates
+     */
+    Set<Delegate> getDelegates(long schoolId);
+
+    /**
      * Get the supplemental info form responses for the given school
      */
     SupplementalInfo getSupplementalInfo(long schoolId);
@@ -97,4 +101,21 @@ public interface SchoolService
      * Save a school's supplemental info form
      */
     SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info);
+
+    /**
+     * Clear out all delegates and position assignments.
+     */
+    void clearDelegates();
+
+    /**
+     * Get a delegate by their ID.
+     */
+    Optional<Delegate> getDelegate(long id);
+
+    /**
+     * Save changes to the delegate.
+     *
+     * @return the modified delegate
+     */
+    Delegate saveDelegate(Delegate delegate);
 }

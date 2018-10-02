@@ -1,5 +1,6 @@
 package org.brownmun.cli.positions;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.auto.value.AutoValue;
@@ -11,7 +12,9 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class SchoolAllocation
 {
-    public static SchoolAllocation create(long id, int general, int specialized, int crisis)
+    @JsonCreator
+    public static SchoolAllocation create(@JsonProperty("id") long id, @JsonProperty("general") int general,
+            @JsonProperty("specialized") int specialized, @JsonProperty("crisis") int crisis)
     {
         return new AutoValue_SchoolAllocation(id, general, specialized, crisis);
     }
