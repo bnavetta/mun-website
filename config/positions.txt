@@ -1,0 +1,115 @@
+<african_union>
+Algeria
+Angola
+Benin
+Botswana
+Burkina Faso
+Burundi
+Cape Verde
+Cameroon
+Central African Republic
+Chad
+Comoros
+Côte d'Ivoire
+Democratic Republic of the Congo
+Djibouti
+Egypt
+Equatorial Guinea
+Eritrea
+Ethiopia
+Gabon
+Gambia
+Ghana
+Guinea
+Guinea-Bissau
+Kenya
+Lesotho
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Nambia
+Niger
+Nigeria
+Republic of the Congo
+Rwanda
+Sahrawi Arab Democractic Republic
+São Tomé and Príncipe
+Senegal
+Seychelles
+Sierra Leone
+Somalia
+South Africa
+South Sudan
+Sudan
+Swaziland
+Tanzania
+Togo
+Tunisia
+Uganda
+Zambia
+Zimbabwe
+<arab_league>
+<disec>
+<ecosoc>
+<environmental_assembly>
+<european_union>
+<hrc>
+<legal>
+<security_council>
+<undp>
+<unhcr>
+<un_women>
+<who>
+<akhenaten>
+<bolivia>
+<bucareli>
+<carnation>
+<finnish_note>
+<icelandic_althing>
+<ioc_rio>
+<iran_constitution>
+<korea>
+<ottoman>
+<tammany_hall>
+William H Walker
+William Cox Redfield
+William Sulzer
+Randolph Guggenheimer
+Charles V. Fornes
+Thomas F. Donnelly
+Thomas H. Cullen
+Thomas Grady
+Henry Doll
+George Washington Plunkitt
+John McGaw Woodbury
+Lewis Nixon
+Edward M Grout
+Louis Haffen
+Tim Sullivan
+Martin Engel
+Joseph "Curly Joe" Cassidy
+George B. McClellan, Jr.
+Victor J. Dowling
+Barbara Porges
+John T. Oakley
+Moritz Herzberg
+<zimbabwe>
+<adhoc>
+<algerian_war>
+<nicaragua>
+<sinojapanese_war>
+<war_of_roses>
+<empire_of_japan>
+<house_of_lancaster>
+<house_of_york>
+<qing_empire>
+<sandinistas>
+<somoza_government>
+<soviet_embassy>
+<us_embassy>
