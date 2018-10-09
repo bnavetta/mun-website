@@ -3,25 +3,21 @@ Algeria
 Angola
 Benin
 Botswana
-Burkina Faso
 Burundi
-Cape Verde
 Cameroon
+Cape Verde
 Central African Republic
 Chad
-Comoros
+Congo
 Côte d'Ivoire
-Democratic Republic of the Congo
-Djibouti
+DR Congo
 Egypt
-Equatorial Guinea
 Eritrea
 Ethiopia
 Gabon
 Gambia
 Ghana
 Guinea
-Guinea-Bissau
 Kenya
 Lesotho
 Liberia
@@ -30,22 +26,16 @@ Madagascar
 Malawi
 Mali
 Mauritania
-Mauritius
 Morocco
 Mozambique
-Nambia
+Namibia
 Niger
 Nigeria
-Republic of the Congo
 Rwanda
-Sahrawi Arab Democractic Republic
-São Tomé and Príncipe
 Senegal
-Seychelles
 Sierra Leone
 Somalia
 South Africa
-South Sudan
 Sudan
 Swaziland
 Tanzania
@@ -54,62 +44,396 @@ Tunisia
 Uganda
 Zambia
 Zimbabwe
-<arab_league>
 <disec>
+US
+China
+Russia
+France
+UK
+India
+Pakistan
+Israel
+DPRK
+Iran
+Mexico
+Colombia
+Brazil
+Honduras
+El Salvador
+Venezuela
+Chile
+Argentina
+Rwanda
+Somalia
+Sudan
+DR Congo
+Sierra Leone
+Ghana
+Egypt
+Iraq
+Syria
+Afghanistan
+Yemen
+Libya
+Saudi Arabia
+Turkey
+Germany
+Spain
+Italy
+Belgium
+Netherlands
+Rep. of Korea
+Japan
+Philippines
 <ecosoc>
+South Africa
+Namibia
+Zimbabwe
+Botswana
+Nigeria
+Kenya
+Algeria
+United Kingdom
+Netherlands
+France
+Germany
+Russia
+Serbia
+Sweden
+Paraguay
+Argentina
+Brazil
+Colombia
+Mexico
+Costa Rica
+Bolivia
+Israel
+United States
+China
+India
+Pakistan
+Philippines
+Thailand
+Jordan
+Egypt
+Iran
+Indonesia
+El Salvador
+Spain
+Peru
+Myanmar
+Australia
+Democratic Republic of the Congo
+Poland
+Ethiopia
+<plenary>
+US
+China
+Japan
+Germany
+U.K.
+India
+France
+Brazil
+Italy
+Canada
+South Korea
+Russia
+Australia
+Spain
+Mexico
+Indonesia
+Turkey
+Netherlands
+Saudi Arabia
+Switzerland
+Argentina 
+Sweden
+Belgium
+Thailand
+Iran
+Austria
+Nigeria
+South Africa
+Singapore
+Philippines
+Pakistan
+Egypt
+Bangladesh
+Venezuela
+Vietnam
+North Korea
+Kenya
+Syria 
+Greece
+Iraq
 <environmental_assembly>
-<european_union>
-<hrc>
-<legal>
-<security_council>
-<undp>
-<unhcr>
+China
+India
+Japan
+South Korea
+Australia
+Germany
+Mexico
+Italy
+South Africa
+Egypt
+Costa Rica
+Norway
+Ecuador
+Zimbabwe
+Botswana
+Namibia
+Bolivia
+Chile 
+Peru
+Kenya
+Sweden
+France
+Brazil
+Colombia
+Spain
+Hungary
+Netherlands
+Argentina
+Thailand
 <un_women>
+Afghanistan
+Bangladesh
+Nepal
+India
+Pakistan
+Sri Lanka
+Uruguay
+Paraguay
+Colombia 
+Ecuador
+Dominican Republic
+Guatemala 
+Kenya
+United States
+Canada
+France
+Germany
+United Kingdom
+China
+Russia
+Japan
+Uganda
+Maldives
+Bhutan
+Peru 
+Honduras
+Finland
+UAE
+Brazil
+South Korea
+<unhcr>
+Afghanistan
+Brazil
+Canada
+China
+Colombia
+Czech Republic
+Democratic Republic of Congo
+Eritrea
+Ethiopia
+France
+Germany
+Greece
+Hungary
+India
+Iran
+Iraq
+Japan
+Lebanon
+Pakistan
+Paraguay
+Poland
+Republic of Korea
+Russia
+Somalia
+South Africa
+Sudan
+Turkey
+United Kingdom
+United States
+Venezuela
+Australia
+Cyprus
+Italy
+Switzerland
+Thailand
 <who>
-<akhenaten>
-<bolivia>
-<bucareli>
-<carnation>
-<finnish_note>
-<icelandic_althing>
-<ioc_rio>
-<iran_constitution>
-<korea>
-<ottoman>
-<tammany_hall>
-William H Walker
-William Cox Redfield
-William Sulzer
-Randolph Guggenheimer
-Charles V. Fornes
-Thomas F. Donnelly
-Thomas H. Cullen
-Thomas Grady
-Henry Doll
-George Washington Plunkitt
-John McGaw Woodbury
-Lewis Nixon
-Edward M Grout
-Louis Haffen
-Tim Sullivan
-Martin Engel
-Joseph "Curly Joe" Cassidy
-George B. McClellan, Jr.
-Victor J. Dowling
-Barbara Porges
-John T. Oakley
-Moritz Herzberg
-<zimbabwe>
-<adhoc>
-<algerian_war>
-<nicaragua>
-<sinojapanese_war>
-<war_of_roses>
-<empire_of_japan>
-<house_of_lancaster>
-<house_of_york>
-<qing_empire>
-<sandinistas>
-<somoza_government>
-<soviet_embassy>
-<us_embassy>
+Liberia
+Nigeria
+Sierra Leone
+Kenya
+Rwanda
+Uganda
+South Sudan
+South Africa
+Egypt
+Malaysia
+Philippines
+Indonesia
+United States
+Mexico
+Canada
+Brazil
+Argentina
+Venezuela
+United Kingdom
+Spain
+France
+Germany
+Italy
+Russia
+Democratic People’s Republic of Korea (DPRK)
+Iran
+Saudi Arabia
+Switzerland
+Singapore
+Luxembourg
+<security_council>
+United States 
+Russia 
+China 
+France
+United Kingdom
+Bolivia
+Côte d’Ivoire
+Equatorial Guinea
+Ethiopia
+Kazakhstan
+Kuwait
+Netherlands
+Peru
+Poland
+Sweden
+<european_union>
+Austria
+Belgium
+Bulgaria
+Croatia
+Cyprus
+Czech Republic
+Denmark
+Estonia
+Finland
+France
+Germany
+Greece
+Hungary
+Ireland
+Italy
+Latvia
+Lithuania
+Luxembourg
+Malta
+Netherlands
+Poland
+Portugal
+Romania 
+Slovakia
+Slovenia
+Spain
+Sweden
+United Kingdom
+<arab_league>
+Algeria
+Bahrain
+Comoros
+Djibouti
+Egypt
+Iraq
+Jordan
+Kuwait
+Lebanon
+Libya
+Mauritania
+Morocco
+Oman
+Palestine
+Qatar
+Saudi Arabia
+Somalia
+Sudan
+Syria
+Tunisia
+United Arab Emirates
+Yemen
+<legal>
+Japan
+China
+South Korea
+North Korea
+India
+Pakistan
+Afghanistan
+Syria
+Iran
+Iraq
+Saudi Arabia 
+Palestine
+Israel
+Yemen
+UAE 
+Qatar
+Egypt 
+Sudan
+South Sudan
+Libya 
+South Africa
+Democratic Republic of Congo
+Somalia
+Nigeria
+Uganda
+Turkey
+Georgia
+Serbia
+Kosovo
+Ukraine
+Russia
+Romania
+UK
+France
+Germany
+Switzerland
+US
+Mexico
+Chile 
+Nicaragua
+<hrc>
+Afghanistan
+Angola
+Australia
+Belgium
+Brazil
+Bolivia
+Chile
+China
+Croatia
+Cuba
+Democratic Republic of the Congo
+Egypt
+Ethiopia
+Germany
+Hungary
+Iraq
+Japan
+Kenya
+Libya
+Mexico
+Nepal
+Nigeria 
+Pakistan
+Republic of Korea 
+Rwanda
+Saudi Arabia 
+Syria
+Switzerland
+Ukraine
+Russian Federation
+United Kingdom
+USA
