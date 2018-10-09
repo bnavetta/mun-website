@@ -1,11 +1,8 @@
 package org.brownmun.cli.positions.assignment;
 
-import java.util.Collection;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
-import com.google.common.primitives.ImmutableLongArray;
 
 /**
  * Inputs to the positions algorithm.
@@ -16,11 +13,9 @@ public abstract class AssignmentSettings
     @JsonCreator
     public static AssignmentSettings create(@JsonProperty("generalOverlap") int generalOverlap,
             @JsonProperty("specializedOverlap") int specializedOverlap,
-            @JsonProperty("crisisOverlap") int crisisOverlap, @JsonProperty("midnightCrisisId") long midnightCrisisId,
-            @JsonProperty("nonMidnightCrisisSchools") Collection<Long> midnightCrisisSchools)
+            @JsonProperty("crisisOverlap") int crisisOverlap)
     {
-        return new AutoValue_AssignmentSettings(generalOverlap, specializedOverlap, crisisOverlap, midnightCrisisId,
-                ImmutableLongArray.copyOf(midnightCrisisSchools));
+        return new AutoValue_AssignmentSettings(generalOverlap, specializedOverlap, crisisOverlap);
     }
 
     /**
@@ -43,16 +38,4 @@ public abstract class AssignmentSettings
      */
     @JsonProperty
     public abstract int crisisOverlap();
-
-    /**
-     * The ID of the midnight crisis committee.
-     */
-    @JsonProperty
-    public abstract long midnightCrisisId();
-
-    /**
-     * The IDs of schools we can't assign to the midnight crisis committee.
-     */
-    @JsonProperty
-    public abstract ImmutableLongArray nonMidnightCrisisSchools();
 }

@@ -138,16 +138,8 @@ public class AssignmentSolver
                 committeeSpotArcs[(int) school.id()][(int) committee.id()] = arc;
             }
 
-            boolean noMidnightCrisis = settings.nonMidnightCrisisSchools().contains(school.id());
-
             for (AssignableCommittee committee : crisis)
             {
-                // Don't add an arc for schools that won't be in the midnight crisis.
-                if (committee.id() == settings.midnightCrisisId() && noMidnightCrisis)
-                {
-                    continue;
-                }
-
                 int arc = maxFlow.addArcWithCapacity(schoolNode + 3, committeeNodes[(int) committee.id()],
                         settings.crisisOverlap());
                 committeeSpotArcs[(int) school.id()][(int) committee.id()] = arc;
