@@ -12,12 +12,6 @@ import org.brownmun.web.WebConfiguration;
 @Import(WebConfiguration.class)
 public class BusunApplication
 {
-    @Bean
-    public Conference conference()
-    {
-        return new BusunConference();
-    }
-
     public static void main(String[] args)
     {
         SpringApplication app = new SpringApplication(BusunApplication.class);

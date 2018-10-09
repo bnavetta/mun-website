@@ -1,24 +1,86 @@
 package org.brownmun.core;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.web.util.UriTemplate;
+
+import java.net.URI;
+import java.util.Map;
+
 /**
- * Interface to represent the conference that this is.
+ * Conference-specific settings
  */
-public interface Conference
+@ConfigurationProperties("conference")
+public class Conference
 {
-    // TODO: maybe an enum?
+    private String name;
+    private String key;
+    private String domainName;
+    private boolean guidesPublished;
+    private UriTemplate backgroundGuideTemplate;
 
     /**
      * The display name of the conference
      */
-    String getName();
+    public String getName()
+    {
+        return name;
+    }
 
     /**
      * A key for lookups
      */
-    String getKey();
+    public String getKey()
+    {
+        return key;
+    }
 
     /**
-     * The conference domain, used for emails, etc..
+     * The conference website domain, used for emails, etc..
      */
-    String getDomainName();
+    public String getDomainName()
+    {
+        return domainName;
+    }
+
+    /**
+     * Whether or not background guides are live on the website.
+     */
+    public boolean isGuidesPublished() {
+        return guidesPublished;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setKey(String key)
+    {
+        this.key = key;
+    }
+
+    public void setDomainName(String domainName)
+    {
+        this.domainName = domainName;
+    }
+
+    public void setGuidesPublished(boolean guidesPublished) {
+        this.guidesPublished = guidesPublished;
+    }
+
+    public void setBackgroundGuideTemplate(String template)
+    {
+        this.backgroundGuideTemplate = new UriTemplate(template);
+    }
+
+    /**
+     * Get the URL for a committee's background guide
+     * @param shortName the short name of the committee, such as {@code undp}.
+     * @return a URL to the committee's background guide
+     */
+    public URI getBackgroundGuideURL(String shortName)
+    {
+        Map<String, String> params = Map.of("shortName", shortName);
+        return backgroundGuideTemplate.expand(params);
+    }
 }

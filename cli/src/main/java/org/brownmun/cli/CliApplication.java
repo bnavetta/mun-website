@@ -10,7 +10,6 @@ import org.brownmun.core.CoreConfiguration;
 
 @SpringBootApplication
 @Import(CoreConfiguration.class)
-@EnableConfigurationProperties(ConfigurableConference.class)
 public class CliApplication
 {
     public static void main(String[] args)
