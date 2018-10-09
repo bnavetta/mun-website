@@ -83,4 +83,12 @@ public class Conference
         Map<String, String> params = Map.of("shortName", shortName);
         return backgroundGuideTemplate.expand(params);
     }
+
+    /**
+     * Get the email address for contacting a committee's chairs.
+     */
+    public String getCommitteeEmail(String shortName)
+    {
+        return shortName + "@" + domainName;
+    }
 }

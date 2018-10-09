@@ -1,25 +1,21 @@
 package org.brownmun.core.committee.impl;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.transaction.Transactional;
-
+import com.google.common.base.Preconditions;
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.CommitteeType;
+import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.model.Delegate;
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
-
-import org.brownmun.core.committee.CommitteeListing;
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.CommitteeType;
-import org.brownmun.core.committee.model.Position;
-import org.brownmun.core.school.model.Delegate;
+import javax.transaction.Transactional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CommitteeServiceImpl implements CommitteeService
@@ -66,26 +62,21 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Transactional
-    @Override
-    public CommitteeListing list()
+    public List<Committee> listByType(CommitteeType type)
     {
-        List<Committee> general = allByType(CommitteeType.GENERAL).collect(Collectors.toList());
-        List<Committee> specialized = allByType(CommitteeType.SPECIALIZED).collect(Collectors.toList());
-        List<Committee> crisis = allByType(CommitteeType.CRISIS).collect(Collectors.toList());
-        List<Committee> jointCrisis = allByType(CommitteeType.JOINT_CRISIS).collect(Collectors.toList());
-
-        Map<Long, Set<Committee>> jccRooms = Maps.newHashMap();
-        for (Committee jcc : jointCrisis)
+        try (Stream<Committee> cs = repo.findAllByTypeOrderByNameAsc(type))
         {
-            // Hibernate 5.2 breaks Jackson's hibernate5 datatype module (which mostly knows
-            // how to un-proxy/initialize
-            // things), so we explicitly initialize here.
-            Set<Committee> rooms = jcc.getJointCrisisRooms();
-            Hibernate.initialize(rooms);
-            jccRooms.put(jcc.getId(), rooms);
+            return cs.collect(Collectors.toList());
         }
+    }
 
-        return CommitteeListing.create(general, specialized, crisis, jointCrisis, jccRooms);
+    @Transactional
+    public Set<Committee> getJointCrisisRooms(Committee jointCrisis)
+    {
+        Preconditions.checkArgument(jointCrisis.getType() == CommitteeType.JOINT_CRISIS);
+        Set<Committee> rooms = repo.getOne(jointCrisis.getId()).getJointCrisisRooms();
+        Hibernate.initialize(rooms);
+        return rooms;
     }
 
     @Override

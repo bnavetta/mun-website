@@ -68,6 +68,10 @@ class CommitteeMap extends React.PureComponent {
                                     <h3 className="committee-map__committee-name">
                                         {committee.name}
                                     </h3>
+                                    <div className="committee-map__committee-info">
+                                        <span><a href={"mailto:" + committee.email}>{committee.email}</a></span>
+                                        {committee.backgroundGuide && <span><a href={committee.backgroundGuide}>Background Guide</a></span>}
+                                    </div>
                                     <p
                                         dangerouslySetInnerHTML={{
                                             __html: committee.description,

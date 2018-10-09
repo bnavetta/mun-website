@@ -37,3 +37,10 @@ mail:
 mailgun:
   base-uri: https://api.mailgun.net/v3/mg.busun.org
   api-key: "${MAILGUN_API_KEY}"
+
+conference:
+  name: BUSUN
+  key: busun
+  domainName: busun.org
+  guidesPublished: true
+  backgroundGuideTemplate: https://storage.googleapis.com/busun_assets/background_guides/{shortName}.pdf

@@ -22,6 +22,12 @@ function Committee({ committee }) {
                     {committee.topic3 && <li>{committee.topic3}</li>}
                     {committee.topic4 && <li>{committee.topic4}</li>}
                 </ul>
+                <p>
+                    Contact at <a href={"mailto:" + committee.email}>{committee.email}</a>
+                </p>
+                {committee.backgroundGuide && <p>
+                    Dowload the <a href={committee.backgroundGuide}>background guide</a>.
+                </p>}
             </div>
         </React.Fragment>
     );

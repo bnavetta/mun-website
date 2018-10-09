@@ -1,15 +1,12 @@
 package org.brownmun.core.committee;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
-import java.util.stream.Stream;
-
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.model.Delegate;
+
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Responsible for committees.
@@ -68,9 +65,14 @@ public interface CommitteeService
     Stream<Committee> allByType(CommitteeType type);
 
     /**
-     * Get info about all committees.
+     * Like {@link #allByType(CommitteeType)}, but returns a list instead.
      */
-    CommitteeListing list();
+    List<Committee> listByType(CommitteeType type);
+
+    /**
+     * Lists the rooms in a joint crisis.
+     */
+    Set<Committee> getJointCrisisRooms(Committee jointCrisis);
 
     /**
      * Find the ID of the committee that a given position belongs to.
