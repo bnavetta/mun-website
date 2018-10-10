@@ -71,7 +71,7 @@ public class Assigner
      * @param committees all committees assigned
      * @return a list of all position assignments
      */
-    private List<PositionAssignment> makeAssignments(AssignmentSolver solver, List<AssignableCommittee> committees)
+    private List<PositionAssignment> makeAssignments(AssignmentSettings settings, AssignmentSolver solver, List<AssignableCommittee> committees)
     {
         List<School> schools = schoolService.listSchools();
 
@@ -83,7 +83,9 @@ public class Assigner
                     .orElseThrow(() -> new IllegalArgumentException("Invalid committee ID: " + aCommittee.id()));
 
             // TODO: just use a linked list from the start?
-            List<Position> positions = Lists.newArrayList(committeeService.getPositions(committee));
+            List<Position> positions = committeeService.getPositions(committee).stream()
+                    .filter(p -> !settings.reservedPositions().contains(p.getId()))
+                    .collect(Collectors.toList());
             // TODO: could prioritize based on importance, desirability, etc. (would need to
             // change school iteration to be fair)
             Collections.shuffle(positions);
@@ -138,6 +140,8 @@ public class Assigner
             }
         });
 
+        // TODO: filter out reserved positions
+
         long maxCommitteeId = Stream.concat(ga.stream(), Stream.concat(spec.stream(), crisis.stream()))
                 .mapToLong(AssignableCommittee::id)
                 .max()
@@ -157,7 +161,7 @@ public class Assigner
         allCommittees.addAll(ga);
         allCommittees.addAll(spec);
         allCommittees.addAll(crisis);
-        return makeAssignments(solver, allCommittees);
+        return makeAssignments(settings, solver, allCommittees);
     }
 
     private List<SchoolAllocation> readAllocations(File source) throws IOException

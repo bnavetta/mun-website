@@ -103,7 +103,9 @@ def prod():
 @prod.command('querydb')
 def prod_querydb():
     with tunnel(container_ip('postgres'), 5432) as t:
-        subprocess.call(['psql', '-h', 'localhost', '-p', str(t.local_bind_port), '-U', 'postgres', 'busun'])
+        env = dict(os.environ)
+        env['PGPASSWORD'] = env['PROD_DB_PASSWORD']
+        subprocess.call(['psql', '-h', 'localhost', '-p', str(t.local_bind_port), '-U', 'postgres', 'busun'], env=env)
 
 
 @prod.command('shell', context_settings=dict(ignore_unknown_options=True))
