@@ -9,10 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,6 +107,14 @@ public class Allocator
         {
             long id = (Long) t.get(0);
             int delegateCount = (Integer) t.get(1);
+
+            cb = em.getCriteriaBuilder();
+            CriteriaQuery<Boolean> acceptedQ = cb.createQuery(Boolean.class);
+            Root<School> r = acceptedQ.from(School.class);
+            acceptedQ.select(r.get(School_.accepted)).where(cb.equal(r.get(School_.id), Long.valueOf(id)));
+            if (!em.createQuery(acceptedQ).getSingleResult()) {
+                continue;
+            }
 
             SchoolAllocation prefs = prefMap.get(id);
             if (prefs == null)

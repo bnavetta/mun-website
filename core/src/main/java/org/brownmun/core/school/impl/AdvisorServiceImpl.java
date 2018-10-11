@@ -7,12 +7,14 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.google.common.base.Throwables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import org.brownmun.core.Conference;
@@ -43,10 +45,11 @@ public class AdvisorServiceImpl implements AdvisorService
     private final MailSender mailSender;
     private final Conference conference;
     private final PasswordEncoder encoder;
+    private final TransactionTemplate tx;
 
     @Autowired
     public AdvisorServiceImpl(PasswordResetRepository repo, SchoolService schoolService, AdvisorRepository advisorRepo,
-            MailSender mailSender, Conference conference, PasswordEncoder encoder)
+                              MailSender mailSender, Conference conference, PasswordEncoder encoder, TransactionTemplate tx)
     {
         this.repo = repo;
         this.schoolService = schoolService;
@@ -54,6 +57,7 @@ public class AdvisorServiceImpl implements AdvisorService
         this.mailSender = mailSender;
         this.conference = conference;
         this.encoder = encoder;
+        this.tx = tx;
     }
 
     @Override
@@ -64,36 +68,45 @@ public class AdvisorServiceImpl implements AdvisorService
     }
 
     @Override
-    @Transactional
     public void requestPasswordReset(String email) throws PasswordResetException
     {
-        Advisor advisor = schoolService.findAdvisor(email)
-                .orElseThrow(() -> new PasswordResetException("No advisor with that email address exists", email));
-
-        PasswordReset reset = new PasswordReset();
-        reset.setResetCode(Tokens.generate(32));
-        reset.setAdvisor(advisor);
-        reset.setRequestedAt(Instant.now());
-        reset = repo.save(reset);
-
-        String resetUrl = UriComponentsBuilder.newInstance()
-                .scheme("https")
-                .host(conference.getDomainName())
-                .path("/your-mun/password/reset")
-                .queryParam("token", reset.getResetCode())
-                .build()
-                .toUriString();
-
-        EmailMessage message = EmailMessage.builder()
-                .recipient(email)
-                .subject(String.format("[%s] Password Reset", conference.getName()))
-                .messageTemplate("password-reset")
-                .variables(Map.of("advisor", advisor, "resetUrl", resetUrl))
-                .build();
-
+        String resetCode = Tokens.generate(32);
         try
         {
+            // Manually manage transactions to avoid doing expensive operations like reset code generation or
+            // sending emails within the database transaction. Otherwise, we can starve the connection pool.
+            PasswordReset reset = tx.execute((t) -> {
+                Advisor advisor = schoolService.findAdvisor(email)
+                        .orElseThrow(() -> new RuntimeException(new PasswordResetException("No advisor with that email address exists", email)));
+
+                PasswordReset r = new PasswordReset();
+                r.setResetCode(resetCode);
+                r.setAdvisor(advisor);
+                r.setRequestedAt(Instant.now());
+                return repo.save(r);
+            });
+
+
+            String resetUrl = UriComponentsBuilder.newInstance()
+                    .scheme("https")
+                    .host(conference.getDomainName())
+                    .path("/your-mun/password/reset")
+                    .queryParam("token", reset.getResetCode())
+                    .build()
+                    .toUriString();
+
+            EmailMessage message = EmailMessage.builder()
+                    .recipient(email)
+                    .subject(String.format("[%s] Password Reset", conference.getName()))
+                    .messageTemplate("password-reset")
+                    .variables(Map.of("advisor", reset.getAdvisor(), "resetUrl", resetUrl))
+                    .build();
+
             mailSender.sendEmail(message);
+        }
+        catch (RuntimeException e)
+        {
+            throw Throwables.getCauseAs(e, PasswordResetException.class);
         }
         catch (MailException e)
         {

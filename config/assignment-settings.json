@@ -1,7 +1,6 @@
 {
-  "generalOverlap": 30,
-  "specializedOverlap": 30,
+  "generalOverlap": 2,
+  "specializedOverlap": 2,
   "crisisOverlap": 1,
-  "nonMidnightCrisisSchools": [],
-  "midnightCrisisId": 40
+  "reservedPositions": [316, 421, 294, 427, 142, 428]
 }

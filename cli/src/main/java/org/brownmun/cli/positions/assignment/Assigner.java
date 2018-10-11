@@ -9,6 +9,8 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -37,6 +39,8 @@ import org.brownmun.core.school.model.School;
  */
 public class Assigner
 {
+    private static final Logger log = LoggerFactory.getLogger(Assigner.class);
+
     private final ObjectMapper jsonMapper;
     private final CsvMapper csvMapper;
     private final CommitteeService committeeService;
@@ -58,9 +62,13 @@ public class Assigner
         this.tx = tx;
     }
 
-    private AssignableCommittee toAssignable(Committee c)
+    private AssignableCommittee toAssignable(Committee c, AssignmentSettings settings)
     {
-        return AssignableCommittee.create(c.getId(), committeeService.getPositions(c).size());
+        long capacity = committeeService.getPositions(c)
+                .stream()
+                .filter(p -> !settings.reservedPositions().contains(p.getId()))
+                .count();
+        return AssignableCommittee.create(c.getId(), Math.toIntExact(capacity));
     }
 
     /**
@@ -71,10 +79,8 @@ public class Assigner
      * @param committees all committees assigned
      * @return a list of all position assignments
      */
-    private List<PositionAssignment> makeAssignments(AssignmentSettings settings, AssignmentSolver solver, List<AssignableCommittee> committees)
+    private List<PositionAssignment> makeAssignments(List<SchoolAllocation> schools, AssignmentSettings settings, AssignmentSolver solver, List<AssignableCommittee> committees)
     {
-        List<School> schools = schoolService.listSchools();
-
         List<PositionAssignment> assignments = Lists.newArrayList();
 
         for (AssignableCommittee aCommittee : committees)
@@ -91,15 +97,19 @@ public class Assigner
             Collections.shuffle(positions);
             Queue<Position> available = Queues.newArrayDeque(positions);
 
-            for (School school : schools)
+            for (SchoolAllocation school : schools)
             {
-                int assigned = solver.getDelegates(school.getId(), committee.getId());
+                int assigned = solver.getDelegates(school.id(), committee.getId());
                 for (int i = 0; i < assigned; i++)
                 {
+                    School s = schoolService.getSchool(school.id()).get();
+
+                    Position position = available.remove();
+                    log.debug("Assigning {} in {} to {} ({} positions left)", position.getName(), committee.getName(), s.getName(), available.size());
                     assignments.add(PositionAssignment.builder()
                             .withCommittee(committee)
-                            .withSchool(school)
-                            .withPosition(available.remove())
+                            .withSchool(s)
+                            .withPosition(position)
                             .build());
                 }
             }
@@ -121,14 +131,14 @@ public class Assigner
         List<AssignableCommittee> ga = tx.execute(t -> {
             try (Stream<Committee> cs = committeeService.allByType(CommitteeType.GENERAL))
             {
-                return cs.map(this::toAssignable).collect(Collectors.toList());
+                return cs.map(c -> toAssignable(c, settings)).collect(Collectors.toList());
             }
         });
 
         List<AssignableCommittee> spec = tx.execute(t -> {
             try (Stream<Committee> cs = committeeService.allByType(CommitteeType.SPECIALIZED))
             {
-                return cs.map(this::toAssignable).collect(Collectors.toList());
+                return cs.map(c -> toAssignable(c, settings)).collect(Collectors.toList());
             }
         });
 
@@ -136,11 +146,9 @@ public class Assigner
             try (Stream<Committee> cs = committeeService.allByType(CommitteeType.CRISIS);
                     Stream<Committee> jcs = committeeService.allByType(CommitteeType.JOINT_CRISIS_ROOM))
             {
-                return Stream.concat(cs, jcs).map(this::toAssignable).collect(Collectors.toList());
+                return Stream.concat(cs, jcs).map(c -> toAssignable(c, settings)).collect(Collectors.toList());
             }
         });
-
-        // TODO: filter out reserved positions
 
         long maxCommitteeId = Stream.concat(ga.stream(), Stream.concat(spec.stream(), crisis.stream()))
                 .mapToLong(AssignableCommittee::id)
@@ -161,7 +169,7 @@ public class Assigner
         allCommittees.addAll(ga);
         allCommittees.addAll(spec);
         allCommittees.addAll(crisis);
-        return makeAssignments(settings, solver, allCommittees);
+        return makeAssignments(allocations, settings, solver, allCommittees);
     }
 
     private List<SchoolAllocation> readAllocations(File source) throws IOException

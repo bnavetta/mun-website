@@ -107,6 +107,8 @@ public class AssignmentCommands
         // existing assignments.
         schoolService.clearDelegates();
 
+        System.out.println("Assigning positions");
+
         for (PositionAssignment assignment : assignments)
         {
             School school = schoolService.getSchool(assignment.schoolId())
@@ -118,7 +120,7 @@ public class AssignmentCommands
             Delegate delegate = new Delegate();
             delegate.setSchool(school);
             delegate.setPosition(position);
-            committeeService.savePosition(position);
+            schoolService.saveDelegate(delegate);
         }
 
         return null;

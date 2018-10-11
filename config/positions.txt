@@ -1,3 +1,43 @@
+<undp>
+Angola
+Algeria
+Australia
+Brazil
+Canada
+Cameroon
+Chad
+Chile
+China
+Colombia
+France
+Gabon
+Greece
+Guatemala
+Haiti
+Honduras
+India
+Indonesia
+Lebanon
+Japan
+Jordan
+Kenya
+Mexico
+Myanmar
+Niger
+Nigeria
+Norway
+Oman
+Peru
+Republic of Korea
+South Africa
+Senegal
+Spain
+Syria
+Turkey
+Uganda
+United Arab Emirates
+United Kingdom of Great Britain and Northern Ireland
+United States of America
 <african_union>
 Algeria
 Angola
@@ -86,6 +126,7 @@ Rep. of Korea
 Japan
 Philippines
 <ecosoc>
+Greece
 South Africa
 Namibia
 Zimbabwe
@@ -168,6 +209,7 @@ Syria
 Greece
 Iraq
 <environmental_assembly>
+Turkey
 China
 India
 Japan
@@ -437,3 +479,434 @@ Ukraine
 Russian Federation
 United Kingdom
 USA
+<empire_of_japan>
+Soh Jaipil
+Masuda Takashi
+Pak Yung-hio
+Kim Ok-Gyun
+Yanosuke Iwasaki
+Prince Oyama Iwao
+Count Kabayama Sukenori
+Empress Shoken
+Fukuzawa Yukichi
+Enomoto Takeaki
+Fukuda Hideko
+Sano Tsunetami
+Matsukata Masayoshi
+Ito Hirobumi
+Okuma Shigenobu
+Itagaki Taisuke
+<qing_empire>
+Min Yeong-Chan, head of the Three Offices
+Choe Ik-hyeon
+Empress Myeongseong/Queen Min
+Admiral Ding Ruchang/Ting Ju-ch'ang
+General Ma Anliang/Ma An-liang
+Li Hanzhang/Li Han-chang, Viceroy of Liangguang
+Yang Changjun/Yang Ch'ang-chün, Viceroy of Shaan-Gan
+Tan Zhonglin/T'an Chung-lin, Viceroy of Min-Zhe
+Zhidong/Chang Chih-tung, Viceroy of Huguang
+Sun Jiayu/Sun Chia-nai, Censor-in-Chief
+Li Hongzhang/Li Hung-chang, Viceroy of Zhili and Beiyang Trade
+Liu Kunyi/Liu K'un-i, Viceroy of Liangjiang and Nanyang Trade Minister
+Xu Jingcheng/Hsü Ching-ch'eng, Minister of Works
+Weng Tonghe/Weng T’ung-ho, Minister of Revenue
+Yikuang/I-kuwang, Prince Qing
+Shiduo/Shih-to, Prince Li
+Yixin/I-hsin, Prince Gong/Kung
+<somoza_government>
+Salvadora Debayle
+Luis Somoza Debayle
+Isabel Urcuyo de Somoza
+Anastasio Somoza Debayle Portocarrero
+Anastasio Somoza Portocarrero
+Guillermo Sevilla Sacasa
+Oscar Sevilla Sacasa
+Roberto Debayle Sacasa
+Leon Debayle Sacasa
+Luis Manuel Debayle Sacasa
+Alexander Debayle Portacerro
+Julio Somoza Portacarrero
+Fernando Debayle Sacasa
+<soviet_embassy>
+Georgi Bolshakov - Press Attache
+Anatoly Dobrynin – Ambassador to the United States
+Yuli Vorontsov - Charge d’affaires
+Mikhail Litvin - Public Affairs Officer
+Elena Bunin - Management Counselor
+Alexander Alexiev - Regional Security Officer
+Katarina Orlov - Cultural Attache
+Vladimir Shubin - Economic Attache
+Anatoly Vasilyevich Torkunov – Scientific and Environmental Attache
+Andrei Gromyko – Foreign Minister
+Velerian Zorin – Deputy Chief of mission
+Gleb Markov – Consul General
+Dmitri Ivanov – Defense Attache
+Yuri Dubinin - Political Attache
+<sandinistas>
+Sergio Ramirez
+Alfonso Robelo
+Alonso Espinosa
+Violeta Chamorro
+Fernando Cardenal Martinez
+Silvio Mayorga
+Tomas Borge Martinez
+Augusto Echeverria
+Emilio Salcedo
+Jose Acosta
+Maria Roberto
+Pedro Joaquin Chamorro Cardenal
+Daniel Ortega
+Carlos Fonseca Almodar
+<us_embassy>
+James Hill – Deputy Chief of Mission
+David Peterson - Consul General
+Michael Martinez – Defense Attache
+Thomas Hughes - Political Attache
+Sarah Watson - Cultural Attache
+Samantha Perez - Economic Attache
+Julia White - Commercial Attache
+Esther Lopez– Scientific and Environmental Attache
+Joseph Myers – Soviet Relations Attache
+John Price - Public Affairs Officer
+Eva Thomas - Management Counselor
+Andrew Butler - Regional Security Officer
+Pearl Richardson – Director for the USAID Branch in Nicaragua
+<house_of_york>
+William Hastings, 1st Baron of Hastings
+John Howard, 1st Duke of Norfolk
+William Neville, Baron of Fauconberg
+Thomas Fauconberg
+Anne Neville, Duchess of Gloucester
+Isabel Neville, Duchess of Clarence
+Richard Neville, 16th Earl of Warwick
+Richard Neville, 5th Earl of Salisbury
+Richard of York, Duke of Gloucester
+George Plantagenet, 1st Duke of Clarence
+Edmund, Earl of Rutland
+Edward, Earl of March
+Cecily Neville, Duchess of York
+John Mowbray, 3rd Duke of Norfolk
+<house_of_lancaster>
+John Talbot, 2nd Earl of Shrewsbury
+Henry Holland, 3rd Duke of Exeter
+John de Vere, 12th Earl of Oxford
+James Tuchet, 5th Baron Audley
+Elizabeth Woodville
+Jasper Tudor, Duke of Bedford
+Edmund Tudor, 1st Earl of Richmond
+Lady Margaret Beaufort, Countess of Richmond
+Sir Owen Tudor
+Humphrey Stafford, 1st Duke of Buckingham
+John Tiptoft, Lord High Treasurer and 1st Earl of Worcester
+Henry Beaufort, 3rd Duke of Somerset
+Edmund Beaufort, 2nd Duke of Somerset
+Queen Margaret of Anjou
+<adhoc>
+Ad Hoc – 1
+Ad Hoc – 2
+Ad Hoc – 3
+Ad Hoc – 4
+Ad Hoc – 5
+Ad Hoc – 6
+Ad Hoc – 7
+Ad Hoc – 8
+Ad Hoc – 9
+Ad Hoc – 10
+Ad Hoc – 11
+Ad Hoc – 12
+Ad Hoc – 13
+Ad Hoc – 14
+Ad Hoc – 15
+<algerian_war>
+Rabah Bitat
+Mourad Didouche
+Mostefa Lacheraf
+Mostefa Ben Boulaïd
+Mohamed Khider
+Mohamed Boudiaf
+Larbi Ben M'hidi
+Hocine Aït Ahmed
+Belkacem Krim
+Bachir Hadj Ali
+Bachir al-Ibrahimi
+Ali Mahsas
+Ahmed Ben Bella
+Abane Ramdane
+<ioc_rio>
+USA
+France
+UK
+Russia
+China
+Japan
+Brazil
+Spain
+Azerbaijan
+Qatar
+Czech Republic
+Australia
+Thailand
+Belgium
+Argentina
+South Africa
+India
+UAE
+Turkey
+Portugal
+Mexico
+Canada
+Kenya
+Italy
+<rome_statute>
+South Africa
+Burundi
+Kenya
+Tunisia
+Nigeria
+Mali
+Jordan
+Georgia
+Afghanistan
+Bosnia & Herzegovina
+Portugal
+Malta
+Austria
+New Zealand
+Canada
+Philippines
+Japan
+Mongolia
+Brazil
+Colombia
+El Salvador
+<tammany_hall>
+William H. Walker
+William Cox Redfield
+William Sulzer
+Randolph Guggenheimer
+Charles V. Fornes
+Thomas F. Donnelly
+Thomas H. Cullen
+Thomas Grady
+Henry Doll
+George Washington Plunkitt
+John McGaw Woodbury
+Lewis Nixon
+Edward M. Grout
+Louis Haffen
+Tim Sullivan
+Martin Engel
+Joseph “Curly Joe” Cassidy
+George B. McClellan, Jr.
+Victor J. Dowling
+Barbara Porges
+John T. Oakley
+Moritz Herzberg
+<korea>
+Choe Hwi
+Kim Yong-chol
+Ri Yong-gil
+Hong Yong-chil
+Ri Son-won
+Ri Yong-ho
+Ri Su-yong
+Ri Myong-su
+Kim Won-hong
+Pak Yong-sik
+Coe Ryong-hae
+Song Young-moo
+Park Soo-gil
+Han Duck-soo
+Cho Myoung-gyon
+Kang Kyung-wha
+Song Min-soon
+Chung In-moon
+Jeong Kyeong-doo
+Cho Yoon-je
+Im Jong-seok
+Chung Eui-yong
+<bolivia>
+Benjamín Blanco (MAS)
+Catalina Varela (MAS)
+Vicente Ortiz (MAS)
+Fernando Quiroga (MAS)
+Juliana Medina (MAS)
+Delfina Rojas (MAS)
+Facundo Herrera (MAS)
+Ricardo Pereyra (MAS)
+Victor Herrera (PODEMOS)
+Sergio Gutierrez (PODEMOS)
+Alessandra Moreno (PODEMOS)
+Olivia Alonso (PODEMOS)
+Carla Rey (PODEMOS)
+Alejandro Ortiz (PODEMOS)
+Isaac Moreno (PODEMOS)
+Josefina Herrera (PODEMOS)
+Cristian Arias (National Unity Front)
+Kevin Castillo (MNR)
+<iran_constitution>
+Ayatollah Ruhollah Khomeini
+Morteza Motahari
+Mohammad Beheshti
+Akbar Hashemi Rafsanjani
+Mehdi Bazargan
+Karim Sanjabi
+Abolhassan Banisadr
+Bahram Afzali
+Mohammad Kazem Shariatmadari
+Hedayatollah Matin-Daftari
+Hasan Habibi
+Mahmoud Taleghani
+Mohammad-Reza Mahdavi Kani
+Hussein-Ali Montazeri
+Ali Khameini
+Mohammad Khatami
+Javad Sharestani
+Mohammad Tavasoli
+Hashem Sabbaghian
+Ahmed Sayyad Javadi
+<carnation>
+Americo Tomás (Estado Novo)
+Marcello Caetano (Estado Novo)
+António de Sommer Champalimaud (Estado Novo
+Américo Ferreira Amorim (Estado Novo)
+António de Spínola (Armed Forces)
+António dos Santos Ramalho Eanes (Armed Forces)
+ Otelo Saraiva de Carvalho (Armed Forces)
+José Baptista Pinheiro de Azevedo (Armed Forces)
+Celeste Caeiro (Civil Society)
+Álvaro Barreirinhas Cunhal (Civil Society)
+Mário Alberto Nobre Lopes Soares (Civil Society)
+José Manuel de Mello (Civil Society)
+Zeca Afonso (Civil Society)
+Francisco de Sá Carneiro (Civil Society)
+Diogo Pinto de Freitas do Amaral (Civil Society)
+Manuel Serra (Civil Society)
+<finnish_note>
+Martti Miettunen - Prime Minister
+Ahti Karjalainen - Minister of Foreign Affairs
+Pauli Lehtosalo - Minister of Justice
+Edvard Björkenheim - Minister of Defense
+Eemil Vihtori Luukka - Minister of the Interior
+Wiljam Sarjala - Minister of Finance (shared with Juho Niemi)
+Juho Niemi - Minister of Finance (shared with Wiljam Sarjala)
+Heikki Hosia - Minister of Education
+Johannes Virolainen - Minister of Agriculture
+Kauno Kleemola - Minister of Transport and Public Works
+Eeli Erkkilä - Deputy Minister of Transport and Public Works
+Ilmari Hustich - Minister of Trade and Industry
+Pauli Lehtosalo - Deputy Minister of Trade and Industry
+Vieno Simonen - Minister of Social Affairs
+Mauno Jussila - Deputy Minister of Social Affairs 
+<turkish_unification>
+Ziya Gokalp (chairman for the council on Economic policy)
+Mustafa İsmet İnönü (Prime Minister)
+Kazim Karabekir (General, started the Progressive Republican Party)
+Ali Fuat Cebesoy (General, started the Progressive Republican Party)
+Ali Fethi Okyar (Liberal Republican Party Leader)
+Nuri Demirag (Billionaire involved in finance policy)
+Celal Bayar (Managing Director of the Largest Turkish commercial bank)
+Hikmet Bayur (Secretary General to the presidency--diplomat)
+Adnan Menderes (Invited by Ataturk to join the people’s republic party currently waiting to be assigned to his first position. Decorated military hero)
+Mehmet Şükrü Kaya (Minister of Foreign Affairs/Minister of the Interior/previous minister of agriculture)
+Ibrahim Refik Saydam (Health minister)
+Sadiye Hanim (First elected female mayor)
+Kara Fatma (Female decorated Turkish military leader and soldier)
+Fatma Aliye Topuz (Feminist writer, essayist, humanitarian)
+Nezihe Muhiddin (Founder of the People’s Party for Women)
+Halide Edip Adıvar (Past corporeal and sargeant in the Turkish nationalist army)
+Hüseyin Vasıf Çınar (Teacher and journalist--former education minister)
+Cemal Hüsnü Taray (Current minister of education)
+Aziz Zekai Apaydin (Minister of National Defense)
+Mehmet Şükrü Saracoğlu (Helped found the Turkish Central Bank)
+Yusuf Kemal Tengirşenk (Deputy Mayor of the Courthouse for the Justice System)
+Fuat Ağralı (Treasurer of the Turkish delegation at Lusanne) 
+<icelandic_althing>
+Egill Kársson - Northern Quarter (Ásbirningar Clan)
+Jón Henriksson - Northern Quarter (Ásbirningar Clan)
+Bótólfur Arnason - Northern Quarter (Ásbirningar Clan)
+Jón Hjaltason - Northern Quarter (Ásbirningar Clan)
+Gísli Jónsson - Northern Quarter (Ásbirningar Clan)
+Kolbeinn Arnórsson - Northern Quarter (Ásbirningar Clan)
+Gísli Gunnarsson - Eastern Quarter (Svínfellingar Clan)
+Þórðr Þórðarson - Eastern Quarter (Svínfellingar Clan)
+Árni Tumason - Eastern Quarter (Svínfellingar Clan)
+Sighvatr Njálsson - Eastern Quarter (Svínfellingar Clan)
+Eyjólfur Njálsson - Eastern Quarter (Svínfellingar Clan)
+Sturla Kolbeinsson - Eastern Quarter (Svínfellingar Clan)
+Flósi Arnason - Western Quarter (Sturlungar Clan)
+Ísleifur Runólfsson - Western Quarter (Sturlungar Clan)
+Klængur Einarsson - Western Quarter (Sturlungar Clan)
+Jón Magnússon - Western Quarter (Sturlungar Clan)
+Árni Ólafsson - Western Quarter (Sturlungar Clan)
+Ögmundur Stefánsson - Western Quarter (Sturlungar Clan)
+Gissur Halldórsson - Southern Quarter (Haukdælir Clan)
+Oddgeir Þorsteinsson - Southern Quarter (Haukdælir Clan)
+Magnús Þorsteinsson - Southern Quarter (Haukdælir Clan)
+Sigvarður Sigvarðursson - Southern Quarter (Haukdælir Clan)
+Páll Einarsson - Southern Quarter (Haukdælir Clan)
+Grímur Sigurðsson - Southern Quarter (Haukdælir Clan)
+Sigvarður Þéttmarsson (Bishop of Skálholt)
+Heinrekur Kársson (Bishop of Hólar)
+<zimbabwe>
+Mathew Nyashanu (ZANU-PF)
+Enock Porusingazi (ZANU-PF)
+Jefry Ngome (ZANU-PF)
+Mafidi Mnangagwa Tongai (ZANU-PF)
+Christopher Chingosho (ZANU-PF)
+Girovah Dzepasi  (ZANU-PF)
+Noveti Muponora (ZANU-PF)
+Bannwell Seremwe (ZANU-PF)
+Oscar Gorerino (ZANU-PF)
+Bramwell Bushu (ZANU-PF)
+Temba Peter Mliswa (Independent)
+Nicola Jane Watson (MDC)
+Livingstone Chimina (MDC)
+Brian Dube (MDC)
+Amos Chibaya (MDC)
+Lloyd Mukapiko Dzikamai (MDC)
+Thabitha Khumalo (MDC)
+Masango Matambanadzo (NPF)
+<bucareli>
+Manuel Téllez (Acting Ambassador to the United States - Lead Negotiator)
+Andrés Molina Enríquez (Radical political leader and “Father” of article 27)
+Adolfo de la Huerta (Secretary of the Treasury/Finance Minister and former interim president)
+Luis N. Morones (Influential Labor Leader)
+Plutarco Elías Calles (Obregón’s chosen successor)
+Alberto J. Pani (Economic expert and career bureaucrat in Mexico)
+Fernando Iglesias Calderón (Former Ambassador to Mexico and Politician)
+Manuel Y. de Negri (Senior Diplomat)
+Genovevo de la O (Politician and former Zapatista leader)
+José Vasconcelos (Secretary of Public Education)
+Jesús Guajardo (Former Zapatista military leader) 
+Charles Evans Hughes (Secretary of State)
+Albert B. Fall (Secretary of the Interior)
+Thomas W. Lamont (American Banker/Head Negotiator representing ICBM loan holders)
+James Speyer (Banker and representative of major debt holder)
+Henry Fletcher (Under Secretary of State and Former Ambassador to Mexico)
+Andrew Mellon (Secretary of the Treasury)
+Herbert Hoover (Secretary of Commerce)
+Charles B. Warren (Diplomat)
+James R. Sheffield (Politician and Diplomat)
+Dwight Morrow (Politician and Diplomat)
+J. Reuben Clark (Politician and Diplomat)
+<pacific_islands>
+Australia
+Kiribati
+New Caledonia
+Tuvalu
+Cook Islands
+Marshall Islands
+New Zealand
+Samoa
+Vanuatu
+Fiji
+Micronesia
+Niue
+Solomon Islands
+French Polynesia
+Nauru
+Palau
+Tonga
+Papua New Guinea
