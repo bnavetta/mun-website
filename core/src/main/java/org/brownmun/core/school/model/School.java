@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Sets;
 
 /**
@@ -225,5 +226,14 @@ public class School
     public int hashCode()
     {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("accepted", accepted)
+                .toString();
     }
 }

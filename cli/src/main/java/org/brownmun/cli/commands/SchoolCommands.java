@@ -1,5 +1,8 @@
 package org.brownmun.cli.commands;
 
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.model.Delegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -73,5 +76,22 @@ public class SchoolCommands
                 .orElseThrow(() -> new IllegalArgumentException("Advisor not found"));
 
         advisorService.changePassword(advisor, password);
+    }
+
+    @ShellMethod("List the members of a school's delegation")
+    public String listDelegation(long schoolId)
+    {
+        AsciiTable table = new AsciiTable();
+        table.addRow("Delegate ID", "Delegate Name", "Position ID", "Position Name", "Committee ID", "Committee Name");
+        table.addRule();
+
+        for (Delegate d : schoolService.getDelegates(schoolId)) {
+            Position p = d.getPosition();
+            Committee c = p.getCommittee();
+            table.addRow(d.getId(), d.getName(), p.getId(), p.getName(), c.getId(), c.getName());
+        }
+
+        table.addRule();
+        return table.render(120);
     }
 }

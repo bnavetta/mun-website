@@ -5,7 +5,10 @@ import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.impl.DelegateRepository;
+import org.brownmun.core.school.impl.SchoolRepository;
 import org.brownmun.core.school.model.Delegate;
+import org.brownmun.core.school.model.School;
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +27,16 @@ public class CommitteeServiceImpl implements CommitteeService
 
     private final CommitteeRepository repo;
     private final PositionRepository positionRepo;
+    private final DelegateRepository delegateRepo;
+    private final SchoolRepository schoolRepo;
 
     @Autowired
-    public CommitteeServiceImpl(CommitteeRepository repo, PositionRepository positionRepo)
+    public CommitteeServiceImpl(CommitteeRepository repo, PositionRepository positionRepo, DelegateRepository delegateRepo, SchoolRepository schoolRepo)
     {
         this.repo = repo;
         this.positionRepo = positionRepo;
+        this.delegateRepo = delegateRepo;
+        this.schoolRepo = schoolRepo;
     }
 
     @Override
@@ -126,27 +133,37 @@ public class CommitteeServiceImpl implements CommitteeService
     }
 
     @Override
+    @Transactional
     public Delegate assignPosition(long positionId, long schoolId)
     {
-        Position position = positionRepo.getOne(positionId);
+        Position position = positionRepo.findById(positionId)
+                .orElseThrow(() -> new IllegalArgumentException("No position with ID " + positionId));
+        School school = schoolRepo.findById(schoolId)
+                .orElseThrow(() -> new IllegalArgumentException("No school with ID " + schoolId));
 
         Delegate old = position.getDelegate();
         if (old != null)
         {
             log.info("Unassigning {} from {}", position, old);
-            old.setPosition(null);
+            delegateRepo.delete(old);
         }
 
-        // TODO: do we delete the old delegate? should there ever be delegates w/o
-        // positions
-        // or are they basically just a join table?
-        // by the time a delegate has attendance info, the conference has already
-        // started
-        // if a delegate has a name but we unassign their position, it's probably
-        // because they're not coming
-        // there could be position swaps, but maybe we implement that separately
-        // so just treat delegates as join table
+        log.info("Assigning {} to {}", position, school);
 
-        return null;
+        Delegate newDel = new Delegate();
+        newDel.setPosition(position);
+        newDel.setSchool(school);
+        return delegateRepo.save(newDel);
+    }
+
+    @Override
+    @Transactional
+    public List<Position> listUnassignedPositions() {
+        List<Position> positions = positionRepo.findUnassigned();
+        for (Position pos : positions)
+        {
+            Hibernate.initialize(pos.getCommittee());
+        }
+        return positions;
     }
 }

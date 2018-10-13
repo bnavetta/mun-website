@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import de.vandermeer.asciitable.AsciiTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -96,5 +97,28 @@ public class CommitteeCommands
                 }
             }
         }
+    }
+
+    @ShellMethod("List unassigned positions")
+    public String unassignedPositions()
+    {
+        AsciiTable table = new AsciiTable();
+        table.addRow("Position ID", "Position Name", "Committee ID", "Committee Name");
+        table.addRule();
+
+        for (Position p : committees.listUnassignedPositions())
+        {
+            table.addRow(p.getId(), p.getName(), p.getCommittee().getId(), p.getCommittee().getName());
+        }
+
+        table.addRule();
+
+        return table.render(120);
+    }
+
+    @ShellMethod("Assign a position to a school")
+    public void assignPosition(long positionId, long schoolId)
+    {
+        committees.assignPosition(positionId, schoolId);
     }
 }

@@ -95,4 +95,9 @@ public interface CommitteeService
      * @return the {@link Delegate} representing the assignment.
      */
     Delegate assignPosition(long positionId, long schoolId);
+
+    /**
+     * Lists positions not assigned to any schools.
+     */
+    List<Position> listUnassignedPositions();
 }
