@@ -3,6 +3,7 @@ package org.brownmun.util;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import io.sentry.Sentry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +53,7 @@ public class Tokens
             // generator (/dev/random) was low on
             // entropy, so token generation was *super* slow.
             log.error("Slow random number generation: {}ms", end - start);
+            Sentry.capture(String.format("Slow random number generation: %d ms", end - start));
         }
 
         return buf.toString();

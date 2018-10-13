@@ -76,8 +76,12 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
             dependency 'org.springframework.shell:spring-shell-starter:2.0.0.M2'
             dependency 'org.javassist:javassist:3.22.0-GA'
             dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
-            dependency 'io.sentry:sentry-spring:1.7.3'
             dependency 'de.vandermeer:asciitable:0.3.2'
+
+            dependencySet(group: 'io.sentry', version: '1.7.3') {
+                entry 'sentry-spring'
+                entry 'sentry'
+            }
 
             dependencySet(group: 'com.google.auto.value', version: '1.6rc1') {
                 entry 'auto-value'
