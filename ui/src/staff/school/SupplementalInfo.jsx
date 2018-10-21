@@ -1,10 +1,10 @@
 import React from "react";
 import { filter, identity } from "ramda";
 import { connect } from "react-redux";
-import { fetchSupplementalInfo } from "./api";
-import { loadSupplementalInfo, selectSupplementalInfo } from "./state";
-import ErrorPage from "../lib/components/ErrorPage";
-import LoadingPage from "../lib/components/LoadingPage";
+import { fetchSupplementalInfo } from "../api";
+import { loadSupplementalInfo, selectSupplementalInfo } from "../state";
+import ErrorPage from "../../lib/components/ErrorPage";
+import LoadingPage from "../../lib/components/LoadingPage";
 
 function luggageStorage(storage) {
     switch (storage) {
@@ -125,7 +125,6 @@ class SupplementalInfoWrapper extends React.Component {
     }
 
     componentDidMount() {
-        console.log("HERE!!!");
         this.loadSupplementalInfo();
     }
 

@@ -9,7 +9,7 @@ import com.google.common.collect.Maps;
 import org.brownmun.core.Conference;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
-import org.hibernate.Hibernate;
+import org.brownmun.web.common.CommitteeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

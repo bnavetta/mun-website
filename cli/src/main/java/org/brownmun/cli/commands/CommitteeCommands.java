@@ -121,4 +121,10 @@ public class CommitteeCommands
     {
         committees.assignPosition(positionId, schoolId);
     }
+
+    @ShellMethod("Unassign a position from whatever school it was assigned to")
+    public void unassignPosition(long positionId)
+    {
+        committees.unassignPosition(positionId);
+    }
 }

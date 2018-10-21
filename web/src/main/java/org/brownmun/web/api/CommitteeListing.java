@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
+import org.brownmun.web.common.CommitteeDTO;
 
 @AutoValue
 public abstract class CommitteeListing

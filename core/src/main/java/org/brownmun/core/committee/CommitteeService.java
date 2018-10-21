@@ -97,6 +97,12 @@ public interface CommitteeService
     Delegate assignPosition(long positionId, long schoolId);
 
     /**
+     * Unassign a position. If assigned to a delegate, then the delegate will be deleted as well. If not assigned,
+     * does nothing.
+     */
+    void unassignPosition(long positionId);
+
+    /**
      * Lists positions not assigned to any schools.
      */
     List<Position> listUnassignedPositions();

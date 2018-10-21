@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { selectSchools } from "./state";
-import { yesNo } from "../lib/util";
+import { selectSchools } from "../state";
+import { yesNo } from "../../lib/util";
 
 const mapStateToProps = state => ({ schools: selectSchools(state) });
 

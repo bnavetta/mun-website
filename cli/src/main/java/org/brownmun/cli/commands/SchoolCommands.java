@@ -1,5 +1,6 @@
 package org.brownmun.cli.commands;
 
+import com.google.common.base.Strings;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.model.Delegate;
@@ -88,7 +89,7 @@ public class SchoolCommands
         for (Delegate d : schoolService.getDelegates(schoolId)) {
             Position p = d.getPosition();
             Committee c = p.getCommittee();
-            table.addRow(d.getId(), d.getName(), p.getId(), p.getName(), c.getId(), c.getName());
+            table.addRow(d.getId(), Strings.nullToEmpty(d.getName()), p.getId(), Strings.nullToEmpty(p.getName()), c.getId(), Strings.nullToEmpty(c.getName()));
         }
 
         table.addRule();

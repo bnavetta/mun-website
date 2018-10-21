@@ -5,13 +5,14 @@ import { Form } from "react-form";
 import parse from "date-fns/parse";
 import format from "date-fns/format";
 
-import { yesNo, displayError } from "../lib/util";
-import LoadingPage from "../lib/components/LoadingPage";
-import ApplicationForm from "../registration/ApplicationForm";
+import { yesNo, displayError } from "../../lib/util";
+import LoadingPage from "../../lib/components/LoadingPage";
+import ApplicationForm from "../../registration/ApplicationForm";
 
 import SupplementalInfo from "./SupplementalInfo";
-import { authenticateAs } from "./api";
-import { selectSchool, selectAdvisors } from "./state";
+import { authenticateAs } from "../api";
+import { selectSchool, selectAdvisors } from "../state";
+import Delegation from "./Delegation";
 
 const mapStateToProps = (state, props) => {
     const id = parseInt(props.match.params.id);
@@ -83,6 +84,10 @@ function SchoolView({ school, advisors }) {
                         ))}
                 </tbody>
             </table>
+
+            <h2>Delegates</h2>
+
+            <Delegation id={school.id} />
 
             <h2>Application Responses</h2>
 

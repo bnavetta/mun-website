@@ -158,6 +158,25 @@ public class CommitteeServiceImpl implements CommitteeService
 
     @Override
     @Transactional
+    public void unassignPosition(long positionId)
+    {
+        Position position = positionRepo.findById(positionId)
+                .orElseThrow(() -> new IllegalArgumentException("No position with ID " + positionId));
+
+        Delegate old = position.getDelegate();
+        if (old != null)
+        {
+            log.info("Unassigning {} from {}", position, old);
+            delegateRepo.delete(old);
+        }
+        else
+        {
+            log.info("{} was not assigned, nothing to be done", position);
+        }
+    }
+
+    @Override
+    @Transactional
     public List<Position> listUnassignedPositions() {
         List<Position> positions = positionRepo.findUnassigned();
         for (Position pos : positions)

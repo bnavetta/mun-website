@@ -1,8 +1,12 @@
 package org.brownmun.web.api;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.web.common.DelegateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,12 +32,14 @@ public class StaffApiController
 {
     private final SchoolService schools;
     private final AdvisorService advisors;
+    private final CommitteeService committees;
 
     @Autowired
-    public StaffApiController(SchoolService schools, AdvisorService advisors)
+    public StaffApiController(SchoolService schools, AdvisorService advisors, CommitteeService committees)
     {
         this.schools = schools;
         this.advisors = advisors;
+        this.committees = committees;
     }
 
     @JsonView(Views.Staff.class)
@@ -55,6 +61,17 @@ public class StaffApiController
     public SupplementalInfo getSupplementalInfo(@PathVariable Long id)
     {
         return schools.getSupplementalInfo(id);
+    }
+
+    @GetMapping("/school/{id}/delegates")
+    public List<DelegateDTO> getDelegates(@PathVariable Long id)
+    {
+        return schools.getDelegates(id)
+                .stream()
+                .sorted(Comparator.comparing(d -> d.getPosition().getName()))
+                .map(d -> DelegateDTO.create(d.getId(), d.getName(), d.getPosition().getName(),
+                        committees.getFullName(d.getPosition().getCommittee())))
+                .collect(Collectors.toList());
     }
 
     @JsonView(Views.Staff.class)

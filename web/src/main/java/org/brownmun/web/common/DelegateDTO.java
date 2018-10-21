@@ -1,4 +1,4 @@
-package org.brownmun.web.advisors;
+package org.brownmun.web.common;
 
 import java.util.Optional;
 
@@ -22,23 +22,23 @@ public abstract class DelegateDTO
      * The delegate's ID
      */
     @JsonProperty("id")
-    abstract long id();
+    public abstract long id();
 
     /**
      * The name of the delegate, if set.
      */
     @JsonProperty("name")
-    abstract Optional<String> name();
+    public abstract Optional<String> name();
 
     /**
      * The name of the position assigned to the delegate.
      */
     @JsonProperty("positionName")
-    abstract Optional<String> positionName();
+    public abstract Optional<String> positionName();
 
     /**
      * The name of the committee the delegate was assigned to.
      */
     @JsonProperty("committeeName")
-    abstract Optional<String> committeeName();
+    public abstract Optional<String> committeeName();
 }

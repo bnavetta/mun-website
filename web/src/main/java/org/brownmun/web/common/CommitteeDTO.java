@@ -1,4 +1,4 @@
-package org.brownmun.web.api;
+package org.brownmun.web.common;
 
 import java.net.URI;
 

@@ -8,8 +8,8 @@ import {
 import { Provider } from "react-redux";
 import { hot } from "react-hot-loader";
 
-import SchoolList from "./SchoolList";
-import SchoolView from "./SchoolView";
+import SchoolList from "./school/SchoolList";
+import SchoolView from "./school/SchoolView";
 import { fetchSchools, fetchAdvisors } from "./api";
 import { loadSchools, loadAdvisors } from "./state";
 
