@@ -26,10 +26,10 @@ public class WebConfiguration implements WebMvcConfigurer
 
         registry.addViewController("/conference-resources/preparation-and-procedure")
                 .setViewName("conference-resources/preparation-and-procedure");
-        registry.addViewController("/conference-resources/delegate-guide")
-                .setViewName("conference-resources/delegate-guide");
         registry.addViewController("/conference-resources/erinn-phelan-award")
                 .setViewName("conference-resources/erinn-phelan-award");
+		registry.addViewController("conference-resources/keynote-speaker")
+			    .setViewName("conference-resources/keynote-speaker");
 
         registry.addViewController("/logistics/getting-to-campus").setViewName("logistics/getting-to-campus");
         registry.addViewController("/logistics/shuttles-and-parking").setViewName("logistics/shuttles-and-parking");
