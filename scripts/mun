@@ -187,10 +187,11 @@ def clean_images(ver):
         tags = json.loads(subprocess.check_output(["gcloud", "container", "images", "list-tags", image, "--format", "json"]))
         for tag in tags:
             if ver not in tag["tags"]:
-                click.secho("Deleting {}:{}".format(image, tag["tags"][0]), fg="red")
-                subprocess.check_call([
-                    "gcloud", "container", "images", "delete", "--force-delete-tags", "{}@{}".format(image, tag["digest"])
-                ])
+                for tag in tag["tags"]:
+                    click.secho("Deleting {}:{}".format(image, tag), fg="red")
+                    subprocess.check_call([
+                        "gcloud", "container", "images", "delete", "{}:{}".format(image, tag)
+                    ])
 
 if __name__ == '__main__':
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
