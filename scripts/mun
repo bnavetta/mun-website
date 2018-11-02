@@ -179,15 +179,17 @@ def deploy():
 
 
 @cli.command()
-def clean_images():
-    ver = version()
+@click.option('--ver', help='Version to keep', required=False)
+def clean_images(ver):
+    if not ver:
+        ver = version()
     for image in ["gcr.io/busun-158105/busun", "gcr.io/busun-158105/ui"]:
         tags = json.loads(subprocess.check_output(["gcloud", "container", "images", "list-tags", image, "--format", "json"]))
         for tag in tags:
             if ver not in tag["tags"]:
                 click.secho("Deleting {}:{}".format(image, tag["tags"][0]), fg="red")
                 subprocess.check_call([
-                    "gcloud", "container", "images", "delete", "{}@{}".format(image, tag["digest"])
+                    "gcloud", "container", "images", "delete", "--force-delete-tags", "{}@{}".format(image, tag["digest"])
                 ])
 
 if __name__ == '__main__':
