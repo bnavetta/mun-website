@@ -1,4 +1,3 @@
-import { createStore, combineReducers } from "redux";
 import * as R from "ramda";
 
 // Action for loading schools into the store
@@ -14,7 +13,7 @@ const LOAD_SUPPLEMENTAL_INFO = "supplemental_info:load";
 const LOAD_DELEGATES = "delegates:load";
 
 // Schools reducer - handles a [school id -> school] map
-function schoolsReducer(state = {}, action) {
+export function schoolsReducer(state = {}, action) {
     switch (action.type) {
         // The LOAD_SCHOOLS action just replaces our school map completely
         case LOAD_SCHOOLS: {
@@ -46,7 +45,7 @@ function schoolsReducer(state = {}, action) {
 }
 
 // Advisors reducer - handles a [school id -> list of advisors] map
-function advisorsReducer(state = {}, action) {
+export function advisorsReducer(state = {}, action) {
     switch (action.type) {
         case LOAD_ADVISORS:
             return R.groupBy(R.prop("schoolId"), action.advisors);
@@ -87,17 +86,3 @@ export const selectSupplementalInfo = (schoolId, state) =>
     state.schools[schoolId].supplementalInfo;
 
 export const selectDelegates = (schoolId, state) => state.schools[schoolId].delegates;
-
-export default function configureStore() {
-    return createStore(
-        combineReducers({
-            schools: schoolsReducer,
-            advisors: advisorsReducer,
-        }),
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-            window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
-
-    // There's a browser extension you can install (https://github.com/zalmoxisus/redux-devtools-extension) to get
-    // Redux tools within your browser developer tools.
-}

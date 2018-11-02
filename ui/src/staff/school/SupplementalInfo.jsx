@@ -2,7 +2,7 @@ import React from "react";
 import { filter, identity } from "ramda";
 import { connect } from "react-redux";
 import { fetchSupplementalInfo } from "../api";
-import { loadSupplementalInfo, selectSupplementalInfo } from "../state";
+import { loadSupplementalInfo, selectSupplementalInfo } from "../state/school";
 import ErrorPage from "../../lib/components/ErrorPage";
 import LoadingPage from "../../lib/components/LoadingPage";
 

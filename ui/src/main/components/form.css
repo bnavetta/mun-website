@@ -3,11 +3,27 @@
     flex-direction: column;
 }
 
+.form.inline {
+    flex-direction: row;
+}
+
 .form > fieldset {
     display: flex;
     border: none;
 
     flex-direction: column;
+}
+
+.form.inline > fieldset {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.form.inline > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .form input,

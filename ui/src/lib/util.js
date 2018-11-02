@@ -28,13 +28,11 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 export async function request(url, options = {}) {
-    const response = await fetch(
-        url,
-        mergeDeepLeft(options, {
-            headers: csrfHeaders,
-            credentials: "same-origin",
-        })
-    );
+    const mergedOptions = mergeDeepLeft(options, {
+        headers: csrfHeaders,
+        credentials: "same-origin",
+    });
+    const response = await fetch(url, mergedOptions);
 
     // Support non-JSON responses
     const contentType = response.headers.get("Content-Type");

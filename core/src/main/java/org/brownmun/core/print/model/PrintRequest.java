@@ -1,6 +1,5 @@
 package org.brownmun.core.print.model;
 
-import java.sql.Blob;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -46,17 +45,11 @@ public class PrintRequest
 
     @Lob
     @JsonIgnore
-    private Blob data;
+    private byte[] data;
 
     @Type(type = "org.brownmun.core.db.PostgresEnumType", parameters = @org.hibernate.annotations.Parameter(name = "postgres_enum", value = "print_request_status"))
     @Enumerated(EnumType.STRING)
-    private Status status;
-
-    @PrePersist
-    protected void setSubmissionTime()
-    {
-        this.submissionTime = Instant.now();
-    }
+    private PrintRequestStatus status;
 
     public Long getId()
     {
@@ -108,24 +101,24 @@ public class PrintRequest
         this.filename = filename;
     }
 
-    public Blob getData()
+    public byte[] getData()
     {
         return data;
     }
 
-    public void setData(Blob data)
+    public void setData(byte[] data)
     {
         this.data = data;
     }
 
-    public Status getStatus()
+    public PrintRequestStatus getStatus()
     {
         return status;
     }
 
-    public void setStatus(Status status)
+    public void setStatus(PrintRequestStatus printRequestStatus)
     {
-        this.status = status;
+        this.status = printRequestStatus;
     }
 
     public String getContentType()
@@ -173,25 +166,8 @@ public class PrintRequest
                 .toString();
     }
 
-    /**
-     * Tracks the state of a printing request.
-     */
-    public enum Status
-    {
-        /**
-         * The request has not yet been claimed.
-         */
-        PENDING,
-
-        /**
-         * A staffer has claimed the request and is in the process of printing and
-         * delivering it.
-         */
-        CLAIMED,
-
-        /**
-         * The print request has been delivered.
-         */
-        COMPLETED;
+    public void setSubmissionTime(Instant submissionTime) {
+        this.submissionTime = submissionTime;
     }
+
 }

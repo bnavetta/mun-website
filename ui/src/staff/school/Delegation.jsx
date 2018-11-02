@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import ErrorPage from "../../lib/components/ErrorPage";
 import LoadingPage from "../../lib/components/LoadingPage";
 import { fetchDelegates } from "../api";
-import { loadDelegates, selectDelegates } from "../state";
+import { loadDelegates, selectDelegates } from "../state/school";
 
 function DelegatesTable({ delegates }) {
     return (

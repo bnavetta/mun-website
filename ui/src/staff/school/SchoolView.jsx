@@ -11,7 +11,7 @@ import ApplicationForm from "../../registration/ApplicationForm";
 
 import SupplementalInfo from "./SupplementalInfo";
 import { authenticateAs } from "../api";
-import { selectSchool, selectAdvisors } from "../state";
+import { selectSchool, selectAdvisors } from "../state/school";
 import Delegation from "./Delegation";
 
 const mapStateToProps = (state, props) => {

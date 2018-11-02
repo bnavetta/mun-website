@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { selectSchools } from "../state";
+import { selectSchools } from "../state/school";
 import { yesNo } from "../../lib/util";
 
 const mapStateToProps = state => ({ schools: selectSchools(state) });

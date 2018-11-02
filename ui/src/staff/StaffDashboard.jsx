@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
     BrowserRouter as Router,
     NavLink,
@@ -10,8 +11,9 @@ import { hot } from "react-hot-loader";
 
 import SchoolList from "./school/SchoolList";
 import SchoolView from "./school/SchoolView";
+import PrintQueue from "./printing/PrintQueue";
 import { fetchSchools, fetchAdvisors } from "./api";
-import { loadSchools, loadAdvisors } from "./state";
+import { loadSchools, loadAdvisors } from "./state/school";
 
 class StaffDashboard extends React.Component {
     componentDidMount() {
@@ -35,6 +37,11 @@ class StaffDashboard extends React.Component {
                                     Schools
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink exact to="/print">
+                                    Printing
+                                </NavLink>
+                            </li>
                         </ul>
 
                         <div className="dashboard-main">
@@ -48,6 +55,10 @@ class StaffDashboard extends React.Component {
                                     path="/schools/:id"
                                     component={SchoolView}
                                 />
+                                <Route
+                                    path="/print"
+                                    component={PrintQueue}
+                                />
                             </Switch>
                         </div>
                     </div>
@@ -56,5 +67,9 @@ class StaffDashboard extends React.Component {
         );
     }
 }
+
+StaffDashboard.propTypes = {
+    store: PropTypes.object.isRequired,
+};
 
 export default hot(module)(StaffDashboard);
