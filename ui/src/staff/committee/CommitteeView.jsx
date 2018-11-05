@@ -128,7 +128,7 @@ class CommitteeView extends React.Component {
                             <th colSpan={6}>Attendance</th>
                         </tr>
                         <tr>
-                            <th colSpan={4} />
+                            <th colSpan={3} />
                             <th>Position Paper</th>
                             <th>Session I</th>
                             <th>Session II</th>
