@@ -30,7 +30,7 @@ public class Delegate
      * The delegate's attendance record (sessions they were present at)
      */
     @Embedded
-    private Attendance attendance;
+    private Attendance attendance = new Attendance();
 
     /**
      * The school this delegate is from.
