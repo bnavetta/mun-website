@@ -190,7 +190,7 @@ def clean_images(ver):
                 for tag in tag["tags"]:
                     click.secho("Deleting {}:{}".format(image, tag), fg="red")
                     subprocess.check_call([
-                        "gcloud", "container", "images", "delete", "{}:{}".format(image, tag)
+                        "gcloud", "container", "images", "delete", "{}:{}".format(image, tag), "--force-delete-tags"
                     ])
 
 if __name__ == '__main__':
