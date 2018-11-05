@@ -21,7 +21,7 @@ function CommitteeList({ match, committees }) {
             </thead>
             <tbody>
                 {committees.map(committee => (
-                    <tr key={committee.id}>
+                    <tr key={committee.id.toString()}>
                         <td>{committee.id}</td>
                         <td>
                             <Link to={`${match.path}/${committee.id}`}>

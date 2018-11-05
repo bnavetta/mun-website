@@ -4,6 +4,7 @@ import { selectUserInfo } from "./user";
 
 const LOAD_COMMITTEES = "committee:load";
 const LOAD_POSITIONS = "committee:load-positions";
+const LOAD_AWARDS = "committee:load-awards";
 const UPDATE_ATTENDANCE = "committee:update-attendance";
 
 export function committeesReducer(state = {}, action) {
@@ -16,6 +17,14 @@ export function committeesReducer(state = {}, action) {
                 [action.committeeId]: {
                     ...state[action.committeeId],
                     positions: action.positions,
+                },
+            };
+        case LOAD_AWARDS:
+            return {
+                ...state,
+                [action.committeeId]: {
+                    ...state[action.committeeId],
+                    awards: action.awards,
                 },
             };
         case UPDATE_ATTENDANCE: {
@@ -67,6 +76,10 @@ export function updateAttendance(committeeId, positionId, session, present) {
         session,
         present,
     };
+}
+
+export function loadAwards(committeeId, awards) {
+    return { type: LOAD_AWARDS, committeeId, awards };
 }
 
 export const selectAllCommittees = state =>

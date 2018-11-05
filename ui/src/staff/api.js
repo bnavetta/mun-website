@@ -40,6 +40,20 @@ export function updateAttendance(committeeId, positionId, session, present) {
     });
 }
 
+export function fetchAwards(committeeId) {
+    return request(`/api/committee/${committeeId}/awards`);
+}
+
+export function grantAward(committeeId, awardId, positionId) {
+    return request(`/api/committee/${committeeId}/awards`, {
+        method: "POST",
+        body: JSON.stringify({ id: awardId, positionId }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+}
+
 export async function authenticateAs(advisorId) {
     let url = new URL("/api/advisors/authenticate-as", window.location.href);
     url.searchParams.set("advisorId", advisorId.toString());

@@ -220,13 +220,13 @@ public class Committee
         if (o == null || getClass() != o.getClass())
             return false;
         Committee committee = (Committee) o;
-        return Objects.equals(name, committee.name);
+        return Objects.equals(id, committee.id);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(name);
+        return Objects.hash(id);
     }
 
     @Override

@@ -4,14 +4,17 @@ import PropTypes from "prop-types";
 
 import { displayError } from "../../lib/util";
 
-import { fetchPositions, updateAttendance } from "../api";
+import {fetchAwards, fetchPositions, grantAward, updateAttendance} from "../api";
 import {
+    loadAwards,
     loadPositions,
     selectCommittee,
     updateAttendance as updateAttendanceAction,
 } from "../state/committee";
 
 import "./CommitteeView.css";
+import "./Awards";
+import Awards from "./Awards";
 
 function AttendanceCheckbox({ position, session, submitAttendance}) {
     return (
@@ -23,6 +26,12 @@ function AttendanceCheckbox({ position, session, submitAttendance}) {
         />
     );
 }
+
+AttendanceCheckbox.propTypes = {
+    position: PropTypes.object.isRequired,
+    session: PropTypes.string.isRequired,
+    submitAttendance: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state, props) => {
     const id = parseInt(props.match.params.id);
@@ -36,6 +45,7 @@ class CommitteeView extends React.Component {
         super(props, context);
 
         this.submitAttendance = this.submitAttendance.bind(this);
+        this.handleChangeAward = this.handleChangeAward.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +57,15 @@ class CommitteeView extends React.Component {
             .catch(e => {
                 console.log("Error loading committee positions", e);
                 displayError("Unable to load positions");
+            });
+
+        fetchAwards(committeeId)
+            .then(awards =>
+                this.props.dispatch(loadAwards(committeeId, awards))
+            )
+            .catch(e => {
+                console.log("Error loading committee awards", e);
+                displayError("Unable to load awards");
             });
     }
 
@@ -76,12 +95,30 @@ class CommitteeView extends React.Component {
         }
     }
 
+    async handleChangeAward(awardId, positionId) {
+        try {
+            const committeeId = this.props.committee.id;
+            await grantAward(committeeId, awardId, positionId);
+            const awards = await fetchAwards(committeeId);
+            this.props.dispatch(loadAwards(committeeId, awards));
+        } catch (e) {
+            console.error(
+                `Error granting award ${awardId} to ${positionId}`,
+                e
+            );
+            displayError("Error saving award");
+        }
+    }
+
     render() {
         const { committee } = this.props;
 
         return (
             <div>
                 <h1>{committee.name}</h1>
+
+                <h2>Attendance</h2>
+
                 <table className="standard-table">
                     <thead>
                         <tr>
@@ -152,6 +189,10 @@ class CommitteeView extends React.Component {
                         ))}
                     </tbody>
                 </table>
+
+                <h2>Awards</h2>
+
+                <Awards committee={committee} onChangeAward={this.handleChangeAward} />
             </div>
         );
     }

@@ -1,19 +1,20 @@
 package org.brownmun.web.api;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.Strings;
-import com.google.common.collect.ComparisonChain;
-import com.sun.mail.iap.Response;
-import javafx.geometry.Pos;
+import org.brownmun.core.api.Views;
+import org.brownmun.core.award.AwardService;
+import org.brownmun.core.award.model.Award;
 import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.AdvisorService;
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Advisor;
 import org.brownmun.core.school.model.Delegate;
+import org.brownmun.core.school.model.School;
+import org.brownmun.core.school.model.SupplementalInfo;
 import org.brownmun.web.common.DelegateDTO;
+import org.brownmun.web.security.ConferenceSecurity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import org.brownmun.core.api.Views;
-import org.brownmun.core.school.AdvisorService;
-import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.Advisor;
-import org.brownmun.core.school.model.School;
-import org.brownmun.core.school.model.SupplementalInfo;
-import org.brownmun.web.security.ConferenceSecurity;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.stream.Collectors;
 
 /**
  * API for the staff dashboard
@@ -45,13 +42,15 @@ public class StaffApiController
     private final SchoolService schools;
     private final AdvisorService advisors;
     private final CommitteeService committees;
+    private final AwardService awards;
 
     @Autowired
-    public StaffApiController(SchoolService schools, AdvisorService advisors, CommitteeService committees)
+    public StaffApiController(SchoolService schools, AdvisorService advisors, CommitteeService committees, AwardService awards)
     {
         this.schools = schools;
         this.advisors = advisors;
         this.committees = committees;
+        this.awards = awards;
     }
 
     @JsonView(Views.Staff.class)
@@ -183,5 +182,52 @@ public class StaffApiController
 
         schools.saveDelegate(delegate);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/committee/{id}/awards")
+    @PreAuthorize("principal.canAccessCommittee(id)")
+    public ResponseEntity<List<CommitteeAward>> awards(@PathVariable long id)
+    {
+        try {
+            return ResponseEntity.ok(awards.awardsForCommittee(id).stream()
+                    .map(award -> CommitteeAward.create(award.getId(), award.getType(), award.getPosition() == null ? OptionalLong.empty() : OptionalLong.of(award.getPosition().getId())))
+                    .collect(Collectors.toList()));
+        }
+        catch (IllegalArgumentException | IllegalStateException e)
+        {
+            log.error("Error listing awards for {}: {}", id, e);
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/committee/{id}/awards")
+    @PreAuthorize("principal.canAccessCommittee(id)")
+    public ResponseEntity<CommitteeAward> submitAward(@PathVariable long id, @RequestBody CommitteeAward award)
+    {
+        Optional<Award> awardOpt = awards.getAward(award.id());
+        if (!awardOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        if (awardOpt.get().getCommittee().getId() != id) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        try {
+            if (!award.positionId().isPresent())
+            {
+                Award a = awards.unassignAward(award.id());
+                return ResponseEntity.ok(CommitteeAward.create(a.getId(), a.getType(), OptionalLong.empty()));
+            }
+            else
+            {
+                Award a = awards.setAward(award.id(), award.positionId().getAsLong());
+                return ResponseEntity.ok(CommitteeAward.create(a.getId(), a.getType(), a.getPosition() == null ? OptionalLong.empty() : OptionalLong.of(a.getPosition().getId())));
+            }
+        }
+        catch (IllegalArgumentException | IllegalStateException e)
+        {
+            log.error("Error giving award {} ({}) to {}: {}", award.id(), award.type(), award.positionId(), e);
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
