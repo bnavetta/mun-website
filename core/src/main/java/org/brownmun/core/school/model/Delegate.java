@@ -30,7 +30,7 @@ public class Delegate
      * The delegate's attendance record (sessions they were present at)
      */
     @Embedded
-    private Attendance attendance = new Attendance();
+    private Attendance attendance;
 
     /**
      * The school this delegate is from.
@@ -106,4 +106,12 @@ public class Delegate
                 .toString();
     }
 
+    @PostLoad
+    private void instantiateAttendance()
+    {
+        if (attendance == null)
+        {
+            attendance = new Attendance();
+        }
+    }
 }
