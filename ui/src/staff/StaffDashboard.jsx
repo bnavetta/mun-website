@@ -9,24 +9,70 @@ import {
 import { Provider } from "react-redux";
 import { hot } from "react-hot-loader";
 
+import { displayError } from "../lib/util";
+import LoadingPage from "../lib/components/LoadingPage";
+
 import SchoolList from "./school/SchoolList";
 import SchoolView from "./school/SchoolView";
 import PrintQueue from "./printing/PrintQueue";
-import { fetchSchools, fetchAdvisors } from "./api";
+import CommitteeList from "./committee/CommitteeList";
+import CommitteeView from "./committee/CommitteeView";
+import { fetchSchools, fetchAdvisors, fetchCommittees } from "./api";
 import { loadSchools, loadAdvisors } from "./state/school";
+import { loadCommittees } from "./state/committee";
 
 class StaffDashboard extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            loadedSchools: false,
+            loadedAdvisors: false,
+            loadedCommittees: false,
+        };
+    }
+
     componentDidMount() {
         fetchSchools()
-            .then(schools => this.props.store.dispatch(loadSchools(schools)))
-            .catch(e => console.error("Error loading schools", e));
+            .then(schools => {
+                this.props.store.dispatch(loadSchools(schools));
+                this.setState({ loadedSchools: true });
+            })
+            .catch(e => {
+                console.error("Error loading schools", e);
+                displayError("Unable to load schools");
+            });
 
         fetchAdvisors()
-            .then(advisors => this.props.store.dispatch(loadAdvisors(advisors)))
-            .catch(e => console.error("Error loading advisors", e));
+            .then(advisors => {
+                this.props.store.dispatch(loadAdvisors(advisors));
+                this.setState({ loadedAdvisors: true });
+            })
+            .catch(e => {
+                console.error("Error loading advisors", e);
+                displayError("Unable to load advisors");
+            });
+
+        fetchCommittees()
+            .then(committees => {
+                this.props.store.dispatch(loadCommittees(committees));
+                this.setState({ loadedCommittees: true });
+            })
+            .catch(e => {
+                console.error("Error loading committees", e);
+                displayError("Unable to load committees");
+            });
     }
 
     render() {
+        if (
+            !this.state.loadedSchools ||
+            !this.state.loadedCommittees ||
+            !this.state.loadedAdvisors
+        ) {
+            return <LoadingPage />;
+        }
+
         return (
             <Provider store={this.props.store}>
                 <Router basename="/staff">
@@ -35,6 +81,11 @@ class StaffDashboard extends React.Component {
                             <li>
                                 <NavLink exact to="/schools">
                                     Schools
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink exact to="/committees">
+                                    Committees
                                 </NavLink>
                             </li>
                             <li>
@@ -56,9 +107,15 @@ class StaffDashboard extends React.Component {
                                     component={SchoolView}
                                 />
                                 <Route
-                                    path="/print"
-                                    component={PrintQueue}
+                                    exact
+                                    path="/committees"
+                                    component={CommitteeList}
                                 />
+                                <Route
+                                    path="/committees/:id"
+                                    component={CommitteeView}
+                                />
+                                <Route path="/print" component={PrintQueue} />
                             </Switch>
                         </div>
                     </div>

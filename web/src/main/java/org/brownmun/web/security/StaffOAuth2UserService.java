@@ -2,6 +2,7 @@ package org.brownmun.web.security;
 
 import java.util.Set;
 
+import org.brownmun.core.committee.model.Committee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -59,8 +60,6 @@ public class StaffOAuth2UserService implements OAuth2UserService<OidcUserRequest
 
         log.info("Logging in staff member {}", email);
 
-        // TODO: support non-staff staff and assigned committee IDs
-
-        return new StaffUser(oidcUser, Set.of(), staff.isSecretariatEmail(email));
+        return new StaffUser(oidcUser, staff.findAssociatedCommittees(email), staff.isSecretariatEmail(email));
     }
 }

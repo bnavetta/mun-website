@@ -43,6 +43,16 @@ public class StaffUser implements User, OidcUser
         this.underlying = underlying;
     }
 
+    public boolean isSecretariat()
+    {
+        return isSecretariat;
+    }
+
+    public Set<Long> getCommitteeIds()
+    {
+        return committeeIds;
+    }
+
     @Override
     public String getEmail()
     {

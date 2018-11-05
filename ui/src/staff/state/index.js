@@ -2,6 +2,8 @@ import { combineReducers, createStore } from "redux";
 
 import { schoolsReducer, advisorsReducer } from "./school";
 import { printReducer } from "./print";
+import { userInfoReducer } from "./user";
+import { committeesReducer } from "./committee";
 
 export default function configureStore() {
     return createStore(
@@ -9,6 +11,8 @@ export default function configureStore() {
             schools: schoolsReducer,
             advisors: advisorsReducer,
             print: printReducer,
+            userInfo: userInfoReducer,
+            committees: committeesReducer,
         }),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
             window.__REDUX_DEVTOOLS_EXTENSION__()

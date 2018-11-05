@@ -15,5 +15,6 @@ table.standard-table th {
 }
 
 table.standard-table thead th {
+    text-align: center;
     border-bottom: 2px solid var(--color-rule);
 }
