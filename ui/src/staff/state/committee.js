@@ -92,7 +92,7 @@ export const selectUserCommittees = state => {
             R.values,
             R.filter(c => R.contains(c.id, userInfo.committees)),
             R.sortBy(R.prop("name"))
-        );
+        )(state.committees);
     } else {
         return selectAllCommittees(state);
     }

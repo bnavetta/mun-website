@@ -22,8 +22,15 @@ export function fetchDelegates(schoolId) {
 }
 
 export async function fetchCommittees() {
-    const committees = await request(`/api/committee`);
-    return R.unnest(R.values(committees));
+    const committeeObj = await request(`/api/committee`);
+
+    return [
+        ...committeeObj.general,
+        ...committeeObj.specialized,
+        ...committeeObj.crisis,
+        ...committeeObj.jointCrises,
+        ...R.unnest(R.values(committeeObj.jointCrisisRooms)),
+    ];
 }
 
 export function fetchPositions(committeeId) {
