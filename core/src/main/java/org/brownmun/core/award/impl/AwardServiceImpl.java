@@ -103,7 +103,7 @@ public class AwardServiceImpl implements AwardService
     @Transactional
     public List<AwardPrint> exportAwards() {
         List<AwardPrint> awards = Lists.newArrayList();
-        for (AwardPrint award : printRepository.findAll(Sort.by("committee.type", "committee.name", "award.type")))
+        for (AwardPrint award : printRepository.findAll(Sort.by("committeeName", "type")))
         {
             if (Strings.isNullOrEmpty(award.getDelegateName()))
             {
