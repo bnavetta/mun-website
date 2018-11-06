@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
     BrowserRouter as Router,
+    Redirect,
     NavLink,
     Route,
     Switch,
@@ -116,6 +117,7 @@ class StaffDashboard extends React.Component {
                                     component={CommitteeView}
                                 />
                                 <Route path="/print" component={PrintQueue} />
+                                <Redirect from="/" to="/committees" />
                             </Switch>
                         </div>
                     </div>

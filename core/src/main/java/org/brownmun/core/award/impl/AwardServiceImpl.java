@@ -1,13 +1,18 @@
 package org.brownmun.core.award.impl;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import org.brownmun.core.award.AwardService;
 import org.brownmun.core.award.model.Award;
+import org.brownmun.core.award.model.AwardPrint;
+import org.brownmun.core.award.model.AwardType;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +26,14 @@ public class AwardServiceImpl implements AwardService
 
     private final CommitteeService committeeService;
     private final AwardRepository awardRepository;
+    private final AwardPrintRepository printRepository;
 
     @Autowired
-    public AwardServiceImpl(CommitteeService committeeService, AwardRepository awardRepository)
+    public AwardServiceImpl(CommitteeService committeeService, AwardRepository awardRepository, AwardPrintRepository printRepository)
     {
         this.committeeService = committeeService;
         this.awardRepository = awardRepository;
+        this.printRepository = printRepository;
     }
 
     @Override
@@ -72,5 +79,41 @@ public class AwardServiceImpl implements AwardService
     public Optional<Award> getAward(long id)
     {
         return awardRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Award createAward(Committee committee, AwardType type) {
+        log.debug("Creating {} award for {}", type.getDisplayName(), committee.getName());
+        Award award = new Award();
+        award.setCommittee(committee);
+        award.setType(type);
+        return awardRepository.save(award);
+    }
+
+    @Override
+    @Transactional
+    public void clearAwards()
+    {
+        log.info("Clearing all awards");
+        awardRepository.deleteAll();
+    }
+
+    @Override
+    @Transactional
+    public List<AwardPrint> exportAwards() {
+        List<AwardPrint> awards = Lists.newArrayList();
+        for (AwardPrint award : printRepository.findAll(Sort.by("committee.type", "committee.name", "award.type")))
+        {
+            if (Strings.isNullOrEmpty(award.getDelegateName()))
+            {
+                log.warn("Unassigned award {}", award);
+                continue;
+            }
+
+            awards.add(award);
+        }
+
+        return awards;
     }
 }
