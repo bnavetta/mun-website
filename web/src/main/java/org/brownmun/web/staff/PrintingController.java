@@ -82,6 +82,7 @@ public class PrintingController
     }
 
     @PutMapping("/claim/{id}")
+    @PreAuthorize("hasRole('SECRETARIAT')")
     public ResponseEntity<PrintRequest> claimRequest(@PathVariable long id)
     {
         try
@@ -95,6 +96,7 @@ public class PrintingController
     }
 
     @PutMapping("/complete/{id}")
+    @PreAuthorize("hasRole('SECRETARIAT')")
     public ResponseEntity<PrintRequest> completeRequest(@PathVariable long id)
     {
         try
