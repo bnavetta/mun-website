@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:wp="http://brownmun.org/th/webpack"
+        xmlns:conference="http://brownmun.org/th/conference"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+    <head>
+        <title>Windmill</title>
+		<style>
+			.windmill-container {
+				display: flex;
+                justify-content: center;
+                align-items: center;
+				width: 100%;
+				height: 100%;
+				background-color: #007f5c;
+			}
+			.windmill {
+				object-fit: contain;
+			}
+		</style>
+    </head>
+
+    <body>
+        <main layout:fragment="content">
+		    <section class="windmill-container">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Wind_turbine.gif" alt="Wind Turbine" class="windmill">
+			</section>
+        </main>
+    </body>
+</html>

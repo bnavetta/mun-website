@@ -38,5 +38,7 @@ public class WebConfiguration implements WebMvcConfigurer
 
         // Redirect last year's link
         registry.addRedirectViewController("/yourbusun", "/your-mun");
+
+        registry.addViewController("/windmill").setViewName("windmill");
     }
 }
