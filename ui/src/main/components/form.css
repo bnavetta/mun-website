@@ -26,6 +26,14 @@
     justify-content: center;
 }
 
+.form.inline label {
+    padding-right: 10px;
+}
+
+.form.inline input, textarea {
+    margin-top: 0;
+}
+
 .form input,
 .form textarea {
     display: block;
