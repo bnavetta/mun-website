@@ -270,7 +270,7 @@ Finland
 UAE
 Brazil
 South Korea
-<unhcr>
+<refugee_council>
 Myanmar
 Afghanistan
 Brazil
@@ -590,6 +590,8 @@ Edmund, Earl of Rutland
 Edward, Earl of March
 Cecily Neville, Duchess of York
 John Mowbray, 3rd Duke of Norfolk
+John Neville, 1st Marquess of Montagu
+Alice Montacute, 5th Countess of Salisbury
 <house_of_lancaster>
 John Talbot, 2nd Earl of Shrewsbury
 Henry Holland, 3rd Duke of Exeter

@@ -50,7 +50,7 @@ def version():
     output = subprocess.check_output(['./gradlew', '--console', 'plain', '-q', 'printVersion'])
     return output.decode(encoding='utf-8').strip()
 
-@click.group()
+@click.group(context_settings=dict(help_option_names=['-h', '--help']))
 def cli():
     pass
 
@@ -124,6 +124,17 @@ def prod_shell(extra_args):
 def prod_ssh():
     subprocess.call(['ssh', '-i', 'provisioning/keys/id_rsa', 'brownmun@busun.org'])
 
+
+@prod.command('dumpdb')
+@click.argument('out', required=False)
+def prod_dump_db(out):
+    with tunnel(container_ip('postgres'), 5432) as t:
+        env = dict(os.environ)
+        env['PGPASSWORD'] = env['PROD_DB_PASSWORD']
+        args = ['pg_dump', '-h', 'localhost', '-p', str(t.local_bind_port), '-U', 'postgres', 'busun']
+        if out:
+            args.extend(['-f', out])
+        subprocess.call(args, env=env)
 
 @cli.group(invoke_without_command=True, chain=True)
 @click.pass_context
