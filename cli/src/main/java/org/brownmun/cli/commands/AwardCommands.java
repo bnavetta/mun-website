@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import org.brownmun.cli.awards.AwardsGenerator;
 import org.brownmun.core.award.AwardService;
 import org.brownmun.core.award.model.AwardPrint;
 import org.brownmun.core.award.model.AwardType;
@@ -21,6 +22,7 @@ import org.springframework.shell.standard.ShellMethod;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @ShellComponent
 public class AwardCommands
@@ -38,6 +40,13 @@ public class AwardCommands
         this.committeeService = committeeService;
     }
 
+    @ShellMethod("Generate award files")
+    public void generateAwards(File output) throws IOException
+    {
+        AwardsGenerator gen = new AwardsGenerator(new File("config/awards.docx"));
+        gen.writeAwards(awardService.exportAwards(), output);
+    }
+    
     @ShellMethod("Export all assigned awards")
     public void exportAwards(File outputFile) throws IOException
     {

@@ -12,6 +12,9 @@ dependencies {
     implementation 'com.google.guava:guava'
     implementation 'de.vandermeer:asciitable'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+    implementation 'org.apache.poi:poi'
+    implementation 'org.apache.poi:poi-scratchpad'
+    implementation 'org.apache.poi:poi-ooxml'
     implementation fileTree(dir: "$orToolsDir/lib", includes: ['*.jar'])
 
     implementation 'com.google.auto.value:auto-value-annotations'

@@ -78,6 +78,12 @@ configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) 
             dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
             dependency 'de.vandermeer:asciitable:0.3.2'
 
+            dependencySet(group: 'org.apache.poi', version: '4.0.0') {
+                entry 'poi'
+                entry 'poi-ooxml'
+                entry 'poi-scratchpad'
+            }
+
             dependencySet(group: 'io.sentry', version: '1.7.3') {
                 entry 'sentry-spring'
                 entry 'sentry'

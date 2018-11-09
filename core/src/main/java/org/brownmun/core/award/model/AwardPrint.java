@@ -58,6 +58,30 @@ public class AwardPrint
         return delegateName;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setType(AwardType type) {
+        this.type = type;
+    }
+
+    public void setCommitteeName(String committeeName) {
+        this.committeeName = committeeName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    public void setDelegateName(String delegateName) {
+        this.delegateName = delegateName;
+    }
+
     @Override
     public String toString()
     {
