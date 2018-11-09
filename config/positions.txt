@@ -447,6 +447,9 @@ US
 Mexico
 Chile 
 Nicaragua
+Kenya
+Jordan
+Portugal
 <hrc>
 Afghanistan
 Angola

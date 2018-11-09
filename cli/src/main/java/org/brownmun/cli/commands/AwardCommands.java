@@ -46,7 +46,7 @@ public class AwardCommands
         AwardsGenerator gen = new AwardsGenerator(new File("config/awards.docx"));
         gen.writeAwards(awardService.exportAwards(), output);
     }
-    
+
     @ShellMethod("Export all assigned awards")
     public void exportAwards(File outputFile) throws IOException
     {
