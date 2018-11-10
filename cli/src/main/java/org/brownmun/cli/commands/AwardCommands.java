@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import de.vandermeer.asciitable.AsciiTable;
 import org.brownmun.cli.awards.AwardsGenerator;
 import org.brownmun.core.award.AwardService;
+import org.brownmun.core.award.model.Award;
 import org.brownmun.core.award.model.AwardPrint;
 import org.brownmun.core.award.model.AwardType;
 import org.brownmun.core.committee.CommitteeService;
@@ -45,6 +47,21 @@ public class AwardCommands
     {
         AwardsGenerator gen = new AwardsGenerator(new File("config/awards.docx"));
         gen.writeAwards(awardService.exportAwards(), output);
+    }
+
+    @ShellMethod("Find unassigned awards")
+    public String unassignedAwards()
+    {
+        AsciiTable table = new AsciiTable();
+        table.addRow("ID", "Type", "Committee", "Committee ID");
+        table.addRule();
+
+        for (Award award : awardService.findUnassignedAwards())
+        {
+            table.addRow(award.getId(), award.getType().getDisplayName(), award.getCommittee().getId(), award.getCommittee().getName());
+        }
+
+        return table.render(128);
     }
 
     @ShellMethod("Export all assigned awards")

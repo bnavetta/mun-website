@@ -9,6 +9,7 @@ import org.brownmun.core.award.model.AwardType;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +115,18 @@ public class AwardServiceImpl implements AwardService
             awards.add(award);
         }
 
+        return awards;
+    }
+
+    @Override
+    @Transactional
+    public List<Award> findUnassignedAwards()
+    {
+        List<Award> awards = awardRepository.findUnassigned();
+        for (Award award : awards)
+        {
+            Hibernate.initialize(award.getCommittee());
+        }
         return awards;
     }
 }

@@ -26,4 +26,6 @@ public interface AwardService
     Award createAward(Committee committee, AwardType type);
 
     List<AwardPrint> exportAwards();
+
+    List<Award> findUnassignedAwards();
 }

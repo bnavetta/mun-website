@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import de.vandermeer.asciitable.AsciiTable;
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Delegate;
+import org.brownmun.core.school.model.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -24,11 +29,13 @@ import org.brownmun.core.committee.model.Position;
 public class CommitteeCommands
 {
     private final CommitteeService committees;
+    private final SchoolService schools;
 
     @Autowired
-    public CommitteeCommands(CommitteeService committees)
+    public CommitteeCommands(CommitteeService committees, SchoolService schools)
     {
         this.committees = committees;
+        this.schools = schools;
     }
 
     /**
@@ -126,5 +133,64 @@ public class CommitteeCommands
     public void unassignPosition(long positionId)
     {
         committees.unassignPosition(positionId);
+    }
+
+    @ShellMethod("List committee")
+    public String listCommittee(String nameOrId)
+    {
+        Optional<Committee> c = getCommittee(nameOrId);
+        if (c.isPresent())
+        {
+            Committee committee = c.get();
+
+            Collection<Position> positions = committees.getPositions(committee);
+
+            AsciiTable table = new AsciiTable();
+            table.addRow("Position ID", "Position Name", "Delegate ID", "Delegate Name", "School ID", "School Name");
+            table.addRule();
+
+            for (Position position : positions)
+            {
+                String delegateId = "";
+                String delegateName = "";
+                String schoolId = "";
+                String schoolName = "";
+
+                Delegate delegate = position.getDelegate();
+                if (delegate != null)
+                {
+                    delegateId = delegate.getId().toString();
+                    delegateName = delegate.getName();
+
+                    School school = schools.getSchool(delegate.getSchool().getId()).get();
+                    schoolId = school.getId().toString();
+                    schoolName = school.getName();
+                }
+
+                table.addRow(position.getId(), position.getName(), delegateId, delegateName, schoolId, schoolName);
+            }
+
+            table.addRule();
+
+            return table.render(120);
+        }
+        else
+        {
+            System.err.println("Committee " + nameOrId + " not found");
+            return "";
+        }
+    }
+
+    private Optional<Committee> getCommittee(String nameOrId)
+    {
+        try
+        {
+            long committeeId = Long.parseLong(nameOrId);
+            return committees.getCommittee(committeeId);
+        }
+        catch (NumberFormatException e)
+        {
+            return committees.findByShortName(nameOrId);
+        }
     }
 }

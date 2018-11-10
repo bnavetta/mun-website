@@ -83,7 +83,10 @@
                                 </ul>
                             </nav>
                         </li>
-                        <li><a th:href="@{/your-mun}">Your BUSUN</a></li>
+                        <li th:switch="true">
+                            <a th:case="${#authorization.expression('hasRole(''ROLE_STAFF'')')}" th:href="@{/staff}">Staff Dashboard</a>
+                            <a th:case="*" th:href="@{/your-mun}">Your BUSUN</a>
+                        </li>
                         <li sec:authorize="hasRole('ROLE_ADVISOR')">
                             <form action="/logout" method="post">
                                 <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}">
