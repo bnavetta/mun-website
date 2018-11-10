@@ -4,17 +4,36 @@ import { connect } from "react-redux";
 import format from "date-fns/format";
 
 import { displayError } from "../../lib/util";
-import { mergeRequest, selectPrintQueue } from "../state/print";
+import { mergeRequest, selectPrintQueue, selectActivePrintQueue } from "../state/print";
 import PrintQueueClient from "./client";
 
 const mapStateToProps = state => ({
     printQueue: selectPrintQueue(state),
+    activeQueue: selectActivePrintQueue(state),
 });
+
+function ActionButton({ request, onClaim, onComplete }) {
+    switch (request.status) {
+        case "PENDING":
+            return <button className="button" onClick={() => onClaim(request.id)}>Claim</button>;
+        case "CLAIMED":
+            return <button className="button" onClick={() => onComplete(request.id)}>Complete</button>;
+        default:
+            return null;
+    }
+}
 
 class PrintQueue extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClaim = this.handleClaim.bind(this);
+        this.handleComplete = this.handleComplete.bind(this);
+        this.toggleShowCompleted = this.toggleShowCompleted.bind(this);
+
+        this.state = {
+            showCompleted: false,
+        }
     }
 
     componentDidMount() {
@@ -51,6 +70,8 @@ class PrintQueue extends React.Component {
     }
 
     render() {
+        const queue = this.state.showCompleted ? this.props.printQueue : this.props.activeQueue;
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className="form inline">
@@ -91,22 +112,26 @@ class PrintQueue extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.printQueue.map(req => (
+                        {queue.map(req => (
                             <tr key={req.id}>
                                 { this.renderPrintRequest(req) }
                             </tr>
                         ))}
                     </tbody>
                 </table>
+
+                <div>
+                    <button className="button" onClick={this.toggleShowCompleted}>{this.state.showCompleted ? 'Hide completed' : 'Show completed'}</button>
+                </div>
             </div>
         );
     }
 
-    renderPrintRequest(req) {
-        const operation = req.status === 'PENDING' ?
-            <button className="button" onClick={() => this.handleClaim(req.id)}>Claim</button> :
-            <button className="button" onClick={() => this.handleComplete(req.id)}>Complete</button>;
+    toggleShowCompleted() {
+        this.setState(state => ({ showCompleted: !state.showCompleted }));
+    }
 
+    renderPrintRequest(req) {
         return (
             <>
                 <td>{req.requester}</td>
@@ -114,7 +139,7 @@ class PrintQueue extends React.Component {
                 <td><a href={`/staff/print-system/download/${req.id}`}>{req.filename}</a></td>
                 <td>{req.numCopies}</td>
                 <td>{req.deliveryLocation}</td>
-                <td>{operation}</td>
+                <td><ActionButton request={req} onClaim={this.handleClaim} onComplete={this.handleComplete}/></td>
             </>
         );
     }

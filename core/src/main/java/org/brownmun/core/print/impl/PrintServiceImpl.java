@@ -95,7 +95,7 @@ public class PrintServiceImpl implements PrintService
         request.setStatus(PrintRequestStatus.COMPLETED);
         PrintRequest saved = txTemplate.execute(tx -> repo.save(request));
         broadcast(saved);
-        log.debug("Marked {} as completed");
+        log.debug("Marked {} as completed", id);
         return saved;
     }
 
@@ -111,7 +111,7 @@ public class PrintServiceImpl implements PrintService
         }
 
         txTemplate.execute(tx -> {
-            repo.findAllInQueue().forEach(subscriber);
+            repo.findAll().forEach(subscriber);
             return null;
         });
 

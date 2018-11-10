@@ -53,14 +53,8 @@ public class PrintingController
         });
 
         out.onCompletion(() -> printService.removeSubscriber(registration));
-        out.onError(err -> {
-            log.warn("Error from SSE client", err);
-            printService.removeSubscriber(registration);
-        });
-        out.onTimeout(() -> {
-            log.warn("SSE client timed out");
-            printService.removeSubscriber(registration);
-        });
+        out.onError(err -> printService.removeSubscriber(registration));
+        out.onTimeout(() -> printService.removeSubscriber(registration));
 
         return ResponseEntity.ok(out);
     }

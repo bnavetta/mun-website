@@ -68,7 +68,7 @@ public class AwardsGenerator
                 run.setText(text, 0);
             }
         }
-        
+
         return doc;
     }
 

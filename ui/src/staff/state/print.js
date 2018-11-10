@@ -16,10 +16,6 @@ export function printReducer(state = { queue: [], requests: {} }, action) {
                 [action.payload.id]: action.payload,
             };
 
-            if (action.payload.status === "COMPLETED") {
-                delete newRequests[action.payload.id];
-            }
-
             return {
                 requests: newRequests,
                 queue: generateQueue(newRequests),
@@ -36,3 +32,6 @@ export function mergeRequest(request) {
 
 export const selectPrintQueue = state =>
     R.map(R.prop(R.__, state.print.requests), state.print.queue);
+
+export const selectActivePrintQueue = state =>
+    R.filter(req => req.status !== "COMPLETED", selectPrintQueue(state));
