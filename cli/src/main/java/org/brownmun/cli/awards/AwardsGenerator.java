@@ -68,26 +68,7 @@ public class AwardsGenerator
                 run.setText(text, 0);
             }
         }
-
-//        Range range = doc.getRange();
-//        for (int i = 0; i < range.numSections(); i++)
-//        {
-//            Section section = range.getSection(i);
-//            for (int j = 0; j < section.numParagraphs(); j++)
-//            {
-//                Paragraph paragraph = section.getParagraph(j);
-//                for (int k = 0; k < paragraph.numCharacterRuns(); k++)
-//                {
-//                    CharacterRun run = paragraph.getCharacterRun(k);
-//                    run.replaceText("$AWARD$", award.getType().getDisplayName());
-//                    run.replaceText("$DELEGATE$", award.getDelegateName());
-//                    run.replaceText("$SCHOOL$", award.getSchoolName());
-//                    run.replaceText("$POSITION$", award.getPositionName());
-//                    run.replaceText("$COMMITTEE$", award.getCommitteeName());
-//                }
-//            }
-//        }
-
+        
         return doc;
     }
 
