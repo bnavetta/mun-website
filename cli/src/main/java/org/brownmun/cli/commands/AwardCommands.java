@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import de.vandermeer.asciitable.AsciiTable;
 import org.brownmun.cli.awards.AwardsGenerator;
 import org.brownmun.core.award.AwardService;
@@ -25,6 +27,8 @@ import org.springframework.shell.standard.ShellMethod;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @ShellComponent
 public class AwardCommands
@@ -46,7 +50,30 @@ public class AwardCommands
     public void generateAwards(File output) throws IOException
     {
         AwardsGenerator gen = new AwardsGenerator(new File("config/awards.docx"));
-        gen.writeAwards(awardService.exportAwards(), output);
+
+        Map<AwardType, List<AwardPrint>> awards = awardService.exportAwards()
+                .stream()
+                .collect(Collectors.groupingBy(AwardPrint::getType));
+
+        if (output.exists())
+        {
+            MoreFiles.deleteRecursively(output.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+        }
+        if (!output.mkdir())
+        {
+            System.err.println("Couldn't create directory " + output);
+            return;
+        }
+
+        for (var awardSet : awards.entrySet())
+        {
+            if (awardSet.getValue().isEmpty())
+            {
+                continue;
+            }
+            File outputFile = new File(output, awardSet.getKey().toString() + ".docx");
+            gen.writeAwards(awardSet.getValue(), outputFile);
+        }
     }
 
     @ShellMethod("Find unassigned awards")
