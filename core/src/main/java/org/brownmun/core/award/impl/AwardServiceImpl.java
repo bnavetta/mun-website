@@ -2,6 +2,7 @@ package org.brownmun.core.award.impl;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import org.brownmun.core.award.AwardExport;
 import org.brownmun.core.award.AwardService;
 import org.brownmun.core.award.model.Award;
 import org.brownmun.core.award.model.AwardPrint;
@@ -102,20 +103,27 @@ public class AwardServiceImpl implements AwardService
 
     @Override
     @Transactional
-    public List<AwardPrint> exportAwards() {
-        List<AwardPrint> awards = Lists.newArrayList();
+    public AwardExport exportAwards() {
+        List<AwardPrint> completeAwards = Lists.newArrayList();
+        List<AwardPrint> incompleteAwards = Lists.newArrayList();
         for (AwardPrint award : printRepository.findAll(Sort.by("committeeName", "type")))
         {
-            if (Strings.isNullOrEmpty(award.getDelegateName()))
+            if (Strings.isNullOrEmpty(award.getPositionName()))
             {
-                log.warn("Unassigned award {}", award);
+                incompleteAwards.add(award);
                 continue;
             }
 
-            awards.add(award);
+            if (Strings.isNullOrEmpty(award.getDelegateName()))
+            {
+                incompleteAwards.add(award);
+                continue;
+            }
+
+            completeAwards.add(award);
         }
 
-        return awards;
+        return new AwardExport(completeAwards, incompleteAwards);
     }
 
     @Override

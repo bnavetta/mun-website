@@ -8,10 +8,12 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.google.common.base.Strings;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import de.vandermeer.asciitable.AsciiTable;
 import org.brownmun.cli.awards.AwardsGenerator;
+import org.brownmun.core.award.AwardExport;
 import org.brownmun.core.award.AwardService;
 import org.brownmun.core.award.model.Award;
 import org.brownmun.core.award.model.AwardPrint;
@@ -23,11 +25,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ShellComponent
@@ -47,11 +51,18 @@ public class AwardCommands
     }
 
     @ShellMethod("Generate award files")
-    public void generateAwards(File output) throws IOException
+    public void generateAwards(File output, @ShellOption(defaultValue = "") String only) throws IOException
     {
         AwardsGenerator gen = new AwardsGenerator(new File("config/awards.docx"));
 
-        Map<AwardType, List<AwardPrint>> awards = awardService.exportAwards()
+        AwardExport allAwards = awardService.exportAwards();
+        List<AwardPrint> toGenerate = allAwards.getCompleteAwards();
+        if (!Strings.isNullOrEmpty(only))
+        {
+            toGenerate = filterFromFile(toGenerate, new File(only));
+        }
+
+        Map<AwardType, List<AwardPrint>> awards = toGenerate
                 .stream()
                 .collect(Collectors.groupingBy(AwardPrint::getType));
 
@@ -74,6 +85,26 @@ public class AwardCommands
             File outputFile = new File(output, awardSet.getKey().toString() + ".docx");
             gen.writeAwards(awardSet.getValue(), outputFile);
         }
+
+        CsvSchema schema = mapper.schemaFor(AwardPrint.class).withHeader();
+        ObjectWriter writer = mapper.writerFor(AwardPrint.class).with(schema);
+        try (SequenceWriter out = writer.writeValues(new File(output, "incomplete.csv"))) {
+            out.writeAll(allAwards.getIncompleteAwards());
+            out.flush();
+        }
+    }
+
+    @ShellMethod("Find incomplete awards")
+    public void incompleteAwards()
+    {
+        String format = " %4s | %20s | %50s | %40s | %40s\n";
+
+        System.out.printf(format, "ID", "Type", "Committee", "School", "Delegate");
+
+        for (AwardPrint award : awardService.exportAwards().getIncompleteAwards())
+        {
+            System.out.printf(format, award.getId(), award.getType().getDisplayName(), award.getCommitteeName(), award.getSchoolName(), award.getDelegateName());
+        }
     }
 
     @ShellMethod("Find unassigned awards")
@@ -89,18 +120,6 @@ public class AwardCommands
         }
 
         return table.render(128);
-    }
-
-    @ShellMethod("Export all assigned awards")
-    public void exportAwards(File outputFile) throws IOException
-    {
-        CsvSchema schema = mapper.schemaFor(AwardPrint.class).withHeader();
-        ObjectWriter writer = mapper.writerFor(AwardPrint.class).with(schema);
-        try (SequenceWriter out = writer.writeValues(outputFile))
-        {
-            out.writeAll(awardService.exportAwards());
-            out.flush();
-        }
     }
 
     @ShellMethod("Create awards from the awards allocation spreadsheet")
@@ -133,6 +152,19 @@ public class AwardCommands
                     awardService.createAward(committee, AwardType.HONORABLE_DELEGATE);
                 }
             }
+        }
+    }
+
+    private List<AwardPrint> filterFromFile(List<AwardPrint> awards, File filterFile) throws IOException
+    {
+        CsvSchema schema = mapper.schemaFor(AwardPrint.class).withHeader();
+        ObjectReader reader = mapper.readerFor(AwardPrint.class).with(schema);
+        try (MappingIterator<AwardPrint> filterIter = reader.readValues(filterFile))
+        {
+            Set<Long> toFilter = filterIter.readAll().stream()
+                    .map(AwardPrint::getId).collect(Collectors.toSet());
+
+            return awards.stream().filter(a -> toFilter.contains(a.getId())).collect(Collectors.toList());
         }
     }
 
