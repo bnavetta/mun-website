@@ -28,7 +28,9 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -120,6 +122,30 @@ public class AwardCommands
         }
 
         return table.render(128);
+    }
+
+    @ShellMethod("Export an awards spreadsheet")
+    public void exportAwards(File outputFile) throws IOException
+    {
+        AwardExport export = awardService.exportAwards();
+
+        CsvSchema schema = mapper.schemaFor(AwardPrint.class).withHeader();
+        ObjectWriter writer = mapper.writerFor(AwardPrint.class).with(schema);
+        try (OutputStream out = new FileOutputStream(outputFile))
+        {
+            // Write a UTF-8 BOM because Excel expects it :(
+            out.write(new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF});
+            try (SequenceWriter s = writer.writeValues(out))
+            {
+                s.writeAll(export.getCompleteAwards());
+                s.flush();
+            }
+        }
+
+        for (AwardPrint incomplete : export.getIncompleteAwards())
+        {
+            System.out.println("Incomplete award: " + incomplete);
+        }
     }
 
     @ShellMethod("Create awards from the awards allocation spreadsheet")
