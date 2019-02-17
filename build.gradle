@@ -1,30 +1,15 @@
 import org.springframework.boot.gradle.tasks.run.BootRun;
 
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name 'gradle-plugins'
-            url 'https://plugins.gradle.org/m2/'
-        }
-        
-        maven {
-            name 'spring-milestones'
-            url 'https://repo.spring.io/milestone'
-        }
-    }
-
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.0.M4'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
-        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.15.0'
-        classpath 'net.ltgt.gradle:gradle-apt-plugin:0.18'
-    }
-}
-
 plugins {
-    id 'org.hidetake.ssh' version '2.9.0'
+    id 'idea'
+    id 'eclipse'
+
     id 'org.ajoberstar.grgit' version '2.3.0'
+
+    id 'org.springframework.boot' version '2.1.3.RELEASE' apply false
+    id 'com.google.cloud.tools.jib' version '1.0.0' apply false
+    id 'com.diffplug.gradle.spotless' version '3.18.0' apply false
+    id 'com.github.ben-manes.versions' version '0.20.0'
 }
 
 def computeVersion() {
@@ -45,10 +30,61 @@ def computeVersion() {
 def currentVersion = computeVersion()
 
 allprojects {
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
-
     version = currentVersion
+}
+
+subprojects {
+    plugins.withType(JavaPlugin) {
+        group = 'org.brownmun'
+
+        sourceCompatibility = '11'
+        targetCompatibility = '11'
+
+        repositories {
+            jcenter()
+        }
+
+        // Needed so the annotationProcessor configuration can depend on :platform
+        // https://discuss.gradle.org/t/consuming-java-platform-in-non-standard-configurations/30469
+        configurations {
+            annotationProcessor {
+                attributes {
+                    attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage, Usage.JAVA_API))
+                }
+            }
+        }
+
+        dependencies {
+            implementation platform(project(':platform'))
+            implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+
+            annotationProcessor platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+            annotationProcessor platform(project(':platform'))
+        }
+    }
+
+    plugins.withType(JavaLibraryPlugin) {
+        dependencies {
+            api platform(project(':platform'))
+            api platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        }
+    }
+
+    plugins.withType(com.diffplug.gradle.spotless.SpotlessPlugin) {
+        spotless {
+            java {
+                importOrder 'java', 'javax', 'org', 'com', 'org.brownmun', ''
+                removeUnusedImports()
+                eclipse().configFile rootProject.file('config/eclipse-formatter-settings.xml')
+                trimTrailingWhitespace()
+                endWithNewline()
+            }
+        }
+    }
+
+    tasks.withType(BootRun).configureEach {
+        workingDir rootProject.projectDir
+    }
 }
 
 idea {
@@ -58,96 +94,35 @@ idea {
 }
 
 configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) {
-    apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'com.github.ben-manes.versions'
-    apply plugin: 'com.diffplug.gradle.spotless'
-    apply plugin: 'net.ltgt.apt-idea'
+    // dependencyManagement {
+    //     dependencies {
+    //         dependency 'com.google.guava:guava:23.6-jre'
+    //         dependency 'org.springframework.shell:spring-shell-starter:2.0.0.M2'
+    //         dependency 'org.javassist:javassist:3.22.0-GA'
+    //         dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
+    //         dependency 'de.vandermeer:asciitable:0.3.2'
 
-    group = 'org.brownmun'
+    //         dependencySet(group: 'org.apache.poi', version: '4.0.0') {
+    //             entry 'poi'
+    //             entry 'poi-ooxml'
+    //             entry 'poi-scratchpad'
+    //         }
 
-    sourceCompatibility = 1.10
-    targetCompatibility = 1.10
+    //         dependencySet(group: 'io.sentry', version: '1.7.3') {
+    //             entry 'sentry-spring'
+    //             entry 'sentry'
+    //         }
 
-    dependencyManagement {
-        dependencies {
-            dependency 'com.google.guava:guava:23.6-jre'
-            dependency 'org.springframework.shell:spring-shell-starter:2.0.0.M2'
-            dependency 'org.javassist:javassist:3.22.0-GA'
-            dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
-            dependency 'de.vandermeer:asciitable:0.3.2'
+    //         dependencySet(group: 'com.google.auto.value', version: '1.6.3') {
+    //             entry 'auto-value'
+    //             entry 'auto-value-annotations'
+    //         }
+    //     }
+    // }
 
-            dependencySet(group: 'org.apache.poi', version: '4.0.0') {
-                entry 'poi'
-                entry 'poi-ooxml'
-                entry 'poi-scratchpad'
-            }
+    
 
-            dependencySet(group: 'io.sentry', version: '1.7.3') {
-                entry 'sentry-spring'
-                entry 'sentry'
-            }
-
-            dependencySet(group: 'com.google.auto.value', version: '1.6rc1') {
-                entry 'auto-value'
-                entry 'auto-value-annotations'
-            }
-
-            // Override for Java 10 support
-            dependency 'org.hibernate:hibernate-jpamodelgen:5.3.0.Final'
-        }
-    }
-
-    repositories {
-        jcenter()
-
-        maven {
-            name 'spring-milestones'
-            url 'https://repo.spring.io/milestone'
-        }
-    }
-
-    tasks.withType(BootRun) {
-        workingDir rootProject.projectDir
-    }
-
-    spotless {
-        java {
-            importOrder 'java', 'javax', 'org', 'com', 'org.brownmun', ''
-            removeUnusedImports()
-            eclipse().configFile rootProject.file('config/eclipse-formatter-settings.xml')
-            trimTrailingWhitespace()
-            endWithNewline()
-        }
-    }
-}
-
-remotes {
-    brownmun {
-        role 'website'
-        host = '104.196.62.13'
-        // TODO: make more generic
-        user = 'ben'
-        identity = file("${System.getProperty("user.home")}/.ssh/google_compute_engine")
-    }
-}
-
-task deploy(dependsOn: [':busun:bootJar', ':ui:build']) {
-    doLast {
-        ssh.run {
-            session(remotes.brownmun) {
-                remove "/srv/http/assets"
-                put from: new File(project(':ui').buildDir, "production"), into: "/srv/http"
-                executeSudo "mv /srv/http/production /srv/http/assets"
-                executeSudo "chgrp -R nginx /srv/http/assets"
-
-                put from: project(':busun').tasks['bootJar'].archivePath, into: "/srv/busun/busun.jar"
-                execute 'chgrp busun /srv/busun/busun.jar'
-                executeSudo 'systemctl restart busun'
-            }
-        }
-    }
+    
 }
 
 task printVersion {

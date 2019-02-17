@@ -1,0 +1,29 @@
+// This uses Gradle's Java Platform Plugin (https://docs.gradle.org/current/userguide/java_platform_plugin.html)
+// to define consistent dependency versions for all projects.
+
+plugins {
+    id 'java-platform'
+}
+
+ext.poiVersion = '4.0.1'
+ext.sentryVersion = '1.7.21'
+ext.autoValueVersion = '1.6.3'
+
+dependencies {
+    constraints {
+        api 'com.google.guava:guava:27.0.1-jre'
+        api 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
+        api 'com.googlecode.libphonenumber:libphonenumber:8.10.5'
+        api 'de.vandermeer:asciitable:0.3.2'
+
+        api "org.apache.poi:poi:$poiVersion"
+        api "org.apache.poi:poi-ooxml:$poiVersion"
+        api "org.apache.poi:poi-scratchpad:$poiVersion"
+
+        api "io.sentry:sentry:$sentryVersion"
+        api "io.sentry:sentry-spring:$sentryVersion"
+
+        api "com.google.auto.value:auto-value:$autoValueVersion"
+        api "com.google.auto.value:auto-value-annotations:$autoValueVersion"
+    }
+}
