@@ -1,23 +1,20 @@
 package org.brownmun.cli.awards;
 
-import org.apache.poi.hwpf.usermodel.CharacterRun;
-import org.apache.poi.hwpf.usermodel.Paragraph;
-import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.poi.hwpf.usermodel.Section;
+import java.io.*;
+import java.util.List;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.brownmun.core.award.model.AwardPrint;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
 
-import java.io.*;
-import java.util.List;
+import org.brownmun.core.award.model.AwardPrint;
 
 public class AwardsGenerator
 {
     private final File templateFile;
 
-    public AwardsGenerator(File templateFile) {
+    public AwardsGenerator(File templateFile)
+    {
         this.templateFile = templateFile;
     }
 
@@ -45,7 +42,8 @@ public class AwardsGenerator
         }
     }
 
-    private XWPFDocument createAward(AwardPrint award) throws IOException {
+    private XWPFDocument createAward(AwardPrint award) throws IOException
+    {
 
         XWPFDocument doc = readTemplate();
 

@@ -79,7 +79,8 @@ public class Assigner
      * @param committees all committees assigned
      * @return a list of all position assignments
      */
-    private List<PositionAssignment> makeAssignments(List<SchoolAllocation> schools, AssignmentSettings settings, AssignmentSolver solver, List<AssignableCommittee> committees)
+    private List<PositionAssignment> makeAssignments(List<SchoolAllocation> schools, AssignmentSettings settings,
+            AssignmentSolver solver, List<AssignableCommittee> committees)
     {
         List<PositionAssignment> assignments = Lists.newArrayList();
 
@@ -89,7 +90,8 @@ public class Assigner
                     .orElseThrow(() -> new IllegalArgumentException("Invalid committee ID: " + aCommittee.id()));
 
             // TODO: just use a linked list from the start?
-            List<Position> positions = committeeService.getPositions(committee).stream()
+            List<Position> positions = committeeService.getPositions(committee)
+                    .stream()
                     .filter(p -> !settings.reservedPositions().contains(p.getId()))
                     .collect(Collectors.toList());
             // TODO: could prioritize based on importance, desirability, etc. (would need to
@@ -105,7 +107,8 @@ public class Assigner
                     School s = schoolService.getSchool(school.id()).get();
 
                     Position position = available.remove();
-                    log.debug("Assigning {} in {} to {} ({} positions left)", position.getName(), committee.getName(), s.getName(), available.size());
+                    log.debug("Assigning {} in {} to {} ({} positions left)", position.getName(), committee.getName(),
+                            s.getName(), available.size());
                     assignments.add(PositionAssignment.builder()
                             .withCommittee(committee)
                             .withSchool(s)

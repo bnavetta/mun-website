@@ -14,7 +14,7 @@ import org.brownmun.util.YamlPropertySourceFactory;
 @ComponentScan
 @EntityScan
 @EnableJpaRepositories
-@EnableConfigurationProperties({SecretariatProperties.class, Conference.class})
+@EnableConfigurationProperties({ SecretariatProperties.class, Conference.class })
 @PropertySource(value = "classpath:/staff.yaml", factory = YamlPropertySourceFactory.class)
 @PropertySource(value = "classpath:/core.yaml", factory = YamlPropertySourceFactory.class)
 public class CoreConfiguration

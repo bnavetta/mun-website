@@ -1,10 +1,7 @@
 package org.brownmun.web.staff;
 
-import com.google.common.escape.Escaper;
-import com.google.common.escape.Escapers;
-import org.brownmun.core.print.PrintService;
-import org.brownmun.core.print.model.PrintRequest;
-import org.brownmun.web.security.User;
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.io.IOException;
+import com.google.common.escape.Escaper;
+import com.google.common.escape.Escapers;
+
+import org.brownmun.core.print.PrintService;
+import org.brownmun.core.print.model.PrintRequest;
+import org.brownmun.web.security.User;
 
 @RestController
 @RequestMapping("/staff/print-system")
@@ -43,11 +45,12 @@ public class PrintingController
     {
         SseEmitter out = new SseEmitter();
         Object registration = printService.addSubscriber(request -> {
-            try {
-                out.send(SseEmitter.event()
-                .name("print-update")
-                .data(request, MediaType.APPLICATION_JSON));
-            } catch (IOException e) {
+            try
+            {
+                out.send(SseEmitter.event().name("print-update").data(request, MediaType.APPLICATION_JSON));
+            }
+            catch (IOException e)
+            {
                 log.warn("Error sending print queue update", e);
             }
         });
@@ -60,12 +63,14 @@ public class PrintingController
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<PrintRequest> submitPrintRequest(@AuthenticationPrincipal User user, @RequestParam MultipartFile source, @RequestParam int numCopies, @RequestParam String deliveryLocation)
+    public ResponseEntity<PrintRequest> submitPrintRequest(@AuthenticationPrincipal User user,
+            @RequestParam MultipartFile source, @RequestParam int numCopies, @RequestParam String deliveryLocation)
     {
         String requester = user.getUsername();
         try
         {
-            PrintRequest request = printService.submitRequest(numCopies, deliveryLocation, requester, source.getOriginalFilename(), source.getContentType(), source.getBytes());
+            PrintRequest request = printService.submitRequest(numCopies, deliveryLocation, requester,
+                    source.getOriginalFilename(), source.getContentType(), source.getBytes());
             return ResponseEntity.ok(request);
         }
         catch (IOException e)

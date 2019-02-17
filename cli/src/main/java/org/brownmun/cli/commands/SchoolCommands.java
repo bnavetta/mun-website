@@ -1,16 +1,17 @@
 package org.brownmun.cli.commands;
 
-import com.google.common.base.Strings;
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.Position;
-import org.brownmun.core.school.model.Delegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import com.google.common.base.Strings;
+
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.AdvisorService;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.Advisor;
+import org.brownmun.core.school.model.Delegate;
 import org.brownmun.core.school.model.School;
 
 import de.vandermeer.asciitable.AsciiTable;
@@ -55,8 +56,10 @@ public class SchoolCommands
         table.addRow("School ID", "School Name", "Accepted");
         table.addStrongRule();
 
-        schoolService.listSchools().stream().filter(s -> s.getName().toLowerCase().contains(queryLower)).forEach(
-                school -> {
+        schoolService.listSchools()
+                .stream()
+                .filter(s -> s.getName().toLowerCase().contains(queryLower))
+                .forEach(school -> {
                     table.addRow(school.getId(), school.getName(), school.isAccepted());
                     table.addRule();
                 });
@@ -86,10 +89,12 @@ public class SchoolCommands
         table.addRow("Delegate ID", "Delegate Name", "Position ID", "Position Name", "Committee ID", "Committee Name");
         table.addRule();
 
-        for (Delegate d : schoolService.getDelegates(schoolId)) {
+        for (Delegate d : schoolService.getDelegates(schoolId))
+        {
             Position p = d.getPosition();
             Committee c = p.getCommittee();
-            table.addRow(d.getId(), Strings.nullToEmpty(d.getName()), p.getId(), Strings.nullToEmpty(p.getName()), c.getId(), Strings.nullToEmpty(c.getName()));
+            table.addRow(d.getId(), Strings.nullToEmpty(d.getName()), p.getId(), Strings.nullToEmpty(p.getName()),
+                    c.getId(), Strings.nullToEmpty(c.getName()));
         }
 
         table.addRule();

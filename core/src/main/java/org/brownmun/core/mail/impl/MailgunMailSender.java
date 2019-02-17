@@ -4,8 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Locale;
 
-import io.sentry.Sentry;
-import io.sentry.event.EventBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestClientException;
@@ -17,6 +15,9 @@ import org.brownmun.core.mail.EmailMessage;
 import org.brownmun.core.mail.MailException;
 import org.brownmun.core.mail.MailProperties;
 import org.brownmun.core.mail.MailSender;
+
+import io.sentry.Sentry;
+import io.sentry.event.EventBuilder;
 
 /**
  * Mailgun-based {@link MailSender}
@@ -53,10 +54,10 @@ public class MailgunMailSender implements MailSender
             log.debug("Sent email [{}] to {} in {}ms", email.subject(), email.recipient(), sendTime);
             if (sendTime.toSeconds() > 5)
             {
-                Sentry.capture(new EventBuilder()
-                        .withMessage(String.format("Slow Mailgun call: %d ms", sendTime.toMillis()))
-                        .withExtra("subject", email.subject())
-                        .withExtra("recipient", email.recipient()));
+                Sentry.capture(
+                        new EventBuilder().withMessage(String.format("Slow Mailgun call: %d ms", sendTime.toMillis()))
+                                .withExtra("subject", email.subject())
+                                .withExtra("recipient", email.recipient()));
             }
         }
         catch (TemplateEngineException e)

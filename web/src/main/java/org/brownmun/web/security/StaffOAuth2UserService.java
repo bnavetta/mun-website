@@ -1,8 +1,5 @@
 package org.brownmun.web.security;
 
-import java.util.Set;
-
-import org.brownmun.core.committee.model.Committee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;

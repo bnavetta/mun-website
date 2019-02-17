@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.google.common.base.Throwables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.google.common.base.Throwables;
 
 import org.brownmun.core.Conference;
 import org.brownmun.core.mail.EmailMessage;
@@ -49,7 +50,7 @@ public class AdvisorServiceImpl implements AdvisorService
 
     @Autowired
     public AdvisorServiceImpl(PasswordResetRepository repo, SchoolService schoolService, AdvisorRepository advisorRepo,
-                              MailSender mailSender, Conference conference, PasswordEncoder encoder, TransactionTemplate tx)
+            MailSender mailSender, Conference conference, PasswordEncoder encoder, TransactionTemplate tx)
     {
         this.repo = repo;
         this.schoolService = schoolService;
@@ -73,11 +74,14 @@ public class AdvisorServiceImpl implements AdvisorService
         String resetCode = Tokens.generate(32);
         try
         {
-            // Manually manage transactions to avoid doing expensive operations like reset code generation or
-            // sending emails within the database transaction. Otherwise, we can starve the connection pool.
+            // Manually manage transactions to avoid doing expensive operations like reset
+            // code generation or
+            // sending emails within the database transaction. Otherwise, we can starve the
+            // connection pool.
             PasswordReset reset = tx.execute((t) -> {
                 Advisor advisor = schoolService.findAdvisor(email)
-                        .orElseThrow(() -> new RuntimeException(new PasswordResetException("No advisor with that email address exists", email)));
+                        .orElseThrow(() -> new RuntimeException(
+                                new PasswordResetException("No advisor with that email address exists", email)));
 
                 PasswordReset r = new PasswordReset();
                 r.setResetCode(resetCode);
@@ -85,7 +89,6 @@ public class AdvisorServiceImpl implements AdvisorService
                 r.setRequestedAt(Instant.now());
                 return repo.save(r);
             });
-
 
             String resetUrl = UriComponentsBuilder.newInstance()
                     .scheme("https")

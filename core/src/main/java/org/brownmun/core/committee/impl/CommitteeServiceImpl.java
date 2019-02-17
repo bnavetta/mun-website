@@ -1,6 +1,19 @@
 package org.brownmun.core.committee.impl;
 
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.google.common.base.Preconditions;
+
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
@@ -9,16 +22,6 @@ import org.brownmun.core.school.impl.DelegateRepository;
 import org.brownmun.core.school.impl.SchoolRepository;
 import org.brownmun.core.school.model.Delegate;
 import org.brownmun.core.school.model.School;
-import org.hibernate.Hibernate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class CommitteeServiceImpl implements CommitteeService
@@ -31,7 +34,8 @@ public class CommitteeServiceImpl implements CommitteeService
     private final SchoolRepository schoolRepo;
 
     @Autowired
-    public CommitteeServiceImpl(CommitteeRepository repo, PositionRepository positionRepo, DelegateRepository delegateRepo, SchoolRepository schoolRepo)
+    public CommitteeServiceImpl(CommitteeRepository repo, PositionRepository positionRepo,
+            DelegateRepository delegateRepo, SchoolRepository schoolRepo)
     {
         this.repo = repo;
         this.positionRepo = positionRepo;
@@ -106,8 +110,9 @@ public class CommitteeServiceImpl implements CommitteeService
         switch (c.getType())
         {
             case JOINT_CRISIS_ROOM:
-                Committee jc = repo.findJointCrisis(c).orElseThrow(
-                        () -> new IllegalStateException("Cannot find joint crisis containing " + c.getId()));
+                Committee jc = repo.findJointCrisis(c)
+                        .orElseThrow(
+                                () -> new IllegalStateException("Cannot find joint crisis containing " + c.getId()));
                 return String.format("%s (%s)", c.getName(), jc.getName());
             default:
                 return c.getName();
@@ -177,7 +182,8 @@ public class CommitteeServiceImpl implements CommitteeService
 
     @Override
     @Transactional
-    public List<Position> listUnassignedPositions() {
+    public List<Position> listUnassignedPositions()
+    {
         List<Position> positions = positionRepo.findUnassigned();
         for (Position pos : positions)
         {

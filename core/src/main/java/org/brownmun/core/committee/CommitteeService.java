@@ -1,12 +1,12 @@
 package org.brownmun.core.committee;
 
+import java.util.*;
+import java.util.stream.Stream;
+
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.committee.model.Position;
 import org.brownmun.core.school.model.Delegate;
-
-import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Responsible for committees.
@@ -97,8 +97,8 @@ public interface CommitteeService
     Delegate assignPosition(long positionId, long schoolId);
 
     /**
-     * Unassign a position. If assigned to a delegate, then the delegate will be deleted as well. If not assigned,
-     * does nothing.
+     * Unassign a position. If assigned to a delegate, then the delegate will be
+     * deleted as well. If not assigned, does nothing.
      */
     void unassignPosition(long positionId);
 

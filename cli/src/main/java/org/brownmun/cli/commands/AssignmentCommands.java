@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.google.common.collect.Maps;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
 import org.jline.utils.AttributedStyle;
@@ -15,8 +13,10 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.google.common.collect.Maps;
 
 import org.brownmun.cli.positions.SchoolAllocation;
 import org.brownmun.cli.positions.allocation.Allocator;
@@ -85,10 +85,9 @@ public class AssignmentCommands
 
         ObjectReader r = csvMapper.readerFor(SchoolAllocation.class)
                 .with(csvMapper.schemaFor(SchoolAllocation.class).withHeader());
-        try(
-                MappingIterator<SchoolAllocation> prefIter = r.readValues(preferencesFile);
-                MappingIterator<SchoolAllocation> allocIter = r.readValues(allocationsFile)
-                ) {
+        try (MappingIterator<SchoolAllocation> prefIter = r.readValues(preferencesFile);
+                MappingIterator<SchoolAllocation> allocIter = r.readValues(allocationsFile))
+        {
             List<SchoolAllocation> prefs = prefIter.readAll();
             Map<Long, SchoolAllocation> allocations = Maps.newHashMap();
             allocIter.forEachRemaining(a -> allocations.put(a.id(), a));
@@ -139,7 +138,8 @@ public class AssignmentCommands
                 result.styled(crisisStyle, String.format("%+d\n", crisisDelta));
             }
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             throw e;
         }
 

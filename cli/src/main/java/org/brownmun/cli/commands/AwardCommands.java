@@ -1,5 +1,21 @@
 package org.brownmun.cli.commands;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -11,7 +27,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.google.common.base.Strings;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
-import de.vandermeer.asciitable.AsciiTable;
+
 import org.brownmun.cli.awards.AwardsGenerator;
 import org.brownmun.core.award.AwardExport;
 import org.brownmun.core.award.AwardService;
@@ -20,21 +36,8 @@ import org.brownmun.core.award.model.AwardPrint;
 import org.brownmun.core.award.model.AwardType;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import de.vandermeer.asciitable.AsciiTable;
 
 @ShellComponent
 public class AwardCommands
@@ -64,8 +67,7 @@ public class AwardCommands
             toGenerate = filterFromFile(toGenerate, new File(only));
         }
 
-        Map<AwardType, List<AwardPrint>> awards = toGenerate
-                .stream()
+        Map<AwardType, List<AwardPrint>> awards = toGenerate.stream()
                 .collect(Collectors.groupingBy(AwardPrint::getType));
 
         if (output.exists())
@@ -90,7 +92,8 @@ public class AwardCommands
 
         CsvSchema schema = mapper.schemaFor(AwardPrint.class).withHeader();
         ObjectWriter writer = mapper.writerFor(AwardPrint.class).with(schema);
-        try (SequenceWriter out = writer.writeValues(new File(output, "incomplete.csv"))) {
+        try (SequenceWriter out = writer.writeValues(new File(output, "incomplete.csv")))
+        {
             out.writeAll(allAwards.getIncompleteAwards());
             out.flush();
         }
@@ -105,7 +108,8 @@ public class AwardCommands
 
         for (AwardPrint award : awardService.exportAwards().getIncompleteAwards())
         {
-            System.out.printf(format, award.getId(), award.getType().getDisplayName(), award.getCommitteeName(), award.getSchoolName(), award.getDelegateName());
+            System.out.printf(format, award.getId(), award.getType().getDisplayName(), award.getCommitteeName(),
+                    award.getSchoolName(), award.getDelegateName());
         }
     }
 
@@ -118,7 +122,8 @@ public class AwardCommands
 
         for (Award award : awardService.findUnassignedAwards())
         {
-            table.addRow(award.getId(), award.getType().getDisplayName(), award.getCommittee().getId(), award.getCommittee().getName());
+            table.addRow(award.getId(), award.getType().getDisplayName(), award.getCommittee().getId(),
+                    award.getCommittee().getName());
         }
 
         return table.render(128);
@@ -134,7 +139,7 @@ public class AwardCommands
         try (OutputStream out = new FileOutputStream(outputFile))
         {
             // Write a UTF-8 BOM because Excel expects it :(
-            out.write(new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF});
+            out.write(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF });
             try (SequenceWriter s = writer.writeValues(out))
             {
                 s.writeAll(export.getCompleteAwards());
@@ -149,7 +154,8 @@ public class AwardCommands
     }
 
     @ShellMethod("Create awards from the awards allocation spreadsheet")
-    public void createAwards(File inputFile) throws IOException {
+    public void createAwards(File inputFile) throws IOException
+    {
         awardService.clearAwards();
 
         CsvSchema schema = mapper.schemaFor(AwardsAllocation.class).withHeader();
@@ -187,15 +193,15 @@ public class AwardCommands
         ObjectReader reader = mapper.readerFor(AwardPrint.class).with(schema);
         try (MappingIterator<AwardPrint> filterIter = reader.readValues(filterFile))
         {
-            Set<Long> toFilter = filterIter.readAll().stream()
-                    .map(AwardPrint::getId).collect(Collectors.toSet());
+            Set<Long> toFilter = filterIter.readAll().stream().map(AwardPrint::getId).collect(Collectors.toSet());
 
             return awards.stream().filter(a -> toFilter.contains(a.getId())).collect(Collectors.toList());
         }
     }
 
-    @JsonPropertyOrder({"ID", "Committee", "Best Delegate", "Outstanding Delegate", "Honorable Delegate"})
-    private static class AwardsAllocation {
+    @JsonPropertyOrder({ "ID", "Committee", "Best Delegate", "Outstanding Delegate", "Honorable Delegate" })
+    private static class AwardsAllocation
+    {
         @JsonProperty("ID")
         public long committeeId;
 

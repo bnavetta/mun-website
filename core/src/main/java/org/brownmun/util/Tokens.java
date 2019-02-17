@@ -3,9 +3,10 @@ package org.brownmun.util;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-import io.sentry.Sentry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.sentry.Sentry;
 
 /**
  * Utility class for generating secure tokens.

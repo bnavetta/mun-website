@@ -1,15 +1,15 @@
 package org.brownmun.core.staff;
 
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.CommitteeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.brownmun.core.Conference;
-
-import java.util.HashSet;
-import java.util.Set;
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.CommitteeType;
 
 /**
  * Helper service for dealing with conference staff.
@@ -52,7 +52,6 @@ public class StaffService
         {
             return Set.of();
         }
-
 
         String shortName = email.substring(0, atIndex);
 

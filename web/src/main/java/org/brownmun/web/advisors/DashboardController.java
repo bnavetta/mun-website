@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.brownmun.web.common.DelegateDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.school.AdvisorService;
 import org.brownmun.core.school.SchoolService;
 import org.brownmun.core.school.model.*;
+import org.brownmun.web.common.DelegateDTO;
 
 @Controller
 @RequestMapping("/your-mun")

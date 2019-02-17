@@ -112,7 +112,8 @@ public class Allocator
             CriteriaQuery<Boolean> acceptedQ = cb.createQuery(Boolean.class);
             Root<School> r = acceptedQ.from(School.class);
             acceptedQ.select(r.get(School_.accepted)).where(cb.equal(r.get(School_.id), Long.valueOf(id)));
-            if (!em.createQuery(acceptedQ).getSingleResult()) {
+            if (!em.createQuery(acceptedQ).getSingleResult())
+            {
                 continue;
             }
 

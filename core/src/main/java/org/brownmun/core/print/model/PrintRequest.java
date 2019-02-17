@@ -166,7 +166,8 @@ public class PrintRequest
                 .toString();
     }
 
-    public void setSubmissionTime(Instant submissionTime) {
+    public void setSubmissionTime(Instant submissionTime)
+    {
         this.submissionTime = submissionTime;
     }
 

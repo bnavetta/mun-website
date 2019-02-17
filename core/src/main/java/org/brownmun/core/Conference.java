@@ -1,10 +1,10 @@
 package org.brownmun.core;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.web.util.UriTemplate;
-
 import java.net.URI;
 import java.util.Map;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.web.util.UriTemplate;
 
 /**
  * Conference-specific settings
@@ -45,7 +45,8 @@ public class Conference
     /**
      * Whether or not background guides are live on the website.
      */
-    public boolean isGuidesPublished() {
+    public boolean isGuidesPublished()
+    {
         return guidesPublished;
     }
 
@@ -64,7 +65,8 @@ public class Conference
         this.domainName = domainName;
     }
 
-    public void setGuidesPublished(boolean guidesPublished) {
+    public void setGuidesPublished(boolean guidesPublished)
+    {
         this.guidesPublished = guidesPublished;
     }
 
@@ -75,6 +77,7 @@ public class Conference
 
     /**
      * Get the URL for a committee's background guide
+     *
      * @param shortName the short name of the committee, such as {@code undp}.
      * @return a URL to the committee's background guide
      */

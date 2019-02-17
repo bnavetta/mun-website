@@ -6,9 +6,12 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class PositionInfo
 {
-    public static PositionInfo create(long id, String name, String delegateName, String schoolName, boolean positionPaper, boolean session1, boolean session2, boolean session3, boolean session4, boolean session5)
+    public static PositionInfo create(long id, String name, String delegateName, String schoolName,
+            boolean positionPaper, boolean session1, boolean session2, boolean session3, boolean session4,
+            boolean session5)
     {
-        return new AutoValue_PositionInfo(id, name, delegateName, schoolName, positionPaper, session1, session2, session3, session4, session5);
+        return new AutoValue_PositionInfo(id, name, delegateName, schoolName, positionPaper, session1, session2,
+                session3, session4, session5);
     }
 
     @JsonProperty("id")

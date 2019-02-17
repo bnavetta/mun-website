@@ -1,11 +1,11 @@
 package org.brownmun.core.committee.impl;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import org.brownmun.core.committee.model.Position;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import org.brownmun.core.committee.model.Position;
 
 /**
  * Queries related to {@link Position}s.

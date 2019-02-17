@@ -1,11 +1,11 @@
 package org.brownmun.web.staff;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
-import org.brownmun.web.security.StaffUser;
 
-import java.util.OptionalLong;
-import java.util.Set;
+import org.brownmun.web.security.StaffUser;
 
 /**
  * Information about a staff user

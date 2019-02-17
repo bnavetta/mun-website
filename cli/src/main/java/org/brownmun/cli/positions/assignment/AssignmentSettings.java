@@ -14,9 +14,11 @@ public abstract class AssignmentSettings
     @JsonCreator
     public static AssignmentSettings create(@JsonProperty("generalOverlap") int generalOverlap,
             @JsonProperty("specializedOverlap") int specializedOverlap,
-            @JsonProperty("crisisOverlap") int crisisOverlap, @JsonProperty("reservedPositions") long[] reservedPositions)
+            @JsonProperty("crisisOverlap") int crisisOverlap,
+            @JsonProperty("reservedPositions") long[] reservedPositions)
     {
-        return new AutoValue_AssignmentSettings(generalOverlap, specializedOverlap, crisisOverlap, ImmutableLongArray.copyOf(reservedPositions));
+        return new AutoValue_AssignmentSettings(generalOverlap, specializedOverlap, crisisOverlap,
+                ImmutableLongArray.copyOf(reservedPositions));
     }
 
     /**

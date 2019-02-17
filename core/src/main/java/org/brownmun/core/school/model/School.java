@@ -229,11 +229,8 @@ public class School
     }
 
     @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("accepted", accepted)
-                .toString();
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("accepted", accepted).toString();
     }
 }

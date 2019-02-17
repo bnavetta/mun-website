@@ -22,10 +22,12 @@ public abstract class PositionAssignment
     }
 
     @JsonCreator
-    public static PositionAssignment create(@JsonProperty("positionId") long positionId, @JsonProperty("positionName") String positionName, @JsonProperty("committeeId") long committeeId, @JsonProperty("committeeName") String committeeName, @JsonProperty("schoolId") long schoolId, @JsonProperty("schoolName") String schoolName)
+    public static PositionAssignment create(@JsonProperty("positionId") long positionId,
+            @JsonProperty("positionName") String positionName, @JsonProperty("committeeId") long committeeId,
+            @JsonProperty("committeeName") String committeeName, @JsonProperty("schoolId") long schoolId,
+            @JsonProperty("schoolName") String schoolName)
     {
-        return builder()
-                .positionId(positionId)
+        return builder().positionId(positionId)
                 .positionName(positionName)
                 .committeeId(committeeId)
                 .committeeName(committeeName)

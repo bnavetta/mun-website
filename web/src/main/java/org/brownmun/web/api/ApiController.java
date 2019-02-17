@@ -5,19 +5,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Maps;
-import org.brownmun.core.Conference;
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.CommitteeType;
-import org.brownmun.web.common.CommitteeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Maps;
+
+import org.brownmun.core.Conference;
 import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.CommitteeType;
 import org.brownmun.core.logistics.HotelService;
 import org.brownmun.core.logistics.model.Hotel;
+import org.brownmun.web.common.CommitteeDTO;
 
 /**
  * Read-only API for client-side code on the public facing website, such as the
@@ -48,7 +49,9 @@ public class ApiController
         List<Committee> jointCrisis = committees.listByType(CommitteeType.JOINT_CRISIS);
 
         List<CommitteeDTO> generalDTOs = general.stream().map(this::committeeToDTO).collect(Collectors.toList());
-        List<CommitteeDTO> specializedDTOs = specialized.stream().map(this::committeeToDTO).collect(Collectors.toList());
+        List<CommitteeDTO> specializedDTOs = specialized.stream()
+                .map(this::committeeToDTO)
+                .collect(Collectors.toList());
         List<CommitteeDTO> crisisDTOs = crisis.stream().map(this::committeeToDTO).collect(Collectors.toList());
         List<CommitteeDTO> jccDTOs = jointCrisis.stream().map(this::committeeToDTO).collect(Collectors.toList());
 

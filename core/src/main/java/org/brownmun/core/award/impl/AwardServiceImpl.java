@@ -1,15 +1,8 @@
 package org.brownmun.core.award.impl;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import org.brownmun.core.award.AwardExport;
-import org.brownmun.core.award.AwardService;
-import org.brownmun.core.award.model.Award;
-import org.brownmun.core.award.model.AwardPrint;
-import org.brownmun.core.award.model.AwardType;
-import org.brownmun.core.committee.CommitteeService;
-import org.brownmun.core.committee.model.Committee;
-import org.brownmun.core.committee.model.Position;
+import java.util.List;
+import java.util.Optional;
+
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +11,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
+import org.brownmun.core.award.AwardExport;
+import org.brownmun.core.award.AwardService;
+import org.brownmun.core.award.model.Award;
+import org.brownmun.core.award.model.AwardPrint;
+import org.brownmun.core.award.model.AwardType;
+import org.brownmun.core.committee.CommitteeService;
+import org.brownmun.core.committee.model.Committee;
+import org.brownmun.core.committee.model.Position;
 
 @Service
 public class AwardServiceImpl implements AwardService
@@ -31,7 +33,8 @@ public class AwardServiceImpl implements AwardService
     private final AwardPrintRepository printRepository;
 
     @Autowired
-    public AwardServiceImpl(CommitteeService committeeService, AwardRepository awardRepository, AwardPrintRepository printRepository)
+    public AwardServiceImpl(CommitteeService committeeService, AwardRepository awardRepository,
+            AwardPrintRepository printRepository)
     {
         this.committeeService = committeeService;
         this.awardRepository = awardRepository;
@@ -42,7 +45,7 @@ public class AwardServiceImpl implements AwardService
     public List<Award> awardsForCommittee(long committeeId)
     {
         Committee committee = committeeService.getCommittee(committeeId)
-        .orElseThrow(() -> new IllegalArgumentException("No committee with ID" + committeeId));
+                .orElseThrow(() -> new IllegalArgumentException("No committee with ID" + committeeId));
         return awardRepository.findAllByCommittee(committee);
     }
 
@@ -60,7 +63,8 @@ public class AwardServiceImpl implements AwardService
             throw new IllegalStateException("Cannot assign award to position in a different committee");
         }
 
-        log.debug("Granting {} award {} in {} to {}", award.getType().getDisplayName(), award.getId(), award.getCommittee().getId(), position);
+        log.debug("Granting {} award {} in {} to {}", award.getType().getDisplayName(), award.getId(),
+                award.getCommittee().getId(), position);
 
         award.setPosition(position);
         return awardRepository.save(award);
@@ -72,7 +76,8 @@ public class AwardServiceImpl implements AwardService
     {
         Award award = awardRepository.findById(awardId)
                 .orElseThrow(() -> new IllegalArgumentException("No award with ID " + awardId));
-        log.debug("Unassigning {} award {} in {}", award.getType().getDisplayName(), award.getId(), award.getCommittee().getId());
+        log.debug("Unassigning {} award {} in {}", award.getType().getDisplayName(), award.getId(),
+                award.getCommittee().getId());
         award.setPosition(null);
         return awardRepository.save(award);
     }
@@ -85,7 +90,8 @@ public class AwardServiceImpl implements AwardService
 
     @Override
     @Transactional
-    public Award createAward(Committee committee, AwardType type) {
+    public Award createAward(Committee committee, AwardType type)
+    {
         log.debug("Creating {} award for {}", type.getDisplayName(), committee.getName());
         Award award = new Award();
         award.setCommittee(committee);
@@ -103,7 +109,8 @@ public class AwardServiceImpl implements AwardService
 
     @Override
     @Transactional
-    public AwardExport exportAwards() {
+    public AwardExport exportAwards()
+    {
         List<AwardPrint> completeAwards = Lists.newArrayList();
         List<AwardPrint> incompleteAwards = Lists.newArrayList();
         for (AwardPrint award : printRepository.findAll(Sort.by("committeeName", "type")))

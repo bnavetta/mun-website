@@ -1,7 +1,22 @@
 package org.brownmun.web.api;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.Strings;
+
 import org.brownmun.core.api.Views;
 import org.brownmun.core.award.AwardService;
 import org.brownmun.core.award.model.Award;
@@ -15,19 +30,6 @@ import org.brownmun.core.school.model.School;
 import org.brownmun.core.school.model.SupplementalInfo;
 import org.brownmun.web.common.DelegateDTO;
 import org.brownmun.web.security.ConferenceSecurity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
-import java.util.stream.Collectors;
 
 /**
  * API for the staff dashboard
@@ -38,14 +40,15 @@ import java.util.stream.Collectors;
 public class StaffApiController
 {
     private static final Logger log = LoggerFactory.getLogger(StaffApiController.class);
-    
+
     private final SchoolService schools;
     private final AdvisorService advisors;
     private final CommitteeService committees;
     private final AwardService awards;
 
     @Autowired
-    public StaffApiController(SchoolService schools, AdvisorService advisors, CommitteeService committees, AwardService awards)
+    public StaffApiController(SchoolService schools, AdvisorService advisors, CommitteeService committees,
+            AwardService awards)
     {
         this.schools = schools;
         this.advisors = advisors;
@@ -110,36 +113,36 @@ public class StaffApiController
     @GetMapping("/committee/{id}/positions")
     public ResponseEntity<List<PositionInfo>> committeePositions(@PathVariable long id)
     {
-        return committees.getCommittee(id).map(committee -> ResponseEntity.ok(committees.getPositions(committee).stream().map(position -> {
-            Delegate delegate = position.getDelegate();
-            if (delegate != null)
-            {
-                return PositionInfo.create(
-                        position.getId(),
-                        position.getName(),
-                        Strings.nullToEmpty(delegate.getName()),
-                        schools.getSchool(delegate.getSchool().getId()).get().getName(),
-                        delegate.getAttendance().isPositionPaperSubmitted(),
-                        delegate.getAttendance().isSessionOne(),
-                        delegate.getAttendance().isSessionTwo(),
-                        delegate.getAttendance().isSessionThree(),
-                        delegate.getAttendance().isSessionFour(),
-                        delegate.getAttendance().isSessionFive());
-            }
-            else
-            {
-                return PositionInfo.create(position.getId(), position.getName(), "", "", false, false, false, false, false, false);
-            }
-        }).sorted(Comparator.comparing(PositionInfo::name)).collect(Collectors.toList())))
+        return committees.getCommittee(id)
+                .map(committee -> ResponseEntity.ok(committees.getPositions(committee).stream().map(position -> {
+                    Delegate delegate = position.getDelegate();
+                    if (delegate != null)
+                    {
+                        return PositionInfo.create(position.getId(), position.getName(),
+                                Strings.nullToEmpty(delegate.getName()),
+                                schools.getSchool(delegate.getSchool().getId()).get().getName(),
+                                delegate.getAttendance().isPositionPaperSubmitted(),
+                                delegate.getAttendance().isSessionOne(), delegate.getAttendance().isSessionTwo(),
+                                delegate.getAttendance().isSessionThree(), delegate.getAttendance().isSessionFour(),
+                                delegate.getAttendance().isSessionFive());
+                    }
+                    else
+                    {
+                        return PositionInfo.create(position.getId(), position.getName(), "", "", false, false, false,
+                                false, false, false);
+                    }
+                }).sorted(Comparator.comparing(PositionInfo::name)).collect(Collectors.toList())))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/committee/{id}/attendance")
     @PreAuthorize("principal.canAccessCommittee(id)")
-    public ResponseEntity<Void> submitAttendance(@PathVariable("id") long committeeId, @RequestBody AttendanceRequest request)
+    public ResponseEntity<Void> submitAttendance(@PathVariable("id") long committeeId,
+            @RequestBody AttendanceRequest request)
     {
         Optional<Position> posOption = committees.getPosition(request.positionId());
-        if (!posOption.isPresent()) {
+        if (!posOption.isPresent())
+        {
             return ResponseEntity.notFound().build();
         }
 
@@ -188,9 +191,13 @@ public class StaffApiController
     @PreAuthorize("principal.canAccessCommittee(id)")
     public ResponseEntity<List<CommitteeAward>> awards(@PathVariable long id)
     {
-        try {
-            return ResponseEntity.ok(awards.awardsForCommittee(id).stream()
-                    .map(award -> CommitteeAward.create(award.getId(), award.getType(), award.getPosition() == null ? OptionalLong.empty() : OptionalLong.of(award.getPosition().getId())))
+        try
+        {
+            return ResponseEntity.ok(awards.awardsForCommittee(id)
+                    .stream()
+                    .map(award -> CommitteeAward.create(award.getId(), award.getType(),
+                            award.getPosition() == null ? OptionalLong.empty()
+                                    : OptionalLong.of(award.getPosition().getId())))
                     .collect(Collectors.toList()));
         }
         catch (IllegalArgumentException | IllegalStateException e)
@@ -205,14 +212,17 @@ public class StaffApiController
     public ResponseEntity<CommitteeAward> submitAward(@PathVariable long id, @RequestBody CommitteeAward award)
     {
         Optional<Award> awardOpt = awards.getAward(award.id());
-        if (!awardOpt.isPresent()) {
+        if (!awardOpt.isPresent())
+        {
             return ResponseEntity.notFound().build();
         }
-        if (awardOpt.get().getCommittee().getId() != id) {
+        if (awardOpt.get().getCommittee().getId() != id)
+        {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        try {
+        try
+        {
             if (!award.positionId().isPresent())
             {
                 Award a = awards.unassignAward(award.id());
@@ -221,7 +231,8 @@ public class StaffApiController
             else
             {
                 Award a = awards.setAward(award.id(), award.positionId().getAsLong());
-                return ResponseEntity.ok(CommitteeAward.create(a.getId(), a.getType(), a.getPosition() == null ? OptionalLong.empty() : OptionalLong.of(a.getPosition().getId())));
+                return ResponseEntity.ok(CommitteeAward.create(a.getId(), a.getType(),
+                        a.getPosition() == null ? OptionalLong.empty() : OptionalLong.of(a.getPosition().getId())));
             }
         }
         catch (IllegalArgumentException | IllegalStateException e)

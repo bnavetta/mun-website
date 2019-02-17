@@ -1,12 +1,11 @@
 package org.brownmun.core.award;
 
-import org.brownmun.core.award.model.Award;
-import org.brownmun.core.award.model.AwardPrint;
-import org.brownmun.core.award.model.AwardType;
-import org.brownmun.core.committee.model.Committee;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.brownmun.core.award.model.Award;
+import org.brownmun.core.award.model.AwardType;
+import org.brownmun.core.committee.model.Committee;
 
 /**
  * Service abstraction for managing awards.

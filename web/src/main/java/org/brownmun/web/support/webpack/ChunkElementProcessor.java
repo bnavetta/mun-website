@@ -31,15 +31,17 @@ public class ChunkElementProcessor extends AbstractElementTagProcessor
 
         for (URI cssFile : chunk.css())
         {
-            IStandaloneElementTag link = context.getModelFactory().createStandaloneElementTag("link",
-                    Map.of("rel", "stylesheet", "href", cssFile.toString()), AttributeValueQuotes.DOUBLE, false, true);
+            IStandaloneElementTag link = context.getModelFactory()
+                    .createStandaloneElementTag("link", Map.of("rel", "stylesheet", "href", cssFile.toString()),
+                            AttributeValueQuotes.DOUBLE, false, true);
             model.add(link);
         }
 
         for (URI jsFile : chunk.js())
         {
-            IOpenElementTag scriptStart = context.getModelFactory().createOpenElementTag("script",
-                    Map.of("src", jsFile.toString(), "defer", "true"), AttributeValueQuotes.DOUBLE, false);
+            IOpenElementTag scriptStart = context.getModelFactory()
+                    .createOpenElementTag("script", Map.of("src", jsFile.toString(), "defer", "true"),
+                            AttributeValueQuotes.DOUBLE, false);
             model.add(scriptStart);
             model.add(context.getModelFactory().createCloseElementTag("script"));
         }

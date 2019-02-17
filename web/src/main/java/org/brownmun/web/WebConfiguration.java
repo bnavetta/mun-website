@@ -1,11 +1,12 @@
 package org.brownmun.web;
 
-import org.brownmun.core.CoreConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import org.brownmun.core.CoreConfiguration;
 
 @Configuration
 @ComponentScan
@@ -27,8 +28,8 @@ public class WebConfiguration implements WebMvcConfigurer
                 .setViewName("conference-resources/preparation-and-procedure");
         registry.addViewController("/conference-resources/erinn-phelan-award")
                 .setViewName("conference-resources/erinn-phelan-award");
-		registry.addViewController("conference-resources/keynote-speaker")
-			    .setViewName("conference-resources/keynote-speaker");
+        registry.addViewController("conference-resources/keynote-speaker")
+                .setViewName("conference-resources/keynote-speaker");
 
         registry.addViewController("/logistics/getting-to-campus").setViewName("logistics/getting-to-campus");
         registry.addViewController("/logistics/shuttles-and-parking").setViewName("logistics/shuttles-and-parking");

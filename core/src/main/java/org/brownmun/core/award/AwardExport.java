@@ -1,8 +1,8 @@
 package org.brownmun.core.award;
 
-import org.brownmun.core.award.model.AwardPrint;
-
 import java.util.List;
+
+import org.brownmun.core.award.model.AwardPrint;
 
 public final class AwardExport
 {
@@ -15,11 +15,13 @@ public final class AwardExport
         this.incompleteAwards = incompleteAwards;
     }
 
-    public List<AwardPrint> getCompleteAwards() {
+    public List<AwardPrint> getCompleteAwards()
+    {
         return completeAwards;
     }
 
-    public List<AwardPrint> getIncompleteAwards() {
+    public List<AwardPrint> getIncompleteAwards()
+    {
         return incompleteAwards;
     }
 }

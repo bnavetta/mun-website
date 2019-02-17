@@ -1,18 +1,21 @@
 package org.brownmun.web.api;
 
+import java.util.OptionalLong;
+
+import javax.annotation.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
-import org.brownmun.core.award.model.AwardType;
 
-import javax.annotation.Nullable;
-import java.util.OptionalLong;
+import org.brownmun.core.award.model.AwardType;
 
 @AutoValue
 public abstract class CommitteeAward
 {
     @JsonCreator
-    public static CommitteeAward create(@JsonProperty("id") long id, @JsonProperty("type") AwardType type, @JsonProperty("positionId") OptionalLong positionId)
+    public static CommitteeAward create(@JsonProperty("id") long id, @JsonProperty("type") AwardType type,
+            @JsonProperty("positionId") OptionalLong positionId)
     {
         return new AutoValue_CommitteeAward(id, positionId, type);
     }

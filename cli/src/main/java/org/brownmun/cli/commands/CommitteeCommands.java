@@ -11,10 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import de.vandermeer.asciitable.AsciiTable;
-import org.brownmun.core.school.SchoolService;
-import org.brownmun.core.school.model.Delegate;
-import org.brownmun.core.school.model.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -24,6 +20,11 @@ import com.google.common.io.Files;
 import org.brownmun.core.committee.CommitteeService;
 import org.brownmun.core.committee.model.Committee;
 import org.brownmun.core.committee.model.Position;
+import org.brownmun.core.school.SchoolService;
+import org.brownmun.core.school.model.Delegate;
+import org.brownmun.core.school.model.School;
+
+import de.vandermeer.asciitable.AsciiTable;
 
 @ShellComponent
 public class CommitteeCommands
@@ -80,8 +81,10 @@ public class CommitteeCommands
                     String committeeSlug = headerMatch.group(1);
                     committee = committees.findByShortName(committeeSlug)
                             .orElseThrow(() -> new IllegalArgumentException("Committee not found: " + committeeSlug));
-                    positionNames = committees.getPositions(committee).stream().map(Position::getName).collect(
-                            Collectors.toSet());
+                    positionNames = committees.getPositions(committee)
+                            .stream()
+                            .map(Position::getName)
+                            .collect(Collectors.toSet());
                     System.out.printf("\n\nCreating positions for %s\n", committee.getName());
                 }
                 else if (committee == null)
