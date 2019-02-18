@@ -20,7 +20,7 @@ public class MailgunClient
     public MailgunClient(MailgunProperties properties, RestTemplateBuilder builder)
     {
         this.restTemplate = builder.rootUri(properties.getBaseUri())
-                .basicAuthorization(properties.getUsername(), properties.getApiKey())
+                .basicAuthentication(properties.getUsername(), properties.getApiKey())
                 .build();
     }
 
