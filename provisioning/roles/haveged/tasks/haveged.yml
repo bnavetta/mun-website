@@ -1,0 +1,19 @@
+---
+
+- name: Ensure haveged user exists
+  user: name=haveged uid=1060 groups=docker create_home=no state=present
+
+- name: Configure haveged service
+  copy:
+    src: haveged.service
+    dest: /etc/systemd/system/haveged.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart haveged
+
+
+- name: Ensure haveged is running
+  service: name=haveged state=started enabled=yes

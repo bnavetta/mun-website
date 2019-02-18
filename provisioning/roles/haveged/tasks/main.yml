@@ -1,0 +1,2 @@
+- import_tasks: haveged.yml
+  tags: [haveged]

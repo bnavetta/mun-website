@@ -5,6 +5,7 @@
 - hosts: brownmun
   roles:
     - base
+    - haveged
     - traefik
     - postgres
     - role: conference-service

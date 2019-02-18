@@ -1,0 +1,15 @@
+[Unit]
+Description=Haveged entropy daemon
+Documentation=https://github.com/jirka-h/haveged
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=haveged
+ExecStartPre=-/usr/bin/docker kill haveged
+ExecStartPre=-/usr/bin/docker rm haveged
+ExecStartPre=/usr/bin/docker pull bnavetta/haveged:latest
+ExecStart=/usr/bin/docker run --name haveged --privileged bnavetta/haveged:latest
+
+[Install]
+WantedBy=multi-user.target
