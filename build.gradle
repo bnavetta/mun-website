@@ -92,8 +92,8 @@ subprojects {
             buildInfo {
                 properties {
                     additional = [
-                            'built-by-gradle': project.gradle.gradleVersion,
-                            'built-by-java': System.getProperty('java.runtime.version')
+                            'gradle-version': project.gradle.gradleVersion,
+                            'java-version': System.getProperty('java.runtime.version')
                     ]
                 }
             }
