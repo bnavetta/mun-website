@@ -181,7 +181,8 @@ def deploy():
     click.secho("Pulling Docker images on server", fg="green")
     client = ssh_client()
     def pull_image(img):
-        _, _, stderr = client.exec_command("docker pull gcr.io/busun-158105/{}:{}".format(img, ver))
+        # For some reason, /opt/bin isn't on the path
+        _, _, stderr = client.exec_command("export PATH=$PATH:/opt/bin; docker pull gcr.io/busun-158105/{}:{}".format(img, ver))
         if not stderr.channel.recv_exit_status() == 0:
             click.secho("Error pulling {}: {}".format(img, stderr.read().decode('utf-8')), fg="red")
             client.close()
