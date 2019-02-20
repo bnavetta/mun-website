@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Profile("prod")
 public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
-    @Value("admin.ip-range")
+    @Value("${admin.ip-range}")
     private String adminIpRange;
 
     @Override
