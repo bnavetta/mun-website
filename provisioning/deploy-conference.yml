@@ -27,3 +27,8 @@
   - name: Restart service
     service: name={{ conference }} state=restarted
     become: yes
+  - name: Restart asset server
+    service: name=asset-server state=restarted
+    become: yes
+  - name: Clean out old images
+    command: docker image prune -af

@@ -50,6 +50,7 @@ def version():
     output = subprocess.check_output(['./gradlew', '--console', 'plain', '-q', 'printVersion'])
     return output.decode(encoding='utf-8').strip()
 
+
 @click.group(context_settings=dict(help_option_names=['-h', '--help']))
 def cli():
     pass
@@ -203,6 +204,7 @@ def clean_images(ver):
                     subprocess.check_call([
                         "gcloud", "container", "images", "delete", "{}:{}".format(image, tag), "--force-delete-tags"
                     ])
+
 
 if __name__ == '__main__':
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
