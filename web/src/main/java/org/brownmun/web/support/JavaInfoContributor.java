@@ -2,7 +2,9 @@ package org.brownmun.web.support;
 
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JavaInfoContributor implements InfoContributor
 {
     @Override

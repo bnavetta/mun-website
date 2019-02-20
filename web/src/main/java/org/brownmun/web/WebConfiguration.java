@@ -11,8 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import org.brownmun.core.CoreConfiguration;
 
-import ch.qos.logback.access.servlet.TeeFilter;
-
 @Configuration
 @ComponentScan
 @Import(CoreConfiguration.class)
@@ -46,12 +44,5 @@ public class WebConfiguration implements WebMvcConfigurer
         registry.addRedirectViewController("/yourbusun", "/your-mun");
 
         registry.addViewController("/windmill").setViewName("windmill");
-    }
-
-    @Bean
-    public Filter teeFilter()
-    {
-        // For access logging
-        return new TeeFilter();
     }
 }

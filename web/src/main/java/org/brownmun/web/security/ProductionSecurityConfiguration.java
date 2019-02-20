@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Order(101)
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration
 @Profile("prod")
 public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapter
