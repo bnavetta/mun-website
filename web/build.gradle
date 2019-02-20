@@ -10,6 +10,7 @@ plugins {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'org.springframework.security:spring-security-config'
@@ -22,6 +23,7 @@ dependencies {
     implementation 'com.google.guava:guava'
     implementation 'com.github.ben-manes.caffeine:caffeine'
     implementation 'io.sentry:sentry-spring'
+    implementation 'ch.qos.logback:logback-access'
 
     implementation project(':core')
 

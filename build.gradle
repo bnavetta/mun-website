@@ -4,11 +4,12 @@ plugins {
     id 'idea'
     id 'eclipse'
 
-    id 'org.ajoberstar.grgit' version '2.3.0'
+    id 'org.ajoberstar.grgit' version '3.0.0'
 
     id 'org.springframework.boot' version '2.1.3.RELEASE' apply false
     id 'com.google.cloud.tools.jib' version '1.0.0' apply false
     id 'com.diffplug.gradle.spotless' version '3.18.0' apply false
+    id 'com.gorylenko.gradle-git-properties' version '2.0.0' apply false
     id 'com.github.ben-manes.versions' version '0.20.0'
 }
 
@@ -85,44 +86,25 @@ subprojects {
     tasks.withType(BootRun).configureEach {
         workingDir rootProject.projectDir
     }
+
+    plugins.withType(org.springframework.boot.gradle.plugin.SpringBootPlugin) {
+        springBoot {
+            buildInfo {
+                properties {
+                    additional = [
+                            'built-by-gradle': project.gradle.gradleVersion,
+                            'built-by-java': System.getProperty('java.runtime.version')
+                    ]
+                }
+            }
+        }
+    }
 }
 
 idea {
     project {
         vcs = 'Git'
     }
-}
-
-configure([':web', ':busun', ':bucs', ':core', ':cli'].collect { project(it) }) {
-    // dependencyManagement {
-    //     dependencies {
-    //         dependency 'com.google.guava:guava:23.6-jre'
-    //         dependency 'org.springframework.shell:spring-shell-starter:2.0.0.M2'
-    //         dependency 'org.javassist:javassist:3.22.0-GA'
-    //         dependency 'com.googlecode.libphonenumber:libphonenumber:8.9.2'
-    //         dependency 'de.vandermeer:asciitable:0.3.2'
-
-    //         dependencySet(group: 'org.apache.poi', version: '4.0.0') {
-    //             entry 'poi'
-    //             entry 'poi-ooxml'
-    //             entry 'poi-scratchpad'
-    //         }
-
-    //         dependencySet(group: 'io.sentry', version: '1.7.3') {
-    //             entry 'sentry-spring'
-    //             entry 'sentry'
-    //         }
-
-    //         dependencySet(group: 'com.google.auto.value', version: '1.6.3') {
-    //             entry 'auto-value'
-    //             entry 'auto-value-annotations'
-    //         }
-    //     }
-    // }
-
-    
-
-    
 }
 
 task printVersion {

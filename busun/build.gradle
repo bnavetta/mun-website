@@ -6,6 +6,7 @@ plugins {
     id 'org.springframework.boot'
     id 'com.diffplug.gradle.spotless'
     id 'com.github.ben-manes.versions'
+    id 'com.gorylenko.gradle-git-properties'
 
     id 'com.google.cloud.tools.jib'
 }
@@ -25,16 +26,6 @@ jib {
         args = ['--spring.profiles.active=prod']
     }
 }
-
-//docker {
-//    name 'gcr.io/busun-158105/busun'
-//    tags project.version
-//    files tasks.bootJar.outputs
-//    buildArgs(['BUILD_VERSION': project.version])
-//    labels(['version': project.version, 'head': grgit.head().abbreviatedId])
-//}
-//
-//docker.dependsOn bootJar
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
