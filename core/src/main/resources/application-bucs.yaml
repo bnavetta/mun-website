@@ -1,5 +1,69 @@
 secretariat:
-  members: []
+  members:
+    - title: Secretary-General
+      name: Shane Niesen
+      email: sg@browncrisis.org
+      image-address: https://storage.googleapis.com/bucs_assets/sec-photos/Shane.png
+      bio: >
+        Shane Niesen (’20) is proud to serve as one of the Secretary-Generals for BUCS VIII. He is a junior from
+        Diamondhead, Mississippi, concentrating in History with a focus on Modern Europe. He has participated in MU since his first year at Brown and has participated in all aspects of Brown University Model United Nations.
+        When he's not doing MUN, he can be found working as a college applications consultant, learning German grammar,
+        or making coffee. He looks forward to a wonderful BUCS in March!
+    - title: Secretary-General
+      name: Caroline Deitch
+      email: sg@browncrisis.org
+      image-address: https://storage.googleapis.com/bucs_assets/sec-photos/Caroline.png
+      bio: >
+        Caroline Deitch (‘20) is one of the Secretary-Generals for BUCS VIII. She is a junior concentrating in
+         International Relations on the Political Economies and Society track. This is her 8th year of Model UN
+        and her third BUCS conference. She participated in last year’s conference as a Crisis Manager for the Roman
+        Question JCC, has been an Under-Secretary-General for our high-school conference BUSUN, and is thrilled to be
+        returning to the BUCS team as Secretary-General! Outside of Model UN, Caroline is a Women in Business e-board 
+        member and an information session leader for the Bruin Club. She is originally from Baltimore, Maryland, and 
+        loves to root for the Ravens!
+    - title: Under-Secretary-General
+      name: Emily Redolfi Tezzat
+      email: usg@browncrisis.org
+      image-address: https://storage.googleapis.com/bucs_assets/sec-photos/Emily.png
+      bio: >
+        Emily Redolfi Tezzat ('21) is the Under-Secretary General for BUCS VIII. She is a sophomore from Venice,
+        Italy concentrating in Political Science. She has participated in MUN since her third year at high school and
+        has participated in all aspects of the Brown University Model United Nations program, including serving as 
+        Director of Logistics for the club. She looks forward to a wonderful BUCS in March!
+    - title: Director-General
+      name: Hans Lei
+      email: dg@browncrisis.org
+      image-address: https://storage.googleapis.com/bucs_assets/sec-photos/Hans.png
+      bio: >
+        Hans Lei ('21) is the Director-General of BUCS VIII. Having lived in both Beijing, China and Bay Area,
+        California, Hans is currently studying economics and political science. He has participated in MUN since high
+        school and is extremely excited to make BUCS 2019 a fun experience for everyone. Outside of MUN, Hans enjoys 
+        exploring Providence's rich selection of restaurants, ballroom dancing, and anxiously awaiting the next 
+        economic recession. He is extremely excited about the conference looks forward to a great weekend of lively MUN 
+        debate!
+    - title: Director of Outreach
+      name: Ratna Patel
+      email: info@browncrisis.org
+      image-address: https://storage.googleapis.com/bucs_assets/sec-photos/Ratna.png
+      bio: >
+        Ratna Patel (‘21) is very excited to be the Director of Outreach for BUCS VIII! Ratna is a junior from
+        Lexington, South Carolina concentrating in Neuroscience. She was involved as a delegate and club leader of her
+        high school’s Model UN chapter. At Brown, Ratna has competed in conferences as part of Brown Model UN’s travel
+        team, worked as a crisis staffer for BUCS, and chaired and directed committees for Brown Model UN’s high school
+        conference, BUSUN. Outside of Model UN, Ratna can be found swirling on the dance floor with the Brown Ballroom
+        Dance Team, teaching neuroscience to high schoolers through the Brown Brain Bee, or finding new shows to enjoy
+        on Netflix. She is honored to hold this position and looks forward to a successful conference!
+    - title: Director of Media
+      name: Mandana Vakil
+      email: media@browncrisis.org
+      image-address: https://storage.googleapis.com/bucs_assets/sec-photos/Mandana.png
+      bio: >
+        Mandana Vakil ('21) is the Director of Media for BUCS VIII. She is a sophomore from Warsaw, Poland
+        concentrating in Economics and History. She has had very little MUN experience before becoming a part of MUN
+        in her first year at Brown University. Apart from MUN, Mandana is also the Marketing Co-Chair for the Economics
+        Departmental Undergraduate Group and interns for Inventing Heron—a start-up serving as a career resource for
+        young adults. In her free time, you can find Mandana sipping on hot a hot cappuccino, painting pictures with
+        words in her journal, or creating Spotify playlists.
 
 mail:
   link-base: https://browncrisis.org
