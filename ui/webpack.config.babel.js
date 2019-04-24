@@ -150,7 +150,7 @@ const webpackConfig = {
         ...(config.isDev
             ? [
                   // Dev plugins
-                  new CleanWebpackPlugin([outputDir]),
+                  new CleanWebpackPlugin(),
                   new webpack.NamedModulesPlugin(),
                   new webpack.HotModuleReplacementPlugin(),
               ]

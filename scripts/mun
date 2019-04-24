@@ -170,7 +170,9 @@ def spotless():
 
 
 @cli.command()
-def deploy():
+@click.option('--busun/--no-busun', default=True)
+@click.option('--bucs/--no-bucs', default=False)
+def deploy(busun, bucs):
     ver = version()
     click.secho("Will deploy version {}".format(ver), fg='green')
 
@@ -188,24 +190,32 @@ def deploy():
             client.close()
             sys.exit(1)
 
-    pull_image("busun")
+    if busun:
+        pull_image("busun")
+    if bucs:
+        pull_image("bucs")
     pull_image("ui")
     client.close()
 
-    click.secho("Running Ansible deploy playbook for BUSUN", fg="green")
-    subprocess.check_call(
-        ['ansible-playbook', 'deploy-conference.yml', '-e', 'conference=busun tag={}'.format(ver)],
-        cwd='provisioning'
-    )
-    # TODO: BUCS and asset server
-
+    if busun:
+        click.secho("Running Ansible deploy playbook for BUSUN", fg="green")
+        subprocess.check_call(
+            ['ansible-playbook', 'deploy-conference.yml', '-e', 'conference=busun tag={}'.format(ver)],
+            cwd='provisioning'
+        )
+    if bucs:
+        click.secho("Running Ansible deploy playbook for BUCS", fg="green")
+        subprocess.check_call(
+            ['ansible-playbook', 'deploy-conference.yml', '-e', 'conference=bucs tag={}'.format(ver)],
+            cwd='provisioning'
+        )
 
 @cli.command()
 @click.option('--ver', help='Version to keep', required=False)
 def clean_images(ver):
     if not ver:
         ver = version()
-    for image in ["gcr.io/busun-158105/busun", "gcr.io/busun-158105/ui"]:
+    for image in ["gcr.io/busun-158105/busun", "gcr.io/busun-158105/ui", "gcr.io/busun-158105/bucs"]:
         tags = json.loads(subprocess.check_output(["gcloud", "container", "images", "list-tags", image, "--format", "json"]))
         for tag in tags:
             if ver not in tag["tags"]:
