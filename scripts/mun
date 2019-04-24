@@ -81,7 +81,7 @@ def querydb():
 
 @dev.command()
 @click.option('--debug/--no-debug', default=False)
-@click.option('--bucs', default=False)
+@click.option('--bucs/--no-bucs', default=False)
 def run(debug, bucs):
     project = 'bucs' if bucs else 'busun'
     subprocess.call(['./gradlew', '-PstableVersion', project + ':bootJar'])
