@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import json
 import os
 import subprocess
@@ -81,8 +81,10 @@ def querydb():
 
 @dev.command()
 @click.option('--debug/--no-debug', default=False)
-def run(debug):
-    subprocess.call(['./gradlew', '-PstableVersion', 'busun:bootJar'])
+@click.option('--bucs', default=False)
+def run(debug, bucs):
+    project = 'bucs' if bucs else 'busun'
+    subprocess.call(['./gradlew', '-PstableVersion', project + ':bootJar'])
     args = ['java']
     if debug:
         args.append('-agentlib:jdwp=transport=dt_socket,address=localhost:5005,server=y,suspend=y')
