@@ -118,13 +118,13 @@ public class AwardServiceImpl implements AwardService
             if (Strings.isNullOrEmpty(award.getPositionName()))
             {
                 incompleteAwards.add(award);
-                continue;
+                // continue;
             }
 
             if (Strings.isNullOrEmpty(award.getDelegateName()))
             {
                 incompleteAwards.add(award);
-                continue;
+                // continue;
             }
 
             completeAwards.add(award);

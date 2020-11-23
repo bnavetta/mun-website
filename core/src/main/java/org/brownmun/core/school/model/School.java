@@ -14,8 +14,7 @@ import com.google.common.collect.Sets;
  * Core School entity
  */
 @Entity
-public class School
-{
+public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -79,141 +78,114 @@ public class School
      */
     private String whyApplied;
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isHasApplied()
-    {
+    public boolean isHasApplied() {
         return hasApplied;
     }
 
-    public void setHasApplied(boolean hasApplied)
-    {
+    public void setHasApplied(boolean hasApplied) {
         this.hasApplied = hasApplied;
     }
 
-    public boolean isAccepted()
-    {
+    public boolean isAccepted() {
         return accepted;
     }
 
-    public void setAccepted(boolean accepted)
-    {
+    public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
 
-    public String getRegistrationCode()
-    {
+    public String getRegistrationCode() {
         return registrationCode;
     }
 
-    public void setRegistrationCode(String registrationCode)
-    {
+    public void setRegistrationCode(String registrationCode) {
         this.registrationCode = registrationCode;
     }
 
-    public Set<Advisor> getAdvisors()
-    {
+    public Set<Advisor> getAdvisors() {
         return Collections.unmodifiableSet(advisors);
     }
 
-    public void addAdvisor(Advisor advisor)
-    {
+    public void addAdvisor(Advisor advisor) {
         advisors.add(advisor);
         advisor.setSchool(this);
     }
 
-    public void removeAdvisor(Advisor advisor)
-    {
+    public void removeAdvisor(Advisor advisor) {
         advisors.remove(advisor);
         advisor.setSchool(null);
     }
 
-    public void setAdvisors(Set<Advisor> advisors)
-    {
+    public void setAdvisors(Set<Advisor> advisors) {
         this.advisors = advisors;
     }
 
-    public Boolean getHasAttendedBefore()
-    {
+    public Boolean getHasAttendedBefore() {
         return hasAttendedBefore;
     }
 
-    public void setHasAttendedBefore(Boolean hasAttendedBefore)
-    {
+    public void setHasAttendedBefore(Boolean hasAttendedBefore) {
         this.hasAttendedBefore = hasAttendedBefore;
     }
 
-    public String getYearsAttended()
-    {
+    public String getYearsAttended() {
         return yearsAttended;
     }
 
-    public void setYearsAttended(String yearsAttended)
-    {
+    public void setYearsAttended(String yearsAttended) {
         this.yearsAttended = yearsAttended;
     }
 
-    public String getAboutSchool()
-    {
+    public String getAboutSchool() {
         return aboutSchool;
     }
 
-    public void setAboutSchool(String aboutSchool)
-    {
+    public void setAboutSchool(String aboutSchool) {
         this.aboutSchool = aboutSchool;
     }
 
-    public String getAboutMunProgram()
-    {
+    public String getAboutMunProgram() {
         return aboutMunProgram;
     }
 
-    public void setAboutMunProgram(String aboutMunProgram)
-    {
+    public void setAboutMunProgram(String aboutMunProgram) {
         this.aboutMunProgram = aboutMunProgram;
     }
 
-    public String getDelegationGoals()
-    {
+    public String getDelegationGoals() {
         return delegationGoals;
     }
 
-    public void setDelegationGoals(String delegationGoals)
-    {
+    public void setDelegationGoals(String delegationGoals) {
         this.delegationGoals = delegationGoals;
     }
 
-    public String getWhyApplied()
-    {
+    public String getWhyApplied() {
         return whyApplied;
     }
 
-    public void setWhyApplied(String whyApplied)
-    {
+    public void setWhyApplied(String whyApplied) {
         this.whyApplied = whyApplied;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -223,14 +195,12 @@ public class School
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(name);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("accepted", accepted).toString();
     }
 }

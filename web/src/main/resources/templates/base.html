@@ -1,90 +1,107 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:wp="http://brownmun.org/th/webpack"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
-    <head>
-        <title>Brown Model UN</title>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun.org/th/webpack"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-        <!--<wp:chunk name="manifest"/>-->
-        <wp:chunk name="vendor"/>
-        <wp:chunk name="main"/>
+<head>
+    <title>Brown Model UN</title>
 
-        <link rel="icon" th:href="@{/favicon.ico}">
+    <!--<wp:chunk name="manifest"/>-->
+    <wp:chunk name="vendor" />
+    <wp:chunk name="main" />
 
-        <meta name="_csrf_header" th:content="${_csrf?.headerName}" />
-        <meta name="_csrf" th:content="${_csrf?.token}" />
-    </head>
+    <link rel="icon" th:href="@{/favicon.ico}">
 
-    <body>
-        <div class="compat-fail">
-            <p>
-                This site uses features not supported by your browser. Please try a more recent browser such as
-                <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>,
-                <a href="https://www.google.com/chrome/">Chrome</a>, <a href="https://www.apple.com/safari/">Safari</a>,
-                or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>.
-            </p>
-            <p>Questions? Contact <a href="mailto:technology@busun.org">technology@busun.org</a>.</p>
-        </div>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}" />
+    <meta name="_csrf" th:content="${_csrf?.token}" />
+</head>
 
-        <div class="base">
-            <header>
-                <div class="title">
-                    <a th:href="@{/}">
-                        <img src="https://storage.googleapis.com/busun_assets/busun-logo.jpg" alt="BUSUN XXII"/>
-                    </a>
-                </div>
-                <nav>
-                    <ul>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-trigger">About Us</a>
-                            <nav class="dropdown-content dropdown-menu">
-                                <ul>
-                                    <li><a th:href="@{/about/secretariat}">Meet the Secretariat</a></li>
-                                    <li><a th:href="@{/about/brown-busun}">Brown &amp; BUSUN</a></li>
-                                </ul>
-                            </nav>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-trigger">Registration</a>
-                            <nav class="dropdown-content dropdown-menu">
-                                <ul>
-                                    <li><a th:href="@{/registration/application}">Application</a></li>
-                                    <li><a th:href="@{/registration/fees-and-deadlines}">Fees &amp; Deadlines</a></li>
-                                    <li><a th:href="@{/registration/financial-aid}">Financial Aid</a></li>
-                                </ul>
-                            </nav>
-                        </li>
-                        <li><a th:href="@{/committees}">Committees</a></li>
-                        <li><a th:href="@{/schedule}">Schedule</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-trigger">Conference Resources</a>
-                            <nav class="dropdown-content dropdown-menu">
-                                <ul>
-                                    <li><a th:href="@{/conference-resources/preparation-and-procedure}">Preparation &amp; Procedure</a></li>
-                                    <li><a href="https://storage.googleapis.com/busun_assets/delegate-guide.pdf">Delegate Guide</a></li>
-									<li><a href="https://storage.googleapis.com/busun_assets/advisor-guide.pdf">Advisor Guide</a></li>
-                                    <li><a href="https://storage.googleapis.com/busun_assets/waiver.pdf">Delegate Release Waiver</a></li>
-									<li><a th:href="@{/conference-resources/keynote-speaker}">Keynote Speaker</a></li>
-                                    <li><a th:href="@{/conference-resources/erinn-phelan-award}">The Erinn Phelan Award</a></li>
-                                </ul>
-                            </nav>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-trigger">Logistics</a>
-                            <nav class="dropdown-content dropdown-menu">
-                                <ul>
-                                    <li><a th:href="@{/logistics/getting-to-campus}">Getting to Campus</a></li>
-                                    <li><a th:href="@{/logistics/hotels}">Partner Hotels</a></li>
-                                    <li><a th:href="@{/logistics/shuttles-and-parking}">Shuttles &amp; Parking</a></li>
-                                    <li><a th:href="@{/logistics/local-restaurants}">Local Restaurants</a></li>
-                                </ul>
-                            </nav>
-                        </li>
-                        <li th:switch="true">
-                            <a th:case="${#authorization.expression('hasRole(''ROLE_STAFF'')')}" th:href="@{/staff}">Staff Dashboard</a>
+<body>
+    <div class="compat-fail">
+        <p>
+            This site uses features not supported by your browser. Please try a more recent browser such as
+            <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>,
+            <a href="https://www.google.com/chrome/">Chrome</a>, <a href="https://www.apple.com/safari/">Safari</a>,
+            or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>.
+        </p>
+        <p>Questions? Contact <a href="mailto:technology@busun.org">technology@busun.org</a>.</p>
+    </div>
+
+    <div class="base">
+        <header>
+            <div class="title">
+                <a th:href="@{/}">
+                    <img src="https://storage.googleapis.com/busun_assets/busun-logo-2020.png" alt="BUSUN XXIV" />
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">About Us</a>
+                        <nav class="dropdown-content dropdown-menu">
+                            <ul>
+                                <li><a th:href="@{/about/secretariat}">Meet the Secretariat</a></li>
+                                <li><a th:href="@{/about/brown-busun}">Brown &amp; BUSUN</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Registration</a>
+                        <nav class="dropdown-content dropdown-menu">
+                            <ul>
+                                <li><a th:href="@{/registration/application}">Application</a></li>
+                                <li><a th:href="@{/registration/fees-and-deadlines}">Fees &amp; Deadlines</a></li>
+                                <li><a th:href="@{/registration/financial-aid}">Financial Aid</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li class="dropdown"><a th:href="@{/committees}">Committees</a></li>
+                    <li class="dropdown"><a th:href="@{/schedule}">Schedule</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Conference Resources</a>
+                        <nav class="dropdown-content dropdown-menu">
+                            <ul>
+                                <li><a th:href="@{/conference-resources/preparation-and-procedure-ga-spec}">Preparation
+                                        &amp;
+                                        Procedure: GA and Specialized</a></li>
+                                <li><a th:href="@{/conference-resources/preparation-and-procedure-crisis}">Preparation
+                                        &amp;
+                                        Procedure: Crisis</a></li>
+                                <!-- <li><a href="https://storage.googleapis.com/busun_assets/delegate-guide.pdf">Delegate
+                                        Guide</a></li> -->
+                                <!-- <li>Delegate Guide (Coming Soon)</li> -->
+                                <!-- <li><a href="https://storage.googleapis.com/busun_assets/advisor-guide.pdf">Advisor
+                                        Guide</a></li> -->
+                                <li><a href="https://storage.googleapis.com/busun_assets/gatherly_guide.pdf">Gatherly
+                                        Guide (PDF)</a>
+                                </li>
+
+
+                                <!-- <li>Advisor Guide (Coming Soon)</li> -->
+                                <!-- <li><a href="https://storage.googleapis.com/busun_assets/waiver.pdf">Delegate Release
+                                        Waiver</a></li> -->
+                                <!-- <li><a th:href="@{/conference-resources/keynote-speaker}">Keynote Speaker</a></li> -->
+                                <li><a th:href="@{/conference-resources/erinn-phelan-award}">The Erinn Phelan Award</a>
+                                </li>
+                                <li><a href="https://shop.spreadshirt.com/busun-2020/all">Conference Merch</a>
+                                </li>
+                                <!-- <li><a th:href="@{/conference-resources/press-corps}">Press Corps</a></li> -->
+                            </ul>
+                        </nav>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Logistics</a>
+                        <nav class="dropdown-content dropdown-menu">
+                            <ul>
+                                <li><a th:href="@{/logistics/getting-to-campus}">Getting to Campus</a></li>
+                                <li><a th:href="@{/logistics/hotels}">Partner Hotels</a></li>
+                                <li><a th:href="@{/logistics/shuttles-and-parking}">Shuttles &amp; Parking</a></li>
+                                <!-- <li><a th:href="@{/logistics/local-restaurants}">Local Restaurants</a></li> -->
+                            </ul>
+                        </nav>
+                    </li>
+                    <li class="dropdown" th:switch="true">
+                        <a th:case="${#authorization.expression('hasRole(''ROLE_STAFF'')')}" th:href="@{/staff}">Staff Dashboard</a>
                             <a th:case="*" th:href="@{/your-mun}">Your BUSUN</a>
                         </li>
                         <li sec:authorize="hasRole('ROLE_ADVISOR')">
@@ -117,9 +134,7 @@
                 </div>
 
                 <p class="base--copyright">
-                    Copyright 2018 Brown Model United Nations
-                    <br/>
-                    Photo by Alex Mukai
+                    Copyright 2020 Brown Model United Nations
                 </p>
             </footer>
         </div>

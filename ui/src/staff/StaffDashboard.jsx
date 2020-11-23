@@ -90,9 +90,9 @@ class StaffDashboard extends React.Component {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink exact to="/print">
-                                    Printing
-                                </NavLink>
+                                {/* <NavLink exact to="/print"> */}
+                                <a href="https://forms.gle/onqZ4RcAHvpaHd2p7" target="_blank">Printing</a>
+                                {/* </NavLink> */}
                             </li>
                         </ul>
 
@@ -116,7 +116,7 @@ class StaffDashboard extends React.Component {
                                     path="/committees/:id"
                                     component={CommitteeView}
                                 />
-                                <Route path="/print" component={PrintQueue} />
+                                {/* <Route path="/print" component={PrintQueue} /> */}
                                 <Redirect from="/" to="/committees" />
                             </Switch>
                         </div>

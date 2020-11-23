@@ -13,8 +13,7 @@ import org.brownmun.core.school.model.Delegate;
  * Organization.
  */
 @Entity
-public class Position
-{
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,49 +36,40 @@ public class Position
     @JoinColumn(name = "committee_id")
     private Committee committee;
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Delegate getDelegate()
-    {
+    public Delegate getDelegate() {
         return delegate;
     }
 
-    public void setDelegate(Delegate delegate)
-    {
+    public void setDelegate(Delegate delegate) {
         this.delegate = delegate;
     }
 
-    public Committee getCommittee()
-    {
+    public Committee getCommittee() {
         return committee;
     }
 
-    public void setCommittee(Committee committee)
-    {
+    public void setCommittee(Committee committee) {
         this.committee = committee;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -89,18 +79,13 @@ public class Position
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(name, committee);
     }
 
     @Override
-    public String toString()
-    {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("committeeId", committee.getId())
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("committeeId", committee.getId())
                 .toString();
     }
 }

@@ -53,17 +53,11 @@ class RegistrationForm extends React.PureComponent {
                 onSubmit={formApi.submitForm}
                 className="registration-form form"
             >
-                <h1>Apply to BUSUN XXII</h1>
+                <h1>Register for BUSUN XXIII</h1>
 
                 <p>
-                    Thank you so much for your application to BUSUN XXII. Due to
-                    the demand for spots in our conference, we request that you
-                    fill out the supplemental questions below as part of your
-                    application. Please fill out the questions below by April
-                    23rd at midnight. Respond to all of the prompts in no more
-                    than 250 words - the quality of these answers will be valued
-                    over length. We look forward to reading your responses, and
-                    we thank you for your interest in attending BUSUN XXII.
+                    Thank you so much for your application to BUSUN XXIII.
+                    Please fill out the information below to create your account.
                     Please email any questions, comments, or concerns to{" "}
                     <a href="mailto:info@busun.org">info@busun.org</a> .
                 </p>
@@ -118,6 +112,7 @@ class RegistrationForm extends React.PureComponent {
                     />
                 </fieldset>
 
+
                 <fieldset>
                     <label htmlFor="advisorPassword">
                         Please choose a password.
@@ -137,10 +132,9 @@ class RegistrationForm extends React.PureComponent {
                     into your BUSUN account.
                 </p>
 
-                <ApplicationForm formApi={formApi} />
 
                 <button className="button" type="submit">
-                    Apply!
+                    Register!
                 </button>
             </form>
         );

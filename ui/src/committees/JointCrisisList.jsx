@@ -24,7 +24,10 @@ function JointCrisisList({ jointCrises, rooms }) {
                         {jcc.email && <p>
                             Contact at <a href={"mailto:" + jcc.email}>{jcc.email}</a>
                         </p>}
-                        <h3>Rooms:</h3>
+                        {committee.backgroundGuide && <p>
+                            Download the <a href={committee.backgroundGuide}>background guide</a>.
+                        </p>}
+                        {/* <h3>Rooms:</h3>
                         <dl className="committees-jcc-room-list">
                             {(rooms[jcc.id] || []).map(room => (
                                 <React.Fragment key={room.id}>
@@ -37,7 +40,7 @@ function JointCrisisList({ jointCrises, rooms }) {
                                     </dd>
                                 </React.Fragment>
                             ))}
-                        </dl>
+                        </dl> */}
                     </div>
                 </li>
             ))}

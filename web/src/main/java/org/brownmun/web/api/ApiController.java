@@ -26,53 +26,51 @@ import org.brownmun.web.common.CommitteeDTO;
  */
 @RestController
 @RequestMapping("/api")
-public class ApiController
-{
+public class ApiController {
     private final CommitteeService committees;
     private final HotelService hotels;
     private final Conference conference;
 
     @Autowired
-    public ApiController(CommitteeService committees, HotelService hotels, Conference conference)
-    {
+    public ApiController(CommitteeService committees, HotelService hotels, Conference conference) {
         this.committees = committees;
         this.hotels = hotels;
         this.conference = conference;
     }
 
     @GetMapping("/committee")
-    public CommitteeListing listCommittees()
-    {
+    public CommitteeListing listCommittees() {
         List<Committee> general = committees.listByType(CommitteeType.GENERAL);
         List<Committee> specialized = committees.listByType(CommitteeType.SPECIALIZED);
         List<Committee> crisis = committees.listByType(CommitteeType.CRISIS);
         List<Committee> jointCrisis = committees.listByType(CommitteeType.JOINT_CRISIS);
 
+        // workaround for crisis delegates attending two committees, busun
+        List<Committee> crisisSunday2020 = committees.listByType(CommitteeType.CRISIS_SUNDAY_2020);
+
         List<CommitteeDTO> generalDTOs = general.stream().map(this::committeeToDTO).collect(Collectors.toList());
-        List<CommitteeDTO> specializedDTOs = specialized.stream()
-                .map(this::committeeToDTO)
+        List<CommitteeDTO> specializedDTOs = specialized.stream().map(this::committeeToDTO)
                 .collect(Collectors.toList());
         List<CommitteeDTO> crisisDTOs = crisis.stream().map(this::committeeToDTO).collect(Collectors.toList());
         List<CommitteeDTO> jccDTOs = jointCrisis.stream().map(this::committeeToDTO).collect(Collectors.toList());
+        List<CommitteeDTO> crisis2020DTOs = crisisSunday2020.stream().map(this::committeeToDTO)
+                .collect(Collectors.toList());
 
         Map<Long, Set<CommitteeDTO>> jccRooms = Maps.newHashMap();
-        for (Committee jcc : jointCrisis)
-        {
+        for (Committee jcc : jointCrisis) {
             Set<Committee> rooms = committees.getJointCrisisRooms(jcc);
             jccRooms.put(jcc.getId(), rooms.stream().map(this::committeeToDTO).collect(Collectors.toSet()));
         }
 
-        return CommitteeListing.create(generalDTOs, specializedDTOs, crisisDTOs, jccDTOs, jccRooms);
+        return CommitteeListing.create(generalDTOs, specializedDTOs, crisisDTOs, jccDTOs, crisis2020DTOs, jccRooms);
     }
 
     @GetMapping("/hotels")
-    public List<Hotel> getHotels()
-    {
+    public List<Hotel> getHotels() {
         return hotels.allHotels();
     }
 
-    private CommitteeDTO committeeToDTO(Committee c)
-    {
+    private CommitteeDTO committeeToDTO(Committee c) {
         CommitteeDTO d = new CommitteeDTO();
         d.setId(c.getId());
         d.setName(c.getName());
@@ -85,8 +83,7 @@ public class ApiController
         d.setMapLongitude(c.getMapLongitude());
         d.setImage(c.getImage());
         d.setEmail(conference.getCommitteeEmail(c.getShortName()));
-        if (conference.isGuidesPublished())
-        {
+        if (conference.isGuidesPublished()) {
             d.setBackgroundGuide(conference.getBackgroundGuideURL(c.getShortName()));
         }
         return d;

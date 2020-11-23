@@ -77,6 +77,7 @@ class Delegation extends React.PureComponent {
                         <th>Delegate Name</th>
                         <th>Position</th>
                         <th>Committee</th>
+                        <th>Link to Gatherly</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,6 +112,7 @@ class Delegation extends React.PureComponent {
                             </td>
                             <td>{d.positionName || "Unassigned"}</td>
                             <td>{d.committeeName || "Unassigned"}</td>
+                            <td>{<a href={d.gatherlyLink}>Click Here</a> || "Link Not Found"}</td>
                         </tr>
                     ))}
                 </tbody>

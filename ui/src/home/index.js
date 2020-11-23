@@ -5,7 +5,7 @@ const MS_PER_HOUR = 1000 * 60 * 60;
 const MS_PER_MINUTE = 1000 * 60;
 const MS_PER_SECOND = 1000;
 
-const countdownDate = new Date("November 9, 2018 13:00:00").getTime();
+const countdownDate = new Date("November 6, 2020 13:00:00").getTime();
 
 document.addEventListener("DOMContentLoaded", () => {
     const target = document.querySelector(".home--countdown");

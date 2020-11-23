@@ -29,6 +29,7 @@ export async function fetchCommittees() {
         ...committeeObj.specialized,
         ...committeeObj.crisis,
         ...committeeObj.jointCrises,
+        ...committeeObj.crisis2020sunday,
         ...R.unnest(R.values(committeeObj.jointCrisisRooms)),
     ];
 }

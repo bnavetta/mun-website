@@ -1,51 +1,54 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:wp="http://brownmun.org/th/webpack"
-        xmlns:conference="http://brownmun.org/th/conference"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{base.html}"
->
-    <head>
-        <title>Application</title>
-        <wp:chunk name="info-page"/>
-    </head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun.org/th/webpack"
+    xmlns:conference="http://brownmun.org/th/conference" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base.html}">
 
-    <body>
-        <main layout:fragment="content" class="registration-application">
-            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/application.jpg" alt="The Application Process">
+<head>
+    <title>Application</title>
+    <wp:chunk name="info-page" />
+</head>
 
-            <section class="info--body">
-                <h2>Application Process</h2>
+<body>
+    <main layout:fragment="content" class="registration-application">
+        <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/application.jpg"
+            alt="The Application Process">
 
-                <!--/*
-                <p class="body-text registration-link">
-                    Register for BUSUN XXII <a th:href="@{/registration/register}">here</a>.
-                </p>
-                */-->
+        <section class="info--body">
+            <h2>Application Process</h2>
 
-                <p class="body-text">
-                    Due to overwhelming interest each year for BUSUN, registration is no longer managed on a first-come,
-                    first-serve basis. We instead request that interested high schools submit an application.This
-                    application will be posted on our website in early April and will be open for two weeks. Applying
-                    early will aid your application but does not guarantee admission. The application consists of
-                    questions related to your school’s Model UN program and your particular interest in BUSUN. We look
-                    forward to reading your responses. Decisions for acceptance to BUSUN XXII will be released by the
-                    end of April 2018. All delegations accepted will be required to confirm their attendance by mid-May
-                    2018, specific date to be announced. Please email <a href="mailto:info@busun.org">info@busun.org</a>
-                    with any questions or concerns about the application process.
-                </p>
 
-                <h2>Waitlist Policy</h2>
+            <p class="body-text registration-link">
+                The application can be found by <a href="https://forms.gle/ckbfqUFALHP51N2p8">clicking here</a>.
+            </p>
 
-                <p class="body-text">
-                    Delegations that are not initially accepted will have the option to be added to our waitlist. Once
-                    all accepted schools confirm their attendance, we will begin to offer available spots to schools who
-                    have accepted a place on our waitlist. The order of waitlist acceptances will consider timeliness of
-                    waitlist confirmation, quality of application, and past participation.
-                </p>
-            </section>
 
-        </main>
-    </body>
+            <p class="body-text">
+                Due to historically high demand for BUSUN, registration is run on an application basis. Interested
+                schools are requested to fill out the application posted on this page, which for BUSUN XXIV has been
+                posted at 12:00 AM on April 15th and will close at 11:59 PM on May 8th. The application consists solely
+                of this form, which seeks information regarding your school's interest in BUSUN. Decisions will be made
+                on the basis of responses to the latter half of this form, with past participation history being
+                considered as well, if applicable. Because of the COVID-19 pandemic, the specific time when the
+                application is submitted will not be considered this year to increase flexibility for schools still
+                adapting to the outbreak. Decisions will be released on May 11th, 2020. In their notification of
+                acceptance, accepted schools will be given a deadline (likely late May) to either accept or to reject
+                this offer, after which waitlisted schools will be contacted as available according to the policy below.
+                Please reach out to Director of External Affairs Andrew George at <a
+                    href="mailto:info@busun.org">info@busun.org</a> with any questions or concerns.
+
+            </p>
+
+            <h2>Waitlist Policy</h2>
+
+            <p class="body-text">
+                Delegations that are not initially accepted will have the option to be added to our waitlist. Once
+                all accepted schools confirm their attendance, we will begin to offer available spots to schools who
+                have accepted a place on our waitlist. The order of waitlist acceptances will consider timeliness of
+                waitlist confirmation, quality of application, and past participation.
+            </p>
+        </section>
+
+    </main>
+</body>
+
 </html>

@@ -7,8 +7,7 @@ import java.util.Set;
 
 import org.brownmun.core.school.model.*;
 
-public interface SchoolService
-{
+public interface SchoolService {
     /**
      * Finds the school with the given ID
      */
@@ -17,10 +16,10 @@ public interface SchoolService
     /**
      * Register a new school
      *
-     * @param name the school's name
-     * @param advisorName the school advisor's name
-     * @param advisorEmail the school advisor's email address
-     * @param advisorPassword the school advisor's password
+     * @param name               the school's name
+     * @param advisorName        the school advisor's name
+     * @param advisorEmail       the school advisor's email address
+     * @param advisorPassword    the school advisor's password
      * @param advisorPhoneNumber the school advisor's phone number
      * @return the newly-persisted school
      */
@@ -37,7 +36,7 @@ public interface SchoolService
     /**
      * Update a school's application.
      *
-     * @param advisor the advisor making the update
+     * @param advisor     the advisor making the update
      * @param application the revised application
      */
     void updateApplication(Advisor advisor, SchoolApplication application);

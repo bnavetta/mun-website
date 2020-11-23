@@ -22,46 +22,42 @@ import org.brownmun.web.security.ConferenceSecurity;
 
 @Controller
 @RequestMapping("/registration/register")
-public class RegistrationController
-{
+public class RegistrationController {
     private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
     private final SchoolService schoolService;
 
     @Autowired
-    public RegistrationController(SchoolService schoolService)
-    {
+    public RegistrationController(SchoolService schoolService) {
         this.schoolService = schoolService;
     }
 
     @GetMapping
-    public String registrationForm()
-    {
+    public String registrationForm() {
         return "registration/register";
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<RegistrationResult> submitApplication(@RequestBody @Valid Application application)
-    {
+    public ResponseEntity<RegistrationResult> submitApplication(@RequestBody @Valid Application application) {
         log.info("Submitting application for school {}", application.getSchoolName());
 
         School school = schoolService.registerSchool(application.getSchoolName(), application.getAdvisorName(),
                 application.getAdvisorEmail(), application.getAdvisorPassword(), application.getAdvisorPhoneNumber());
 
-        school.setId(school.getId());
-        school.setName(school.getName());
-        school.setHasAttendedBefore(application.isHasAttendedBefore());
-        school.setYearsAttended(application.getYearsAttended());
-        school.setAboutSchool(application.getAboutSchool());
-        school.setAboutMunProgram(application.getAboutMunProgram());
-        school.setDelegationGoals(application.getDelegationGoals());
-        school.setWhyApplied(application.getWhyApplied());
+        school.setAccepted(true);
+        // school.setId(school.getId());
+        // school.setName(school.getName());
+        // school.setHasAttendedBefore(application.isHasAttendedBefore());
+        // school.setYearsAttended(application.getYearsAttended());
+        // school.setAboutSchool(application.getAboutSchool());
+        // school.setAboutMunProgram(application.getAboutMunProgram());
+        // school.setDelegationGoals(application.getDelegationGoals());
+        // school.setWhyApplied(application.getWhyApplied());
 
         schoolService.submitApplication(school);
 
         Advisor advisor = Iterables.getOnlyElement(school.getAdvisors());
-        URI dashboard = MvcUriComponentsBuilder.fromMethodName(DashboardController.class, "dashboardHome")
-                .build()
+        URI dashboard = MvcUriComponentsBuilder.fromMethodName(DashboardController.class, "dashboardHome").build()
                 .toUri();
 
         ConferenceSecurity.authenticateAsAdvisor(advisor);

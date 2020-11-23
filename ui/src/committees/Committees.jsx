@@ -40,6 +40,7 @@ class Committees extends React.Component {
     }
 
     render() {
+        var msg = "<p>Please scroll under each committee to access the descriptions and link for the background guides.</p><br><p>This year, delegates in crisis committees will be participating in two separate committees: one on Saturday, and another on Sunday. Your position assignments listed on the advisor portal reflect this. The first position listed is the delegate\'s committee and position on Saturday, and the position listed in parentheses is the delegate\'s committee and position on Sunday. Please email info@busun.org with any questions regarding this change.</p>";
         if (this.state.loading) {
             return <LoadingPage />;
         } else if (this.state.error) {
@@ -47,7 +48,9 @@ class Committees extends React.Component {
             return null;
         } else {
             return (
+                // <p>Coming soon!</p>
                 <Tabs>
+                    <div className="content" dangerouslySetInnerHTML={{ __html: msg }}></div>
                     <TabList>
                         <Tab>General</Tab>
                         <Tab>Specialized and Historical</Tab>
@@ -64,11 +67,16 @@ class Committees extends React.Component {
 
                     {/* Specialized */}
                     <TabPanel>
-                        <CommitteeMap
+                        <CommitteeList
                             committees={this.state.committees.specialized}
-                            locations={locations}
                         />
                     </TabPanel>
+                    {/* <TabPanel>
+                            <CommitteeMap
+                                committees={this.state.committees.specialized}
+                                locations={locations}
+                            />
+                        </TabPanel> */}
 
                     {/* Crisis */}
                     <TabPanel>
@@ -79,11 +87,16 @@ class Committees extends React.Component {
 
                     {/* Joint crisis */}
                     <TabPanel>
-                        <JointCrisisList
-                            jointCrises={this.state.committees.jointCrises}
-                            rooms={this.state.committees.jointCrisisRooms}
+                        <CommitteeList
+                            committees={this.state.committees.jointCrises}
                         />
                     </TabPanel>
+                    {/* <TabPanel>
+                            <JointCrisisList
+                                jointCrises={this.state.committees.jointCrises}
+                                rooms={this.state.committees.jointCrisisRooms}
+                            />
+                        </TabPanel> */}
                 </Tabs>
             );
         }

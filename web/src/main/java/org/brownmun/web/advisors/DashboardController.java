@@ -25,8 +25,7 @@ import org.brownmun.web.common.DelegateDTO;
 
 @Controller
 @RequestMapping("/your-mun")
-public class DashboardController
-{
+public class DashboardController {
     private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     private final SchoolService schoolService;
@@ -35,32 +34,28 @@ public class DashboardController
 
     @Autowired
     public DashboardController(SchoolService schoolService, AdvisorService advisorService,
-            CommitteeService committeeService)
-    {
+            CommitteeService committeeService) {
         this.schoolService = schoolService;
         this.advisorService = advisorService;
         this.committeeService = committeeService;
     }
 
     @GetMapping
-    public String dashboardHome()
-    {
+    public String dashboardHome() {
         return "advisor-dashboard/home";
     }
 
     @PreAuthorize("hasRole('ADVISOR')")
     @GetMapping(value = "/self", produces = "application/json")
     @ResponseBody
-    public Advisor getSelf(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
-    {
+    public Advisor getSelf(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser) {
         return currentUser;
     }
 
     @PreAuthorize("hasRole('ADVISOR')")
     @GetMapping(value = "/school", produces = "application/json")
     @ResponseBody
-    public School getSchool(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
-    {
+    public School getSchool(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser) {
         return schoolService.loadSchool(currentUser);
     }
 
@@ -68,8 +63,7 @@ public class DashboardController
     @PostMapping("/update-application")
     @ResponseBody
     public ResponseEntity<SchoolApplication> updateApplication(@RequestBody SchoolApplication app,
-            @AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
-    {
+            @AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser) {
         schoolService.updateApplication(currentUser, app);
         return ResponseEntity.ok(app);
     }
@@ -78,8 +72,7 @@ public class DashboardController
     @GetMapping("/supplemental-info")
     @ResponseBody
     public SupplementalInfo getSupplementalInfo(
-            @AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
-    {
+            @AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser) {
         return schoolService.getSupplementalInfo(currentUser.getSchoolId());
     }
 
@@ -88,8 +81,7 @@ public class DashboardController
     @ResponseBody
     public ResponseEntity<SupplementalInfo> updateSupplementalInfo(
             @AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser,
-            @RequestBody SupplementalInfo info)
-    {
+            @RequestBody SupplementalInfo info) {
         info = schoolService.updateSupplementalInfo(currentUser, info);
         return ResponseEntity.ok(info);
     }
@@ -104,22 +96,18 @@ public class DashboardController
     @ResponseBody
     public ResponseEntity<String> changePassword(
             @AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser,
-            @RequestBody Map<String, String> passInfo)
-    {
+            @RequestBody Map<String, String> passInfo) {
         String password = passInfo.get("password");
-        if (Strings.isNullOrEmpty(password))
-        {
+        if (Strings.isNullOrEmpty(password)) {
             return ResponseEntity.badRequest().body("Missing password");
         }
 
         String confirm = passInfo.get("confirm");
-        if (Strings.isNullOrEmpty(confirm))
-        {
+        if (Strings.isNullOrEmpty(confirm)) {
             return ResponseEntity.badRequest().body("Missing password confirmation");
         }
 
-        if (!password.equals(confirm))
-        {
+        if (!password.equals(confirm)) {
             return ResponseEntity.badRequest().body("Passwords don't match");
         }
 
@@ -134,31 +122,26 @@ public class DashboardController
     @PreAuthorize("hasRole('ADVISOR')")
     @GetMapping("/delegates")
     @ResponseBody
-    public List<DelegateDTO> getDelegates(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser)
-    {
-        return schoolService.getDelegates(currentUser.getSchoolId())
-                .stream()
+    public List<DelegateDTO> getDelegates(@AuthenticationPrincipal(expression = "asAdvisor()") Advisor currentUser) {
+        return schoolService.getDelegates(currentUser.getSchoolId()).stream()
                 .sorted(Comparator.comparing(d -> d.getPosition().getName()))
                 .map(d -> DelegateDTO.create(d.getId(), d.getName(), d.getPosition().getName(),
-                        committeeService.getFullName(d.getPosition().getCommittee())))
+                        committeeService.getFullName(d.getPosition().getCommittee()), d.getGatherlyLink(),
+                        d.getPosition().getId()))
                 .collect(Collectors.toList());
     }
 
     @PreAuthorize("hasRole('ADVISOR')")
     @PutMapping("/delegates/set-name")
     @ResponseBody
-    public ResponseEntity<Void> setDelegateName(@RequestParam long id, @RequestParam String name)
-    {
+    public ResponseEntity<Void> setDelegateName(@RequestParam long id, @RequestParam String name) {
         Optional<Delegate> d = schoolService.getDelegate(id);
-        if (d.isPresent())
-        {
+        if (d.isPresent()) {
             Delegate delegate = d.get();
             delegate.setName(name);
             schoolService.saveDelegate(delegate);
             return ResponseEntity.ok().build();
-        }
-        else
-        {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
@@ -167,8 +150,7 @@ public class DashboardController
      * Support HTML5 pushState URLs
      */
     @GetMapping({ "/application", "/advisors", "/supplemental", "/change-password", "/delegation" })
-    public String ui()
-    {
+    public String ui() {
         return "forward:/your-mun/";
     }
 }

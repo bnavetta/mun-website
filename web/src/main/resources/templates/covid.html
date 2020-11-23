@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun.org/th/webpack"
+    xmlns:conference="http://brownmun.org/th/conference" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base.html}">
+
+<head>
+    <title>BUSUN XXIV</title>
+    <wp:chunk name="home" />
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <th:block conference:if-busun="">
+
+            <section class="home--content">
+                <h2>COVID-19 Update</h2>
+
+                <p><b>UPDATED August 19, 2020</b></p>
+
+                <p>Dear Advisors, Delegates, and members of the BUSUN community,</p>
+
+                <p>On behalf of the BUSUN Secretariat, we wish to express our deepest sympathies and well wishes to everyone during this challenging time.</p>
+
+                <p>We wanted to give you an update regarding how BUSUN is handling the response to COVID-19, and promise to continuously keep you updated regarding how BUSUN will respond and adapt to putting together a conference during this time.</p>
+
+                <p>Firstly, BUSUN XXIV will now be held <b>virtually</b> during the weekend of November 6-8, 2020. BUSUN Secretariat and staff are working tirelessly around the clock to ensure that the conference will be run to the same high standards that you have come to expect from our nearly 24 years of operation, and to that end, we will be utilizing new technologies in order to ensure this. In a first for our conference, we will be utilizing Gatherly, a video-conferencing software allowing for smoother and safer unmoderated caucuses, merges, and flow of discussion between delegates. In particular, the software will allow for delegates to move around and experience the same collaboration and communication that they have come to expect from a Model UN conference. </p>
+
+                <p>Registration has unfortunately closed, but please reach out to our Director of External Affairs if you seek an extension. Schools that are currently accepted will be allowed to drop with no consequences until up to October 1st, 2020. As a kind reminder, we will be waiving the criterion that an earlier application submission will aid your future admissions; we fully understand that schools may have other priorities this year in dealing with appropriate responses to COVID-19, and want to ensure that all have an equal opportunity to participate in future BUSUN conferences. Please email our Director of External Affairs, Andrew George (info@busun.org), for any questions, concerns, or ways in which BUSUN can help support schools with their applications during this difficult time.</p>
+
+                <p>Finally, we wish to again extend our support and sympathies, and hope that you all be safe and take care in the months to come.</p>
+
+                <p>Thank you for choosing to come to BUSUN XXIV, and we look forward to seeing you online in November. </p>
+
+                <p>
+                Sincerely,
+                <br/>
+
+                Eamon McKeever and Helen Zhang
+                <br/>
+                Secretaries-General, BUSUN XXIV
+                <br/>
+                sg@busun.org
+              </p>
+            </section>
+        </th:block>
+        <th:block conference:if-bucs>
+            <p>Coming Soon!</p>
+        </th:block>
+    </main>
+</body>
+
+</html>

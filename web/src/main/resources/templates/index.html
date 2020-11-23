@@ -1,102 +1,129 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:wp="http://brownmun.org/th/webpack"
-        xmlns:conference="http://brownmun.org/th/conference"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{base.html}"
->
-    <head>
-        <title>BUSUN XXII</title>
-        <wp:chunk name="home" />
-    </head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun.org/th/webpack"
+    xmlns:conference="http://brownmun.org/th/conference" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base.html}">
 
-    <body>
-        <main layout:fragment="content" class="home">
-            <th:block conference:if-busun="">
-                <header class="home--cover">
-					<a th:href="@{/windmill}"><img src="https://storage.googleapis.com/busun_assets/title-images/home.jpg" alt="BUSUN XXII - November 9-11 2018"></a>
-                </header>
+<head>
+    <title>BUSUN XXIV</title>
+    <wp:chunk name="home" />
+</head>
 
-                <div class="home--registration">
-                    <!--<button class="button home&#45;&#45;register-button">Register</button>-->
-                    <div class="home--countdown">
-                        <h3 class="home--countdown-header">Countdown to BUSUN XXII!</h3>
+<body>
+    <main layout:fragment="content" class="home">
+        <th:block conference:if-busun="">
+            <div></div>
 
-                        <span class="home--countdown-days"></span>
-                        <span class="home--countdown-label">Days</span>
+            <header class="home--cover">
+                <a th:href="@{/windmill}"><img
+                        src="https://storage.googleapis.com/busun_assets/title-images/busuncover-2020.png"
+                        alt="BUSUN XXIV - November 6-8, 2019"></a>
 
-                        <span class="home--countdown-hours"></span>
-                        <span class="home--countdown-label">Hours</span>
-
-                        <span class="home--countdown-minutes"></span>
-                        <span class="home--countdown-label">Minutes</span>
-
-                        <span class="home--countdown-seconds"></span>
-                        <span class="home--countdown-label">Seconds</span>
+                <a th:href="@{/covid}">
+                    <div style="
+                    font-size: xx-large;
+                    text-align: center;
+                    background-color: #c0b283;">
+                        COVID-19 Update
                     </div>
+                </a>
+            </header>
+
+            <div class="home--registration">
+                <!--<button class="button home&#45;&#45;register-button">Register</button>-->
+                <div class="home--countdown">
+                    <h3 class="home--countdown-header">Countdown to BUSUN XXIV!</h3>
+
+                    <span class="home--countdown-days"></span>
+                    <span class="home--countdown-label">Days</span>
+
+                    <span class="home--countdown-hours"></span>
+                    <span class="home--countdown-label">Hours</span>
+
+                    <span class="home--countdown-minutes"></span>
+                    <span class="home--countdown-label">Minutes</span>
+
+                    <span class="home--countdown-seconds"></span>
+                    <span class="home--countdown-label">Seconds</span>
                 </div>
+            </div>
 
-                <section class="home--content">
-                    <h2>Letter from the Secretaries-General</h2>
-                    <p>Dear Esteemed Delegation and Advisors,</p>
+            <section class="home--content">
+                <h2>Awards</h2>
 
-                    <p>
-                        On behalf of the Brown Model United Nations program, we are honored to invite you to the
-                        Twenty-Second Annual Session of the Brown University Simulation of the United Nations (BUSUN),
-                        which will be held on the Brown University campus from November 9-11, 2018.
-                        We are proud to say that BUSUN will welcome over 900 students and 100 advisors to our campus in
-                        November. While BUSUN continues to grow and evolve each year, we are excited to continue some of
-                        the traditions that we believe make our conference special. Delegations return to year after
-                        year because of our small committee sizes, informed and passionate chairs, and welcoming
-                        atmosphere. As a Secretariat and staff, we value diplomacy and do our best to create a
-                        productive and positive experience for all delegates and advisors.
-                    </p>
+                <p>The award list for BUSUN 2020 can be seen by <a
+                        href="https://docs.google.com/spreadsheets/d/12vQsF2EUIAb723EWbXbESXrKLgHaMdbrbzS0x_iXPhk/edit?usp=sharing">clicking
+                        here</a>. Delegates who have won awards will have their certificates emailed to their advisors
+                    shortly.</p>
 
-                    <p>
-                        We are thrilled to announce that the conference theme for BUSUN XXII will be global health.
-                        Delegation will explore not only more traditional aspects of global health &mdash; including
-                        accessibility, equity, and affordability of care &mdash; but also the interconnectivity of human
-                        health and wellness with other topics including bioterrorism, food security, and the rights of
-                        women. We are confident that delegates at BUSUN this year, like those who have attended BUSUN
-                        in the past, will participate in engaging debate that challenges their understanding of current
-                        events and historical topics.
-                    </p>
+                <h2>Opening Ceremony</h2>
 
-                    <p>
-                    On behalf of the BUSUN Secretariat and our entire staff, we hope that you will be able to join us in
-                        November. Please contact our Director of External Affairs, Elinor Martinez, at
-                        <a href="mailto:info@busun.org">info@busun.org</a> with any questions or concerns. We look
-                        forward to welcoming you to BUSUN 2018!
-                    </p>
+                <p>Please use our Zoom meeting <a href="https://brown.zoom.us/j/93959428066?pwd=WWFsUTVUbEpzSzlpY09YcGlFS2VlUT09
+                        ">(click here)</a> to access BUSUN XXIV's Opening Ceremony from 7-8PM EST on Friday, November
+                    6. If prompted for a passcode, please use: BUSUNXXIV</p>
 
-                    <p>
-                        Best,
-                        <br/>
-                        Colette Bare and Jourdan Smithwick
-                        <br/>
-                        Secretaries-General, BUSUN XXII
-                        <br/>
-                        <a href="mailto:sg@busun.org">sg@busun.org</a>
-                    </p>
+                <h2>Letter from the Secretaries-General</h2>
+                <p>Dear Advisors, Delegates, and members of the BUSUN community,</p>
 
-                    <h2>Announcements</h2>
+                <p>On behalf of the BUSUN Secretariat, we wish to express our deepest sympathies and well wishes to
+                    everyone during this challenging time.</p>
 
-                    <p>
-                        Registration for BUSUN XXII is closed.
-                    </p>
+                <p>We wanted to give you an update regarding how BUSUN is handling the response to COVID-19, and promise
+                    to continuously keep you updated regarding how BUSUN will respond and adapt to putting together a
+                    conference during this time.</p>
 
-                    <!--/*
+                <p>Firstly, BUSUN XXIV will now be held <b>virtually</b> during the weekend of November 6-8, 2020. BUSUN
+                    Secretariat and staff are working tirelessly around the clock to ensure that the conference will be
+                    run to the same high standards that you have come to expect from our nearly 24 years of operation,
+                    and to that end, we will be utilizing new technologies in order to ensure this. In a first for our
+                    conference, we will be utilizing Gatherly, a video-conferencing software allowing for smoother and
+                    safer unmoderated caucuses, merges, and flow of discussion between delegates. In particular, the
+                    software will allow for delegates to move around and experience the same collaboration and
+                    communication that they have come to expect from a Model UN conference. </p>
+
+                <p>Registration has unfortunately closed, but please reach out to our Director of External Affairs if
+                    you seek an extension. Schools that are currently accepted will be allowed to drop with no
+                    consequences until up to October 1st, 2020. As a kind reminder, we will be waiving the criterion
+                    that an earlier application submission will aid your future admissions; we fully understand that
+                    schools may have other priorities this year in dealing with appropriate responses to COVID-19, and
+                    want to ensure that all have an equal opportunity to participate in future BUSUN conferences. Please
+                    email our Director of External Affairs, Andrew George (info@busun.org), for any questions, concerns,
+                    or ways in which BUSUN can help support schools with their applications during this difficult time.
+                </p>
+
+                <p>Finally, we wish to again extend our support and sympathies, and hope that you all be safe and take
+                    care in the months to come.</p>
+
+                <p>Thank you for choosing to come to BUSUN XXIV, and we look forward to seeing you online in November.
+                </p>
+
+                <p>
+                    Sincerely,
+                    <br />
+
+                    Eamon McKeever and Helen Zhang
+                    <br />
+                    Secretaries-General, BUSUN XXIV
+                    <br />
+                    sg@busun.org
+                </p>
+                <h2>Announcements</h2>
+
+                <p>
+                    Registration for BUSUN XXIV is not yet open.
+                </p>
+
+                <!--/*
                     <p>
                         Register for BUSUN XXII <a th:href="@{/registration/register}">here</a>.
                     </p>
                     */-->
 
-                </section>
-            </th:block>
-            <th:block conference:if-bucs>
-                <p>Coming Soon!</p>
-            </th:block>
-        </main>
-    </body>
+            </section>
+        </th:block>
+        <th:block conference:if-bucs>
+            <p>Coming Soon!</p>
+        </th:block>
+    </main>
+</body>
+
 </html>

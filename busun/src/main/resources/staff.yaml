@@ -2,134 +2,183 @@
 
 secretariat:
   members:
-  - name: Jourdan Smithwick
+  - name: Eamon McKeever
     title: Secretary-General
-    email: sg@busun.org
+    email: secgen1@busun.org
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/eamon1.jpg
     bio: >
-      Jourdan Smithwick (’20) is proud to serve as one of the Secretaries-General for BUSUN XXII. Jourdan is a junior
-      from Long Island, New York concentrating in Public Policy and Cognitive Science. She has been involved with Model
-      United Nations as a delegate since middle school and now works to organize and staff conferences at Brown, serving
-      most recently as Director of External Affairs for BUSUN XXI and chair of Arctic Council 2019 for BUCS VII. When
-      not busy with BUSUN planning and logistics, Jourdan can be found adventuring in the woods, buying crazy socks to
-      add to her growing collection, or exploring the Providence food scene. She is looking forward to a successful
-      conference!
-    image: https://storage.googleapis.com/busun_assets/sec-photos/jourdan.jpg
-  - name: Colette Bare
+      Eamon McKeever (’22) is the Co-Secretary-General for BUSUN XXIV. Eamon is a junior from Chapel Hill, North Carolina,
+      concentrating in International and Public Affairs with a focus in Security studies. He has been involved
+      with Model UN since his freshman year of high school, and previously served as the
+      Under Secretary-General of Crisis Committees for BUSUN XXIII. Outside of BUSUN, Eamon
+      can be found around campus working for Brown's Admissions Office as a Tour Guide, playing
+      his saxophone, or constantly exploring Providence. He is extremely excited for BUSUN 2020 and is looking forward to an exciting conference!
+
+  - name: Helen Zhang
     title: Secretary-General
-    email: sg@busun.org
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/helen1.jpg
+    email: secgen2@busun.org
     bio: >
-      Colette Bare (’19) is the Co-Secretary General for BUSUN XXII. A senior from Ann Arbor, Michigan, Colette studies
-      biomedical engineering. Colette has been competing in Model UN since her freshman year of high school and loves
-      Brown MUN - spending time as a delegate, past SG for Brown’s college conference (BUCS), and now working to make
-      this BUSUN the best yet! Outside of MUN, you can find Colette playing soccer with her intramural team,
-      volunteering with the Society of Women Engineers, and doing research in a cardiovascular engineering lab on
-      campus. Colette enjoys spending her few spare moments running the hills of Providence and working on the New York
-      Times Crossword puzzle. She can’t wait for BUSUN 2018!
-    image: https://storage.googleapis.com/busun_assets/sec-photos/colette.jpg
-  - name: Cathy Bai
-    title: Senior Advisor
-    email: decorum@busun.org
-    bio: >
-      Cathy serves as Senior Advisor for BUSUN XXII. Originally from China and Indonesia, she is a senior
-      double-concentrating in Computational Biology and Applied Mathematics-Economics. She has been involved in Model UN
-      since high school, during which she had the opportunity to debate in and help run several conferences in Southeast
-      Asia. Outside of Model UN, Cathy is a certified scuba diving instructor and enjoys cooking and traveling (though
-      she wishes she could do more of both). Cathy served as Co-Secretary-General last year, and Director of General
-      Committees the year before that. This will be her last BUSUN, and she hopes that it will be her best BUSUN, too!
-    image: https://storage.googleapis.com/busun_assets/sec-photos/cathy.jpg
-  - name: Zahra Asghar
+      Helen Zhang (’22) is honoured to serve as the Co-Secretary General for BUSUN XXIV.
+      Helen is originally from Shanghai, China, and studies Biology with a focus in Physiology and Biotechnology.
+      She is hoping to go to medical school in the future to study surgery. Helen has been involved
+      in MUN since her 6th grade, and has previously held roles as Director-General of BUSUN XXIII
+      and the Director of Logistics for the Travel Team. Outside of BUSUN, Helen can be found
+      volunteering at Hasbro Children's Hospital, researching at the Cardiovascular Research Center,
+      and worrying if she does too much MUN (the answer is no). She is ecstatic to be working with
+      such an amazing Secretariat, and looks forward to welcoming everyone to Brown in November!
+    
+  - name: Ratna Patel
     title: Chief of Staff
-    email: usg@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/zahra.jpg
+    email: chiefofstaff@busun.org
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/ratna1.jpg
     bio: >
-      Zahra Asghar (’20) is the Chief of Staff for BUSUN XXII. She is a junior from Dubai, UAE concentrating in
-      Cognitive Neuroscience and International Relations with a focus on the Middle East. She has participated in MUN
-      since her freshman year at high school and has participated in all aspects of the Brown University Model United
-      Nations program. When she’s not doing MUN, she can be found working as a research assistant to find ways that
-      neuroscience can be used to improve education and psychosocial support for refugees (or napping). She looks
-      forward to a wonderful BUSUN in November!
-  - name: Juliana Simon
+      Ratna Patel (’21) is very excited to be the Chief of Staff for BUSUN XXIV!
+      Ratna is a senior from Lexington, South Carolina concentrating in Neuroscience.
+      She chaired a committee for BUSUN XXII and previously served as Director of Media
+      on the BUSUN XXIII Secretariat. Additionally, Ratna was the Director of Outreach
+      for Brown’s college conference, BUCS, two years ago and most recently served as
+      its co-Secretary-General. Outside of Model UN, Ratna can be found swinging on the
+      dance floor with the Brown Ballroom Dance Team, teaching neuroscience to high
+      schoolers through the Brown Brain Bee, or finding new shows to enjoy on Netflix.
+      She is honored to hold this position and looks forward to a successful conference!
+
+
+  - name: Shalin Patel
     title: Director-General
     email: dg@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/juliana.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/shalin1.jpg
     bio: >
-      Juliana Simon (’20) is excited to serve as Director General for BUSUN XXII.  Juliana is a junior from Los Angeles,
-      CA concentrating in Health and Human Biology.  Although lacking formal Model UN experience, Juliana had the
-      pleasure of working as a member of the Operations Staff at BUSUN XXI, and she is thrilled to help make this year’s
-      conference a smashing success.  When Juliana is not spending her time on the tennis court competing on Brown’s
-      varsity team, she can be found baking, watching Diners, Drive-ins, and Dives, and roaming Providence in search of
-      fabulous desserts.
-  - name: Bailee Peralto
+      Shalin Patel (’23) is excited to serve as the Director-General for BUSUN XXIV.
+      Originally from New Jersey, and is currently planning to study Applied Mathematics
+      and Computer Science. He has been a part of the Model UN world since 8th grade
+      and was grateful for the experiences that it has and continues to give. Outside
+      of Model UN you can find him playing frisbee, working on research, and buying
+      too many chai lattes. He is eager to meet everyone in November!
+
+
+  - name: Andrew Yan
     title: Under-Secretary General of General Assemblies
     email: general@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/bailee.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/andrewY1.jpg
     bio: >
-      Bailee Peralto is the Under-Secretary General for General Assemblies for BUSUN XII. She is a sophomore from Cape
-      Coral, Florida and plans on studying International Relations during her time at Brown. Her MUN career began during
-      her freshman year in high school and is still going strong as, alongside working for BUSUN XII, she participates
-      in the Brown MUN travel team and staffs for the BUCS, Brown's MUN conference for college students. Although firmly
-      believing that MUN is truly a lifestyle (and not just a club), Bailee can also be found immersed in her Russian
-      and Spanish studies, or drinking coffee in one of the many Providence cafés. She can’t wait to see all of the
-      passion delegates bring to the table at BUSUN XII!
-  - name: John Metz
+      Andrew Yan (’23) is excited to serve as Under-Secretary General of General Assemblies.
+      He is from Boston and is currently considering concentrating in Biochemistry and East Asian Studies.
+      He began MUN in high school, working for his high school's conference and attending BUSUN,
+      and has been obsessed ever since. Last year he served as co-chair for Arab League,
+      and hopes to continue his involvement going forward. Outside of MUN, he can be found doing research,
+      teaching sailing, and figuring out dining plan hacks. He looks forward to seeing the stellar debate during the conference.
+
+
+  - name: Yohan Mutta
     title: Under-Secretary General of Specialized Agencies
     email: spec@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/john.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/yohan1.jpg
     bio: >
-      John Metz is a history major and a diehard New England Patriots fan. A junior at Brown, he is extremely excited to mark his
-      third year at BUSUN and his seventh year in Model UN. Besides MUN, he has spent his free time working as a staff writer at
-      the Brown Political Review, a student of German literature, and an advocate for political causes in Rhode Island and around
-      the country. Originally from Richmond, Virginia, he has come to think of Providence as a second home, and hopes you’ll find
-      it as beautiful as he does. 
-  - name: Caroline Deitch
+      Yohan Mutta (’23) is excited to serve as the Under Secretary-General for Specialized and Historical Committees for BUSUN XXIV.
+      He is a sophomore from Mombasa, Kenya and is currently undecided about which concentration to pursue.
+      Yohan has debated, chaired and organized several MUN conferences since joining MUN in the 6th grade.
+      Outside of MUN, Yohan is organizing a project in his home country Kenya to empower young people
+      to challenge the status quo, volunteers conducting outreach to homeless people in Providence, and
+      organizes events at the international student's centre. In his free time,
+      Yohan can be found exploring Providence's newest culinary offerings.
+
+  - name: Shaun Kohli
     title: Under-Secretary General of Crisis Committees
     email: crisis@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/caroline.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/shaun1.jpg
     bio: >
-      Caroline Deitch is a junior concentrating in International Relations on the Political Economies and Society track.
-      This is her 7th year of Model UN, and her third BUSUN conference. She participated in last year’s conference as a
-      crisis manager for the Arab Spring JCC, and is thrilled to be returning to the BUSUN team as a member of the
-      Secretariat! Outside of Model UN, Caroline is a Women in Business e-board member and an information session leader
-      for the Bruin Club. She is originally from Baltimore, Maryland, and loves to root for the Ravens!
-  - name: Elinor Martinez
+      Shaun Kohli (’22) is excited to serve as Under-Secretary General for Crisis Committees at BUSUN XXIV.
+      Shaun is a junior hailing from Buffalo, New York and is concentrating in Applied Math Biology.
+      He has been involved with Model UN since Sophomore year of high school, and has previously served as
+      Crisis Manager for the Estates General JCC at BUSUN XXIII, and as USG for BUCS IX.
+      In his free time, Shaun enjoys playing spikeball with friends and doing the crossword.
+      He is looking forward to a great conference!
+
+
+  - name: Andrew George
     title: Director of External Affairs
     email: info@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/elinor.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/andrewG1.jpg
     bio: >
-      Elinor is the Director of External Affairs for BUSUN XXII. She is a second-year concentrating in Economics and
-      International Relations and hails from Worcester, Massachusetts. She has been involved with MUN since her
-      freshman year of high school and is a part of Brown's Travel team, BUCS, and BUSUN. Outside of MUN and Econ
-      problem sets, Elinor can be found playing her oboe or downhill skiing (not at the same time, regrettably.) She is
-      looking forward to the best BUSUN yet!
-  - name: Siddhi Nadkarni
+      Andrew George (’22) is thrilled to serve as the Director of External Affairs for BUSUN XXIV!
+      He hails from the small town of Sudbury, MA - home to Chris Evans - and is
+      a premed concentrating in Biochemistry and Molecular Biology.
+      He has participated in MUN since 8th grade, recently serving as Travel Team
+      Head Delegate in addition to Crisis Managing for BUSUN and BUCS. Beyond MUN,
+      Andrew can be found playing saxophone or piano, TAing/tutoring, researching cancer,
+      and ingesting unhealthy amounts of caffeine in unhealthily short time periods.
+      He is eager to field all your questions over the year and welcome you to Brown's campus in November!
+
+
+  - name: Cassie Berns
+    title: Director of Operations and Implementation
+    email: ops@busun.org
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/cassie1.jpg
+    bio: >
+      Cassie Berns (’23) is excited to serve as the Director of Operations and Implementation
+      for BUSUN XXIV. She is a sophomore from St. Louis, Missouri studying Applied Math - Economics.
+      She has been a part of MUN since her junior year of high school and served as a
+      BUSUN committee chair last year. Outside of MUN, she is a member of Brown’s cheer team,
+      and loves doing crosswords and drinking chai lattes in her free time.
+      She is so excited to meet everyone and cannot wait for BUSUN! 
+
+
+  - name: Ashley Knebel
+    title: Senior Advisor
+    email: decorum@busun.org
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/ashley1.jpg
+    bio: >
+      Ashley Knebel (’22) is the Senior Advisor for BUSUN XXIV. She is a junior from Los Angeles,
+      California studying English and Cognitive Neuroscience. She has been involved in MUN
+      since her freshman year of highschool and served as Under Secretary General of General
+      Assemblies last year! Outside of MUN, you can find Ashley participating in Greek Life,
+      saving lives with Brown EMS, or wandering around Providence in search of the best Vanilla Latte.
+      Ashley is so excited to welcome everyone to BUSUN XXIV!
+
+
+  - name: Ijeoma Meremikwu
     title: Director of Outreach
     email: outreach@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/siddhi.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/ijeoma1.jpg
     bio: >
-      Siddhi Nadkarni (’21) is the Director of Outreach for BUSUN 2018. Siddhi is a sophomore, studying Public Health
-      and Economics, from Syracuse, New York. She has been participating in Model United Nations since her freshman year
-      of high school and served as the Director for the Society of Muslim Brothers Committee for BUSUN 2017. When not in
-      search of the best coffee shops in Providence or reading for class, Siddhi volunteers at Planned Parenthood and
-      the Dorcas International Institute of Rhode Island. She is extremely excited to welcome everyone to BUSUN 2018 and
-      cannot wait for a weekend full of passionate debate!  
-  - name: Ben Navetta
+      Ijeoma Meremikwu (’22) is a junior majoring in Computational Biology. On her free time,
+      she loves dancing with Brown's Oja Modern African Dance Team, watching anime, and learning
+      languages (Spanish, Korean and Igbo). She has been a MUNer since middle school and she is really
+      looking forward to productive conversations and experiences during her 2nd year as part of BUSUN Secretariat.
+
+  - name: Hyun Choi
     title: Director of Technology
     email: technology@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/ben.jpg
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/hyun1.jpg
     bio: >
-      Ben Navetta ('19) is the Director of Technology for BUSUN XXII. A lifelong New Englander, Ben comes from a small,
-      just-past-rural town in Massachusetts. Ben is a senior studying computer science. Outside of BUSUN, he is a
-      teaching assistant in the computer science department, an organizer for Brown's annual hackathon, and a systems
-      administrator for a computer vision research lab. He got his first Model UN experience when a friend pulled him
-      into staffing at BUCS his freshman year. Since then, he has served as Director of Technology for BUSUN XXI and
-      staffed and directed at BUCS VI and VII. When he has time, Ben is passionate about coffee and classics, and is an
-      aspiring baker and chef.
-  - name: Tess Rossi
-    title: Director of Operations
-    email: ops@busun.org
-    image: https://storage.googleapis.com/busun_assets/sec-photos/tess.jpg
+      Hyun Choi (’21) is the Director of Technology for BUSUN XXIV. Born in Seoul, Korea, 
+      he has lived in the U.S. since he was 13 and went to high school in Concord, Massachusetts. 
+      Hyun is a senior majoring in computer science and public policy. Outside of BUSUN, he is 
+      an undergraduate teaching assistant in the computer science department and an associate editor
+      of the Brown Political Review. He got his first Model UN experience when a friend pulled him
+      into staffing at BUSUN XXII, and is looking forward to his second year on the BUSUN Secretariat.
+      In his free time, Hyun loves to travel, learn about the law, and eat Chipotle burrito bowls (with guac).
+
+  - name: Ashton Lam
+    title: Director of Media
+    email: ashton_lam@brown.edu
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/ashton.jpg
     bio: >
-      Tess Rossi is the Director of Operations and Implementation. She is a junior, studying psychology
-      and literary arts. She has a passion for science-fiction and writing. She has been a part of Brown’s Model UN club
-      since her freshman year, and served as BUSUN’s Director of Operations last year. She looks forward to improving
-      everyone’s BUSUN experience this year!
+      Hailing from the Bay Area, California, Ashton Lam (’22) is excited to serve as the Director of Media 
+      for BUSUN XXIV. He is a junior studying Economics and International and Public Affairs, and this will
+      be his first MUN conference ever! Although a virtual conference is certainly not how he originally imagined
+      it to turn out, Ashton looks forward to seeing his work come to life on the new Gatherly platform and can't
+      wait to meet everyone at BUSUN.
+
+  - name: Martin Kononov
+    title: Treasurer
+    email: martin_kononov@brown.edu
+    image: https://storage.googleapis.com/busun_assets/sec-photos-2020/martin.jpeg
+    bio: >
+      Martin Kononov (’23) is the treasurer for BUSUN XXIV and Chair of the Security Council. Martin is
+      concentrating in Chemical biology and has been involved with MUN since his freshman year in high school.
+      In 2019, he was the President of the General Assembly at the 51st Annual THIMUN, in The Hague, and held numerous
+      other leadership positions at MUN conferences throughout Europe. In his free time, Martin enjoys doing
+      undergraduate chemistry research, playing the alto saxophone, skiing in his home state of Colorado,
+      cycling, and flying his plane.

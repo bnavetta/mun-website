@@ -43,60 +43,61 @@ class CommitteeMap extends React.PureComponent {
         const { openMarkers } = this.state;
 
         return (
-            <GoogleMap defaultZoom={2} ref={this.setMap}>
-                {committees.map(committee => (
-                    <Marker
-                        key={committee.id}
-                        position={{
-                            lat: committee.mapLatitude,
-                            lng: committee.mapLongitude,
-                        }}
-                        onClick={() => this.handleToggleOpen(committee.id)}
-                    >
-                        {openMarkers[committee.id] && (
-                            <InfoWindow
-                                onCloseClick={() =>
-                                    this.handleToggleOpen(committee.id)
-                                }
-                            >
-                                <div className="committee-map__committee">
-                                    <img
-                                        className="committee-map__committee-image"
-                                        src={committee.image}
-                                        alt={committee.name}
-                                    />
-                                    <h3 className="committee-map__committee-name">
-                                        {committee.name}
-                                    </h3>
-                                    <div className="committee-map__committee-info">
-                                        <span><a href={"mailto:" + committee.email}>{committee.email}</a></span>
-                                        {committee.backgroundGuide && <span><a href={committee.backgroundGuide}>Background Guide</a></span>}
-                                    </div>
-                                    <p
-                                        dangerouslySetInnerHTML={{
-                                            __html: committee.description,
-                                        }}
-                                    />
-                                    <ul>
-                                        {committee.topic1 && (
-                                            <li>{committee.topic1}</li>
-                                        )}
-                                        {committee.topic2 && (
-                                            <li>{committee.topic2}</li>
-                                        )}
-                                        {committee.topic3 && (
-                                            <li>{committee.topic3}</li>
-                                        )}
-                                        {committee.topic4 && (
-                                            <li>{committee.topic4}</li>
-                                        )}
-                                    </ul>
-                                </div>
-                            </InfoWindow>
-                        )}
-                    </Marker>
-                ))}
-            </GoogleMap>
+            <p>Coming soon!</p>
+            // <GoogleMap defaultZoom={2} ref={this.setMap}>
+            //     {committees.map(committee => (
+            //         <Marker
+            //             key={committee.id}
+            //             position={{
+            //                 lat: committee.mapLatitude,
+            //                 lng: committee.mapLongitude,
+            //             }}
+            //             onClick={() => this.handleToggleOpen(committee.id)}
+            //         >
+            //             {openMarkers[committee.id] && (
+            //                 <InfoWindow
+            //                     onCloseClick={() =>
+            //                         this.handleToggleOpen(committee.id)
+            //                     }
+            //                 >
+            //                     <div className="committee-map__committee">
+            //                         <img
+            //                             className="committee-map__committee-image"
+            //                             src={committee.image}
+            //                             alt={committee.name}
+            //                         />
+            //                         <h3 className="committee-map__committee-name">
+            //                             {committee.name}
+            //                         </h3>
+            //                         <div className="committee-map__committee-info">
+            //                             <span><a href={"mailto:" + committee.email}>{committee.email}</a></span>
+            //                             {committee.backgroundGuide && <span><a href={committee.backgroundGuide}>Background Guide</a></span>}
+            //                         </div>
+            //                         <p
+            //                             dangerouslySetInnerHTML={{
+            //                                 __html: committee.description,
+            //                             }}
+            //                         />
+            //                         <ul>
+            //                             {committee.topic1 && (
+            //                                 <li>{committee.topic1}</li>
+            //                             )}
+            //                             {committee.topic2 && (
+            //                                 <li>{committee.topic2}</li>
+            //                             )}
+            //                             {committee.topic3 && (
+            //                                 <li>{committee.topic3}</li>
+            //                             )}
+            //                             {committee.topic4 && (
+            //                                 <li>{committee.topic4}</li>
+            //                             )}
+            //                         </ul>
+            //                     </div>
+            //                 </InfoWindow>
+            //             )}
+            //         </Marker>
+            //     ))}
+            // </GoogleMap>
         );
     }
 

@@ -15,8 +15,7 @@ import org.brownmun.core.committee.model.Position;
  * student.
  */
 @Entity
-public class Delegate
-{
+public class Delegate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,71 +45,78 @@ public class Delegate
     @JoinColumn(name = "position_id")
     private Position position;
 
-    public Long getId()
-    {
+    /**
+     * Gatherly link, BUSUN 2020
+     */
+    private String gatherlyLink;
+
+    // private long positionId;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Attendance getAttendance()
-    {
+    public Attendance getAttendance() {
         return attendance;
     }
 
-    public void setAttendance(Attendance attendance)
-    {
+    public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
     }
 
-    public School getSchool()
-    {
+    public School getSchool() {
         return school;
     }
 
-    public void setSchool(School school)
-    {
+    public void setSchool(School school) {
         this.school = school;
     }
 
-    public Position getPosition()
-    {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position)
-    {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
+    public String getGatherlyLink() {
+        return gatherlyLink;
+    }
+
+    public void setGatherlyLink(String link) {
+        this.gatherlyLink = link;
+    }
+
+    // public long getPositionId() {
+    // return positionId;
+    // }
+
+    // public void setPositionId(long id) {
+    // this.positionId = id;
+    // }
+
     @Override
-    public String toString()
-    {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("schooId", school.getId())
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("schooId", school.getId())
                 .toString();
     }
 
     @PostLoad
-    private void instantiateAttendance()
-    {
-        if (attendance == null)
-        {
+    private void instantiateAttendance() {
+        if (attendance == null) {
             attendance = new Attendance();
         }
     }

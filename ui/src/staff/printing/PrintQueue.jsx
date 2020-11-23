@@ -7,10 +7,10 @@ import { displayError } from "../../lib/util";
 import { mergeRequest, selectPrintQueue, selectActivePrintQueue } from "../state/print";
 import PrintQueueClient from "./client";
 
-const mapStateToProps = state => ({
-    printQueue: selectPrintQueue(state),
-    activeQueue: selectActivePrintQueue(state),
-});
+// const mapStateToProps = state => ({
+//     printQueue: selectPrintQueue(state),
+//     activeQueue: selectActivePrintQueue(state),
+// });
 
 function ActionButton({ request, onClaim, onComplete }) {
     switch (request.status) {
@@ -71,59 +71,66 @@ class PrintQueue extends React.Component {
 
     render() {
         const queue = this.state.showCompleted ? this.props.printQueue : this.props.activeQueue;
-
+        console.log("queue1");
+        console.log(queue);
         return (
             <div>
-                <form onSubmit={this.handleSubmit} className="form inline">
-                    <fieldset>
-                        <label htmlFor="numCopies">Copies</label>
-                        <input
-                            type="number"
-                            name="numCopies"
-                            id="numCopies"
-                            min={0}
-                        />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="deliveryLocation">Deliver To</label>
-                        <input
-                            type="text"
-                            name="deliveryLocation"
-                            id="deliveryLocation"
-                        />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="source">File</label>
-                        <input type="file" name="source" id="source" />
-                    </fieldset>
-                    <div>
-                        <button className="button" type="submit">Submit</button>
-                    </div>
-                </form>
-                <table className="standard-table">
-                    <thead>
-                        <tr>
-                            <th>Requested By</th>
-                            <th>Requested At</th>
-                            <th>Filename</th>
-                            <th>Copies</th>
-                            <th>Deliver To</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {queue.map(req => (
-                            <tr key={req.id}>
-                                { this.renderPrintRequest(req) }
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <div>
-                    <button className="button" onClick={this.toggleShowCompleted}>{this.state.showCompleted ? 'Hide completed' : 'Show completed'}</button>
-                </div>
+                Please fill out <a href="https://forms.gle/onqZ4RcAHvpaHd2p7" target="_blank">this Google form</a> to request printing.
             </div>
+            // <div>
+            //     <form onSubmit={this.handleSubmit} className="form inline">
+            //         <fieldset>
+            //             <label htmlFor="numCopies">Copies</label>
+            //             <input
+            //                 type="number"
+            //                 name="numCopies"
+            //                 id="numCopies"
+            //                 min={0}
+            //             />
+            //         </fieldset>
+            //         <fieldset>
+            //             <label htmlFor="deliveryLocation">Deliver To</label>
+            //             <input
+            //                 type="text"
+            //                 name="deliveryLocation"
+            //                 id="deliveryLocation"
+            //             />
+            //         </fieldset>
+            //         <fieldset>
+            //             <label htmlFor="source">File</label>
+            //             <input type="file" name="source" id="source" />
+            //         </fieldset>
+            //         <div>
+            //             <button className="button" type="submit">Submit</button>
+            //         </div>
+            //     </form>
+            //     <table className="standard-table">
+            //         <thead>
+            //             <tr>
+            //                 <th>Requested By</th>
+            //                 <th>Requested At</th>
+            //                 <th>Filename</th>
+            //                 <th>Copies</th>
+            //                 <th>Deliver To</th>
+            //                 <th></th>
+            //             </tr>
+            //         </thead>
+            //         <tbody>
+            //             {console.log("inside")}
+            //             {console.log(queue)}
+            //             {
+            //                 queue.map(req => (
+            //                     <tr key={req.id}>
+            //                         {this.renderPrintRequest(req)}
+            //                     </tr>
+            //                 ))}
+            //         </tbody>
+            //     </table>
+
+            //     <div>
+            //         <button className="button" onClick={this.toggleShowCompleted}>{this.state.showCompleted ? 'Hide completed' : 'Show completed'}</button>
+            //     </div>
+            // </div>
         );
     }
 
@@ -132,6 +139,8 @@ class PrintQueue extends React.Component {
     }
 
     renderPrintRequest(req) {
+        console.log("render");
+        console.log(req);
         return (
             <>
                 <td>{req.requester}</td>
@@ -139,15 +148,15 @@ class PrintQueue extends React.Component {
                 <td><a href={`/staff/print-system/download/${req.id}`}>{req.filename}</a></td>
                 <td>{req.numCopies}</td>
                 <td>{req.deliveryLocation}</td>
-                <td><ActionButton request={req} onClaim={this.handleClaim} onComplete={this.handleComplete}/></td>
+                <td><ActionButton request={req} onClaim={this.handleClaim} onComplete={this.handleComplete} /></td>
             </>
         );
     }
 }
 
-PrintQueue.propTypes = {
-    printQueue: PropTypes.arrayOf(PropTypes.object).isRequired,
-    dispatch: PropTypes.func.isRequired,
-};
+// PrintQueue.propTypes = {
+//     printQueue: PropTypes.arrayOf(PropTypes.object).isRequired,
+//     dispatch: PropTypes.func.isRequired,
+// };
 
-export default connect(mapStateToProps)(PrintQueue);
+// export default connect(mapStateToProps)(PrintQueue);

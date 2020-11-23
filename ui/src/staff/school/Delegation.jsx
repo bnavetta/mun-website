@@ -12,17 +12,21 @@ function DelegatesTable({ delegates }) {
         <table className="standard-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Delegate Name</th>
                     <th>Position</th>
                     <th>Committee</th>
+                    <th>Gatherly Link</th>
                 </tr>
             </thead>
             <tbody>
                 {delegates.map(d => (
                     <tr key={d.id}>
+                        <td>{d.positionID}</td>
                         <td>{d.name || "Unset"}</td>
                         <td>{d.positionName || "Unassigned"}</td>
                         <td>{d.committeeName || "Unassigned"}</td>
+                        <td>{d.gatherlyLink || "No Link Assigned"}</td>
                     </tr>
                 ))}
             </tbody>

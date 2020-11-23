@@ -14,7 +14,7 @@ export default function SupplementalInfoForm({
         <React.Fragment>
             <fieldset>
                 <label htmlFor="phoneNumber">
-                    What is your school's phone number?
+                    On-Call Chaperone Phone Number
                 </label>
                 <ValidatedText
                     disabled={readOnly}
@@ -24,7 +24,7 @@ export default function SupplementalInfoForm({
                 />
             </fieldset>
 
-            <fieldset>
+            {/* <fieldset>
                 <p>What is your school's address?</p>
 
                 <ValidatedText
@@ -54,9 +54,9 @@ export default function SupplementalInfoForm({
                     field="country"
                     placeholder="Country"
                 />
-            </fieldset>
+            </fieldset> */}
 
-            <fieldset>
+            {/* <fieldset>
                 <label htmlFor="financialAid">
                     Is your delegation applying for financial aid?
                 </label>
@@ -111,9 +111,9 @@ export default function SupplementalInfoForm({
                         </p>
                     </React.Fragment>
                 )}
-            </fieldset>
+            </fieldset> */}
 
-            <fieldset>
+            {/* <fieldset>
                 <label htmlFor="busunHotel">
                     Is your school using a BUSUN hotel?
                 </label>
@@ -135,9 +135,9 @@ export default function SupplementalInfoForm({
                     field="nonBusunHotel"
                     id="nonBusunHotel"
                 />
-            </fieldset>
+            </fieldset> */}
 
-            <fieldset>
+            {/* <fieldset>
                 <p>On which days will your school need shuttle service?</p>
 
                 <div className="option-pair">
@@ -167,9 +167,10 @@ export default function SupplementalInfoForm({
                     <Checkbox field="shuttleSunday" id="shuttleSunday" />
                     <label htmlFor="shuttleSunday">Sunday</label>
                 </div>
-            </fieldset>
+            </fieldset> */}
 
-            <fieldset>
+
+            {/* <fieldset>
                 <label htmlFor="commuting">Is your school commuting?</label>
                 <RadioGroup field="commuting" id="commuting">
                     <div className="option-pair">
@@ -234,9 +235,9 @@ export default function SupplementalInfoForm({
                         />
                     </React.Fragment>
                 )}
-            </fieldset>
+            </fieldset> */}
 
-            <fieldset>
+            {/* <fieldset>
                 <label htmlFor="arrivalTime">
                     When do you plan to arrive on Friday
                 </label>
@@ -296,11 +297,11 @@ export default function SupplementalInfoForm({
                         </label>
                     </div>
                 </RadioGroup>
-            </fieldset>
+            </fieldset> */}
 
             <fieldset>
                 <label htmlFor="delegateCount">
-                    How many delegates will you be bringing?
+                    Number of Accepted Spots
                 </label>
                 <ValidatedText
                     disabled={readOnly}
@@ -310,7 +311,7 @@ export default function SupplementalInfoForm({
                 />
             </fieldset>
 
-            <fieldset>
+            {/* <fieldset>
                 <label htmlFor="chaperoneCount">
                     How many chaperones will you be bringing?
                 </label>
@@ -384,7 +385,7 @@ export default function SupplementalInfoForm({
                     id="infoSessionCount"
                     type="number"
                 />
-            </fieldset>
+            </fieldset> */}
         </React.Fragment>
     );
 }

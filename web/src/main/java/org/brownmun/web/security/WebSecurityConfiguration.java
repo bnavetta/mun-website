@@ -19,8 +19,7 @@ import org.brownmun.core.staff.StaffService;
 
 @Configuration
 // @EnableWebSecurity
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
-{
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final Logger log = LoggerFactory.getLogger(WebSecurityConfiguration.class);
 
     @Value("${webSecurity.enableCsp:true}")
@@ -42,50 +41,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     private StaffService staffService;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
-        if (enableCsp)
-        {
+    protected void configure(HttpSecurity http) throws Exception {
+        if (enableCsp) {
             log.debug("Using content security policy");
             http.headers().contentSecurityPolicy(CONTENT_SECURITY_POLICY).reportOnly();
         }
 
-        http.csrf()
-                .and()
-                .cors()
-                .and()
-                .headers()
-                .referrerPolicy(ReferrerPolicy.NO_REFERRER)
-                .and()
+        http.csrf().and().cors().and().headers().referrerPolicy(ReferrerPolicy.NO_REFERRER).and()
                 .addHeaderWriter(new FeaturePolicyWriter(FEATURE_POLICY))
                 .addHeaderWriter(new ExpectCTHeaderWriter(false, Duration.ofDays(2),
                         "https://brownmun.report-uri.com/r/d/ct/reportOnly"))
-                .and()
-                .authorizeRequests()
-                .antMatchers("/staff/**")
-                .hasRole("STAFF")
-                .antMatchers("/your-mun/password/**")
-                .permitAll()
-                .antMatchers("/your-mun/**")
-                .hasRole("ADVISOR")
-                .antMatchers("/registration/register")
-                .denyAll()
-                .and()
-                .oauth2Login()
-                .loginPage("/staff/login")
-                .permitAll()
-                .userInfoEndpoint()
-                .oidcUserService(new StaffOAuth2UserService(staffService))
-                .and()
-                .and()
-                .formLogin()
-                .loginPage("/your-mun/login")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .permitAll()
-                .and()
+                .and().authorizeRequests().antMatchers("/staff/**").hasRole("STAFF")
+                .antMatchers("/your-mun/password/**").permitAll().antMatchers("/your-mun/**").hasRole("ADVISOR")
+                // .antMatchers("/registration/register")
+                // .denyAll()
+                .and().oauth2Login().loginPage("/staff/login").permitAll().userInfoEndpoint()
+                .oidcUserService(new StaffOAuth2UserService(staffService)).and().and().formLogin()
+                .loginPage("/your-mun/login").permitAll().and().logout().logoutUrl("/logout").permitAll().and()
                 .exceptionHandling()
                 .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/staff/login"),
                         new AntPathRequestMatcher("/staff/**"))
@@ -94,8 +66,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception
-    {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 }

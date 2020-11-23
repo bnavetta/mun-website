@@ -39,9 +39,9 @@
 }
 
 .schedule-date.day-sat {
-    grid-row: 11;
+    grid-row: 3;
 }
 
 .schedule-date.day-sun {
-    grid-row: 19;
+    grid-row: 7;
 }

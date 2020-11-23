@@ -1,0 +1,893 @@
+<african_union>
+Algeria 
+Angola
+Botswana
+Burundi 
+Cameroon
+Central African Republic 
+Chad
+The Democratic Republic of the Congo 
+Cote d'Ivoire
+Djibouti
+Egypt 
+Ethiopia
+Gambia 
+Ghana
+Kenya
+Liberia
+Libya
+Madagascar
+Mauritania 
+Morocco
+Mozambique
+Niger
+Nigeria
+Rwanda
+Somalia 
+South Africa
+South Sudan 
+Sudan
+Tanzania
+Togo 
+Tunisia 
+Uganda
+Zambia 
+Zimbabwe
+Burkina Faso 
+Guinea
+Senegal
+Namibia
+Cape Verde
+<disec>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Belgium 
+Dominican Republic
+Equatorial Guinea
+Germany 
+Indonesia
+Ivory Coast
+Kuwait
+Peru
+Poland
+South Africa
+Canada 
+Norway 
+Iceland 
+Mexico 
+Ethiopia 
+Kenya 
+Peru 
+Madagascar 
+Vietnam 
+South Korea 
+Japan 
+India 
+Turkey 
+Egypt
+Saudi Arabia
+<human_rights>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Algeria
+Botswana
+Djibouti
+Egypt
+Jordan
+Lebanon
+Libya
+Ireland
+Italy
+Latvia
+Lithuania
+Malta
+Netherlands
+Poland
+Portugal
+Romania
+Slovakia
+Spain
+Sweden
+Germany
+Turkey
+Hungary 
+Greece
+Nepal
+Yemen
+<refugee_council>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Chile
+Trinidad and Tobago 
+Australia
+Saudi Arabia
+Vietnam
+Brazil
+Qatar
+Somalia
+Bahrain
+Algeria
+Botswana
+Djibouti
+Egypt
+Jordan
+Lebanon
+Libya
+Ireland
+Italy
+Latvia
+Lithuania
+Malta
+Netherlands
+Poland
+Portugal
+Romania
+<who>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Slovakia
+Algeria
+Botswana
+Cuba
+Egypt
+Jordan
+Lebanon
+Libya
+Ireland
+Italy
+Latvia
+Lithuania
+Chile
+Trinidad and Tobago 
+Australia
+Saudi Arabia
+Vietnam
+Brazil
+Qatar
+Somalia
+Nigeria 
+Liberia 
+Pakistan 
+Afghanistan
+Venezuela
+<european_union>
+Austria
+Belgium
+Bulgaria
+Croatia
+Cyprus
+Czechia 
+Denmark
+Estonia
+Finland
+France
+Germany
+Greece
+Hungary 
+Ireland
+Italy
+Latvia
+Lithuania
+Luxembourg
+Malta
+Netherlands
+Poland
+Portugal
+Romania
+Slovakia
+Slovenia
+Spain
+Sweden
+Turkey
+United Kingdom
+<arab_league>
+Algeria
+Bahrain
+Comoros
+Djibouti
+Egypt
+Jordan
+Kuwait
+Lebanon
+Libya
+Mauritania
+Morocco
+Oman
+Palestine
+Qatar
+Saudia Arabia
+Somalia
+Sudan
+Syria
+Tunisia
+The United Arab Emirates
+Yemen
+<unep>
+United Kingdom
+USA
+China
+Russian Federation
+Bahrain
+Algeria
+Botswana
+India
+Croatia
+Cyprus
+Czechia 
+Denmark
+Estonia
+Finland
+France
+Germany
+Greece
+Hungary 
+Ireland
+Italy
+Pakistan
+Afghanistan
+Luxembourg
+Netherlands
+Brazil
+Vietnam
+Morocco
+Iran
+<un_women>
+Angola
+Burkina Faso
+Cameroon
+Ghana
+Kenya
+Nigeria
+Rwanda
+Zambia
+Bahrain
+Bangladesh
+India
+Mongolia
+Nepal
+Yemen
+Georgia
+Hungary
+Brazil
+Chile
+Colombia
+Cuba
+El Salvador
+Trinidad and Tobago
+Australia
+Turkey
+Sweden
+South Africa
+Ukraine
+Iran
+China
+<unicef>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Czechia 
+Denmark
+Estonia
+Finland
+Germany
+Greece
+Hungary 
+Mauritania
+Morocco
+Oman
+Palestine
+Qatar
+Saudi Arabia
+Somalia
+Sudan
+Portugal
+Romania
+Slovakia
+Lithuania
+Indonesia
+India
+Kenya
+Lebanon
+<ecosoc>
+Belarus
+Benin
+Brazil
+Columbia
+Democratic Republic of the Congo
+Dominican Republic
+Macedonia
+Finland
+France
+Germany
+India
+Indonesia
+Ireland
+Kazakhstan
+Luxembourg
+Madagascar
+Mexico
+Morocco
+Myanmar
+Netherlands
+People's Republic of China
+Panama
+Philipines
+Portugal
+Russian Federation
+Saudia Arabia
+Serbia
+Sudan
+Switzerland
+Thailand
+United Arab Emirates
+USA
+Uruguay
+Yemen
+<unodc>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Djibouti
+Egypt
+Jordan
+Lebanon
+Libya
+Ireland
+Italy
+Latvia
+Lithuania
+Malta
+Madagascar
+Mexico
+Morocco
+Myanmar
+Netherlands
+People's Republic of China
+Panama
+Philipines
+Sudan
+Syria
+Tunisia
+The United Arab EMirates
+Yemen
+Cuba
+<plenary>
+United States
+Russia
+China
+France
+United Kingdom
+Germany
+Brazil
+South Korea
+India
+Indonesia
+Japan
+Canada
+Mexico
+Phillippines
+Vietnam
+Argentina
+Malawi
+Zimbabwe
+Somalia
+Bahamas
+Switzerland
+New Zealand
+Australia
+Thailand
+Egypt
+Dominican Republic
+Ghana
+Nigeria
+Madagascar
+Djibouti
+Ecuador
+Denmark
+Italy
+Spain
+Turkey
+Algeria
+Cameroon
+Afghanistan
+Iraq
+Saudi Arabia
+Ireland
+<unesco>
+Afghanistan
+Australia
+Azerbaijan
+Bahrain
+Bangladesh
+Brazil
+Canada
+Cuba
+China
+Ethiopia
+France
+Germany
+Hungary
+Indonesia
+Iraq
+Japan
+Kuwait
+Kyrgyzstan
+Norway
+Pakistan
+Poland
+Spain
+Uganda
+United States of America
+Yemen
+<security_council>
+United Kingdom
+USA
+China
+France
+Russian Federation
+Belgium 
+Dominican Republic
+Equatorial Guinea
+Germany 
+Indonesia
+Ivory Coast
+Kuwait
+Peru
+Poland
+South Africa
+<specpol>
+Australia
+Cambodia
+Ethiopia
+India
+Italy
+Madagascar
+Mali
+Poland
+Syria
+Russian Federation
+Germany 
+USA
+France
+China
+United Kingdom
+Libya
+South Africa
+Nigeria
+Pakistan
+Argentina
+Bolivia
+Lebanon
+Turkey
+Papua New Guinea
+Philippines
+<providence>
+Ward 1: Councilman Charles Murphy
+Ward 2: Councilwoman Mary Lively
+Ward 3: Councilman James O’Halligan
+Ward 4: Councilman Elias Hargrave
+Ward 5: Councilwoman Helen Blackwood
+Ward 6: Councilwoman Margaret Kelly
+Ward 7: Councilman David Russo
+Ward 8: Councilman Robert Walsh
+Ward 9: Councilman Thomas Murray
+Ward 10: Councilman Paul Ricci
+Ward 11: Councilwoman Agatha Sachs
+Ward 12: Councilman John Paulson
+Ward 13: Councilwoman Amelia Lively
+Ward 14: Councilman Theodore Brown
+Ward 15: Councilwoman Jennifer Tyler
+<mexican_constitution>
+Venustiano Carranza
+Francisco “Pancho” Villa
+Emiliano Zapata
+Álvaro Obregón
+José Mora y del Rio, Archbishop of Mexico
+Mauro Loyo Sánchez, Governor of Veracruz
+Smedley McClintock III., Senior Partner at Sullivan and Cromwell
+Antonio Diaz Soto y Gama
+William Randolph Hearst
+Plutarco Elías Calles
+Pablo Gonzalez Garza
+Hermila Galindo Acosta
+Ignacio Bonillas
+Adolfo de la Huerta
+Lázaro Cárdenas
+María del Refugio García
+Editor of El País (main Catholic Newspaper in Mexico)
+<estates_general>
+Anne Louis Henri de La Fare
+Antoine Eleonor Leon Leclerc de Juign
+Charles Alexandre de Calonne
+Charles Gaspard Elisabeth Joseph de Bailly
+Charles Maurice de Talleyrand-Perigord
+Charlotte Petit Durand
+Count of Artois
+César-Cassini de Rivéry
+François Victor du Bois
+Jacques Pierre Brissot
+Julien Raimond
+Reémy-Louis de Croÿ
+Louis Philippe Joseph d’Orleans
+Marie Theres Louis
+Augustine Robespierre
+Comte de Mirabeau
+Francois Denis Tronchet
+Jacques Gagneux
+Jean Paul Marat
+Jean-Paul Rabaut Saint-Etienne
+Joseph Martin-Dauch
+Madame Roland
+Marie-Elise Dubois
+Marquis de Lafayette
+Olympe de Gouges
+Pierre Gaspard Chaumette
+Pierre Joseph Cambon
+Vincent Oge
+<cedaw>
+Edward Kennedy - Massachusetts
+Robert Byrd - West Virginia
+Joseph Biden - Delaware
+John Culver - Indiana
+Howard Metzenbaum - Ohio
+Dennis DeConcini - Arizona
+Patrick Leahy - Vermont
+Barbara Mikulski - Maryland
+Patsy Takemoto Mink - Hawaii
+Shirley Chisholm - New York
+Geraldine Ferraro - New York
+Barbara Jordan - Texas
+Charles Mathias Jr. - Maryland
+Margaret Heckler - Massachusetts
+Orrin Hatch - Utah
+Robert Dole - Kansas
+Thad Cochran - Michigan
+Alan Simpson - Wyoming
+Nancy Kassebaum - Kansas
+Cleta Mitchell - Oklahoma
+Olympia Snowe - Maine
+<brexit>
+Theresa May, Prime Minister of the United Kingdom, leader of the Conservative party
+Boris Johnson, Secretary of State for Foreign and Commonwealth Affairs
+Philip Hammond, Chancellor of the Exchequer
+David Davis, Secretary of State for Exiting the European Union
+Liam Fox, Secretary of State for Foreign Trade
+Greg Clark, Secretary of State for Business, Energy, and Industrial Strategy
+James Brokenshire, Secretary of State for Northern Ireland
+Arlene Foster, Leader of the Northern Irish Democratic Unionist Party
+Nigel Dodds, Leader of the Northern Irish Democratic Unionist Party in the House of Commons
+Jeffery Donaldson, Democratic Unionist Party Chief Whip
+Gavin Robinson, DUP Westminster Spokesperson for Defense and Home Affairs
+Jeremy Corbyn, Leader of the opposition, Leader of the Labour Party
+Tom Watson, Deputy Leader of the Labour Party
+John McDonnell, Shadow Chancellor of the Exchequer
+Keir Starmer, Shadow Secretary of State for Leaving the European Union
+Yvette Cooper - Chair of the Home Affairs Select Committee
+Ian Blackford, Leader of the Scottish National Party in the House of Commons
+Kirsty Blackman, SNP spokesperson on the Economy
+Patrick Grady, SNP Chief Whip
+Peter Grant, SNP Spokesperson on Exiting the European Union
+<accelerando>
+United States
+Russian Federation
+People's Republic of China
+United Kingdom
+Canada
+India
+Japan
+Republic of Korea
+Ethiopia
+Republic of South Africa
+Nigeria
+Australia
+Ukraine
+Israel
+Iran
+Luxembourg
+Singapore
+UAE
+France
+Kenya
+Brazil
+Argentina
+Egypt
+<ad_hoc>
+Position 1
+Position 2
+Position 3
+Position 4
+Position 5
+Position 6
+Position 7
+Position 8
+Position 9
+Position 10
+Position 11
+Position 12
+Position 13
+Position 14
+Position 15
+Position 16
+Position 17
+<gilded_age>
+William Jennings Bryan
+Lincoln Steffens
+Ida Tarbell
+George Hoar
+Eugene Debs
+Samuel Gompers
+Robert M. La Follette
+Oliver Kelley
+Joseph Carey
+William Simon U’Ren
+Joseph McKenna
+Edward Douglass White
+Fred DuBois
+Bellamy Storer
+George F. Edmunds
+John D. Rockefeller
+Collis Potter Huntington
+Andrew Carnegie
+Horace White
+Henry Havemeyer
+Leland Stanford
+Nelson Aldrich
+James McMillan
+John Michael Clancy
+<panama>
+Spain
+France
+Peru
+Gran Colombia
+Mexico
+Chile
+Brazil
+Argentina
+Central America
+United States
+Great Britain
+<human_genome>
+Jennifer Doudna
+Emmanuelle Charpentier
+David Baltimore
+George Church
+Feng Zhang
+David Liu
+He Jiankui
+Stephen Quake
+Alta Charo
+Xiaomei Zhai
+Duanqing Pei
+Matthew Porteus
+Bryan Bishop
+Denis Rebrikov
+Kazuto Kato
+Carrie Lam
+Julian Savulescu
+Maria de Jesus Medina Arellano
+Sivaprakash Ramalingam
+Paula Amato
+Maurizio Balistreri
+Ames Dhai
+Mohammed Ghaly
+<seneca_falls>
+Frederick Douglass
+Elizabeth Cady Stanton
+Lucretia Mott
+Mary Ann M’Clintock
+Henry Brewster Stanton
+Jane Hun
+Martha Wright
+Amy Post
+Hannah Plant
+Catherine C. Paine
+Richard P. Hunt
+Charlotte Woodward
+Rachel Dell Bonnel
+James Mott
+Edward F. Underhill
+Thomas Dell
+Jacob P. Chamberlain
+Lydia Mount
+Elizabeth M’Clintock
+Margaret Pryor
+Harriet Cady Eaton
+Cynthia Davis
+<lutsk>
+King Jagiella of Polan
+Emperor Sigismund of the Holy Roman Empire
+King Erik of Norway, Sweden, and Denmark
+Ambassador Bianchi
+Ambassador Colombo
+Ambassador Pugliesi
+Ambassador Sottocorno
+Delegate Adelbrand
+Delegate Aswin
+Delegate Bedrich
+Delegate Heimrad
+Ambassador Abdullah
+Ambassador Melek
+Ambassador Muhittin
+Ambassador Tankut
+Ambassador Vahit
+Prince Vytautus of Lithuania
+<climate_change>
+United States of America
+Canada
+Saudi Arabia
+Russia
+Iran
+China
+india
+United Kingdom
+France
+Germany
+Japan
+South Korea
+Netherlands
+Guyana
+Maldives
+Bangladesh
+Solomon Islands
+Marshall Islands
+Costa Rica
+mali
+Sudan
+South Africa
+Afghanistan
+Brazil
+Democratic Republic of the Congo
+Indonesia
+Peru
+Colombia
+<post_colonial_algeria>
+Albert Camus
+Messali Hadj
+Ferhat Abbas
+Ali Ammar
+Zohra Drif
+Jacques Derrida
+Ahmed Ben Bella
+Houari Boumediène
+Djamila Boupacha 
+Emmanuel Roblès
+Jean Sénac
+Hocine Ait Ahmed
+Danièle Djamila Amrane-Minne
+Alphonse Juin
+Krim Belkacem
+Ahmed Tewfik El Madani
+Jean Pélégri
+Hélène Cixous 
+Colonel Amirouche
+<tokyo_trials>
+Germany
+Emperor Hirohito (Japan)
+Delfin Jaranilla (Philippines)
+Joseph Keeman (US)
+Douglas MacArthur (US)
+Iwane Matsui (Japan)
+Ju-ao Mei (China)
+Ivan Michyevich Zaryanov (Soviet Union)
+Radhabinod Pal (India)
+Miyake Shotaro (Japan)
+Harry Truman (U.S.)
+United Kingdom
+Sir William Webb (Australia)
+Prime Minister Shigeru Yoshida (Japan)
+<pacific_islands>
+Australia
+Cook Islands
+Federated States of Micronesia
+Fiji
+Kiribati
+Republic of Marshall Islands
+Nauru
+new Zealand
+Niue
+Palau
+Papua New Guinea
+Samoa
+Solomon Islands
+Tonga
+Tuvalu
+Vanuatu
+New Caledonia
+French Polynesia
+<frankfurt_diet>
+Carl Joseph Anton Mittermaier
+Carl Theodor Welcker
+Friedrich Daniel Bassermann
+Friedrich Christoph Dahlmann
+Friedrich Wilhelm IV
+Gabriel Riesser
+Heinrich von Gagern
+Johann Droysen
+Joseph Maria von Radowitz
+Karl Vogt
+Ludwig von der Pfordten
+Otto von Bismarck
+Prince Felix of Schwarzenberg
+Rudolf Haym
+Wilhelm Wolff
+<african_unity>
+Ghana
+Ethiopia
+Nigeria
+Egypt
+Senegal
+mali
+Tunisia
+Liberia
+Ivory Coast
+Guinea Conakry
+Libya
+Algeria
+Somalia
+Togo
+<amazon>
+Brian T. Olsavsky
+Jeffrey M. Blackburn
+Andrew R. Jassy
+Shelley L. Reynolds
+Jeffrey A. Wilke
+David A. Zapolsky
+Rosalind G. Brewer
+Jamie S. Gorelick
+Daniel P. Huttenlocher
+Judith A. McGrath
+Indra K. Nooy
+Jonathan J. Rubinstein 
+Thomas O. Ryder
+Patricia Q. Stonesifer
+Wendell P. Weeks
+<communist>
+Armenian Soviet Socialist Republic
+Azerbaijan Soviet Socialist Republic
+Belorussian Soviet Socialist Republic
+Estonian Soviet Socialist Republic
+Georgian Soviet Socialist Republic
+Kazakh Soviet Socialist Republic
+Kirgiz Soviet Socialist Republic
+Latvian Soviet Socialist Republi
+Lithuanian Soviet Socialist Republic
+Moldavian Soviet Socialist Republic
+Tajik Soviet Socialist Republic
+Turkmen Soviet Socialist Republic
+Ukranian Soviet Socialist Republic
+Uzbek Soviet Socialist Republic
+Russian Soviet Federative Socialist Republic
+Chechen-Ingush Autonomous Soviet Socialist Republic
+<press_corps>
+Times of India 1
+Al Jazeera 1
+The Guardian 1
+China Daily 1
+DAWN 1
+Sydney Morning Herald 1
+Yomiuri Shimbun 1
+Le Monde 1
+Times of India 2
+Al Jazeera 2
+The Guardian 2
+China Daily 2
+DAWN 2
+Sydney Morning Herald 2
+Yomiuri Shimbun 2
+Le Monde 2

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { displayError } from "../../lib/util";
 
-import {fetchAwards, fetchPositions, grantAward, updateAttendance} from "../api";
+import { fetchAwards, fetchPositions, grantAward, updateAttendance } from "../api";
 import {
     loadAwards,
     loadPositions,
@@ -16,7 +16,7 @@ import "./CommitteeView.css";
 import "./Awards";
 import Awards from "./Awards";
 
-function AttendanceCheckbox({ position, session, submitAttendance}) {
+function AttendanceCheckbox({ position, session, submitAttendance }) {
     return (
         <input
             type="checkbox"
@@ -112,6 +112,8 @@ class CommitteeView extends React.Component {
 
     render() {
         const { committee } = this.props;
+        console.log("CommitteeView");
+        console.log(committee.positions);
 
         return (
             <div>
@@ -122,6 +124,7 @@ class CommitteeView extends React.Component {
                 <table className="standard-table">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Position</th>
                             <th>Delegate</th>
                             <th>School</th>
@@ -140,6 +143,7 @@ class CommitteeView extends React.Component {
                     <tbody>
                         {(committee.positions || []).map(position => (
                             <tr key={position.id}>
+                                <td>{position.id}</td>
                                 <td>{position.name}</td>
                                 <td>{position.delegateName}</td>
                                 <td>{position.schoolName}</td>

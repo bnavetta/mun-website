@@ -10,12 +10,11 @@ import com.google.auto.value.AutoValue;
  * control what fields are sent over.
  */
 @AutoValue
-public abstract class DelegateDTO
-{
-    public static DelegateDTO create(long id, String name, String positionName, String committeeName)
-    {
+public abstract class DelegateDTO {
+    public static DelegateDTO create(long id, String name, String positionName, String committeeName,
+            String gatherlyLink, long positionId) {
         return new AutoValue_DelegateDTO(id, Optional.ofNullable(name), Optional.ofNullable(positionName),
-                Optional.ofNullable(committeeName));
+                Optional.ofNullable(committeeName), positionId, Optional.ofNullable(gatherlyLink));
     }
 
     /**
@@ -41,4 +40,16 @@ public abstract class DelegateDTO
      */
     @JsonProperty("committeeName")
     public abstract Optional<String> committeeName();
+
+    /**
+     * The position ID of the position this delegate was assigned to
+     */
+    @JsonProperty("positionID")
+    public abstract long positionID();
+
+    /**
+     * BUSUN 2020 gatherly link
+     */
+    @JsonProperty("gatherlyLink")
+    public abstract Optional<String> gatherlyLink();
 }

@@ -12,10 +12,7 @@ h2 {
     font-size: 2em;
 }
 
-hr {
-    border: 0;
-    border-top: 0.5px solid var(--color-rule);
-}
+
 
 a {
     color: var(--color-primary);
@@ -25,3 +22,31 @@ a {
 a:hover {
     color: var(--color-dark);
 }
+
+p,body,ul,ol,tr,td,.schedule-container,dl,address {
+    color: black;
+}
+
+.dropdown {
+    color: white;
+}
+
+.base--copyright {
+    color: white;
+}
+
+/* body {
+    color: black;
+}
+
+ul {
+    color: black;
+}
+
+tr {
+    color: black;
+}
+
+td {
+    color: black;
+} */

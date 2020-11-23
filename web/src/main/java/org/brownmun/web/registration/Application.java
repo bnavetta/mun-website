@@ -8,8 +8,7 @@ import org.brownmun.util.PhoneNumber;
 /**
  * Representation of the application form.
  */
-public class Application
-{
+public class Application {
     @NotBlank
     private String schoolName;
 
@@ -31,125 +30,103 @@ public class Application
 
     private String yearsAttended;
 
-    @NotBlank
+    // @NotBlank
     private String aboutSchool;
 
-    @NotBlank
+    // @NotBlank
     private String aboutMunProgram;
 
-    @NotBlank
+    // @NotBlank
     private String delegationGoals;
 
-    @NotBlank
+    // @NotBlank
     private String whyApplied;
 
-    public String getSchoolName()
-    {
+    public String getSchoolName() {
         return schoolName;
     }
 
-    public void setSchoolName(String schoolName)
-    {
+    public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
     }
 
-    public String getAdvisorName()
-    {
+    public String getAdvisorName() {
         return advisorName;
     }
 
-    public void setAdvisorName(String advisorName)
-    {
+    public void setAdvisorName(String advisorName) {
         this.advisorName = advisorName;
     }
 
-    public String getAdvisorEmail()
-    {
+    public String getAdvisorEmail() {
         return advisorEmail;
     }
 
-    public void setAdvisorEmail(String advisorEmail)
-    {
+    public void setAdvisorEmail(String advisorEmail) {
         this.advisorEmail = advisorEmail;
     }
 
-    public String getAdvisorPassword()
-    {
+    public String getAdvisorPassword() {
         return advisorPassword;
     }
 
-    public void setAdvisorPassword(String advisorPassword)
-    {
+    public void setAdvisorPassword(String advisorPassword) {
         this.advisorPassword = advisorPassword;
     }
 
-    public String getAdvisorPhoneNumber()
-    {
+    public String getAdvisorPhoneNumber() {
         return advisorPhoneNumber;
     }
 
-    public void setAdvisorPhoneNumber(String advisorPhoneNumber)
-    {
+    public void setAdvisorPhoneNumber(String advisorPhoneNumber) {
         this.advisorPhoneNumber = advisorPhoneNumber;
     }
 
-    public boolean isHasAttendedBefore()
-    {
+    public boolean isHasAttendedBefore() {
         return hasAttendedBefore;
     }
 
-    public void setHasAttendedBefore(boolean hasAttendedBefore)
-    {
+    public void setHasAttendedBefore(boolean hasAttendedBefore) {
         this.hasAttendedBefore = hasAttendedBefore;
     }
 
-    public String getYearsAttended()
-    {
+    public String getYearsAttended() {
         return yearsAttended;
     }
 
-    public void setYearsAttended(String yearsAttended)
-    {
+    public void setYearsAttended(String yearsAttended) {
         this.yearsAttended = yearsAttended;
     }
 
-    public String getAboutSchool()
-    {
+    public String getAboutSchool() {
         return aboutSchool;
     }
 
-    public void setAboutSchool(String aboutSchool)
-    {
+    public void setAboutSchool(String aboutSchool) {
         this.aboutSchool = aboutSchool;
     }
 
-    public String getAboutMunProgram()
-    {
+    public String getAboutMunProgram() {
         return aboutMunProgram;
     }
 
-    public void setAboutMunProgram(String aboutMunProgram)
-    {
+    public void setAboutMunProgram(String aboutMunProgram) {
         this.aboutMunProgram = aboutMunProgram;
     }
 
-    public String getDelegationGoals()
-    {
+    public String getDelegationGoals() {
         return delegationGoals;
     }
 
-    public void setDelegationGoals(String delegationGoals)
-    {
+    public void setDelegationGoals(String delegationGoals) {
         this.delegationGoals = delegationGoals;
     }
 
-    public String getWhyApplied()
-    {
+    public String getWhyApplied() {
         return whyApplied;
     }
 
-    public void setWhyApplied(String whyApplied)
-    {
+    public void setWhyApplied(String whyApplied) {
         this.whyApplied = whyApplied;
     }
 }

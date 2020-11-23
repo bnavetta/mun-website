@@ -5,6 +5,8 @@ import * as R from "ramda";
 const byType = R.groupBy(R.prop("type"));
 
 function PositionSelect({ positions, selectedId, onSelect }) {
+    console.log("PositionSelect");
+    console.log(positions);
     return (
         <select
             onChange={event => onSelect(event.target.value)}
@@ -19,7 +21,6 @@ function PositionSelect({ positions, selectedId, onSelect }) {
         </select>
     );
 }
-
 PositionSelect.propTypes = {
     positions: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectedId: PropTypes.number,
@@ -28,7 +29,9 @@ PositionSelect.propTypes = {
 
 export default function Awards({ committee, onChangeAward }) {
     const awards = byType(committee.awards || []);
-
+    console.log("Awards");
+    console.log(committee);
+    console.log(committee.positions);
     return (
         <dl className="prop-list">
             <dt>Best Delegate</dt>

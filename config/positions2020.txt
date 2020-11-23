@@ -1,0 +1,311 @@
+<security_council>
+China
+France
+Russia
+United Kingdom
+United States
+Belgium
+Dominican Republic
+Estonia
+Germany
+Indonesia
+Niger
+Saint Vincent and the Grenadines
+South Africa
+Tunisia
+Vietnam
+<arctic_council>
+Canada
+Denmark
+Finland
+Iceland
+Norway
+Russia
+Sweden
+United States
+Aluet International Association
+Arctic Athabaskan Council
+Gwich'in Council
+Inuit Circumpolar Council
+Russian Association of Indigenous Peoples of the North
+Saami Council
+<un_women_1>
+Argentina
+Australia
+Brazil
+Canada
+China
+Egypt
+Ethiopia
+France
+Germany
+India
+Indonesia
+Iran
+Iraq
+Japan
+Kenya
+Mexico
+Morocco
+New Zealand
+Nigeria
+North Korea
+Pakistan
+Qatar
+Russia
+Saudi Arabia
+South Africa
+South Korea
+Spain
+Sweden
+Turkey
+UK
+United States
+Vietnam
+<un_women_2>
+Argentina
+Australia
+Brazil
+Canada
+China
+Egypt
+Ethiopia
+France
+Germany
+India
+Indonesia
+Iran
+Iraq
+Japan
+Kenya
+Mexico
+Morocco
+New Zealand
+Nigeria
+North Korea
+Pakistan
+Qatar
+Russia
+Saudi Arabia
+South Africa
+South Korea
+Spain
+Sweden
+Turkey
+UK
+United States
+Vietnam
+<unesco>
+Argentina
+Australia
+Brazil
+Canada
+China
+Egypt
+Ethiopia
+France
+Germany
+India
+Indonesia
+Iran
+Iraq
+Japan
+Kenya
+Mexico
+Morocco
+New Zealand
+Nigeria
+North Korea
+Pakistan
+Qatar
+Russia
+Saudi Arabia
+South Africa
+South Korea
+Spain
+Sweden
+Turkey
+UK
+United States
+Vietnam
+Yemen
+<disec>
+Argentina
+Australia
+Brazil
+Canada
+China
+Egypt
+Ethiopia
+France
+Germany
+India
+Indonesia
+Iran
+Iraq
+Japan
+Kenya
+Mexico
+Morocco
+New Zealand
+Nigeria
+North Korea
+Pakistan
+Qatar
+Russia
+Saudi Arabia
+South Africa
+South Korea
+Spain
+Sweden
+Turkey
+UK
+United States
+Vietnam
+Yemen
+<facebook>
+Mark Zuckerberg –– Founder, CEO, and Chairman of the Board
+Sheryl Sandberg –– Chief Operating Officer, Board Member
+Dave Wehner –– Chief Financial Officer
+Mike Schroepfer –– Chief Technology Officer
+Chris Cox –– Chief Product Officer
+Atish Banerjea –– Chief Information Officer
+Erin Egan –– Chief Privacy Officer (also VP of Public Policy)
+Marc Andreessen –– Member of Audit Committee, Compensation & Governance Committee
+Erskine Bowles –– Chair of Audit Committee
+Kenneth Chenault
+Susan Desmond-Hellmann –– Lead Independent Director, Member of Audit Committee
+Reed Hastings –– Chair of Compensation & Governance Committee
+Jan Koum
+Peter Thiel –– Member of Compensation & Governance Committee
+Colin Stretch –– General Counsel
+Caryn Marooney –– VP of Global Communications (FB's top PR exec)
+Elliot Schrage –– VP of Global Communications (FB's top PR exec)
+Rachel Whetstone –– VP of Communications for FB & WhatsApp
+Debbie Frost –– VP of Int'l Policy & Communications
+<cholera_haiti>
+Rene Preval, President of Haiti
+Jean-Max Bellerive, Prime Minister of Haiti
+Raymond Joseph, Haitian Ambassador to the United States
+Jean Yves Jason, Mayor of Port-au-Prince
+Marie-Michele Rey, Foriegn Minister of Haiti
+Léo Mérorès, Haitian Representative to the United Nations
+Josseline Colimon Fethiere, Trade and Industry Minister of Haiti
+Edmund Mulet, Head of United Nations Stabilisation Mission in Haiti (MINUSTAH)
+Maj. General Luiz Cruz, Head of MINUSTAH Military Component
+Gregory Hartl, Spokesman for the World Health Organization
+Michaëlle Jean, UNESCO Special Envoy to Haiti
+Françoise Gruloos-Ackermans, UNICEF Representative in Haiti
+Bill Clinton, United States Special Envoy to Haiti
+Dr. Paul Farmer, United States Deputy Special Envoy to Haiti
+Jean-Pierre Guiteau, President of the Haiti Red Cross Society
+Archbishop Bernard Auza, Apolstolic Nuncio to Haiti
+Dr. Ruben Silie Valdez, Domican Republic’s Ambassador to Haiti
+Hassan Issa, Head of Doctors Without Borders/Médecins Sans Frontières Mission in Haiti
+Beverly Oda, Canadian Minister of International Cooperation
+Kenneth Merten, United States Ambassador to Haiti
+<press_corps>
+Washington Post
+Buzzfeed
+South China Morning Post
+Al Jazeera
+Der Spiegel
+The Sun
+El Espectator
+News24
+<brown_steering>
+Sam Brown
+Ari Greene
+Ryan Lord
+Sawyer Taff
+Avery Kaiser
+Jay Stevenson
+Aaron Tau
+Charlie Fey
+Bobby Lewis
+Francis Morrison
+MJ Allen
+Finley Sontag
+Aaron Gamzon
+Oakley Bridges
+Jordan Zeller
+Kerry Logan
+Campbell Smith
+Marion Devore
+Austen Perry
+Taylor Meyer
+<ccp_politburo>
+Zhou Enlai
+Deng Xiaoping,
+Wang Hongwen
+Zhang Chunqiao
+Yao Wenyuan
+Jiang Qing
+Ye Jianying,
+Hua Guofeng
+Li Xiannian
+Wang Dongxing
+Liu Bocheng
+Kang Sheng
+Zhu De
+Li Deshen
+Saifuddin Azizi
+Wu Guixian
+Chen Xilian
+Su Zhenhua
+Wei Guoqing
+Xu Shiyou
+<league_of_nations>
+Germany
+Italy
+USSR
+Great Britain
+France
+Czechoslovakia
+Austria
+Poland
+Greece
+Romania
+Albania
+Turkey
+Hungary
+Lithuania
+Latvia
+Switzerland
+Estonia
+Yugoslavia
+Belgium
+Netherlands
+Norway
+Sweden
+Finland
+<bretton_woods>
+Australia
+Bolivia
+Brazil
+Chile
+China
+Cuba
+Egypt
+Ethiopia
+France
+Honduras
+India
+Iran
+Liberia
+Mexico
+Nigeria
+Philippines
+South Africa
+Soviet Union
+United Kingdom
+United States of America
+<north_korea>
+Choe Ryong-Hae (Bomb US - John F. Kennedy)Choe Song (Bomb US - Dean Rusk)Jong Kyong-Thaek (Bomb US - Robert McNamara)Kim Kyong-Hui (Bomb USSR - Alexei Kosygin)Kim Yo-Jong (Bomb USSR - Andrei Gromyko)Kwak Chang-Sik (Bomb USSR - Kirill Moskalenko)Choe Son-Hui (ADHOC Person 1)Kim Su-Gil (ADHOC Person 2)Choe Pu-li (ADHOC Person 3)Ri Yong-Mu (ADHOC Person 9)Tang Kum-Chol (ADHOC Person 10)An Jong-Su (ADHOC Person 11)
+<latin_independence>
+Manuela Saenz (Bomb US - John A. McCone)Fransisco de Miranda (Bomb US - Lyndon B. Johnson)Francisco de Paula Santander (Bomb USSR - Nikita Khrushchev)José de San Martín (Bomb USSR - Rodion Malinovsky)Alexandre Sabès Pétion (ADHOC Person 4)Antonio José de Sucre (ADHOC Person 5)Juan Francisco Antonio Hilarión Zea Díaz (ADHOC Person 12)José Joaquín de Olmedo y Maruri (ADHOC Person 13)
+<love_the_bomb>
+US John F. Kennedy (ADHOC Person 6)US Lyndon B. Johnson (Latin Independence - José Joaquín de Olmedo y Maruri)US Robert McNamara (ADHOC Person 8)US Adlai Stevenson II (North Korea - Ri Yong-Mu)US Dean Rusk (Latin Independence - Francisco de Paula Santander)US John A. McCone (ADHOC Person 7)US J. Edgar Hoover (North Korea - Kwak Chang-Sik)US Glenn T. Seaborg (North Korea - Jong Kyong-Thaek)
+USSR Nikita Khrushchev (Latin Independence - Antonio José de Sucre)USSR Alexei Kosygin (ADHOC Person 14)USSR Vladimir Semichastny (North Korea - Choe Pu-Li)USSR Rodion Malinovsky (ADHOC Person 15)USSR Andrei Gromyko (Latin Independence - Alexandre Sabès Pétion)USSR Valerian Zorin (North Korea - Choe Son-Hui)USSR Kirill Moskalenko (ADHOC Person 16)USSR Igor Kurchatov (North Korea - Kim Kyong-Hui)
+<ad_hoc>
+Person 1 (Bomb US - Glenn T. Seaborg)Person 2 (North Korea - Kim Su-Gil)Person 3 (North Korea - Choe Song)Person 4 (North Korea - Jang Kum-Chol)Person 5 (Bomb US - J. Edgar Hoover)Person 6 (Latin Independence - Manuela Saenz)Person 7 (Bomb US - Adlai Stevenson II)Person 8  (Latin Independence - Fransisco de Miranda)Person 9 (Bomb USSR - Igor Kurchatov)Person 10 (Latin Independence - José de San Martín)Person 11 (North Korea - Choe Ryong-Hae)Person 12 (Bomb USSR - Valerian Zorin)Person 13 (Latin Independence - Juan Francisco Antonio Hilarión Zea Díaz)Person 14 (North Korea - Kim Yo-Jong)Person 15 (North Korea - An Jong-Su)Person 16 (Bomb USSR - Vladimir Semichastny)

@@ -53,8 +53,7 @@ import org.brownmun.cli.positions.SchoolAllocation;
  * capacity equal to the number of positions in the committee.</li>
  * </ul>
  */
-public class AssignmentSolver
-{
+public class AssignmentSolver {
     private static final int SOURCE = 0;
     private static final int DESTINATION = 1;
 
@@ -78,8 +77,7 @@ public class AssignmentSolver
 
     private final MaxFlow maxFlow;
 
-    public AssignmentSolver(int maxSchoolId, int maxCommitteeId)
-    {
+    public AssignmentSolver(int maxSchoolId, int maxCommitteeId) {
         this.maxCommitteeId = maxCommitteeId;
         this.maxSchoolId = maxSchoolId;
 
@@ -88,26 +86,22 @@ public class AssignmentSolver
     }
 
     private void buildGraph(AssignmentSettings settings, List<SchoolAllocation> allocations,
-            List<AssignableCommittee> ga, List<AssignableCommittee> spec, List<AssignableCommittee> crisis)
-    {
+            List<AssignableCommittee> ga, List<AssignableCommittee> spec, List<AssignableCommittee> crisis) {
         int[] committeeNodes = new int[maxCommitteeId + 1];
 
-        for (int id = 0; id <= maxCommitteeId; id++)
-        {
+        for (int id = 0; id <= maxCommitteeId; id++) {
             committeeNodes[id] = id + DESTINATION + 1;
         }
 
         // GA, spec, and crisis nodes are at schoolNodes[id] + 1, 2, and 3, respectively
         int[] schoolNodes = new int[maxSchoolId + 1];
 
-        for (int id = 0; id <= maxSchoolId; id++)
-        {
+        for (int id = 0; id <= maxSchoolId; id++) {
             schoolNodes[id] = maxCommitteeId + DESTINATION + 1 + 4 * id;
         }
 
         // Add school arcs
-        for (SchoolAllocation school : allocations)
-        {
+        for (SchoolAllocation school : allocations) {
             int schoolNode = schoolNodes[(int) school.id()];
 
             // Source -> school with capacity = delegation size
@@ -124,22 +118,19 @@ public class AssignmentSolver
 
             // Now, we add the school-to-committee arcs
 
-            for (AssignableCommittee committee : ga)
-            {
+            for (AssignableCommittee committee : ga) {
                 int arc = maxFlow.addArcWithCapacity(schoolNode + 1, committeeNodes[(int) committee.id()],
                         settings.generalOverlap());
                 committeeSpotArcs[(int) school.id()][(int) committee.id()] = arc;
             }
 
-            for (AssignableCommittee committee : spec)
-            {
+            for (AssignableCommittee committee : spec) {
                 int arc = maxFlow.addArcWithCapacity(schoolNode + 2, committeeNodes[(int) committee.id()],
                         settings.specializedOverlap());
                 committeeSpotArcs[(int) school.id()][(int) committee.id()] = arc;
             }
 
-            for (AssignableCommittee committee : crisis)
-            {
+            for (AssignableCommittee committee : crisis) {
                 int arc = maxFlow.addArcWithCapacity(schoolNode + 3, committeeNodes[(int) committee.id()],
                         settings.crisisOverlap());
                 committeeSpotArcs[(int) school.id()][(int) committee.id()] = arc;
@@ -147,8 +138,8 @@ public class AssignmentSolver
         }
 
         // Add committee-to-destination arcs
-        for (AssignableCommittee committee : Iterables.concat(ga, spec, crisis))
-        {
+        for (AssignableCommittee committee : Iterables.concat(ga, spec, crisis)) {
+            log.debug("committee capacity {} {}", committee.id(), committee.capacity());
             maxFlow.addArcWithCapacity(committeeNodes[(int) committee.id()], DESTINATION, committee.capacity());
         }
     }
@@ -158,8 +149,7 @@ public class AssignmentSolver
      * committee. Must be called after
      * {@link #solve(AssignmentSettings, List, List, List, List)}.
      */
-    public int getDelegates(long schoolId, long committeeId)
-    {
+    public int getDelegates(long schoolId, long committeeId) {
         Preconditions.checkElementIndex((int) schoolId, maxSchoolId + 1);
         Preconditions.checkElementIndex((int) committeeId, maxCommitteeId + 1);
         return Math.toIntExact(maxFlow.getFlow(committeeSpotArcs[(int) schoolId][(int) committeeId]));
@@ -169,30 +159,26 @@ public class AssignmentSolver
      * Use max flow to solve for how many delegates from each school should be in
      * each committee.
      *
-     * @param settings configuration for the flow graph
+     * @param settings    configuration for the flow graph
      * @param allocations school allocations to committee types
-     * @param ga all assignable GA committees
-     * @param spec all assignable specialized committees
-     * @param crisis all assignable crisis committees
+     * @param ga          all assignable GA committees
+     * @param spec        all assignable specialized committees
+     * @param crisis      all assignable crisis committees
      * @return {@code true} if there was an optimal solution using all delegates,
      *         {@code false} otherwise
      */
     public boolean solve(AssignmentSettings settings, List<SchoolAllocation> allocations, List<AssignableCommittee> ga,
-            List<AssignableCommittee> spec, List<AssignableCommittee> crisis)
-    {
+            List<AssignableCommittee> spec, List<AssignableCommittee> crisis) {
         log.debug("Building flow graph");
         buildGraph(settings, allocations, ga, spec, crisis);
         log.debug("Solving for optimal flow");
         MaxFlow.Status status = maxFlow.solve(SOURCE, DESTINATION);
-        if (status == MaxFlow.Status.OPTIMAL)
-        {
+        if (status == MaxFlow.Status.OPTIMAL) {
             long flow = maxFlow.getOptimalFlow();
             long expectedFlow = allocations.stream().mapToInt(SchoolAllocation::totalDelegates).sum();
             log.debug("Maximum flow was {} (expected {})", flow, expectedFlow);
             return flow == expectedFlow;
-        }
-        else
-        {
+        } else {
             log.debug("No optimal solution - status was {}", status);
             return false;
         }

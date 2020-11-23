@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import { hot } from "react-hot-loader";
 
 function Committee({ committee }) {
+    var rules;
+    if (committee.name === "Disarmament and International Security Committee") {
+        rules = <p><a href="https://docs.google.com/document/d/1Io9j4po40mNgp883FDjoHCvEI36JfQzERpMkA_E-sBs/edit?usp=sharing">DISEC Supplemental Information</a></p>
+    }
     return (
         <React.Fragment>
             <div className="committees-list__committee-overview">
@@ -22,12 +26,16 @@ function Committee({ committee }) {
                     {committee.topic3 && <li>{committee.topic3}</li>}
                     {committee.topic4 && <li>{committee.topic4}</li>}
                 </ul>
-                <p>
+                {/* <p>
                     Contact at <a href={"mailto:" + committee.email}>{committee.email}</a>
-                </p>
+                </p> */}
                 {committee.backgroundGuide && <p>
-                    Dowload the <a href={committee.backgroundGuide}>background guide</a>.
+                    Download the <a href={committee.backgroundGuide}>background guide</a>.
                 </p>}
+                {/* {committee.backgroundGuide && <p>
+                    Background guide coming soon.
+                </p>} */}
+                {rules}
             </div>
         </React.Fragment>
     );

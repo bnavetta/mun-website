@@ -24,8 +24,7 @@ import org.brownmun.core.school.model.*;
 import org.brownmun.util.Tokens;
 
 @Service
-public class SchoolServiceImpl implements SchoolService
-{
+public class SchoolServiceImpl implements SchoolService {
     private static final Logger log = LoggerFactory.getLogger(SchoolServiceImpl.class);
 
     private final PasswordEncoder passwordEncoder;
@@ -40,8 +39,7 @@ public class SchoolServiceImpl implements SchoolService
     @Autowired
     public SchoolServiceImpl(PasswordEncoder passwordEncoder, SchoolRepository repo, AdvisorRepository advisorRepo,
             SchoolApplicationRepository appRepo, SupplementalInfoRepository infoRepo, DelegateRepository delegateRepo,
-            EntityManagerFactory emf, EntityManager em)
-    {
+            EntityManagerFactory emf, EntityManager em) {
         this.passwordEncoder = passwordEncoder;
         this.repo = repo;
         this.advisorRepo = advisorRepo;
@@ -53,15 +51,13 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
-    public Optional<School> getSchool(long id)
-    {
+    public Optional<School> getSchool(long id) {
         return repo.findById(id);
     }
 
     @Override
     public School registerSchool(String name, String advisorName, String advisorEmail, String advisorPassword,
-            String advisorPhoneNumber)
-    {
+            String advisorPhoneNumber) {
         School school = new School();
         school.setAccepted(false);
         school.setHasApplied(false);
@@ -79,8 +75,7 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
-    public void submitApplication(School school)
-    {
+    public void submitApplication(School school) {
         Preconditions.checkNotNull(school.getId(), "School does not exist");
         log.info("Submitting application for school {} ({})", school.getName(), school.getId());
 
@@ -93,21 +88,18 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
-    public Optional<Advisor> findAdvisor(String email)
-    {
+    public Optional<Advisor> findAdvisor(String email) {
         return advisorRepo.findByEmail(email);
     }
 
     @Override
-    public OptionalLong findSchoolId(long delegateId)
-    {
+    public OptionalLong findSchoolId(long delegateId) {
         return repo.findSchoolId(delegateId);
     }
 
     @Override
     @Transactional
-    public School loadSchool(Advisor advisor)
-    {
+    public School loadSchool(Advisor advisor) {
         School school = repo.getOne(advisor.getSchool().getId());
         log.info("Materialized school {}", school.toString());
         return (School) Hibernate.unproxy(school);
@@ -115,8 +107,7 @@ public class SchoolServiceImpl implements SchoolService
 
     @Override
     @Transactional
-    public void updateApplication(Advisor advisor, SchoolApplication application)
-    {
+    public void updateApplication(Advisor advisor, SchoolApplication application) {
         log.info("Application for {} being updated by {}", application.getName(), advisor.getEmail());
         appRepo.save(application);
         emf.getCache().evict(School.class, application.getId());
@@ -124,28 +115,24 @@ public class SchoolServiceImpl implements SchoolService
     }
 
     @Override
-    public void accept(School school)
-    {
+    public void accept(School school) {
         log.info("Accepting {} ({})", school.getId(), school.getName());
         school.setAccepted(true);
         repo.save(school);
     }
 
     @Override
-    public List<School> listSchools()
-    {
+    public List<School> listSchools() {
         return repo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     @Override
-    public List<Advisor> getAdvisors(long schoolId)
-    {
+    public List<Advisor> getAdvisors(long schoolId) {
         return advisorRepo.findBySchoolId(schoolId);
     }
 
     @Override
-    public List<Advisor> listAdvisors()
-    {
+    public List<Advisor> listAdvisors() {
         return advisorRepo.findAll();
     }
 
@@ -153,8 +140,7 @@ public class SchoolServiceImpl implements SchoolService
      * Fetches the school's supplemental info, creating a new object if necessary.
      */
     @Override
-    public SupplementalInfo getSupplementalInfo(long schoolId)
-    {
+    public SupplementalInfo getSupplementalInfo(long schoolId) {
         return infoRepo.findById(schoolId).orElseGet(() -> {
             SupplementalInfo info = new SupplementalInfo();
             info.setSchool(repo.getOne(schoolId));
@@ -164,8 +150,7 @@ public class SchoolServiceImpl implements SchoolService
 
     @Transactional
     @Override
-    public SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info)
-    {
+    public SupplementalInfo updateSupplementalInfo(Advisor advisor, SupplementalInfo info) {
         /*
          * Because we're using @MapsId on SupplementalInfo, Spring thinks we're always
          * updating an existing entity. To work around that, we first check if we're
@@ -179,12 +164,9 @@ public class SchoolServiceImpl implements SchoolService
         info.setSchool(school);
 
         Optional<SupplementalInfo> existing = infoRepo.findById(school.getId());
-        if (existing.isPresent())
-        {
+        if (existing.isPresent()) {
             return em.merge(info);
-        }
-        else
-        {
+        } else {
             em.persist(info);
             return info;
         }
@@ -192,22 +174,19 @@ public class SchoolServiceImpl implements SchoolService
 
     @Override
     @Transactional
-    public void clearDelegates()
-    {
+    public void clearDelegates() {
         log.warn("Deleting all delegates");
         delegateRepo.deleteAllInBatch();
     }
 
     @Override
     @Transactional
-    public Set<Delegate> getDelegates(long schoolId)
-    {
+    public Set<Delegate> getDelegates(long schoolId) {
         School school = repo.findById(schoolId)
                 .orElseThrow(() -> new IllegalArgumentException("No school with ID " + schoolId));
 
         Set<Delegate> delegates = repo.fetchDelegates(school);
-        for (Delegate delegate : delegates)
-        {
+        for (Delegate delegate : delegates) {
             Hibernate.initialize(delegate.getPosition());
             Hibernate.initialize(delegate.getPosition().getCommittee());
             Hibernate.initialize(delegate.getSchool());
@@ -218,15 +197,13 @@ public class SchoolServiceImpl implements SchoolService
 
     @Override
     @Transactional
-    public Optional<Delegate> getDelegate(long id)
-    {
+    public Optional<Delegate> getDelegate(long id) {
         return delegateRepo.findById(id);
     }
 
     @Override
     @Transactional
-    public Delegate saveDelegate(Delegate delegate)
-    {
+    public Delegate saveDelegate(Delegate delegate) {
         return delegateRepo.save(delegate);
     }
 }

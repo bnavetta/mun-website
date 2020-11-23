@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun.org/th/webpack"
+    xmlns:conference="http://brownmun.org/th/conference" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base.html}">
+
+<head>
+    <title>Preparation and Procedure</title>
+    <wp:chunk name="info-page" />
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <img class="title-photo"
+            src="https://storage.googleapis.com/busun_assets/title-images/preparation-procedure.jpg"
+            alt="Preparation and Procedure">
+
+        <section class="info--body" style="color: black;">
+            <h1>GA and Specialized Committees</h1>
+
+            <p class=" body-text">
+                BUSUN recognizes that being well-prepared and knowledgeable is just as important as debate skills
+                in a Model UN conference. Although delegates are not expected to show all of their research to their
+                committee chairs, we suggest that delegates print and annotate some research materials for reference
+                during committee sessions.
+
+                Please note that a full list of Rules and Procedure for GA and Specialized Committees can be found in
+                the Delegate Guide under the <i>Conference Resources</i> tab. Below you will find position paper
+                guidelines and research tips that are specific for GA and Specialized Committees.
+            </p>
+
+            <h2 class="info--body">Position Paper Guidelines</h2>
+
+            <p class="body-text">
+                All delegates are required to submit a position paper to their committee chairs in advance of the
+                first committee session. We hope that all delegates will familiarize themselves with the topics and
+                positions outlined by their committee chairs before arriving to campus.
+            </p>
+
+            <h2 class="info--body">General Guidelines for Position Papers</h2>
+
+            <ul>
+                <li>
+                    Position papers should be 1-2 pages in length per topic, written in size 12 Times New Roman font
+                    with 1 inch margins.
+                </li>
+
+                <li>
+                    <strong>All delegates should email their positions papers to the committee chair email listed in
+                        their background guide by November 1, 2019 at 11:59 PM.</strong> Delegates are still eligible
+                    for
+                    awards as long as they submit their position paper by the beginning of the first committee session
+                    on Friday, November 8 but they will not be guaranteed feedback from their chair. Chair email
+                    addresses
+                    can be found at <a th:href="@{/committees}">our committees page</a> or in your background guide.
+                </li>
+
+                <li>
+                    Position papers should be submitted in <code>.DOC</code>, <code>.DOCX</code>, or
+                    <code>.PDF</code> format. Files should be titled in the following format:
+                    <code>School_LastName_Position</code> (e.g. "BrownHS_Smith_USA.pdf").
+                </li>
+
+                <li>
+                    Citations and works referenced should be clearly listed at the end of all position papers. We
+                    prefer that these references be formatted in Chicago or MLA style. BUSUN takes plagiarism
+                    seriously &mdash; plagiarized content may result in delegate disqualification from awards, or in
+                    serious cases, entire delegations may not be invited in future years.
+                </li>
+
+                <li>
+                    Position papers should contain:
+                    <ul>
+                        <li>Relevant historical actions</li>
+                        <li>Current policies on the topic</li>
+                        <li>Potential solutions you intend to propose in committee</li>
+                        <li>Responses to &lsquo;Questions to Consider&rdquo; from background guide</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Delegation should write a position paper for all topics assigned to their committee - this may
+                    not hold true for all specialized or crisis committees. Please consult your
+                    <a th:href="@{/committees}">committee background guide</a> for more information.
+                </li>
+            </ul>
+
+            <h2 class="info--body">Research Tips and Tricks</h2>
+
+            <ul>
+                <li>
+                    Read your committee background guide thoroughly and make sure you have a firm understanding of
+                    the topics and questions to consider. These will be important discussion points during committee.
+                </li>
+
+                <li>
+                    Suggested research sources:
+                    <ul>
+                        <li>
+                            Reference the cited links, books, and articles that your chair used while writing their
+                            background guide. If there is a particular article in the background guide you are
+                            interested in that you can't get access to please email your chair. They might be able
+                            to help.
+                        </li>
+
+                        <li>Try doing a Google Books search of your positions and topics.</li>
+
+                        <li>If possible, visit your local or school library.</li>
+
+                        <li>
+                            Use online databases, such as JSTOR or EBSCOHost, to access articles published in
+                            academic journals.
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Focus your research on explaining the ideas and solutions <strong>you</strong> will bring to the
+                    issues at hand. Your chairs have done their background research already and are primarily
+                    interested in the innovative ways in which you will be approaching committee.
+                </li>
+
+                <li>
+                    Contact your chair with any questions! They have been preparing all year for this conference
+                    and are knowledgeable about their topics. While emailing them is not a substitute for doing your
+                    research, they should be able to answer questions that may arise while you prepare for the
+                    conference. Contact information can be found <a th:href="@{/committees}">here</a>.
+                </li>
+            </ul>
+        </section>
+
+    </main>
+</body>
+
+</html>

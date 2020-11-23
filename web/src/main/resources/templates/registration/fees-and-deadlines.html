@@ -1,127 +1,126 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:wp="http://brownmun.org/th/webpack"
-        xmlns:conference="http://brownmun.org/th/conference"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{base.html}"
->
-    <head>
-        <title>Fees and Deadlines</title>
-        <wp:chunk name="info-page"/>
-    </head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:wp="http://brownmun.org/th/webpack"
+    xmlns:conference="http://brownmun.org/th/conference" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base.html}">
 
-    <body>
-        <main layout:fragment="content">
-            <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/fees-deadlines.jpg" alt="Fees and Deadlines">
+<head>
+    <title>Fees and Deadlines</title>
+    <wp:chunk name="info-page" />
+</head>
 
-            <section class="info--body">
-                <h2>Fees</h2>
+<body>
+    <main layout:fragment="content">
+        <img class="title-photo" src="https://storage.googleapis.com/busun_assets/title-images/fees-deadlines.jpg"
+            alt="Fees and Deadlines">
 
-                <p class="body-text">
-                    Fees are split up into three portions: a delegation fee (paid once per school attending), a delegate
-                    fee (charged for each individual delegate), and a chaperone fee (for each additional chaperone in
-                    excess of the ratio of one chaperone for every ten delegates). The delegation fee must be postmarked
-                    by the deadlines indicated below to complete the registration process. Schools that fail to pay the
-                    delegation fee by the Late Payment deadline forfeit their participation in the conference. Schools
-                    placed on our waitlist are not required to pay the delegation fee until they are offered a spot at
-                    the conference.
-                </p>
+        <section class="info--body">
+            <h2>Fees</h2>
 
-                <table class="standard-table">
-                    <thead>
-                        <tr>
-                            <th>Fee</th>
-                            <th>Regular Payment</th>
-                            <th>Late Payment</th>
-                        </tr>
-                    </thead>
+            <p class="body-text">
+                Fees are split up into three portions: a registration fee (paid once per school attending), a delegate
+                fee (charged for each individual delegate), and a chaperone fee (for each additional chaperone in
+                excess of the ratio of one chaperone for every ten delegates). The registration fee must be postmarked
+                by the deadlines indicated below to complete the registration process. Schools that fail to pay the
+                registrtion fee by the Late Payment deadline forfeit their participation in the conference. Schools
+                placed on our waitlist are not required to pay the registration fee until they are offered a spot at
+                the conference.
+            </p>
 
-                    <tbody>
-                        <tr>
-                            <th scope="row">Delegation Fee</th>
-                            <td>$55</td>
-                            <td>$65</td>
-                        </tr>
+            <table class="standard-table">
+                <thead>
+                    <tr>
+                        <th>Fee</th>
+                        <th>Regular Payment</th>
+                        <th>Late Payment</th>
+                    </tr>
+                </thead>
 
-                        <tr>
-                            <th scope="row">Delegate Fee</th>
-                            <td>$60</td>
-                            <td>$70</td>
-                        </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row">Registration Fee</th>
+                        <td>$55</td>
+                        <td>$65</td>
+                    </tr>
 
-                        <tr>
-                            <th scope="row">Chaperone Fee</th>
-                            <td>$10</td>
-                            <td>$10</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <tr>
+                        <th scope="row">Delegate Fee</th>
+                        <td>$60</td>
+                        <td>$70</td>
+                    </tr>
 
-                <p class="body-text">
-                    Shuttle fees are $18 per person. More information regarding shuttles can be found
-                    <a th:href="@{/logistics/shuttles-and-parking}">here</a>.
-                </p>
+                    <tr>
+                        <th scope="row">Chaperone Fee</th>
+                        <td>$10</td>
+                        <td>$10</td>
+                    </tr>
+                </tbody>
+            </table>
 
-                <h2>Deadlines</h2>
+            <p class="body-text">
+                Shuttle fees are $18 per person. More information regarding shuttles can be found
+                <a th:href="@{/logistics/shuttles-and-parking}">here</a>.
+            </p>
 
-                <ul>
-                    <li>
-                        <p>August 17, 2018 &mdash; Deadline for Regular Payment delegation fees</p>
+            <h2>Deadlines</h2>
 
-                        <p>
-                            Delegation fees must be submitted by this date to avoid being charged the late payment
-                            rate for <strong>all</strong> fees (including delegation, delegate, and chaperone fees).
-                            After this date, delegations will be charged at the late payment rates indicated above.
-                        </p>
-                    </li>
+            <ul>
+                <li>
+                    <p>July 31, 2020 &mdash; Deadline for Regular Payment delegation fees</p>
 
-                    <li>
-                        September 17, 2018 &mdash; Deadline for Late Payment delegation fees
-                    </li>
+                    <p>
+                        Delegation fees must be submitted by this date to avoid being charged the late payment
+                        rate for <strong>all</strong> fees (including delegation, delegate, and chaperone fees).
+                        After this date, delegations will be charged at the late payment rates indicated above.
+                    </p>
+                </li>
 
-                    <li>
-                        October 1, 2018 &mdash; Deadline for all fees
-                    </li>
-                </ul>
+                <li>
+                    September 18, 2020 &mdash; Deadline for Late Payment delegation fees
+                </li>
 
-                <h2>Cancellation and Refund Policy</h2>
+                <li>
+                    October 2, 2020 &mdash; Deadline for all fees
+                </li>
+            </ul>
 
-                <p>
-                    The initial delegation fee is non-refundable. However, BUSUN refund policies for delegate,
-                    chaperone, and shuttle fees are as follows:
-                </p>
+            <h2>Cancellation and Refund Policy</h2>
 
-                <dl>
-                    <dt>Before October 1:</dt>
-                    <dd>Full refund of payments</dd>
+            <p>
+                The initial delegation fee is non-refundable. However, BUSUN refund policies for delegate,
+                chaperone, and shuttle fees are as follows:
+            </p>
 
-                    <dt>October 1 - 15:</dt>
-                    <dd>50% refund of payments</dd>
+            <dl>
+                <dt>Before October 2:</dt>
+                <dd>Full refund of payments</dd>
 
-                    <dt>After October 15:</dt>
-                    <dd>No refund offered</dd>
-                </dl>
+                <dt>October 2 - 16:</dt>
+                <dd>50% refund of payments</dd>
 
-                <h2>Payment Methods</h2>
+                <dt>After October 25:</dt>
+                <dd>No refund offered</dd>
+            </dl>
 
-                <p class="body-text">
-                    Payment will only be accepted in the form of cash and checks. We unfortunately cannot process credit
-                    cards. International delegations should contact the Director of External Affairs at
-                    <a href="mailto:info@busun.org">info@busun.org</a> for details on payment via wire transfer.
-                    <strong>Please make all checks out to Brown University Model UN.</strong> Payments should be mailed
-                    to:
-                </p>
+            <h2>Payment Methods</h2>
 
-                <address>
-                    Brown University Simulation of the United Nations<br/>
-                    Box 3614<br/>
-                    69 Brown St.<br/>
-                    Providence, RI 02912
-                </address>
+            <p class="body-text">
+                Payment will only be accepted in the form of cash and checks. We unfortunately cannot process credit
+                cards. International delegations should contact the Director of External Affairs at
+                <a href="mailto:info@busun.org">info@busun.org</a> for details on payment via wire transfer.
+                <strong>Please make all checks out to Brown University Model UN.</strong> Payments should be mailed
+                to:
+            </p>
 
-            </section>
+            <address>
+                Brown University Simulation of the United Nations<br />
+                Box 1930<br />
+                69 Brown St.<br />
+                Providence, RI 02912
+            </address>
 
-        </main>
-    </body>
+        </section>
+
+    </main>
+</body>
+
 </html>

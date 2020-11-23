@@ -10,12 +10,11 @@ import com.google.auto.value.AutoValue;
 import org.brownmun.web.common.CommitteeDTO;
 
 @AutoValue
-public abstract class CommitteeListing
-{
+public abstract class CommitteeListing {
     public static CommitteeListing create(List<CommitteeDTO> general, List<CommitteeDTO> specialized,
-            List<CommitteeDTO> crisis, List<CommitteeDTO> jointCrises, Map<Long, Set<CommitteeDTO>> jointCrisisRooms)
-    {
-        return new AutoValue_CommitteeListing(general, specialized, crisis, jointCrises, jointCrisisRooms);
+            List<CommitteeDTO> crisis, List<CommitteeDTO> jointCrises, List<CommitteeDTO> crisis2020,
+            Map<Long, Set<CommitteeDTO>> jointCrisisRooms) {
+        return new AutoValue_CommitteeListing(general, specialized, crisis, jointCrises, crisis2020, jointCrisisRooms);
     }
 
     @JsonProperty("general")
@@ -29,6 +28,9 @@ public abstract class CommitteeListing
 
     @JsonProperty("jointCrises")
     abstract List<CommitteeDTO> jointCrises();
+
+    @JsonProperty("crisis2020sunday")
+    abstract List<CommitteeDTO> crisis2020sunday();
 
     @JsonProperty("jointCrisisRooms")
     abstract Map<Long, Set<CommitteeDTO>> jointCrisisRooms();
