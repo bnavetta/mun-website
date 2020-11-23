@@ -113,7 +113,7 @@ task printVersion {
     }
 }
 
-task pushImages(dependsOn: [':busun:jib', ':ui:dockerTag', ":ui:dockerPush${ucfirst(project.version)}"]) {}
+task pushImages(dependsOn: [':busun:jib', ':bucs:jib', ':ui:dockerTag', ":ui:dockerPush${ucfirst(project.version)}"]) {}
 
 // Copied from com.palantir.gradle plugin for consistency
 String ucfirst(String str) {

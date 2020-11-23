@@ -7,6 +7,24 @@ plugins {
     id 'com.diffplug.gradle.spotless'
     id 'com.github.ben-manes.versions'
     id 'com.gorylenko.gradle-git-properties'
+
+    id 'com.google.cloud.tools.jib'
+}
+
+jib {
+    from {
+        image = "gcr.io/distroless/java:11"
+        credHelper = "osxkeychain"
+    }
+
+    to {
+        image = "gcr.io/busun-158105/bucs:${project.version}"
+        credHelper = "gcloud"
+    }
+
+    container {
+        args = ['--spring.profiles.active=prod']
+    }
 }
 
 dependencies {
